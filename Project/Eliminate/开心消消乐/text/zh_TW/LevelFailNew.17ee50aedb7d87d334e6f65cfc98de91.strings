@@ -1,0 +1,13 @@
+"level.fail.animal.effect.mode" = "沒有可消除的小動物了...";
+"level.fail.dig.endless.mode" = "獲得的分數不足1星啊…";
+"level.fail.dig.step.mode" = "寶石數量不夠啊…";
+"level.fail.dig.time.mode" = "寶石數量不夠啊…";
+"level.fail.drop.mode" = "拿到的金豆莢不夠啊…";
+"level.fail.drop.ufo.mode" = "金豆莢被外星人搶跑啦…";
+"level.fail.eliminate.effect.mode" = "消除的特效數量不足啊…";
+"level.fail.ice.mode" = "還有冰塊沒有清除啊…";
+"level.fail.objective.mode" = "消除的目標數量不足啊…";
+"level.fail.step.mode" = "分數不夠啊…TAT";
+"level.fail.swap.effect.mode" = "交換特效的次數不足啊…";
+"level.fail.time.mode" = "分數不夠啊…TAT";
+"level.fail.venom.effect.mode" = "沒有毒液了，無法完成目標...";

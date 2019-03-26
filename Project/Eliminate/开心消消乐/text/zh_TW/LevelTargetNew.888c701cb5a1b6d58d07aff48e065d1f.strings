@@ -1,0 +1,10 @@
+"level.target.dig.endless.mode" = "盡力挖掘所有寶石";
+"level.target.dig.step.mode" = "挖出足夠數量的寶石";
+"level.target.dig.time.mode" = "規定時間內挖出足夠寶石";
+"level.target.drop.mode" = "獲得足夠的金豆莢";
+"level.target.eliminate.effect.mode" = "消除指定數量的下列特效";
+"level.target.ice.mode" = "消除所有冰塊";
+"level.target.objective.mode" = "消除足夠數量的下列目標";
+"level.target.step.mode" = "獲得足夠分數";
+"level.target.swap.effect.mode" = "交換下列特效足夠次數";
+"level.target.time.mode" = "規定時間內獲得足夠分數";

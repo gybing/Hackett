@@ -1,0 +1,14 @@
+"classic.move.objective" = "得到足夠的分數";
+"classic.objective" = "限時達到得分";
+"dig.move.objective" = "挖到足夠的寶石";
+"dig.time.objective" = "挖地時間模式";
+"drop.down.objective" = "獲得足夠金豆莢";
+"level.info.panel.start.level.failed" = "非常抱歉，遊戲出錯，請嘗試重開遊戲…";
+"light.up.objective" = "消除所有冰塊";
+"order.objective" = "收集下列目標";
+"start.game.panel.choose.item.title" = "請選擇道具";
+"start.game.panel.preprop.item.selected" = "已選中";
+"start.game.panel.start.btn.txt" = "開始";
+"start.game.panel.title_di" = "第";
+"start.game.panel.title_guan" = "關";
+"start.game.panel.unlock.txt" = "{level_number}關解鎖";

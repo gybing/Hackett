@@ -1,0 +1,9 @@
+"exception.panel.btn.commit" = "恢复到正常数据";
+"exception.panel.btn.email" = "反馈问题";
+"exception.panel.commit.tips" = "数据已恢复正常，可以继续游戏啦~";
+"exception.panel.day" = "日";
+"exception.panel.email.tips" = "您的数据已发送到客服系统";
+"exception.panel.month" = "月";
+"exception.panel.text" = "为了避免更大的损失，建议您选择恢复到上次联网保存的数据。否则您将不再能使用需要联网的功能。";
+"exception.panel.tittle" = "您的游戏数据出现异常！";
+"exception.panel.top.level" = "最高关卡：{num}关{space}{space}{space}{data}";

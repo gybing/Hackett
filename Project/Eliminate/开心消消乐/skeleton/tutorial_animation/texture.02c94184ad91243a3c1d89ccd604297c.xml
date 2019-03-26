@@ -1,0 +1,102 @@
+<TextureAtlas name="tutorial_animation" width="1024" height="1024">
+  <SubTexture name="reflas_tutorial_animation" width="64" height="72" cocos2d_pX="19.7" cocos2d_pY="19.8" x="404" y="475"/>
+  <SubTexture name="0nxc_tutorial_animation" width="47" height="50" cocos2d_pX="24.35" cocos2d_pY="19.55" x="422" y="335"/>
+  <SubTexture name="step_left" width="91" height="33" cocos2d_pX="0" cocos2d_pY="0" x="693" y="763"/>
+  <SubTexture name="step_left_en_US" width="131" height="30" cocos2d_pX="0" cocos2d_pY="0" x="469" y="604"/>
+  <SubTexture name="reflash2_tutorial_animation" width="59" height="64" cocos2d_pX="11.15" cocos2d_pY="15.85" x="602" y="604"/>
+  <SubTexture name="5_tutorial_animation" width="37" height="49" cocos2d_pX="19.5" cocos2d_pY="19.3" x="977" y="156"/>
+  <SubTexture name="4_tutorial_animation" width="41" height="50" cocos2d_pX="23.05" cocos2d_pY="20.65" x="977" y="52"/>
+  <SubTexture name="3_tutorial_animation" width="37" height="49" cocos2d_pX="19.75" cocos2d_pY="19.55" x="432" y="118"/>
+  <SubTexture name="rvfsvc_tutorial_animation" width="21" height="50" cocos2d_pX="13.6" cocos2d_pY="20.6" x="422" y="423"/>
+  <SubTexture name="2 xgdf_tutorial_animation" width="40" height="50" cocos2d_pX="20.9" cocos2d_pY="19.55" x="977" y="104"/>
+  <SubTexture name="step_left_zh_TW" width="91" height="33" cocos2d_pX="0" cocos2d_pY="0" x="788" y="754"/>
+  <SubTexture name="0sdfv_tutorial_animation" width="41" height="50" cocos2d_pX="18.45" cocos2d_pY="20" x="432" y="66"/>
+  <SubTexture name="apple_tutorial_animation" width="311" height="211" cocos2d_pX="155.45" cocos2d_pY="98.55" x="475" y="0"/>
+  <SubTexture name="miaozhen_tutorial_animation" width="8" height="23" cocos2d_pX="3.1" cocos2d_pY="18.1" x="957" y="252"/>
+  <SubTexture name="clock_tutorial_animation" width="133" height="94" cocos2d_pX="-143.5" cocos2d_pY="-99.65" x="755" y="524"/>
+  <SubTexture name="s35g_tutorial_animation/snow" width="65" height="65" cocos2d_pX="-0.15" cocos2d_pY="-0.4" x="407" y="709"/>
+  <SubTexture name="duplicated2/magic2_tutorial_animation" width="55" height="58" cocos2d_pX="17.6" cocos2d_pY="26.65" x="888" y="644"/>
+  <SubTexture name="fdyh54654" width="118" height="132" cocos2d_pX="58.7" cocos2d_pY="65.65" x="312" y="66"/>
+  <SubTexture name="duplicated2/hamer_tutorial_animation" width="51" height="42" cocos2d_pX="11" cocos2d_pY="8.2" x="209" y="777"/>
+  <SubTexture name="duplicated2/sdbvyh_tutorial_animation" width="7" height="19" cocos2d_pX="4.4" cocos2d_pY="9.65" x="957" y="298"/>
+  <SubTexture name="duplicated2/jkiu_tutorial_animation" width="13" height="19" cocos2d_pX="6.45" cocos2d_pY="9.65" x="957" y="210"/>
+  <SubTexture name="duplicated2/4344_tutorial_animation" width="40" height="40" cocos2d_pX="19.8" cocos2d_pY="17.8" x="432" y="169"/>
+  <SubTexture name="duplicated2/whitecircle_tutorial_animation" width="70" height="70" cocos2d_pX="34.8" cocos2d_pY="34.8" x="265" y="695"/>
+  <SubTexture name="duplicated2/3454_tutorial_animation" width="70" height="71" cocos2d_pX="34.75" cocos2d_pY="34.95" x="428" y="636"/>
+  <SubTexture name="fdafhgf" width="116" height="91" cocos2d_pX="-392.9" cocos2d_pY="-103.85" x="665" y="426"/>
+  <SubTexture name="gsgf4643" width="473" height="64" cocos2d_pX="0" cocos2d_pY="0" x="0" y="0"/>
+  <SubTexture name="fdsafadsf" width="227" height="17" cocos2d_pX="-16.3" cocos2d_pY="-9.15" x="451" y="830"/>
+  <SubTexture name="duplicated2/frog" width="62" height="53" cocos2d_pX="30.25" cocos2d_pY="23.65" x="387" y="776"/>
+  <SubTexture name="duplicated2/house_tutorial_animation" width="56" height="58" cocos2d_pX="27" cocos2d_pY="26.9" x="890" y="524"/>
+  <SubTexture name="duplicated2/eagle_tutorial_animation" width="59" height="52" cocos2d_pX="28.9" cocos2d_pY="22.8" x="693" y="798"/>
+  <SubTexture name="dfsdfds" width="25" height="25" cocos2d_pX="12.25" cocos2d_pY="12.25" x="445" y="423"/>
+  <SubTexture name="duplicated2/chicken" width="65" height="65" cocos2d_pX="32.5" cocos2d_pY="32.5" x="821" y="620"/>
+  <SubTexture name="duplicated2/dj bac_tutorial_animation" width="311" height="70" cocos2d_pX="0" cocos2d_pY="0" x="122" y="845"/>
+  <SubTexture name="duplicated2/dj_tutorial_animation" width="310" height="211" cocos2d_pX="154.95" cocos2d_pY="105.3" x="0" y="66"/>
+  <SubTexture name="change_tutorial_animation" width="58" height="54" cocos2d_pX="1.45" cocos2d_pY="2.75" x="131" y="789"/>
+  <SubTexture name="hamer_tutorial_animation" width="40" height="38" cocos2d_pX="6" cocos2d_pY="8" x="430" y="295"/>
+  <SubTexture name="hamer2_tutorial_animation" width="73" height="90" cocos2d_pX="36.05" cocos2d_pY="44.55" x="948" y="536"/>
+  <SubTexture name="hamer1_tutorial_animation" width="76" height="80" cocos2d_pX="37.6" cocos2d_pY="39.65" x="391" y="549"/>
+  <SubTexture name="dfggt_tutorial_animation" width="191" height="176" cocos2d_pX="95.3" cocos2d_pY="87.8" x="472" y="426"/>
+  <SubTexture name="lineandboom" width="84" height="74" cocos2d_pX="25.45" cocos2d_pY="26.35" x="193" y="577"/>
+  <SubTexture name="erwer_tutorial_animation" width="68" height="68" cocos2d_pX="33.05" cocos2d_pY="34.45" x="945" y="698"/>
+  <SubTexture name="square_tutorial_animation" width="70" height="70" cocos2d_pX="35" cocos2d_pY="35" x="572" y="670"/>
+  <SubTexture name="magic_tutorial_animation" width="39" height="34" cocos2d_pX="5.1" cocos2d_pY="3.9" x="422" y="387"/>
+  <SubTexture name="sdbvyh_tutorial_animation" width="7" height="19" cocos2d_pX="4.4" cocos2d_pY="9.65" x="957" y="319"/>
+  <SubTexture name="jkiu_tutorial_animation" width="13" height="19" cocos2d_pX="6.45" cocos2d_pY="9.65" x="957" y="231"/>
+  <SubTexture name="whitecircle_tutorial_animation" width="70" height="70" cocos2d_pX="34.8" cocos2d_pY="34.8" x="0" y="670"/>
+  <SubTexture name="horsesmile_tutorial_animation" width="67" height="81" cocos2d_pX="33.1" cocos2d_pY="39.1" x="950" y="380"/>
+  <SubTexture name="colours_tutorial_animation" width="75" height="73" cocos2d_pX="37.45" cocos2d_pY="34.7" x="279" y="620"/>
+  <SubTexture name="animals/dfhfdsjtry" width="70" height="70" cocos2d_pX="0" cocos2d_pY="0" x="716" y="691"/>
+  <SubTexture name="animals/fgsfhsf" width="70" height="70" cocos2d_pX="0" cocos2d_pY="0" x="193" y="653"/>
+  <SubTexture name="magic2_tutorial_animation" width="55" height="58" cocos2d_pX="17.6" cocos2d_pY="26.65" x="967" y="260"/>
+  <SubTexture name="yejhf" width="68" height="62" cocos2d_pX="32.8" cocos2d_pY="29.6" x="337" y="704"/>
+  <SubTexture name="fyt" width="88" height="83" cocos2d_pX="43.2" cocos2d_pY="41.6" x="193" y="492"/>
+  <SubTexture name="dyrt" width="108" height="110" cocos2d_pX="53.6" cocos2d_pY="55.2" x="312" y="324"/>
+  <SubTexture name="dytr" width="116" height="122" cocos2d_pX="57.6" cocos2d_pY="60" x="312" y="200"/>
+  <SubTexture name="duplicated/tgre " width="167" height="167" cocos2d_pX="83.15" cocos2d_pY="83.6" x="788" y="189"/>
+  <SubTexture name="duplicated/hdyru" width="164" height="164" cocos2d_pX="81.25" cocos2d_pY="81.65" x="784" y="358"/>
+  <SubTexture name="duplicated/yrey" width="187" height="187" cocos2d_pX="93.05" cocos2d_pY="93.05" x="788" y="0"/>
+  <SubTexture name="duplicated/circle2" width="90" height="90" cocos2d_pX="45" cocos2d_pY="45" x="312" y="436"/>
+  <SubTexture name="bingdong tubiao" width="47" height="51" cocos2d_pX="-0.05" cocos2d_pY="-0.55" x="972" y="207"/>
+  <SubTexture name="1__" width="29" height="22" cocos2d_pX="9.3" cocos2d_pY="16.5" x="358" y="552"/>
+  <SubTexture name="2__" width="31" height="22" cocos2d_pX="9.3" cocos2d_pY="16.5" x="358" y="528"/>
+  <SubTexture name="4344_tutorial_animation" width="40" height="40" cocos2d_pX="19.8" cocos2d_pY="17.8" x="430" y="211"/>
+  <SubTexture name="whitecircle" width="70" height="70" cocos2d_pX="34.8" cocos2d_pY="34.8" x="72" y="670"/>
+  <SubTexture name="3454_tutorial_animation" width="70" height="71" cocos2d_pX="34.75" cocos2d_pY="34.95" x="356" y="631"/>
+  <SubTexture name="dongzhu" width="61" height="57" cocos2d_pX="31.05" cocos2d_pY="26.35" x="324" y="768"/>
+  <SubTexture name="duplicated/hngyui" width="63" height="62" cocos2d_pX="31.35" cocos2d_pY="30.7" x="144" y="725"/>
+  <SubTexture name="duye" width="60" height="60" cocos2d_pX="29.25" cocos2d_pY="30.2" x="881" y="764"/>
+  <SubTexture name="erh" width="60" height="60" cocos2d_pX="30.15" cocos2d_pY="30.15" x="262" y="767"/>
+  <SubTexture name="y5r" width="44" height="50" cocos2d_pX="22.45" cocos2d_pY="24.35" x="977" y="0"/>
+  <SubTexture name="tgre" width="55" height="56" cocos2d_pX="28.2" cocos2d_pY="28.25" x="65" y="801"/>
+  <SubTexture name="htr" width="73" height="68" cocos2d_pX="36.55" cocos2d_pY="33.95" x="948" y="628"/>
+  <SubTexture name="t5e487" width="76" height="69" cocos2d_pX="37.2" cocos2d_pY="34" x="743" y="620"/>
+  <SubTexture name="dj bac_tutorial_animation" width="311" height="70" cocos2d_pX="0" cocos2d_pY="0" x="435" y="852"/>
+  <SubTexture name="uoiudfmvcircle_tutorial_animation" width="88" height="81" cocos2d_pX="-4.85" cocos2d_pY="-8.75" x="665" y="519"/>
+  <SubTexture name="asset/__resources/trexcvxc_tutorial_animation" width="64" height="57" cocos2d_pX="-12.1" cocos2d_pY="-16.2" x="65" y="742"/>
+  <SubTexture name="duplicated2/magic2_tutorial_animation copy" width="55" height="58" cocos2d_pX="17.6" cocos2d_pY="26.65" x="888" y="704"/>
+  <SubTexture name="duplicated2/square_tutorial_animation" width="70" height="70" cocos2d_pX="35" cocos2d_pY="35" x="644" y="684"/>
+  <SubTexture name="duplicated2/hamer_tutorial_animation copy" width="51" height="50" cocos2d_pX="9.95" cocos2d_pY="12.9" x="209" y="725"/>
+  <SubTexture name="duplicated2/sdbvyh_tutorial_animation copy" width="7" height="19" cocos2d_pX="4.4" cocos2d_pY="9.65" x="957" y="277"/>
+  <SubTexture name="duplicated2/jkiu_tutorial_animation copy" width="13" height="19" cocos2d_pX="6.45" cocos2d_pY="9.65" x="957" y="189"/>
+  <SubTexture name="duplicated2/4344_tutorial_animation copy" width="40" height="40" cocos2d_pX="19.8" cocos2d_pY="17.8" x="430" y="253"/>
+  <SubTexture name="duplicated2/whitecircle_tutorial_animation copy" width="70" height="70" cocos2d_pX="34.8" cocos2d_pY="34.8" x="500" y="636"/>
+  <SubTexture name="duplicated2/3454_tutorial_animation copy" width="70" height="71" cocos2d_pX="34.75" cocos2d_pY="34.95" x="950" y="463"/>
+  <SubTexture name="duplicated2/hamer2_tutorial_animation" width="73" height="90" cocos2d_pX="36.05" cocos2d_pY="44.55" x="283" y="528"/>
+  <SubTexture name="duplicated2/hamer1_tutorial_animation" width="76" height="80" cocos2d_pX="37.6" cocos2d_pY="39.65" x="665" y="602"/>
+  <SubTexture name="duplicated2/dfggt_tutorial_animation" width="191" height="176" cocos2d_pX="95.3" cocos2d_pY="87.8" x="0" y="492"/>
+  <SubTexture name="duplicated2/chicken copy" width="65" height="65" cocos2d_pX="32.5" cocos2d_pY="32.5" x="500" y="708"/>
+  <SubTexture name="duplicated2/frog copy" width="62" height="53" cocos2d_pX="30.25" cocos2d_pY="23.65" x="474" y="775"/>
+  <SubTexture name="duplicated2/house_tutorial_animation copy" width="56" height="58" cocos2d_pX="27" cocos2d_pY="26.9" x="890" y="584"/>
+  <SubTexture name="duplicated2/eagle_tutorial_animation copy" width="61" height="59" cocos2d_pX="28.9" cocos2d_pY="27.5" x="567" y="742"/>
+  <SubTexture name="duplicated2/dj bac_tutorial_animation copy" width="311" height="70" cocos2d_pX="0" cocos2d_pY="0" x="0" y="917"/>
+  <SubTexture name="duplicated2/dj_tutorial_animation copy" width="310" height="211" cocos2d_pX="154.95" cocos2d_pY="105.3" x="0" y="279"/>
+  <SubTexture name="reflash_tutorial_animation" width="63" height="59" cocos2d_pX="6.5" cocos2d_pY="4.1" x="0" y="742"/>
+  <SubTexture name="duplicated/frog" width="62" height="53" cocos2d_pX="30.25" cocos2d_pY="23.65" x="943" y="768"/>
+  <SubTexture name="house_tutorial_animation" width="56" height="58" cocos2d_pX="27" cocos2d_pY="26.9" x="966" y="320"/>
+  <SubTexture name="duplicated/chicken" width="65" height="65" cocos2d_pX="32.5" cocos2d_pY="32.5" x="821" y="687"/>
+  <SubTexture name="eagle_tutorial_animation" width="59" height="52" cocos2d_pX="28.9" cocos2d_pY="22.8" x="786" y="789"/>
+  <SubTexture name="duplicated/foxb" width="61" height="59" cocos2d_pX="29.95" cocos2d_pY="27.65" x="630" y="756"/>
+  <SubTexture name="dj_tutorial_animation" width="310" height="211" cocos2d_pX="154.95" cocos2d_pY="105.3" x="472" y="213"/>
+</TextureAtlas>

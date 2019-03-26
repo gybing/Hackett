@@ -1,0 +1,12 @@
+"mark.panel.btn.has.sign.tip" = "Claim gifts";
+"mark.panel.cant.mark" = "Data overdue. Please try later!";
+"mark.panel.cant.remark" = "Data overdue. Please try later";
+"mark.panel.clear.label" = "days later reset";
+"mark.panel.close.btn.text" = "Close";
+"mark.panel.mark.btn.text" = "Check In";
+"mark.panel.mark.fail" = "Please get online to sign in.";
+"mark.panel.remark.btn.text" = "Forward";
+"mark.panel.remark.err" = "Sorry… Error…";
+"mark.panel.remark.err.no.gold" = "Sorry… Need more happy coins";
+"mark.panel.tip.title" = "Claim after {mark_number} check-ins";
+"mark.panel.title" = "Daily Free Gifts!";

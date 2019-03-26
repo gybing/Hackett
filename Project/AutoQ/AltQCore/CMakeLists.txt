@@ -1,0 +1,14 @@
+INCLUDE("../CMakeShared.txt")
+FILE(GLOB_RECURSE SRC "./*.*")
+FILE(GLOB_RECURSE Interface "../AltQInterface/*.h")
+
+ADD_DEFINITIONS(-DALTQLIB)
+
+ADD_ALTQ_INCLUDE()
+ADD_ALTQ_LINKPATH()
+INCLUDE_DIRECTORIES(../AltQInterface)
+
+ADD_LIBRARY(AltQCore SHARED ${SRC} ${Interface})
+ADD_ALTQ_LINKLIB(AltQCore)
+
+SOURCE_GROUP("AltQInterface" FILES ${Interface})

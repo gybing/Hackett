@@ -1,0 +1,148 @@
+/* Nav */
+
+.nav-drag { -webkit-app-region: drag; }
+.nav-no-drag { -webkit-app-region: no-drag; }
+
+.nav {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: var(--color-bg-content);
+}
+
+.nav-header-sys-ul {
+  float: right;
+  height: 100%;
+}
+
+.nav-header-sys-li {
+  float: right;
+  list-style: none;
+  height: 100%;
+}
+
+.nav-button-sys {
+  position: relative;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  border-style: none;
+  background-repeat: no-repeat;
+  margin: 12.5px 5px 12.5px 5px;
+  padding: 0px;
+}
+
+.nav-button-min {
+  background: url(../images/sys_btn_minimize.png);
+  width: 36px;
+  height: 25px;
+}
+
+.nav-button-close {
+  background: url(../images/sys_btn_close.png);
+  width: 38px;
+  height: 25px;
+}
+
+.nav-auth-content {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: var(--color-bg-content);
+}
+
+.nav-auth-content .nav-header-sys-ul {
+  height: 40px;
+}
+
+.nav-auth-content .nav-button-close {
+  background: url(../images/main_close_button_red_15_15_3.png);
+  width: 15px;
+  height: 15px;
+}
+
+.nav-auth-content .nav-button-sys {
+  margin: 20px;
+}
+
+.nav-auth-content .nav-button-close:hover { background-position-y: -15px; }
+.nav-auth-content .nav-button-close .is-selected { background-position-y: -30px; }
+
+.nav-auth-content .main-native-view {
+  width: 360px;
+  height: 210px;
+  margin: 0px 120px 0 120px;
+}
+
+.nav-auth-icon {
+  width: 150px;
+  height: 150px;
+    margin: 5px 100px 20px 100px;
+  -webkit-border-radius: 50%;
+  border-width: 2px;
+  border-style: double;
+  border-color: white;
+}
+
+.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+}
+
+.is-shown {
+  visibility: visible;
+  opacity: 1;
+}
+
+.auth-view {
+  width: 90%;
+  margin: 0 5% 0 5%;
+}
+
+.auth-view input {
+    box-sizing: border-box;
+    color: #222;
+    font-size: 14px;
+    width: 80%;
+    height: 35px;
+    border: 1px solid #baced9;
+    border-radius: 3px;
+    background-color: #deeef5;
+    padding: 10px;
+    outline: 0;
+    margin: 5px 10% 5px 10%;
+}
+
+.auth-view button {
+    width: 80%;
+    line-height: 40px;
+    height: 40px;
+    font-size: 15px;
+    border: 0;
+    margin: 10px 10% 5px 10%;
+    outline: 0;
+    border-radius: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    display: inline-block;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #008cee;
+    color: #fff;
+}
+
+.auth-view button:hover {
+      background-color: #46b2fe !important;
+    color: #fff !important;
+}
+
+.auth-view button:active {
+  background-color: #1a86d2 !important;
+    color: #fff !important;
+}

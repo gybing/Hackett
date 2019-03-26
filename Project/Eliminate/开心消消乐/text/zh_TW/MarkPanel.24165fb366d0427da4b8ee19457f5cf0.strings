@@ -1,0 +1,12 @@
+"mark.panel.btn.has.sign.tip" = "有簽到獎勵可以領取～";
+"mark.panel.cant.mark" = "簽到資料已過期，請稍後重試";
+"mark.panel.cant.remark" = "補簽資料已過期，請稍後重試";
+"mark.panel.clear.label" = "天後清空簽到資料";
+"mark.panel.close.btn.text" = "關閉";
+"mark.panel.mark.btn.text" = "今日簽到";
+"mark.panel.mark.fail" = "簽到功能需要連接無線網路";
+"mark.panel.remark.btn.text" = "補簽";
+"mark.panel.remark.err" = "補簽出錯了";
+"mark.panel.remark.err.no.gold" = "風車幣不足，補簽失敗…";
+"mark.panel.tip.title" = "再簽到{mark_number}天可領取";
+"mark.panel.title" = "簽到好禮";

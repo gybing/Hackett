@@ -1,0 +1,47 @@
+// 文件
+// 
+// 每个应用（扩展）都应该包含下面的文件：
+//     一个main.json文件
+//     一个或多个DLL文件（除非这个应用是一个皮肤）
+//     可选的任何需要的其他文件，例如图片
+// 
+// 在开发应用（扩展）时，需要把这些文件都放到同一个目录下。发布应用（扩展）时，这个目录全部打包到一个应用（扩展）名是.zip的压缩文件中。
+
+{
+  // *必须的字段
+  // 扩展名称
+  "name": "My Extension",
+
+  // *必须的字段
+  // 版本号
+  // 例:"1" "1.0" "2.10.2" "3.1.2.4567"
+  "version": "versionString", 
+
+  // 建议提供的字段
+  "description": "A plain text description",
+  "icons": 
+  {
+    "16": "icon16.png",             
+    "48": "icon48.png",            
+    "128": "icon128.png" 
+  },
+
+  // 多选一，或者都不提供
+  // 
+  // 1.主题插件
+  "theme": {
+    "colors": {
+      "frame": "#EFFFFFFF",
+    },
+  },
+
+  // 2.索引插件
+  "search": {
+    "module": "AltQModule*.dll"
+  },
+
+  // 3.UI插件
+  "preview": {
+    "module": "AltQModule*UI.dll"
+  }
+}  

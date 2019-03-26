@@ -1,0 +1,10 @@
+"update.done.confirm" = "關閉遊戲";
+"update.done.text" = "新版更新完畢，重開遊戲體驗吧～";
+"update.mew.vision.panel.no" = "稍後再說";
+"update.mew.vision.panel.yes" = "現在下載";
+"update.mew.vision.text" = "開心消消樂更新啦！{n}請問現在下載新版本嗎？";
+"update.panel.bag.prop.text" = "您目前遊戲版本過低，無法使用此道具喔~是否更新遊戲再來查看？";
+"update.panel.fail.disconnect" = "網路連接不穩，動態更新中斷啦…";
+"update.panel.unsigned.apk" = "警告：檢測到您當前使用的遊戲版本不合法，請下載官方版本繼續遊戲！";
+"user.data.error.code.108" = "對不起，請到Appstore升級到最新版本，再繼續遊戲吧～";
+"user.data.error.code.206" = "對不起，您的本機資料出現問題，請刪除遊戲，並重新從appstore下載遊戲";

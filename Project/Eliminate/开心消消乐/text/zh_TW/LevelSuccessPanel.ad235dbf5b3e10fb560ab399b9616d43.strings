@@ -1,0 +1,6 @@
+"level.success.next.level.button.label.txt" = "下一關";
+"level.success.replay.button.label.txt" = "重玩";
+"level.success.reward.txt" = "獎勵";
+"level.success.score.txt" = "分數";
+"level.success.share.to.weibo.btn.label" = "分享";
+"level.success.title" = "第{level_id}關";

@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2013
+Project("{6B3C9548-8012-8A2E-C98B-255D281C3944}") = "HanWenBook", "HanWenBook.vcxproj", "{0FEC7862-7FF1-44BA-C9D7-CEE25EC13629}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FEC7862-7FF1-44BA-C9D7-CEE25EC13629}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0FEC7862-7FF1-44BA-C9D7-CEE25EC13629}.Debug|Win32.Build.0 = Debug|Win32
+		{0FEC7862-7FF1-44BA-C9D7-CEE25EC13629}.Release|Win32.ActiveCfg = Release|Win32
+		{0FEC7862-7FF1-44BA-C9D7-CEE25EC13629}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

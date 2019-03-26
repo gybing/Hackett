@@ -1,0 +1,4 @@
+"star.reward.panel.get.btn.label" = "领取奖励";
+"star.reward.panel.reward.des" = "获得{star_number}颗星星可领取：";
+"star.reward.panel.reward.get.fail" = "对不起，领取奖励需要连接无线网络。";
+"star.reward.panel.title" = "星星奖励";

@@ -1,0 +1,15 @@
+<TextureAtlas name="chicken_fly_animation" width="256" height="256">
+  <SubTexture name="chicken_eye2zs_sss" width="28" height="17" cocos2d_pX="10.1" cocos2d_pY="11.85" x="226" y="81"/>
+  <SubTexture name="chicken_eye2zs" width="22" height="23" cocos2d_pX="10.65" cocos2d_pY="16.95" x="226" y="100"/>
+  <SubTexture name="chicken_eyezs_sss" width="29" height="23" cocos2d_pX="13.95" cocos2d_pY="18.1" x="225" y="125"/>
+  <SubTexture name="chicken_eyezs" width="25" height="25" cocos2d_pX="12.25" cocos2d_pY="18.1" x="228" y="54"/>
+  <SubTexture name="chicken_meimaozs" width="54" height="18" cocos2d_pX="26.75" cocos2d_pY="12.85" x="0" y="138"/>
+  <SubTexture name="chicken_mousezs" width="24" height="52" cocos2d_pX="11.7" cocos2d_pY="37.8" x="228" y="0"/>
+  <SubTexture name="chicken_eye2zssmile" width="25" height="19" cocos2d_pX="12.2" cocos2d_pY="17.15" x="89" y="138"/>
+  <SubTexture name="chicken_eyezssmile" width="31" height="21" cocos2d_pX="15.2" cocos2d_pY="14.8" x="56" y="138"/>
+  <SubTexture name="chicken_hatzs" width="40" height="49" cocos2d_pX="19.6" cocos2d_pY="35.5" x="161" y="124"/>
+  <SubTexture name="chicken_wings1zs" width="65" height="71" cocos2d_pX="30.9" cocos2d_pY="52.95" x="161" y="0"/>
+  <SubTexture name="chicken_bodyzs" width="159" height="136" cocos2d_pX="78.75" cocos2d_pY="99.8" x="0" y="0"/>
+  <SubTexture name="chicken_wings2zs" width="63" height="49" cocos2d_pX="19.8" cocos2d_pY="39.3" x="161" y="73"/>
+  <SubTexture name="chicken_footzs" width="20" height="19" cocos2d_pX="13.8" cocos2d_pY="10.35" x="203" y="124"/>
+</TextureAtlas>

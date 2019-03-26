@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Component\DocumentWindow.cpp" />
+    <ClCompile Include="LookAndFeel\LAFBase.cpp" />
+    <ClCompile Include="Component\DialogWindow.cpp" />
+    <ClCompile Include="Configuration\Configuration.cpp" />
+    <ClCompile Include="AudioCapture\PlaybackAudioCapture.cpp" />
+    <ClCompile Include="AudioCapture\TimeCostDebug.cpp" />
+    <ClCompile Include="Fourier.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Component\DocumentWindow.h" />
+    <ClInclude Include="LookAndFeel\LAFBase.h" />
+    <ClInclude Include="Component\DialogWindow.h" />
+    <ClInclude Include="Configuration\Configuration.h" />
+    <ClInclude Include="AudioCapture\PlaybackAudioCapture.h" />
+    <ClInclude Include="AudioCapture\ClassRegister.h" />
+    <ClInclude Include="AudioCapture\TimeCostDebug.h" />
+    <ClInclude Include="AudioLiveScrollingDisplay.h" />
+    <ClInclude Include="Fourier.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="LookAndFeel">
+      <UniqueIdentifier>{4fc88a8d-f654-44f8-b82a-7ac9efc5dca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{c59f8a5b-2b65-4b55-9001-30749e77e84d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Res\resources.rc" />
+  </ItemGroup>
+</Project>

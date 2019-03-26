@@ -1,0 +1,10 @@
+"update.done.confirm" = "关闭游戏";
+"update.done.text" = "开心消消乐新版本更新完毕，请重启游戏体验新内容。";
+"update.mew.vision.panel.no" = "稍后再说";
+"update.mew.vision.panel.yes" = "现在下载";
+"update.mew.vision.text" = "开心消消乐有新的更新啦！{n}请问是否现在下载新版本？";
+"update.panel.bag.prop.text" = "您当前游戏版本过低，无法使用此道具哦~是否更新游戏再来查看？";
+"update.panel.fail.disconnect" = "网络连接不稳，动态更新中断！";
+"update.panel.unsigned.apk" = "警告：检测到您当前使用的游戏版本不是合法版本，请下载官方版本继续游戏！";
+"user.data.error.code.108" = "对不起，您需要到Appstore升级到最新版本才能继续游戏。";
+"user.data.error.code.206" = "对不起，您的本地数据出现问题，请删除游戏，并重新从appstore下载游戏";

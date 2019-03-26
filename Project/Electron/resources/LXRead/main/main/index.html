@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>HanWenBook</title>
+
+    <link rel="stylesheet" href="../../assets/css/variables.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/nativize.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/nav.css">
+    <link rel="stylesheet" href="../../assets/css/section.css">
+  </head>
+  <body>
+    <nav class="nav context-menu">
+      <header class="nav-header nav-drag">
+        <img class="nav-header-icon" src="../../assets/img/main_logo.png"/>
+        <ul class="nav-header-menu-ul nav-no-drag">
+          <li class="nav-header-menu-li"><button type="button" id="button-header-menu-store" class="nav-button">图书馆</button></li>
+          <li class="nav-header-menu-li"><button type="button" id="button-header-menu-shelf" class="nav-button">书架</button></li>
+          <li class="nav-header-menu-li"><button type="button" id="button-header-menu-class" class="nav-button">班级</button></li>
+          <li class="nav-header-menu-li"><button type="button" id="button-header-menu-home" class="nav-button">我的</button></li>
+        </ul>
+        <ul class="nav-header-sys-ul nav-no-drag">
+          <li class="nav-header-sys-li"><button type="button" id="button-header-close" class="nav-button-sys nav-button-close"></button></li>
+          <li class="nav-header-sys-li"><button type="button" id="button-header-min" class="nav-button-sys nav-button-min"></button></li>
+        </ul>
+      </header>
+
+      <main class="content">
+        <div class="content-item is-hidden">
+          <div class="content-store-toobar nav-drag">
+            <ul class="content-store-toobar-ul nav-no-drag">
+              <li class="content-store-toobar-li">
+                <button type="button" id="button-store-free" class="content-store-toobar-button-free">
+                  推荐
+                  <div class="content-store-toobar-button-free-img"/>
+                </button>
+              </li>
+              <li class="content-store-toobar-li">
+                <button type="button" id="button-store-type" class="content-store-toobar-button-type">
+                  分类
+                  <div class="content-store-toobar-button-type-img"/>
+                </button>
+              </li>
+              <li class="content-store-toobar-li">
+                <button type="button" id="button-store-rank" class="content-store-toobar-button-rank">
+                  排行
+                  <div class="content-store-toobar-button-rank-img"/>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="content-store-native">
+            <webview class="content-store-native-view" id="webview-native-content" nodeintegration/>
+          </div>
+        </div>
+        <div class="content-item is-hidden">
+          <div class="content-shelf-native">
+            <dir class="content-shelf-native-list">
+              <dir class="content-shelf-native-list-header">
+                <img class="content-shelf-native-icon" id="label-shelf-native-icon" src="http://image.lejiaolexue.com/userlogo/149880/3"/>
+                <h1 class="content-shelf-native-title" id="label-shelf-native-title"></h1>
+                <h2 class="content-shelf-native-count" id="label-shelf-native-count">藏书:</h2>
+              </dir>
+              <ul class="native-shelf-list-ul" id="ul-shelf-list">
+              <li class="native-shelf-list-li">
+              </li>
+            </ul>
+            </dir>
+            <div class="content-shelf-native-book">
+              
+            </div>
+          </div>
+        </div>
+        <div class="content-item is-hidden">
+          <button type="button" id="button-windows" data-section="windows" class="nav-button">Create and manage <em>windows</em></button>
+          <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">Handling window <em>crashes and hangs</em></button>
+        </div>
+        <div class="content-item is-hidden">
+          <button type="button" id="button-windows" data-section="windows" class="nav-button">Create and manage <em>windows</em></button>
+          <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">Handling window <em>crashes and hangs</em></button>
+        </div>
+      </main>
+
+    <script>
+    require('../../render/main/main')
+    require('../../render/main/store')
+    require('../../render/main/shelf')
+    </script>
+  </body>
+</html>

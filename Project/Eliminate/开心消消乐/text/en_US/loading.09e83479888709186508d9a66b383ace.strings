@@ -1,0 +1,6 @@
+"loading.create.account" = "Raccoon is creating account for you...";
+"loading.login.waitin" = "Raccoon is working hard to log in...";
+"loading.login.waiting" = "Raccoon is working hard to log in...";
+"pre.tips.cancel" = "cancel";
+"pre.tips.login" = "loading...";
+"pre.tips.merging.data" = "Merging data.Please wait.";

@@ -1,0 +1,9 @@
+"exception.panel.btn.commit" = "Reload";
+"exception.panel.btn.email" = "Report";
+"exception.panel.commit.tips" = "Game is fine now! Please continue!";
+"exception.panel.day" = "Day";
+"exception.panel.email.tips" = "Information sent to customer service.";
+"exception.panel.month" = "Month";
+"exception.panel.text" = "Please reload your last saved game.";
+"exception.panel.tittle" = "WARNING!";
+"exception.panel.top.level" = "Top Level: Level{num} {data}";

@@ -1,0 +1,99 @@
+{
+	"image": "thanksgiving_icon@2x.png",
+	"config": "thanksgiving_icon@2x.plist",
+	"stageHeight": 400,
+	"stageWidth": 550,
+	"version": 1,
+	"groups": {
+		"Thanksgiving/thanksgivingButton": [
+			{
+				"x": -3,
+				"y": -2,
+				"width": 101,
+				"height": 102,
+				"scaleX": 1,
+				"scaleY": 1,
+				"skewX": 0,
+				"skewY": 0,
+				"rotation": 0,
+				"index": 0,
+				"id": "wrapper",
+				"image": "Thanksgiving/元件 2",
+				"type": 2,
+				"scalingGrid": false
+			}
+		],
+		"Thanksgiving/元件 2": [
+			{
+				"x": 0,
+				"y": 3,
+				"width": 101,
+				"height": 100,
+				"scaleX": 1,
+				"scaleY": 1,
+				"skewX": 0,
+				"skewY": 0,
+				"rotation": 0,
+				"index": 0,
+				"id": "icon",
+				"image": "Thanksgiving/元件 1",
+				"type": 0,
+				"scalingGrid": false
+			},
+			{
+				"x": 62,
+				"y": 4,
+				"width": 41,
+				"height": 41,
+				"scaleX": 1,
+				"scaleY": 1,
+				"skewX": 0,
+				"skewY": 0,
+				"rotation": 0,
+				"index": 1,
+				"id": "rewardFlag",
+				"image": "Thanksgiving/rewardFlag",
+				"type": 0,
+				"scalingGrid": false
+			},
+			{
+				"x": 59,
+				"y": 1,
+				"width": 39.3,
+				"height": 40.5,
+				"scaleX": 0.9499969482421875,
+				"scaleY": 0.9499969482421875,
+				"skewX": 0,
+				"skewY": 0,
+				"rotation": 0,
+				"index": 2,
+				"id": "redDot",
+				"image": "Thanksgiving/fruittreebutton_ring",
+				"type": 0,
+				"scalingGrid": false
+			},
+			{
+				"x": 63.55,
+				"y": 4.6,
+				"width": 29.3,
+				"height": 31.4,
+				"scaleX": 0.9499969482421875,
+				"scaleY": 0.9499969482421875,
+				"skewX": 0,
+				"skewY": 0,
+				"rotation": 0,
+				"lineType": "single line",
+				"maxCharacters": 0,
+				"textType": "static",
+				"face": "DroidSansFallback",
+				"size": 26,
+				"fillColor": "#ffee00",
+				"alignment": "center",
+				"letterSpacing": 0,
+				"index": 3,
+				"id": "num",
+				"type": 1
+			}
+		]
+	}
+}

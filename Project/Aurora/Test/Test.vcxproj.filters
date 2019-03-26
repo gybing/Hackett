@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Demos">
+      <UniqueIdentifier>{00A8DD64-8897-DD63-293A-BF966D26B6B4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{40270E52-8FFD-E4D3-1A5F-536C66219037}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Demos\AnimationDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\CameraDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\ChildProcessDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\CodeEditorDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\ComponentTransformsDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\CryptographyDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\DialogsDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\FontsDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\GraphicsDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\ImagesDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\JavaScript.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\KeyMappingsDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\LiveConstantDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\LookAndFeelDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\MultithreadingDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\MultiTouch.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\NetworkingDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\PropertiesDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\SystemInfoDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\TimersAndEventsDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\UnitTestsDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\ValueTreesDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\VideoDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\WebBrowserDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\WidgetsDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\WindowsDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="Demos\XMLandJSONDemo.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroScreen.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="BinaryData.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Demos\WavefrontObjParser.h">
+      <Filter>Demos</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoUtilities.h" />
+    <ClInclude Include="JuceDemoHeader.h" />
+    <ClInclude Include="BinaryData.h" />
+    <ClInclude Include="JuceHeader.h" />
+    <ClInclude Include="MainWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\tile_background.png">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\cello.wav">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\demo table data.xml">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\icons.zip">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\juce_icon.png">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\juce_module_info">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\portmeirion.jpg">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\teapot.obj">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\treedemo.xml">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include=".\icon.ico">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include=".\resources.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="G0iEF1" name="LXChat" projectType="guiapp" version="1.0.0"
+              bundleIdentifier="com.yourcompany.LXChat" includeBinaryInAppConfig="1"
+              jucerVersion="4.1.0">
+  <MAINGROUP id="sN8set" name="LXChat">
+    <GROUP id="{27518B51-222B-621B-9C0E-9818B48BCFDF}" name="Source">
+      <FILE id="nl4Mm0" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+      <FILE id="xv0RVT" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="pakBaZ" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       isDebug="1" optimisation="1" targetName="LXChat"/>
+        <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       isDebug="0" optimisation="3" targetName="LXChat"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <XCODE_IPHONE targetFolder="Builds/iOS">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" iosCompatibility="default" isDebug="1" optimisation="1"
+                       targetName="LXChat"/>
+        <CONFIGURATION name="Release" iosCompatibility="default" isDebug="0" optimisation="3"
+                       targetName="LXChat"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </XCODE_IPHONE>
+    <VS2015 targetFolder="Builds/VisualStudio2015">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="LXChat"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="3" targetName="LXChat"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </VS2015>
+    <VS2013 targetFolder="Builds/VisualStudio2013">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="LXChat"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="3" targetName="LXChat"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </VS2013>
+    <VS2012 targetFolder="Builds/VisualStudio2012">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="LXChat"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="3" targetName="LXChat"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </VS2012>
+    <VS2010 targetFolder="Builds/VisualStudio2010">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="LXChat"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="3" targetName="LXChat"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </VS2010>
+    <VS2008 targetFolder="Builds/VisualStudio2008">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" isDebug="1"
+                       optimisation="1" targetName="LXChat"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" isDebug="0"
+                       optimisation="3" targetName="LXChat"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </VS2008>
+    <VS2005 targetFolder="Builds/VisualStudio2005">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" isDebug="1"
+                       optimisation="1" targetName="LXChat"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" isDebug="0"
+                       optimisation="3" targetName="LXChat"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </VS2005>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
+                       targetName="LXChat"/>
+        <CONFIGURATION name="Release" libraryPath="/usr/X11R6/lib/" isDebug="0" optimisation="3"
+                       targetName="LXChat"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_video" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>

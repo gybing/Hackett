@@ -1,0 +1,12 @@
+{
+  "key": "3F330EC8-FEC6-41C5-AAE9-228822382BD1",
+  "name": "音乐电台模块",
+  "description": "提供音乐电台",
+  "version": "1.0.0", 
+  "search": {
+    "module": "AltQModuleRadio.dll"
+  },
+  "ui": {
+    "module": "AltQModuleRadioUI.dll"
+  }
+}  

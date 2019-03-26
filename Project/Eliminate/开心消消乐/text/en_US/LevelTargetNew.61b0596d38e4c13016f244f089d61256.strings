@@ -1,0 +1,10 @@
+"level.target.dig.endless.mode" = "Try to dig all the gems out";
+"level.target.dig.step.mode" = "Dig enough gems";
+"level.target.dig.time.mode" = "Dig enough gems";
+"level.target.drop.mode" = "Collect Gold Peas";
+"level.target.eliminate.effect.mode" = "Activate the power below";
+"level.target.ice.mode" = "Clear all Ice Blocks";
+"level.target.objective.mode" = "Clear targets";
+"level.target.step.mode" = "Get enough score";
+"level.target.swap.effect.mode" = "Swap over the powers below";
+"level.target.time.mode" = "Get enough score";

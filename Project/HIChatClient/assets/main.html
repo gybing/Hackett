@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>HanWenBook</title>
+
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/nativize.css">
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/section.css">
+  </head>
+  <body>
+    <nav class="nav">
+      <header class="nav-header nav-drag">
+        <!--img class="nav-header-icon" src=""/-->
+        <span class="title">乐信</span>
+        <ul class="nav-header-sys-ul nav-no-drag">
+          <li class="nav-header-sys-li"><button type="button" id="button-header-close" class="nav-button-sys nav-button-close"></button></li>
+          <li class="nav-header-sys-li"><button type="button" id="button-header-min" class="nav-button-sys nav-button-min"></button></li>
+        </ul>
+      </header>
+      <main class="content">
+        <div class="main-toobar nav-drag" id="main-toobar-ul">
+          <div class="main-me">
+            <img class="icon" id="main-toobar-info-icon" src="./images/default_face.png"/>
+            <span class="title" id="main-toobar-info-title" >韩瑞军</span>
+          </div>
+          <ul class="nav-no-drag">
+            <li class="main-toobar-chat"><i class="iconfont"></i><span class="text">乐信</span></li>
+            <li class="main-toobar-contact"><i class="iconfont"></i><span class="text">联系人</span></li>
+            <li class="main-toobar-application"><i class="iconfont"></i><span class="text">应用</span></li>
+          </ul>
+        </div>
+        <div class="main-native" id="main-native-div">
+          <ul class="main-native-chat is-hidden" id="native-chat-ul">
+            <!--li>
+             <i class="delete iconfont" htitle="删除会话"></i>
+             <img class="icon" src="./images/default_face.png"/>
+             <div class="item-content">
+              <p class="title">乐教乐学</p>
+              <p class="time">11.31</p>
+              <p class="text">[4条] 乐信撤回了一条消息</p>
+             </div>
+            </li-->
+          </ul>
+          <ul class="main-native-contact is-hidden" id="native-contact-ul">
+            <!--li>
+             <img class="icon" src="./images/default_face.png"/>
+             <div class="item-content">
+              <p class="title">张明义</p>
+              <p class="text">软件开发工程师</p>
+             </div>
+            </li-->
+          </ul>
+          <ul class="main-native-application is-hidden" id="native-application-ul">
+            <!--li>
+             <img class="icon" src="./images/default_face.png"/>
+             <div class="item-content">
+              <p class="title">乐教乐学</p>
+             </div>
+            </li-->
+          </ul>
+        </div>
+        <div class="main-content">
+          <div class="main-chat-view is-hidden" id="main-chat-view-div">
+            <div class="chat-view-title">
+              <img class="icon" id="main-chat-view-title-icon" src="./images/default_face.png"/>
+              <div class="item-content">
+               <p class="title" id="main-chat-view-title-title"><!--张明义--></p>
+               <p class="text" id="main-chat-view-title-text"><!--软件开发工程师--></p>
+              </div>
+              <div class="chat-view-title-operations">
+                <i class="iconfont chat-operations-1"></i>
+                <i class="iconfont chat-operations-2"></i>
+                <i class="iconfont chat-operations-3"></i>
+                <i class="iconfont chat-operations-4"></i>
+                <i class="iconfont chat-operations-5"></i>
+              </div>
+            </div>
+            <div class="chat-view">
+              <ul id="chat-view-ul">
+                <li class="chat-item">
+                  <div class="chat-profile">
+                    <div class="chat-status">15:10</div>
+                    <div class="chat-profile-info">
+                      <span class="name-text"><!--钉钉小秘书--></span>
+                      <span class="chat-time"><!--09-26 15:43:41--></span>
+                    </div>
+                  </div>
+                  <img class="avatar" src="./images/default_face.png"/>
+                  <div class="chat-content">
+                    <div class="msg-bubble">
+                      <pre class="text">不乖哦，又来调戏人家，亲再详细描述一下你的问题，我会为你排忧解难哒~</pre>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="chat-input-view">
+              <div class="input-area">
+                <ul class="tool-bar">
+                  <li>
+                    <div htitle="附件">
+                      <i class="iconfont"></i>
+                      <input type="file" class="file-input" title=" " multiple="" uploader="upload.uploader">
+                    </div>
+                  </li>
+                  <li><i class="iconfont tool-icon htitle="表情"></i></li>
+                  <li><i class="iconfont tool-icon htitle="试试直接输入@"></i></li>
+                  <li><i class="iconfont tool-icon htitle="选择钉盘文件"></i></li>
+                  <li><i class="iconfont tool-icon htitle="发送名片到本会话"></i></li>
+                  <li><i class="iconfont tool-icon htitle="点赞"></i></li>
+                </ul>
+                <div class="msg-box">
+                  <textarea id="msg-box-textarea"></textarea>
+                </div>
+              </div>
+              <div class="action-area">
+                <a id="send-message-button">发送</a>
+              </div>
+            </div>
+          </div>
+          <dir class="main-contact-view is-hidden" id="main-contact-view-div"/></div>
+          <div class="main-app-view is-hidden" id="main-app-view-div"/></div>
+        </div>
+      </main>
+    </nav>
+    <script>
+    require('./main')
+    </script>
+  </body>
+</html>

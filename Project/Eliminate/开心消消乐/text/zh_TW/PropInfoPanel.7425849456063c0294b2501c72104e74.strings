@@ -1,0 +1,9 @@
+"prop.info.panel.anim.play" = "效果展示";
+"prop.info.panel.close.txt" = "關閉";
+"prop.info.panel.list1" = "以下道具只能在關卡開始前購買，並只能在本次闖關時使用。";
+"prop.info.panel.list2" = "金色氣泡中的道具只能在目前關卡使用。";
+"prop.info.panel.list3" = "有綠色標記的泡泡為普通道具，永久有效。";
+"prop.info.panel.list4" = "有黃色標記的泡泡為臨時道具，當局有效。";
+"prop.info.panel.prop.full" = "普通";
+"prop.info.panel.prop.temp" = "臨時";
+"prop.info.panel.title" = "道具說明";

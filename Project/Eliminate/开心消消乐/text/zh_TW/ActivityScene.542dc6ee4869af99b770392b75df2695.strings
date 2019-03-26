@@ -1,0 +1,3 @@
+"activity.scene.loading.text" = "請稍等";
+"activity.scene.message.text1" = "{n}個新消息";
+"activityscene.percent.text" = "活動正在下載中，請稍候…{n}%";

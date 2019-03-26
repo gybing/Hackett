@@ -1,0 +1,9 @@
+"new.version.cancal.text" = "稍後再說";
+"new.version.download.text" = "下載";
+"new.version.dynamic.isnew.error" = "已經是最新版本啦！";
+"new.version.dynamic.settingfile.error" = "下載配置文件出錯!";
+"new.version.dynamic.tip.text" = "本更新包約{n}K";
+"new.version.package.tip.text" = "更新需要約消耗50m流量，建議在wifi狀態下下載喔~";
+"new.version.package.title.text" = "新版本更新";
+"new.version.success.get.text" = "領取";
+"new.version.success.msg.text" = "恭喜您更新成功，獲得{n}個{name}獎勵！";

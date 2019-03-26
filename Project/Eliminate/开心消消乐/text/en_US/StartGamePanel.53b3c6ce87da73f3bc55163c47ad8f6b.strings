@@ -1,0 +1,14 @@
+"classic.move.objective" = "Get enough score";
+"classic.objective" = "Get enough score";
+"dig.move.objective" = "Dig enough gems";
+"dig.time.objective" = "Limited digging mode";
+"drop.down.objective" = "Collect Gold Peas";
+"level.info.panel.start.level.failed" = "Sorry. Error. Please restart the game.";
+"light.up.objective" = "Clear all Ice Blocks";
+"order.objective" = "Collect them";
+"start.game.panel.choose.item.title" = "Select Boosters";
+"start.game.panel.preprop.item.selected" = "Selected";
+"start.game.panel.start.btn.txt" = "Play";
+"start.game.panel.title_di" = "No";
+"start.game.panel.title_guan" = "Level";
+"start.game.panel.unlock.txt" = "Lvl {level_number}";

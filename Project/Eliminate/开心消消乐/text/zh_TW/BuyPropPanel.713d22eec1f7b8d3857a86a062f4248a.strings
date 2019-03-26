@@ -1,0 +1,12 @@
+"buy.prop.panel.btn.buy.txt" = "購買";
+"buy.prop.panel.err.no.gold" = "風車幣不足，購買失敗";
+"buy.prop.panel.err.undefined" = "購買出錯了，請您重新嘗試";
+"buy.prop.panel.hammer" = "小木槌";
+"buy.prop.panel.label.number" = "請選擇數量：";
+"buy.prop.panel.label.treasure" = "您擁有";
+"buy.prop.panel.linebrush" = "魔法棒";
+"buy.prop.panel.refresh" = "重整";
+"buy.prop.panel.revert" = "後退1步";
+"buy.prop.panel.success" = "道具購買成功！";
+"buy.prop.panel.swap" = "強制交換";
+"buy.prop.panel.title" = "購買道具";

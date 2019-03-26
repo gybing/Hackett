@@ -1,0 +1,14 @@
+"consume.history.panel.date.text" = "%Y/%m/%d %H:%M";
+"consume.history.panel.desc" = "僅顯示最近兩個月消費記錄";
+"consume.history.panel.desc1" = "如遇充值相關問題，請諮詢客服或發送Email進行查詢。{n}郵箱地址：anipop@happyelements.com";
+"consume.history.panel.gold.text" = "{n}風車幣";
+"consume.history.panel.header.1" = "購買項目";
+"consume.history.panel.header.2" = "交易時間";
+"consume.history.panel.header.3" = "價格";
+"consume.history.panel.loading.text.1" = "沒有更早的記錄了，只顯示兩個月內消費記錄唷～";
+"consume.history.panel.loading.text.2" = "正在讀取更早的消費紀錄...";
+"consume.history.panel.normal.price" = "${n}";
+"consume.history.panel.title" = "我的消費紀錄";
+"consume.tip.panel.text.1" = "您剛才成功購買了{n}風車幣。";
+"game.last.restored.payment" = "您上次購買的風車幣到帳囉，請進遊戲查收吧～謝謝您！";
+"consume.history.panel.qq.price" = "{n}Q點";

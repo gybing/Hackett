@@ -1,0 +1,10 @@
+
+/* Custom Properties */
+
+:root {
+  --color-bg:         hsl(184, 100.0%, 34.3%);
+  --color-bg-content: hsl(0, 0.0%, 94.1%);
+  --color-bg-control: hsl(218, 42.1%, 92.5%);
+  --color-text-black: hsl(0, 0.0%, 22.7%);
+  --color-bg-content-grey: 	hsl(180, 0.67% , 70.78% );
+}

@@ -1,0 +1,3 @@
+"star.reward.panel.get.btn.label" = "領取獎勵";
+"star.reward.panel.reward.des" = "獲得{star_number}顆星星可領取：";
+"star.reward.panel.reward.get.fail" = "對不起，領取獎勵需要連接無線網路。";

@@ -1,0 +1,11 @@
+"level.start.dig.endless.mode" = "Dig all gems";
+"level.start.dig.step.mode" = "Dig enough gems";
+"level.start.dig.time.mode" = "Dig enough gems";
+"level.start.drop.mode" = "Collect";
+"level.start.eliminate.effect.mode" = "Activate the power";
+"level.start.ice.mode" = "Clear all Ice Blocks";
+"level.start.objective.mode" = "Target";
+"level.start.step.mode" = "Get enough score";
+"level.start.swap.effect.mode" = "Swap over the powers";
+"level.start.time.mode" = "Get enough score";
+"level.start.weekly.race.rabbit" = "Try save more bunnies!";

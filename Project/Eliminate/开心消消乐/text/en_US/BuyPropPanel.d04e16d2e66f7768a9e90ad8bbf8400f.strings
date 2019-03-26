@@ -1,0 +1,12 @@
+"buy.prop.panel.btn.buy.txt" = "Buy";
+"buy.prop.panel.err.no.gold" = "Sorry, not enough Happy Coins…";
+"buy.prop.panel.err.undefined" = "Sorry, Please try again";
+"buy.prop.panel.hammer" = "Lil' Mallet";
+"buy.prop.panel.label.number" = "Select amount:";
+"buy.prop.panel.label.treasure" = "You have";
+"buy.prop.panel.linebrush" = "Magic Wand";
+"buy.prop.panel.refresh" = "Shuffle";
+"buy.prop.panel.revert" = "Undo";
+"buy.prop.panel.success" = "Get the boosters!";
+"buy.prop.panel.swap" = "Swap";
+"buy.prop.panel.title" = "Purchase Boosters";

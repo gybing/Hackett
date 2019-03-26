@@ -1,0 +1,13 @@
+"level.fail.animal.effect.mode" = "Can't clear the animals!";
+"level.fail.dig.endless.mode" = "You need a star...";
+"level.fail.dig.step.mode" = "Not enough gems...";
+"level.fail.dig.time.mode" = "No enough gems";
+"level.fail.drop.mode" = "Need more Gold Peas…";
+"level.fail.drop.ufo.mode" = "The Gold Peas are robbed…";
+"level.fail.eliminate.effect.mode" = "You have to activate more!";
+"level.fail.ice.mode" = "There're still Ice Blocks...";
+"level.fail.objective.mode" = "You have to clear more of them!";
+"level.fail.step.mode" = "Score not enough...";
+"level.fail.swap.effect.mode" = "You have to swap more!";
+"level.fail.time.mode" = "Not enough score";
+"level.fail.venom.effect.mode" = "No more venom. Can't complete level.";

@@ -1,0 +1,4 @@
+"more.star.btn.txt" = "Get more stars";
+"more.star.panel.desc" = "(Easier to get 3 stars when you've more moves remain)";
+"more.star.panel.title" = "Play these levels to get {num} more stars";
+"more.star.star.reward.desc" = "You'll have to collect {num} more stars.";

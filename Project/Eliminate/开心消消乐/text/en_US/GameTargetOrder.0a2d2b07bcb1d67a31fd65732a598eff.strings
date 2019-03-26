@@ -1,0 +1,9 @@
+"game.target.tips.order2.1" = "Goal: Activate line power {num} times";
+"game.target.tips.order2.2" = "Goal: Activate popping power {num} times";
+"game.target.tips.order2.3" = "Goal: Clear {num} magic birds";
+"game.target.tips.order3.1" = "Goal: Swap 2 line power {num} times";
+"game.target.tips.order3.2" = "Goal: Swap line & popping power {num} times";
+"game.target.tips.order3.3" = "Goal: Swap magic bird & stripe power {num} times";
+"game.target.tips.order3.4" = "Goal: Swap 2 popping power {num} times";
+"game.target.tips.order3.5" = "Goal: Swap magic bird & popping power {num} times";
+"game.target.tips.order3.6" = "Goal: Swap 2 magic bird {num} times";

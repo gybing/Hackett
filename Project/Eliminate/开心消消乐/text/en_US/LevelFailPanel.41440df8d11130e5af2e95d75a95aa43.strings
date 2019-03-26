@@ -1,0 +1,11 @@
+"level.fail.classic" = "Score not enough...";
+"level.fail.classic.move" = "Need higher score…";
+"level.fail.dig.move" = "Need more gems…";
+"level.fail.dig.time" = "Digging Mode";
+"level.fail.drop.down" = "Need more Gold Peas…";
+"level.fail.light.up" = "There're still Ice Blocks…";
+"level.fail.order" = "Need to clear more…";
+"level.fail.replay.button.label.txt" = "Try again";
+"level.fail.score.not.reached" = "You need a star...";
+"level.fail.score.txt" = "Score";
+"level.fail.title" = "Level {level_id}";

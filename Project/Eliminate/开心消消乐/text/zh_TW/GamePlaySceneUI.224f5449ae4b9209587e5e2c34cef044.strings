@@ -1,0 +1,4 @@
+"level.number.label.txt" = "第{level_number}關";
+"move.or.time.counter.step.txt" = "剩餘步數";
+"move.or.time.counter.time.txt" = "剩餘時間";
+"score.progress.bar.score.txt" = "分數";

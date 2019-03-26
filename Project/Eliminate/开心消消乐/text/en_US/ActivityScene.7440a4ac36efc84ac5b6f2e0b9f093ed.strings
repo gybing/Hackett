@@ -1,0 +1,5 @@
+"activity.scene.error1" = "Network error. Please check and enter the game again.";
+"activity.scene.loading.text" = "Please wait";
+"activity.scene.message.text1" = "{n} new message";
+"activity.scene.message.text2" = "You're not connected to WiFi. Confirm to download this activity now? Needs {n}";
+"activityscene.percent.text" = "Activity download, please wait…{n}%";

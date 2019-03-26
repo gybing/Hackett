@@ -1,0 +1,15 @@
+"buy.gold.panel.btn.free.text" = "免費獲取";
+"buy.gold.panel.buy.timeout" = "蘋果商店支付交易超時，請確認網路連接情況";
+"buy.gold.panel.discount" = "折";
+"buy.gold.panel.err.undefined" = "本次支付失敗囉…";
+"buy.gold.panel.free.sign" = "免費";
+"buy.gold.panel.get.list.fail" = "讀取蘋果商店失敗，請檢查網路情況吧～";
+"buy.gold.panel.get.list.fail_android" = "讀取GooglePlay失敗，請檢查網路情況吧～";
+"buy.gold.panel.get.list.fail_ios" = "讀取AppStore失敗，請檢查網路情況吧～";
+"buy.gold.panel.get.list.timeout" = "連接到蘋果商店失敗，請確認網路連接情況吧";
+"buy.gold.panel.get.list.timeout_android" = "連接到GooglePlay商店失敗，請確認網路連接情況吧";
+"buy.gold.panel.get.list.timeout_ios" = "連接到蘋果商店失敗，請確認網路連接情況吧";
+"buy.gold.panel.money.mark" = "NT$";
+"buy.gold.panel.success" = "成功購買風車幣！";
+"buy.gold.panel.tip" = "若支付遇到問題，再次點擊該額度就正常囉。（無需再次支付）";
+"buy.gold.panel.title" = "購買風車幣";

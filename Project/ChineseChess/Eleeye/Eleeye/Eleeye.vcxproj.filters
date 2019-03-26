@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="book.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="Eleeye.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="evaluate.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="genmoves.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="hash.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="movesort.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="position.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="preeval.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="pregen.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="search.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="ucci.cpp">
+      <Filter>eleeye</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\pipe.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="book.h">
+      <Filter>eleeye</Filter>
+    </ClInclude>
+    <ClInclude Include="hash.h">
+      <Filter>eleeye</Filter>
+    </ClInclude>
+    <ClInclude Include="movesort.h">
+      <Filter>eleeye</Filter>
+    </ClInclude>
+    <ClInclude Include="position.h">
+      <Filter>eleeye</Filter>
+    </ClInclude>
+    <ClInclude Include="preeval.h">
+      <Filter>eleeye</Filter>
+    </ClInclude>
+    <ClInclude Include="pregen.h">
+      <Filter>eleeye</Filter>
+    </ClInclude>
+    <ClInclude Include="search.h">
+      <Filter>eleeye</Filter>
+    </ClInclude>
+    <ClInclude Include="ucci.h">
+      <Filter>eleeye</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Base\base.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Base\base2.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Base\parse.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Base\pipe.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Base\rc4prng.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Base\x86asm.h">
+      <Filter>base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="eleeye">
+      <UniqueIdentifier>{31a90012-93c8-461e-bab7-c0978c3c0156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{508c0257-3035-42af-a804-44dc19d9b31e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+"level.success.next.level.button.label.txt" = "Next";
+"level.success.replay.button.label.txt" = "Replay";
+"level.success.reward.txt" = "Reward";
+"level.success.score.txt" = "Score";
+"level.success.share.to.weibo.btn.label" = "Brag";
+"level.success.title" = "Level {level_id}";

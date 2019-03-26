@@ -1,0 +1,3 @@
+"star.reward.panel.get.btn.label" = "Claim";
+"star.reward.panel.reward.des" = "Claim after {star_number} stars:";
+"star.reward.panel.reward.get.fail" = "Failed to claim. Please get online.";

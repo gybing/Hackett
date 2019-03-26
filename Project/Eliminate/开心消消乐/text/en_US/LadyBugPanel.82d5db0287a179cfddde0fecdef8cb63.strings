@@ -1,0 +1,14 @@
+"lady.bug.panel.day" = "No.{day} Day";
+"lady.bug.panel.get.reward.failed" = "Failed to claim. Please get online.";
+"lady.bug.panel.not.opened.yet" = "Locked";
+"lady.bug.panel.pass.level.get.fruit.mission" = "Collect a fruit above Lvl {level} from the Treasury Tree";
+"lady.bug.panel.pass.level.mission" = "Complete Lvl {level}";
+"lady.bug.panel.restart.task.btn" = "Restart";
+"lady.bug.panel.restart.task.fail" = "Failed to restart. Please get online.";
+"lady.bug.panel.three.star.pass.level.mission" = "3-Star pass Lvl {level}";
+"lady.bug.panel.time.to.end" = "Ends after {time}";
+"lady.bug.panel.time.to.open" = "Unlock after {time}";
+"lady.bug.panel.time.to.receive.reward" = "Claim after {time}";
+"lady.bug.panel.tip.button.continue" = "Play";
+"lady.bug.panel.tip.button.text" = "Lvl 2 completed. Claim the gift after 10 more levels in {n} hours!";
+"lady.bug.panel.title" = "Ladybug Tasks";

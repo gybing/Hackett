@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="vAntLb" name="Genius" projectType="guiapp" version="1.0.0"
+              bundleIdentifier="com.hackett.Genius" includeBinaryInAppConfig="0"
+              jucerVersion="4.1.0" companyEmail="23925493@qq.com" companyWebsite=""
+              companyName="hackett">
+  <MAINGROUP id="YglzV8" name="Genius">
+    <GROUP id="{E2C40F91-65AD-7F5D-2A7A-FB1012F030A0}" name="Source">
+      <FILE id="IXgrmd" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+      <FILE id="BLK7r4" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="cJXETs" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <VS2013 targetFolder="Builds/VisualStudio2013">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="Genius"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="3" targetName="Genius"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE4/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JUCE4/modules"/>
+      </MODULEPATHS>
+    </VS2013>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0"/>
+  </MODULES>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>

@@ -1,0 +1,10 @@
+"update.done.confirm" = "Quit";
+"update.done.text" = "Anipop updated! Please re-enter the game!";
+"update.mew.vision.panel.no" = "Later";
+"update.mew.vision.panel.yes" = "Update";
+"update.mew.vision.text" = "Anipop has new feature!{n} Update now ?";
+"update.panel.bag.prop.text" = "Game needs to be updated. Update now?";
+"update.panel.fail.disconnect" = "Unstable connection. Failed!";
+"update.panel.unsigned.apk" = "Warning: Your current game version is illegal. Please download the official version.";
+"user.data.error.code.108" = "Sorry, please update the game to continue.";
+"user.data.error.code.206" = "Data error. Please reinstall the game.";

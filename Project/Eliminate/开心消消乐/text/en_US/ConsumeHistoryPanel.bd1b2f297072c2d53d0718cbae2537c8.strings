@@ -1,0 +1,13 @@
+"consume.history.panel.date.text" = "%Y/%m/%d %H:%M";
+"consume.history.panel.desc" = "Only show record within 2 months.";
+"consume.history.panel.desc1" = "Please send email to our mailbox: anipop@happyelements.com ,if you have any problem regarding to payment.";
+"consume.history.panel.gold.text" = "{n} Happy Coins";
+"consume.history.panel.header.1" = "Purchased";
+"consume.history.panel.header.2" = "Time";
+"consume.history.panel.header.3" = "Price";
+"consume.history.panel.loading.text.1" = "We can only show record within 2 months.";
+"consume.history.panel.loading.text.2" = "Loading earlier record...";
+"consume.history.panel.normal.price" = "${n}";
+"consume.history.panel.title" = "My Transaction Record";
+"consume.tip.panel.text.1" = "You've bought {n} Happy Coins.";
+"game.last.restored.payment" = "The Happy Coins you've purchased last time is in your account now. Please check in game.";

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>乐信登录</title>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/nativize.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/section.css">
+  </head>
+  <body>
+    <nav class="nav-auth-content nav-drag">
+      <ul class="nav-header-sys-ul nav-no-drag">
+        <li class="nav-header-sys-li">
+          <button type="button" id="button-header-close" class="nav-button-sys nav-button-close"/>
+        </li>
+      </ul>
+      <img class="nav-auth-icon nav-no-drag" src="images/default_face.png"/>
+      <div class="auth-view nav-no-drag">
+        <input type="text" placeholder="请输入手机号" id="input-phone">
+        <input type="password" placeholder="请输入密码" id="input-pwd">
+        <button type="submit" id="button-auth-login">登录</button>
+      </div>
+    </nav>
+    <script>
+      require('electron-cookies')
+      require('./auth')
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+package controllers
+
+import (
+	M "../modules"
+	"github.com/labstack/echo"
+	"gopkg.in/mgo.v2/bson"
+)
+
+type ControllerUser struct {
+	Controller
+}
+
+func (m *Controller)GetRoute() map[string]interface{} {
+	return {
+		"/SetUserInfo": SetUserInfo,
+		"/GetUserInfo": func (c echo.Context) error {
+			Name := c.QueryParam("Name")
+			Face := c.QueryParam("Face")
+			Pass := c.QueryParam("Pass")
+
+			u := M.UserInfo{}
+			err := M.GetUserInfo(c.(*AuthContext).ID, &u)
+			if err != nil {
+				return Response(c, InvalidParameter, "用户不存在", nil)
+			}
+
+			if Face != "" {
+				u.Face = Face
+			}
+
+			if Name != "" {
+				u.Name = Name
+			}
+
+			if Pass != "" {
+				u.Pass = M.GetPassHash(Pass)
+			}
+
+			// 设置用户信息
+			err = M.SetUserInfo(u.ID, &u)
+			if err != nil {
+				return Response(c, Internal, "创建用户失败", nil)
+			}
+
+			return Response(c, Succeed, "", u)
+		},
+	}
+}
+
+// 设置用户信息
+func (m *ControllerUser)SetUserInfo(c echo.Context) error {
+	Name := c.QueryParam("Name")
+	Face := c.QueryParam("Face")
+	Pass := c.QueryParam("Pass")
+
+	u := M.UserInfo{}
+	err := M.GetUserInfo(c.(*AuthContext).ID, &u)
+	if err != nil {
+		return Response(c, InvalidParameter, "用户不存在", nil)
+	}
+
+	if Face != "" {
+		u.Face = Face
+	}
+
+	if Name != "" {
+		u.Name = Name
+	}
+
+	if Pass != "" {
+		u.Pass = M.GetPassHash(Pass)
+	}
+
+	// 设置用户信息
+	err = M.SetUserInfo(u.ID, &u)
+	if err != nil {
+		return Response(c, Internal, "创建用户失败", nil)
+	}
+
+	return Response(c, Succeed, "", u)
+}
+
+// 获取用户信息
+func (m *ControllerUser)GetUserInfo(c echo.Context) error {
+	ID := c.QueryParam("ID")
+	u := M.UserInfo{}
+
+	// 参数检查
+	if ID == "" {
+		M.GetUserInfo(c.(*AuthContext).ID, &u)
+		return Response(c, Succeed, "", u)
+	}
+
+	M.GetUserInfo(bson.ObjectIdHex(ID), &u)
+	return Response(c, Succeed, "", u)
+}

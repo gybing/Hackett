@@ -1,0 +1,6 @@
+"panel.choosepayment.other" = "Other";
+"panel.choosepayment.payments.mi" = "";
+"panel.choosepayment.payments.qq" = "";
+"panel.choosepayment.payments.wdj" = "";
+"panel.choosepayment.title" = "Please select payment method";
+"panel.choosepayment.unsupport.tips" = "Sorry. Can't pay with your mobile service provideds. Please choosee othe methods.";

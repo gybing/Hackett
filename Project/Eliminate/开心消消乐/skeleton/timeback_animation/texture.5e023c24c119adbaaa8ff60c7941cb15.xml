@@ -1,0 +1,6 @@
+<TextureAtlas name="timeback_animation" width="1024" height="1024">
+  <SubTexture name="biao_bright" width="158" height="394" cocos2d_pX="112.05" cocos2d_pY="202.1" x="0" y="326"/>
+  <SubTexture name="miaozhen" width="26" height="77" cocos2d_pX="0" cocos2d_pY="0" x="913" y="0"/>
+  <SubTexture name="clock" width="454" height="324" cocos2d_pX="17.25" cocos2d_pY="24.5" x="457" y="0"/>
+  <SubTexture name="clock_white" width="455" height="324" cocos2d_pX="18.05" cocos2d_pY="24.5" x="0" y="0"/>
+</TextureAtlas>

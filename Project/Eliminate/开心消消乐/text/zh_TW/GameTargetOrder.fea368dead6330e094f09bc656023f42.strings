@@ -1,0 +1,9 @@
+"game.target.tips.order2.1" = "目標：消除{num}個直線特效";
+"game.target.tips.order2.2" = "目標：消除{num}個爆炸特效";
+"game.target.tips.order2.3" = "目標：消除{num}個魔力鳥特效";
+"game.target.tips.order3.1" = "目標：交換{num}次兩個直線特效";
+"game.target.tips.order3.2" = "目標：交換{num}次直線特效和爆炸特效";
+"game.target.tips.order3.3" = "目標：交換{num}次魔力鳥和直線特效";
+"game.target.tips.order3.4" = "目標：交換{num}次兩個爆炸特效";
+"game.target.tips.order3.5" = "目標：交換{num}次魔力鳥和爆炸特效";
+"game.target.tips.order3.6" = "目標：交換{num}次兩個魔力鳥特效";

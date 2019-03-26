@@ -1,0 +1,9 @@
+"exception.panel.btn.commit" = "恢復到正常資料";
+"exception.panel.btn.email" = "提報問題";
+"exception.panel.commit.tips" = "資料已恢復正常，可以繼續遊戲啦~";
+"exception.panel.day" = "日";
+"exception.panel.email.tips" = "您的資料已發送到客服系統";
+"exception.panel.month" = "月";
+"exception.panel.text" = "為了避免更大的損失，建議您選擇恢復到上次連網保存的資料。否則您將不能再使用需要連網的功能唷…";
+"exception.panel.tittle" = "您的遊戲資料出現異常！";
+"exception.panel.top.level" = "最高關卡：{num}關{space}{space}{space}{data}";

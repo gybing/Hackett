@@ -1,0 +1,1 @@
+BinaryBuilder.exe ./res ../AltQApp/resources AltQResources

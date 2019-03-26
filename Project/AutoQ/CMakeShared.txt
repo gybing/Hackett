@@ -1,0 +1,50 @@
+﻿# 设置包含路径
+FUNCTION(ADD_ALTQ_INCLUDE)
+	INCLUDE_DIRECTORIES(.
+	$ENV{DEV_ROOT}/Base
+	$ENV{DEV_ROOT}/odbc
+	$ENV{DEV_ROOT}/kcache
+	$ENV{DEV_ROOT}/win32
+	$ENV{DEV_ROOT}/curl
+	$ENV{DEV_ROOT}/third
+	$ENV{DEV_ROOT}/iconv
+	$ENV{DEV_ROOT}/sqlite
+	$ENV{DEV_ROOT}/pattern
+	$ENV{DEV_ROOT}/sqlite
+	$ENV{DEV_ROOT}/pinyin
+	$ENV{DEV_ROOT}/rapidjson
+	$ENV{DEV_ROOT}/jsoncpp/include/json
+	$ENV{DEV_ROOT}/crashrpt
+	)
+ENDFUNCTION(ADD_ALTQ_INCLUDE)
+
+
+# 添加链接库路径
+FUNCTION(ADD_ALTQ_LINKPATH)
+	LINK_DIRECTORIES(
+		$ENV{DEV_ROOT}/lib/${CMAKE_STANDARD_OUT_SUFFIX}
+	)
+ENDFUNCTION(ADD_ALTQ_LINKPATH)
+
+
+# 添加链接库
+FUNCTION(ADD_ALTQ_LINKLIB TARGET)
+	TARGET_LINK_LIBRARIES(${TARGET}
+		libcurl
+		libiconv.lib
+		libpolar
+		libthird
+		libpattern
+		libjsoncpp
+		libares
+		libbase
+		libodbc
+		libkcache
+		libwin32
+		libpinyin
+		libsqlite
+		libthird
+		libzlib
+		Winmm
+	)
+ENDFUNCTION(ADD_ALTQ_LINKLIB)

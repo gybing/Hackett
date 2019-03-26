@@ -1,0 +1,15 @@
+info face="BerlinSansFBDemi-Bold" size=34 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=2,2
+common lineHeight=39 base=31 scaleW=160 scaleH=80 pages=1 packed=0
+page id=0 file="5_more_cd@2x.png"
+chars count=11
+char id=32 x=134 y=34 width=0 height=0 xoffset=0 yoffset=32 xadvance=12 page=0 chnl=0 letter="space"
+char id=48 x=1 y=34 width=30 height=31 xoffset=0 yoffset=1 xadvance=25 page=0 chnl=0 letter="0"
+char id=49 x=114 y=34 width=18 height=31 xoffset=0 yoffset=1 xadvance=15 page=0 chnl=0 letter="1"
+char id=50 x=32 y=34 width=26 height=31 xoffset=0 yoffset=1 xadvance=21 page=0 chnl=0 letter="2"
+char id=51 x=87 y=34 width=25 height=31 xoffset=0 yoffset=1 xadvance=20 page=0 chnl=0 letter="3"
+char id=52 x=30 y=1 width=27 height=31 xoffset=0 yoffset=0 xadvance=22 page=0 chnl=0 letter="4"
+char id=53 x=60 y=34 width=25 height=31 xoffset=0 yoffset=1 xadvance=21 page=0 chnl=0 letter="5"
+char id=54 x=58 y=1 width=27 height=31 xoffset=0 yoffset=1 xadvance=23 page=0 chnl=0 letter="6"
+char id=55 x=114 y=1 width=25 height=31 xoffset=0 yoffset=1 xadvance=20 page=0 chnl=0 letter="7"
+char id=56 x=87 y=1 width=25 height=31 xoffset=0 yoffset=1 xadvance=20 page=0 chnl=0 letter="8"
+char id=57 x=1 y=1 width=27 height=31 xoffset=0 yoffset=1 xadvance=23 page=0 chnl=0 letter="9"

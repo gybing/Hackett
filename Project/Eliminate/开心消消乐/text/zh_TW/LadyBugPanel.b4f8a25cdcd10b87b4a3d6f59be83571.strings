@@ -1,0 +1,14 @@
+"lady.bug.panel.day" = "第{day}天";
+"lady.bug.panel.get.reward.failed" = "領取獎勵失敗，請檢查網路情況";
+"lady.bug.panel.not.opened.yet" = "尚未開啟";
+"lady.bug.panel.pass.level.get.fruit.mission" = "在金銀果樹上摘取一個不低於{level}級的果實";
+"lady.bug.panel.pass.level.mission" = "通過第{level}關";
+"lady.bug.panel.restart.task.btn" = "重啟任務";
+"lady.bug.panel.restart.task.fail" = "重啟任務出錯，請檢查網路連接";
+"lady.bug.panel.three.star.pass.level.mission" = "3星通過第{level}關";
+"lady.bug.panel.time.to.end" = "{time}後結束";
+"lady.bug.panel.time.to.open" = "{time}後任務開啟";
+"lady.bug.panel.time.to.receive.reward" = "{time}後可以領獎";
+"lady.bug.panel.tip.button.continue" = "繼續遊戲";
+"lady.bug.panel.tip.button.text" = "您現在剛通過第2關，只需要{n}小時內再闖10關就可以領取獎勵啦！";
+"lady.bug.panel.title" = "瓢蟲任務";

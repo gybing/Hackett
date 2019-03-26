@@ -1,0 +1,12 @@
+{
+  "key": "60BE604C-CE6F-4DFC-AE71-BBB8639037CB",
+  "name": "文件模块",
+  "description": "提供全盘文件搜索",
+  "version": "1.0.0", 
+  "search": {
+    "module": "AltQModuleFile.dll"
+  },
+  "ui": {
+    "module": "AltQModuleFileUI.dll"
+  }
+}  

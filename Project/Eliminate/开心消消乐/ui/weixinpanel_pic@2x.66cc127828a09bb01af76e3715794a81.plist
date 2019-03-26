@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>howto_wechatpic1 instance 10000</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{273,183}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{273,183}}</string>
+				<key>sourceSize</key>
+				<string>{273,183}</string>
+			</dict>
+			<key>howto_wechatpic2 instance 10000</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,185},{274,124}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{274,124}}</string>
+				<key>sourceSize</key>
+				<string>{274,124}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>realTextureFileName</key>
+			<string>weixinpanel_pic@2x.png</string>
+			<key>size</key>
+			<string>{280,320}</string>
+			<key>textureFileName</key>
+			<string>weixinpanel_pic@2x.png</string>
+		</dict>
+	</dict>
+</plist>

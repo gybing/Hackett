@@ -1,0 +1,15 @@
+"buy.gold.panel.btn.free.text" = "Claim";
+"buy.gold.panel.buy.timeout" = "Unable to buy from App Store, please";
+"buy.gold.panel.discount" = "off";
+"buy.gold.panel.err.undefined" = "Sorry, failed…";
+"buy.gold.panel.free.sign" = "Free";
+"buy.gold.panel.get.list.fail" = "Failed to connect to store.";
+"buy.gold.panel.get.list.fail_android" = "Failed to connect to GooglePlay.";
+"buy.gold.panel.get.list.fail_ios" = "Failed to connect to AppStore.";
+"buy.gold.panel.get.list.timeout" = "Can't connect App Store, please check your internet.";
+"buy.gold.panel.get.list.timeout_android" = "Can't connect GooglePlay, please check your internet.";
+"buy.gold.panel.get.list.timeout_ios" = "Can't connect App Store, please check your internet.";
+"buy.gold.panel.money.mark" = "$";
+"buy.gold.panel.success" = "Got Happy Coins!";
+"buy.gold.panel.tip" = "If you have problem with payment, please try to click again.";
+"buy.gold.panel.title" = "Happy Coins";
