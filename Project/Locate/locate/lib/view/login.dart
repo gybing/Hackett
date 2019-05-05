@@ -1,116 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:provide/provide.dart';
 import 'package:locate/bloc/bloc.dart';
 
-class LoginPage extends StatefulWidget {
-  final AuthStore authStore;
-
-  LoginPage({Key key, @required this.authStore})
-      : assert(authStore != null),
-        super(key: key);
-
+class LoginView extends StatefulWidget {
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  AuthBloc _authBloc;
-
-  AuthStore get _authStore => widget.authStore;
-
-  @override
-  void initState() {
-    _authBloc = BlocProvider.of<AuthBloc>(context);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
-      body: LoginForm(
-        authBloc: _authBloc,
-      ),
-    );
+  State<StatefulWidget> createState() {
+    return new LoginViewState();
   }
 }
 
-class LoginForm extends StatefulWidget {
-  final AuthBloc authBloc;
-
-  LoginForm({
-    Key key,
-    @required this.authBloc,
-  }) : super(key: key);
-
-  @override
-  State<LoginForm> createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<LoginForm> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  AuthBloc get _authBloc => widget.authBloc;
+class LoginViewState extends State<LoginView> {
+  final textMobile = TextEditingController();
+  final textName = TextEditingController();
+  final textPass = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BaseEvent, AuthState>(
-      bloc: _authBloc,
-      builder: (BuildContext context, AuthState state) 
-      {
-        if (state is LoginFailure) {
-          _onWidgetDidBuild(() {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(
-                content: Text('${state.error}'),
-                backgroundColor: Colors.red,
+    return Provide<AuthBloc>(
+      builder: (BuildContext context, Widget widget, AuthBloc auth) {
+        return Scaffold(
+          body: new Builder(builder: (BuildContext context) {
+            return Container(
+              padding: const EdgeInsets.all(45),
+              decoration: BoxDecoration(
+                color: Colors.black12,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InputWiget(
+                      text: '登录名', obscure: false, controller: textMobile),
+                  SizedBox(height: 25),
+                  InputWiget(text: '密码', obscure: true, controller: textPass),
+                  SizedBox(height: 25),
+                  auth.isregist
+                      ? InputWiget(
+                          text: '姓名', obscure: false, controller: textName)
+                      : Container(height: 0.0, width: 0.0),
+                  auth.isregist
+                      ? SizedBox(height: 25)
+                      : Container(height: 0.0, width: 0.0),
+                  SizedBox(height: 25),
+                  LoginButtonWiget(
+                      text: auth.isregist ? '注册' : '登陆',
+                      textMobile: textMobile,
+                      textName: textName,
+                      textPass: textPass),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      FlatButton(
+                          textColor: Colors.blueGrey,
+                          child: Text('忘记密码'),
+                          onPressed: () => Scaffold.of(context).showSnackBar(
+                              new SnackBar(
+                                  content: new Text('请联系管理员: 15311666086')))),
+                      FlatButton(
+                          textColor: Colors.blueGrey,
+                          child: Text(auth.isregist ? '登陆' : '注册'),
+                          onPressed: () => auth.changeRegist(!auth.isregist))
+                    ],
+                  )
+                ],
               ),
             );
-          });
-        }
-
-        return Container(
-          padding: const EdgeInsets.all(55),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InputWiget(
-                text: '用户名',
-                obscure: false,
-                controller: _usernameController),
-              SizedBox(height: 20,),
-              InputWiget(
-                text: '密码',
-                obscure: true,
-                controller: _passwordController),
-              SizedBox(height: 30,),
-              LoginButtonWiget(
-                onPressed: state is! LoginLoading ? _onLoginButtonPressed : null,
-                text: '登录',
-              ),
-              Container(
-                child: state is LoginLoading ? CircularProgressIndicator() : null,
-              ),
-            ],
-          ),
+          }),
         );
       },
     );
-  }
-
-  void _onWidgetDidBuild(Function callback) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      callback();
-    });
-  }
-
-  _onLoginButtonPressed() {
-    _authBloc.dispatch(LoginEvent(
-      username: _usernameController.text,
-      password: _passwordController.text,
-    ));
   }
 }
 
@@ -120,24 +77,25 @@ class InputWiget extends StatelessWidget {
   final bool obscure;
   final TextEditingController controller;
 
-  InputWiget({
-    Key key,
-    @required this.text,
-    @required this.obscure,
-    @required this.controller
-    }) : super(key: key);
+  InputWiget(
+      {Key key,
+      @required this.text,
+      @required this.obscure,
+      @required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return new SizedBox(
       child: new Container(
-        padding: EdgeInsets.fromLTRB(20, 2, 8, 2),
+        padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: Colors.black12,
+          color: Colors.white,
         ),
         alignment: Alignment.center,
         child: TextField(
+          textAlign: TextAlign.center,
           maxLines: 1,
           obscureText: this.obscure,
           controller: this.controller,
@@ -151,37 +109,104 @@ class InputWiget extends StatelessWidget {
   }
 }
 
-
-// 登录按钮
-class LoginButtonWiget extends StatelessWidget {
-  final VoidCallback onPressed;
+class LoginButtonWiget extends StatefulWidget {
+  final TextEditingController textMobile;
+  final TextEditingController textName;
+  final TextEditingController textPass;
   final String text;
 
-  LoginButtonWiget({
-    Key key,
-    @required this.text,
-    @required this.onPressed
-    }) : super(key: key);
+  LoginButtonWiget(
+      {Key key,
+      @required this.text,
+      @required this.textMobile,
+      @required this.textName,
+      @required this.textPass})
+      : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return new LoginButtonWigetState();
+  }
+}
+
+class LoginButtonWigetState extends State<LoginButtonWiget>
+    with SingleTickerProviderStateMixin {
+  AnimationController _animateControllerWidth;
+  Animation _animateWidth;
+
+  String get _text => widget.text;
+
+  void onTap() async {
+    if (_animateControllerWidth.isAnimating) {
+      return;
+    }
+
+    AuthBloc auth = Provide.value<AuthBloc>(context);
+    if (auth.isloading) {
+      return;
+    }
+
+    if (_animateControllerWidth.isDismissed) {
+      await _animateControllerWidth.forward();
+    }
+
+    auth
+        .login(mobile: widget.textMobile.text, pass: widget.textPass.text)
+        .catchError((error) {
+      Scaffold.of(context)
+          .showSnackBar(new SnackBar(content: new Text(error.toString())));
+    }).whenComplete(() async {
+      if (auth.current == null) {
+        await _animateControllerWidth.reverse();
+      } else {
+        Navigator.pushReplacementNamed(context, "/HomeView");
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animateControllerWidth = new AnimationController(
+        vsync: this, duration: new Duration(milliseconds: 200));
+
+    _animateWidth = new Tween(begin: 320.0, end: 60.0).animate(
+        new CurvedAnimation(
+            parent: _animateControllerWidth, curve: Curves.easeOutQuad))
+      ..addListener(() {
+        setState(() {});
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return new RaisedButton(
-      onPressed: this.onPressed,
-      child: new Container(
-        padding: EdgeInsets.fromLTRB(2, 15, 2, 15),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: Colors.deepOrangeAccent,
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          this.text,
-          textAlign: TextAlign.center,
-          style: TextStyle(letterSpacing: 20,
-          fontWeight: FontWeight.bold,
-          color: Colors.white70),
-        )
-      ),
-    );
+    return GestureDetector(
+        onTap: onTap,
+        child: Container(
+            decoration: BoxDecoration(
+                color: const Color.fromRGBO(255, 120, 110, 1.0),
+                borderRadius: BorderRadius.all(Radius.circular(35))),
+            width: _animateWidth.value,
+            height: 60.0,
+            alignment: Alignment.center,
+            child: _animateControllerWidth.isDismissed
+                ? Text(
+                    _text,
+                    style: TextStyle(color: Color(0xffffffff)),
+                  )
+                : _animateControllerWidth.isCompleted
+                    ? CircularProgressIndicator(
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(Colors.white),
+                        strokeWidth: 3,
+                      )
+                    : null));
+  }
+
+  @override
+  void dispose() {
+    _animateControllerWidth?.dispose();
+    super.dispose();
   }
 }

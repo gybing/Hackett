@@ -1,25 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:provide/provide.dart';
 import 'package:locate/bloc/bloc.dart';
 
-class HomePage extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return new HomeViewState();
+  }
+}
+
+class HomeViewState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
+  AnimationController _animateController;
+  Animation _animate;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animateController = new AnimationController(
+        vsync: this, duration: new Duration(milliseconds: 200));
+
+    _animate = new Tween(begin: 320.0, end: 60.0).animate(
+        new CurvedAnimation(
+            parent: _animateController, curve: Curves.easeOutQuad))
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final AuthBloc authBloc =
-        BlocProvider.of<AuthBloc>(context);
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
-      body: Container(
-        child: Center(
-            child: RaisedButton(
-          child: Text('logout'),
-          onPressed: () {
-            authBloc.dispatch(LogoutEvent());
-          },
-        )),
-      ),
-    );
+        appBar: AppBar(
+          title: Text('Home'),
+        ),
+        body: Provide<AuthBloc>(
+          builder: (BuildContext context, Widget widget, AuthBloc auth) =>
+              Container(
+                child: Center(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(auth.current?.ID),
+                    Text(auth.current?.Name),
+                    Text(auth.current?.Mobile),
+                    Text(auth.current?.Face),
+                    Text(auth.current?.Time.toString()),
+                    RaisedButton(
+                      child: Text('退出'),
+                      onPressed: () {
+                        auth.logout();
+                        Navigator.pushReplacementNamed(context, "/LoginView");
+                      },
+                    ),
+                  ],
+                )),
+              ),
+        ));
   }
 }

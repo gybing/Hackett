@@ -1,65 +1,36 @@
+import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:provide/provide.dart';
 import 'package:locate/bloc/bloc.dart';
-
-import 'package:locate/view/home.dart';
-import 'package:locate/view/login.dart';
-import 'package:locate/view/splash.dart';
-import 'package:locate/view/loading.dart';
+import 'package:locate/view/view.dart';
 
 void main() {
-  BlocSupervisor().delegate = MainBlocDelegate();
-  runApp(LocateApp(authStore: AuthStore()));
+  final providers = Providers()
+    ..provide(Provider.function((context) => AuthBloc()))
+    ..provide(Provider.function((context) => ContactBloc()));
+
+  runApp(ProviderNode(
+    providers: providers,
+    child: LocateApp(),
+  ));
+
+  // 设置android状态栏为透明
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle systemUiOverlayStyle =
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
 }
 
-class LocateApp extends StatefulWidget {
-  final AuthStore authStore;
-
-  LocateApp({Key key, @required this.authStore}) : super(key: key);
-
-  @override
-  State<LocateApp> createState() => _LocateAppState();
-}
-
-class _LocateAppState extends State<LocateApp> {
-  AuthBloc _authBloc;
-  AuthStore get _authStore => widget.authStore;
-
-  @override
-  void initState() {
-    _authBloc = AuthBloc(authStore: _authStore);
-    _authBloc.dispatch(AppStartEvent());
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _authBloc.dispose();
-    super.dispose();
-  }
-
+class LocateApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthBloc>(
-      bloc: _authBloc,
-      child: MaterialApp(
-        home: BlocBuilder<BaseEvent, AuthState>(
-          bloc: _authBloc,
-          builder: (BuildContext context, AuthState state) {
-            if (state is AuthenticationUninitialized) {
-              return SplashPage();
-            }
-            if (state is AuthenticationAuthenticated) {
-              return HomePage();
-            }
-            if (state is AuthenticationUnauthenticated) {
-              return LoginPage(authStore: _authStore);
-            }
-            if (state is AuthenticationLoading) {
-              return LoadingIndicator();
-            }
-          },
-        ),
-      ),
-    );
+    return MaterialApp(home: ContactView(), routes: {
+      "/StartView": (context) => StartView(),
+      "/LoginView": (context) => LoginView(),
+      "/HomeView": (context) => HomeView(),
+      "/ContactView": (context) => ContactView(),
+    });
   }
 }

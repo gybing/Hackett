@@ -1,59 +1,60 @@
-import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:locate/module/module.dart';
+import 'package:locate/network/network.dart';
 
-import 'package:meta/meta.dart';
-import 'package:bloc/bloc.dart';
+class AuthBloc with ChangeNotifier {
+  UserInfo current;
+  bool isloading;
+  bool isregist;
 
-import 'package:locate/event/event.dart';
-import 'package:locate/state/state.dart';
-import 'package:locate/store/store.dart';
+  AuthBloc() {
+    this.current = null;
+    this.isloading = false;
+    this.isregist = false;
+  }
 
-class AuthBloc extends Bloc<BaseEvent, AuthState> {
-  final AuthStore authStore;
+  bool isLogin() {
+    return current != null;
+  }
 
-  AuthBloc({@required this.authStore})
-      : assert(authStore != null);
+  Future<dynamic> login({String mobile: "", String pass: ""}) async {
+    this.isloading = true;
+    notifyListeners();
 
-  @override
-  AuthState get initialState => AuthenticationUninitialized();
+    return Future.value(await api.login(mobile: mobile, pass: pass).then((u) {
+      this.current = UserInfo.fromJson(u);
+    }).whenComplete(() {
+      this.isloading = false;
+      notifyListeners();
+    }));
+  }
 
-  @override
-  Stream<AuthState> mapEventToState(BaseEvent event) async* {
-    if (event is AppStartEvent) {
-      final bool hasToken = false;// await authStore.hasToken();
-
-      if (hasToken) {
-        yield AuthenticationAuthenticated();
-      } else {
-        yield AuthenticationUnauthenticated();
-      }
+  void changeRegist(bool regist) {
+    if (this.isregist != regist) {
+      this.isregist = regist;
+      notifyListeners();
     }
+  }
 
-    if (event is LoginEvent) {
-      yield LoginLoading();
+  void regist({String mobile: "", String name: "", String pass: ""}) async {
+    this.isloading = true;
+    notifyListeners();
 
-      try {
-        final token = 'token'; /*await authStore.authenticate(
-          username: event.username,
-          password: event.password,
-        );*/
+    return Future.value(
+        await api.regist(mobile: mobile, name: name, pass: pass).then((u) {
+      this.current = UserInfo.fromJson(u);
+      isregist = false;
+    }).whenComplete(() {
+      this.isloading = false;
+      notifyListeners();
+    }));
+  }
 
-          dispatch(LoginSuccessEvent(token: token));
-        yield LoginInitial();
-      } catch (error) {
-        yield LoginFailure(error: error.toString());
-      }
-    }
-
-    if (event is LoginSuccessEvent) {
-      yield AuthenticationLoading();
-      // await authStore.SetToken(event.token);
-      yield AuthenticationAuthenticated();
-    }
-
-    if (event is LogoutEvent) {
-      yield AuthenticationLoading();
-      // await authStore.DeleteToken();
-      yield AuthenticationUnauthenticated();
+  void logout() async {
+    if (isLogin()) {
+      this.current = null;
+      await api.logout();
+      notifyListeners();
     }
   }
 }

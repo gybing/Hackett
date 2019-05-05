@@ -1,0 +1,1 @@
+scp -r ./service root@144.34.183.114:/root/locate/service
