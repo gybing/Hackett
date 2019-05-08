@@ -8,7 +8,7 @@ import (
 )
 
 // 用户信息
-type UserInfo struct {
+type UserData struct {
 	// 基本信息
 	ID     bson.ObjectId `bson:"_id" json:"ID"`
 	Mobile string        `bson:"Mobile"`

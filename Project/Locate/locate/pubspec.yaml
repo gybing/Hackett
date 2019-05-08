@@ -1,5 +1,5 @@
 name: locate
-description: A new Flutter project.
+description: A Locate project.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -21,11 +21,13 @@ dependencies:
     sdk: flutter
   equatable: any
   font_awesome_flutter: any
-  provide: ^1.0.2
+  provide: any
+  dio: any
+  cookie_jar: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  # cupertino_icons: ^0.1.2
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +52,7 @@ flutter:
    - images/sandra.png
    - images/stella.png
    - images/trevor.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

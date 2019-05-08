@@ -24,7 +24,7 @@ const (
 )
 
 // 关系信息
-type ContactInfo struct {
+type ContactData struct {
 	ID        bson.ObjectId `bson:"_id" json:"_id"`
 	ContactID bson.ObjectId `bson:"ContactID"`
 	State     int           `bson:"State"`
@@ -37,7 +37,7 @@ func Request(id bson.ObjectId, cid bson.ObjectId) error {
 		return errors.New("cannot request own")
 	}
 
-	ci := ContactInfo{
+	ci := ContactData{
 		ID:        id,
 		ContactID: cid,
 		State:     ContactStateRequest,
@@ -50,7 +50,7 @@ func Request(id bson.ObjectId, cid bson.ObjectId) error {
 
 // 处理申请
 func Process(id bson.ObjectId, cid bson.ObjectId) error {
-	ci := ContactInfo{}
+	ci := ContactData{}
 	err := db.Contact.Find(bson.M{"_id": cid, "ContactID": id}).One(&ci)
 	if err != nil {
 		return err
@@ -75,7 +75,7 @@ func Remove(id bson.ObjectId, cid bson.ObjectId) error {
 }
 
 // 获取好友列表
-func GetContactList(id bson.ObjectId, cs *[]ContactInfo) {
+func GetContactList(id bson.ObjectId, cs *[]ContactData) {
 	db.Contact.Find(
 		bson.M{"$or": []bson.M{
 			bson.M{"_id": id, "State": ContactStateClose},
@@ -89,7 +89,7 @@ func GetContactList(id bson.ObjectId, cs *[]ContactInfo) {
 }
 
 // 获取申请列表
-func GetRequestList(id bson.ObjectId, rtype int, cs *[]ContactInfo) {
+func GetRequestList(id bson.ObjectId, rtype int, cs *[]ContactData) {
 	if rtype == 1 {
 		db.Contact.Find(bson.M{"_id": id, "State": ContactStateRequest}).All(cs)
 	} else {

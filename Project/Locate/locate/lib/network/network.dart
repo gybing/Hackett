@@ -1,105 +1,77 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio/dio.dart';
 
 typedef CallBack = void Function();
 
 class Network {
-  static const String host = '144.34.183.114';
-  final _httpClient = new HttpClient();
+  final dio = Dio(BaseOptions(
+    baseUrl: "http://144.34.183.114",
+    connectTimeout: 5000,
+    receiveTimeout: 3000,
+  ));
 
-  // 认证
+  Network() {
+    dio.interceptors.add(CookieManager(PersistCookieJar()));
+  }
+
+  // 登陆
   Future<dynamic> login({String mobile, String pass}) {
-    return _requestGet(Uri.http(
-      host,
-      '/Auth/Login',
-      <String, String>{'Mobile': '$mobile', 'Pass': '$pass', 'Device': '0'},
-    ));
+    return httpGet('/Auth/Login',
+        params: {'Mobile': '$mobile', 'Pass': '$pass', 'Device': '0'});
   }
 
+  // 退出
   Future<dynamic> logout() {
-    return _requestGet(Uri.http(
-      host,
-      '/Auth/Logout',
-      <String, String>{},
-    ));
+    return httpGet('/Auth/Logout');
   }
 
+  // 注册
   Future<dynamic> regist({String mobile, String name, String pass}) {
-    return _requestGet(Uri.http(
-      host,
-      '/Auth/Regist',
-      <String, String>{
-        'Mobile': '$mobile',
-        'Pass': '$pass',
-        'Device': '0',
-        'Name': '$name',
-        'Face': ''
-      },
-    ));
+    return httpGet('/Auth/Regist', params: {
+      'Mobile': '$mobile',
+      'Pass': '$pass',
+      'Device': '0',
+      'Name': '$name',
+      'Face': ''
+    });
   }
 
-// 用户
+  // 用户
   Future<dynamic> getUserInfo({String id: ""}) {
-    return _requestGet(Uri.http(
-      host,
-      '/User/GetUserInfo',
-      <String, String>{'ID': id},
-    ));
+    return httpGet('/User/GetUserInfo', params: {'ID': id});
   }
 
   // 好友
   Future<dynamic> contactRequest({String id: ""}) {
-    return _requestGet(Uri.http(
-      host,
-      '/Contact/Request',
-      <String, String>{'ContactID': id},
-    ));
+    return httpGet('/Contact/Request', params: {'ContactID': id});
   }
 
   Future<dynamic> contactProcess({String id: "", String type: ""}) {
-    return _requestGet(Uri.http(
-      host,
-      '/Contact/Process',
-      <String, String>{'ContactID': id, "Type": type},
-    ));
+    return httpGet('/Contact/Process', params: {'ContactID': id, "Type": type});
   }
 
   Future<dynamic> contactRemove({String id: ""}) {
-    return _requestGet(Uri.http(
-      host,
-      '/Contact/Remove',
-      <String, String>{'ContactID': id},
-    ));
+    return httpGet('/Contact/Remove', params: {'ContactID': id});
   }
 
   Future<dynamic> getContactList() {
-    return _requestGet(Uri.http(
-      host,
-      '/Contact/GetContactList',
-      <String, String>{},
-    ));
+    return httpGet('/Contact/GetContactList');
   }
 
   Future<dynamic> getRequestList({String type: ""}) {
-    return _requestGet(Uri.http(
-      host,
-      '/Contact/GetRequestList',
-      <String, String>{"Type": type},
-    ));
+    return httpGet('/Contact/GetRequestList', params: {"Type": type});
   }
 
-  Future<dynamic> _requestGet(Uri uri) async {
-    var request = await _httpClient.getUrl(uri);
-    var response = await request.close();
-    var responseBody = await response.transform(utf8.decoder).join();
-    var data = json.decode(responseBody);
-
-    if (data["Code"] != 0) {
-      return Future.error(data["Message"]);
-    }
-
-    return data["Data"];
+  Future<dynamic> httpGet(String url, {Map<String, dynamic> params}) async {
+    return await dio.get(url, queryParameters: params).then((v) {
+      if (v.data["Code"] != 0) {
+        return Future.error(v.data["Message"]);
+      }
+      return v.data["Data"];
+    }).catchError((e) {
+      return Future.error(e.toString());
+    });
   }
 }
 

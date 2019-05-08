@@ -12,26 +12,26 @@ import (
 )
 
 // 认证信息
-type AuthInfo struct {
+type AuthData struct {
 	ID     bson.ObjectId `bson:"_id"`
 	Token  string        `bson:"Token"`
 	Device string        `bson:"Device"`
 	Time   time.Time     `bson:"Time"`
 }
 
-func SetAuthInfo(t *AuthInfo) error {
+func SetAuthInfo(t *AuthData) error {
 	_, err := db.Auth.Upsert(bson.M{"_id": t.ID}, t)
 	return err
 }
 
 // 密码认证
-func AuthUserPass(u *UserInfo, pass string, device string) *http.Cookie {
+func AuthUserPass(u *UserData, pass string, device string) *http.Cookie {
 	if GetPassHash(pass) != u.Pass {
 		return nil
 	}
 
 	// 生成令牌
-	token := AuthInfo{
+	token := AuthData{
 		ID:     u.ID,
 		Token:  createToken(),
 		Device: device,
@@ -48,8 +48,8 @@ func AuthUserPass(u *UserInfo, pass string, device string) *http.Cookie {
 }
 
 // 检查令牌
-func CheckToken(t string) (*AuthInfo, error) {
-	token := AuthInfo{}
+func CheckToken(t string) (*AuthData, error) {
+	token := AuthData{}
 	err := db.Auth.Find(bson.M{"Token": t}).One(&token)
 	return &token, err
 }

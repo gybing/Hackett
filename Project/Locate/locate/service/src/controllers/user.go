@@ -12,7 +12,7 @@ func SetUserInfo(c echo.Context) error {
 	Face := c.QueryParam("Face")
 	Pass := c.QueryParam("Pass")
 
-	u := M.UserInfo{}
+	u := M.UserData{}
 	err := M.GetUserInfo(c.(*AuthContext).ID, &u)
 	if err != nil {
 		return Response(c, ErrorParameter, "用户不存在", nil)
@@ -42,7 +42,7 @@ func SetUserInfo(c echo.Context) error {
 // 获取用户信息
 func GetUserInfo(c echo.Context) error {
 	ID := c.QueryParam("ID")
-	u := M.UserInfo{}
+	u := M.UserData{}
 
 	// 参数检查
 	if ID == "" {

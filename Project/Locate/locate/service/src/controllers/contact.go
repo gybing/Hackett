@@ -53,7 +53,7 @@ func Remove(c echo.Context) error {
 
 // 获取好友列表
 func GetContactList(c echo.Context) error {
-	cs := []M.ContactInfo{}
+	cs := []M.ContactData{}
 	M.GetContactList(c.(*AuthContext).ID, &cs)
 	return Response(c, Success, "", cs)
 }
@@ -70,7 +70,7 @@ func GetRequestList(c echo.Context) error {
 		return Response(c, ErrorParameter, "参数错误", nil)
 	}
 
-	cs := []M.ContactInfo{}
+	cs := []M.ContactData{}
 	M.GetRequestList(c.(*AuthContext).ID, tp, &cs)
 	return Response(c, Success, "", cs)
 }

@@ -8,7 +8,7 @@ import (
 )
 
 // 位置信息
-type LocationInfo struct {
+type LocationData struct {
 	ID        bson.ObjectId `bson:"_id" json:"ID"`
 	Accuracy  float64       `bson:"Accuracy"`
 	Longitude float64       `bson:"Longitude"`
@@ -19,7 +19,7 @@ type LocationInfo struct {
 
 // 获取好友列表
 func GetUserLocation(id bson.ObjectId, l interface{}) {
-	cs := []LocationInfo{}
+	cs := []LocationData{}
 	db.Contact.Find(bson.M{"UserID": id}).All(&cs)
 
 	uids := make([]bson.ObjectId, len(cs))

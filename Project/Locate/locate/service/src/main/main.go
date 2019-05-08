@@ -1,7 +1,7 @@
 package main
 
 import (
-	C "./controllers"
+	C "../controllers"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )

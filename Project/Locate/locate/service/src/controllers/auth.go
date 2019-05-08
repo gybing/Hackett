@@ -4,6 +4,7 @@ import (
 	"time"
 
 	M "../modules"
+
 	"github.com/labstack/echo"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -29,7 +30,7 @@ func Regist(c echo.Context) error {
 		return Response(c, ErrorParameter, "密码错误", nil)
 	}
 
-	u := M.UserInfo{}
+	u := M.UserData{}
 	err := M.GetMobileInfo(Mobile, &u)
 	if err == nil {
 		return Response(c, ErrorParameter, "用户已注册", nil)
@@ -63,7 +64,7 @@ func Login(c echo.Context) error {
 		return Response(c, ErrorParameter, "用户名密码错误", nil)
 	}
 
-	u := M.UserInfo{}
+	u := M.UserData{}
 	err := M.GetMobileInfo(Mobile, &u)
 	if err != nil {
 		return Response(c, ErrorParameter, "用户名不存在", nil)

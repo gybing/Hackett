@@ -8,7 +8,8 @@ import 'package:locate/view/view.dart';
 void main() {
   final providers = Providers()
     ..provide(Provider.function((context) => AuthBloc()))
-    ..provide(Provider.function((context) => ContactBloc()));
+    ..provide(Provider.function((context) => ContactBloc()))
+    ..provideValue(UserBloc);
 
   runApp(ProviderNode(
     providers: providers,

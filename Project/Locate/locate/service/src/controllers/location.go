@@ -15,7 +15,7 @@ func GetUserLocation(c echo.Context) error {
 		return Response(c, ErrorParameter, "用户ID错误", nil)
 	}
 
-	u := M.LocationInfo{}
+	u := M.LocationData{}
 	M.GetUserLocation(bson.ObjectIdHex(ID), &u)
 	return Response(c, Success, "", u)
 }
