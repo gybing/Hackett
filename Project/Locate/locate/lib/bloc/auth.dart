@@ -36,7 +36,8 @@ class AuthBloc with ChangeNotifier {
     }
   }
 
-  void regist({String mobile: "", String name: "", String pass: ""}) async {
+  Future<dynamic> regist(
+      {String mobile: "", String name: "", String pass: ""}) async {
     this.isloading = true;
     notifyListeners();
 

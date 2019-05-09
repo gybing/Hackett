@@ -13,51 +13,43 @@ class ContactBloc with ChangeNotifier {
     this.receives = null;
   }
 
-  Future<dynamic> getContactList() async {
-    return Future.value(await api.getContactList().then((cs) {
-      this.contacts = cs.map((c) => ContactInfo.fromJson(c));
-    }).catchError((e) {
-
-      var v = e;
-    }).whenComplete(() {
-      notifyListeners();
-    }));
+  void getContactList() async {
+    notifyListeners();
+    this.contacts = (await api.getContactList())
+        ?.map<ContactInfo>((c) => ContactInfo.fromJson(c))
+        .toList();
+    notifyListeners();
   }
 
-  Future<dynamic> getRequestList({String type: ""}) async {
-    return Future.value(await api.getRequestList(type: type).then((cs) {
-      if (type == "1") {
-        this.requests = cs.map((c) => ContactInfo.fromJson(c));
-      } else if (type == "2") {
-        this.receives = cs.map((c) => ContactInfo.fromJson(c));
-      }
-    }).whenComplete(() {
-      notifyListeners();
-    }));
+  void getRequestList({String type: ""}) async {
+    notifyListeners();
+    this.requests = (await api.getRequestList())
+        ?.map<ContactInfo>((c) => ContactInfo.fromJson(c))
+        .toList();
+    notifyListeners();
   }
 
-  Future<dynamic> request({String id: ""}) async {
-    return Future.value(await api.contactRequest(id: id).whenComplete(() {
+  void request({String id: ""}) async {
+    await api.contactRequest(id: id).whenComplete(() {
       getRequestList(type: "1");
       notifyListeners();
-    }));
+    });
   }
 
-  Future<dynamic> remove({String id: ""}) async {
-    return Future.value(await api.contactRemove(id: id).whenComplete(() {
+  void remove({String id: ""}) async {
+    await api.contactRemove(id: id).whenComplete(() {
       getContactList();
       getRequestList(type: "1");
       getRequestList(type: "2");
       notifyListeners();
-    }));
+    });
   }
 
-  Future<dynamic> process({String id: "", String type: ""}) async {
-    return Future.value(
-        await api.contactProcess(id: id, type: type).whenComplete(() {
+  void process({String id: "", String type: ""}) async {
+    await api.contactProcess(id: id, type: type).whenComplete(() {
       getContactList();
       getRequestList(type: "2");
       notifyListeners();
-    }));
+    });
   }
 }

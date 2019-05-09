@@ -42,11 +42,11 @@ class HomeViewState extends State<HomeView>
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(auth.current?.ID),
-                    Text(auth.current?.Name),
-                    Text(auth.current?.Mobile),
-                    Text(auth.current?.Face),
-                    Text(auth.current?.Time.toString()),
+                    Text(auth.current?.id),
+                    Text(auth.current?.name),
+                    Text(auth.current?.mobile),
+                    Text(auth.current?.face),
+                    Text(auth.current?.time.toString()),
                     RaisedButton(
                       child: Text('退出'),
                       onPressed: () {

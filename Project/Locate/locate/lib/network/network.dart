@@ -12,7 +12,7 @@ class Network {
   ));
 
   Network() {
-    dio.interceptors.add(CookieManager(PersistCookieJar()));
+    dio.interceptors.add(CookieManager(CookieJar()));
   }
 
   // 登陆

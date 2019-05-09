@@ -69,7 +69,7 @@ class _ContactViewState extends State<ContactView>
       ),
       title: Provide<AuthBloc>(
           builder: (BuildContext context, Widget widget, AuthBloc auth) =>
-              Text(auth.current != null ? auth.current.Name : "联系人")),
+              Text(auth.current != null ? auth.current.name : "联系人")),
       centerTitle: true,
       actions: <Widget>[
         IconButton(
@@ -79,7 +79,7 @@ class _ContactViewState extends State<ContactView>
           ),
           onPressed: () async {
             AuthBloc auth = Provide.value<AuthBloc>(context);
-            await auth.login(mobile: "15311666086", pass: "123456");
+            await auth.login(mobile: "13671090924", pass: "123456");
 
             ContactBloc contact = Provide.value<ContactBloc>(context);
             await contact.getContactList();
@@ -93,17 +93,17 @@ class _ContactViewState extends State<ContactView>
     return Provide<AuthBloc>(
         builder: (BuildContext context, Widget widget, AuthBloc auth) {
       return UserAccountsDrawerHeader(
-        accountName: Text(auth.current != null ? auth.current.Name : ""),
-        accountEmail: Text(auth.current != null ? auth.current.Mobile : ""),
+        accountName: Text(auth.current != null ? auth.current.name : ""),
+        accountEmail: Text(auth.current != null ? auth.current.mobile : ""),
         currentAccountPicture: auth.current != null
-            ? (auth.current.Face != null && auth.current.Face != ""
+            ? (auth.current.face != null && auth.current.face != ""
                 ? CircleAvatar(
-                    backgroundImage: NetworkImage(auth.current.Face),
+                    backgroundImage: NetworkImage(auth.current.face),
                   )
                 : CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Text(
-                      auth.current.Name[0],
+                      auth.current.name[0],
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.w700,
@@ -136,7 +136,7 @@ class _ContactViewState extends State<ContactView>
           children: contact.contacts != null
               ? contact.contacts.map<Widget>((c) {
                   return ListTile(
-                    leading: CircleAvatar(child: Text(c.ContactID)),
+                    leading: CircleAvatar(child: Text(c.contact)),
                     title: Text('Drawer item $c.ContactID'),
                     onTap: _showNotImplementedMessage,
                   );
@@ -211,5 +211,26 @@ class _ContactViewState extends State<ContactView>
         child: Text("map"),
       ),
     );
+  }
+}
+
+typedef ContactTapCallback = void Function(String id);
+
+class ContactItem extends StatelessWidget {
+  final String id;
+  final ContactTapCallback onTap;
+
+  const ContactItem({Key key, this.id, this.onTap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Provide<UserBloc>(
+        builder: (BuildContext context, Widget widget, UserBloc contact) {
+      return ListTile(
+        leading: CircleAvatar(child: Text(c.contact)),
+        title: Text('Drawer item $c.ContactID'),
+        onTap: () => this.onTap(id),
+      );
+    });
   }
 }

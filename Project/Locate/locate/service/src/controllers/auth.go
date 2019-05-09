@@ -22,12 +22,12 @@ func Regist(c echo.Context) error {
 		return Response(c, ErrorParameter, "设备参数错误", nil)
 	}
 
-	if Mobile == "" {
+	if Mobile == "" || !M.CheckPhone(Mobile) {
 		return Response(c, ErrorParameter, "手机号错误", nil)
 	}
 
-	if Pass == "" {
-		return Response(c, ErrorParameter, "密码错误", nil)
+	if Pass == "" || len(Pass) < 6 {
+		return Response(c, ErrorParameter, "密码须不少于6位", nil)
 	}
 
 	u := M.UserData{}
@@ -60,7 +60,7 @@ func Login(c echo.Context) error {
 	Mobile := c.QueryParam("Mobile")
 	Pass := c.QueryParam("Pass")
 
-	if Mobile == "" || Pass == "" {
+	if Mobile == "" || Pass == "" || !M.CheckPhone(Mobile) {
 		return Response(c, ErrorParameter, "用户名密码错误", nil)
 	}
 

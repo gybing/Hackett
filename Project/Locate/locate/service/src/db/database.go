@@ -4,7 +4,7 @@ import (
 	mgo "gopkg.in/mgo.v2"
 )
 
-var host = "mongodb://144.34.183.114/locate"
+var host = "mongodb://hackett:roothan@144.34.183.114"
 var dbname = "locate"
 
 // 数据库

@@ -150,18 +150,37 @@ class LoginButtonWigetState extends State<LoginButtonWiget>
       await _animateControllerWidth.forward();
     }
 
-    auth
-        .login(mobile: widget.textMobile.text, pass: widget.textPass.text)
-        .catchError((error) {
-      Scaffold.of(context)
-          .showSnackBar(new SnackBar(content: new Text(error.toString())));
-    }).whenComplete(() async {
-      if (auth.current == null) {
-        await _animateControllerWidth.reverse();
-      } else {
-        Navigator.pushReplacementNamed(context, "/HomeView");
-      }
-    });
+    if (auth.isregist) {
+      auth
+          .regist(
+              mobile: widget.textMobile.text,
+              pass: widget.textPass.text,
+              name: widget.textName.text)
+          .catchError((error) {
+        Scaffold.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(new SnackBar(content: new Text(error.toString())));
+      }).whenComplete(() async {
+        if (auth.current == null) {
+          await _animateControllerWidth.reverse();
+        } else {
+          Navigator.pushReplacementNamed(context, "/HomeView");
+        }
+      });
+    } else {
+      auth
+          .login(mobile: widget.textMobile.text, pass: widget.textPass.text)
+          .catchError((error) {
+        Scaffold.of(context)
+            .showSnackBar(new SnackBar(content: new Text(error.toString())));
+      }).whenComplete(() async {
+        if (auth.current == null) {
+          await _animateControllerWidth.reverse();
+        } else {
+          Navigator.pushReplacementNamed(context, "/HomeView");
+        }
+      });
+    }
   }
 
   @override

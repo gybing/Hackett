@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"math/rand"
 	"net/http"
+	"regexp"
 	"time"
 
 	"../db"
@@ -81,4 +82,10 @@ func GetPassHash(pass string) string {
 	h := md5.New()
 	h.Write([]byte(pass))
 	return hex.EncodeToString(h.Sum(nil))
+}
+
+func CheckPhone(phone string) bool {
+	reg := `^1([38][0-9]|14[57]|5[^4])\d{8}$`
+	rgx := regexp.MustCompile(reg)
+	return rgx.MatchString(phone)
 }
