@@ -205,6 +205,10 @@ profile
 **/VisualStudio2017/x64
 **/Builds/x64
 **/.vs
+**/.vscode
+**/build
+**/out
+**/build_x64
 **/CodeBlocks/bin
 **/CodeBlocks/obj
 **/CodeBlocks/*.depend
