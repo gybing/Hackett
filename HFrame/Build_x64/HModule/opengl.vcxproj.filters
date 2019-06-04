@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLFrameBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLGraphicsContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLPixelFormat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\opengl\utils\OpenGLAppComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\geometry\Draggable3DOrientation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\geometry\Matrix3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\geometry\Quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\geometry\Vector3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\native\MissingGLDefinitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\native\OpenGLExtensions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\native\OpenGL_android.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\native\OpenGL_ios.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\native\OpenGL_linux_X11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\native\OpenGL_osx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\native\OpenGL_win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLFrameBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLGraphicsContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLHelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLPixelFormat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\opengl\OpenGLTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\opengl\utils\OpenGLAppComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D2F9A494-6C11-38B9-A90E-5993EDDD2C87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{211C770E-3D88-3536-B830-8D45F1A0E0A1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

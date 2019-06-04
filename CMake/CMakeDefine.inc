@@ -1,5 +1,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
 
+# 启用目录
+set_property(GLOBAL PROPERTY USE_FOLDERS ON) 
+
 if(HCMAKE_DEFINE_INCLUDE)
   return()
 endif()
@@ -88,4 +91,3 @@ function(ASSIGN_SOURCE_GROUP)
         source_group("${_source_path_msvc}" FILES "${_source}")
     endforeach()
 endfunction(ASSIGN_SOURCE_GROUP)
-

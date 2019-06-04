@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\BlocksVersion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks_basics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\BlockGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\PhysicalTopologySource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\RuleBasedTopologySource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\internal\BandwidthStatsLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\internal\BlockImplementation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\internal\ConnectedDeviceGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\internal\DepreciatedVersionReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\internal\Detector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\internal\DetectorHolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\internal\DeviceInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\internal\MIDIDeviceDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\internal\MidiDeviceConnection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\visualisers\BitmapLEDProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\visualisers\DrumPadLEDProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\BlockConfigManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\BlocksVersion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\ControlButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\LEDGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\LEDRow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\StatusLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\TouchList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks\TouchSurface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\blocks_basics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\littlefoot\LittleFootCompiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\littlefoot\LittleFootRemoteHeap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\littlefoot\LittleFootRunner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\protocol\BitPackingUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\protocol\BlockModels.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\protocol\BlocksProtocolDefinitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\protocol\HostPacketBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\protocol\HostPacketDecoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\BlockGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\PhysicalTopologySource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\RuleBasedTopologySource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\Topology.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\topology\TopologySource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\visualisers\BitmapLEDProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\blocks_basics\visualisers\DrumPadLEDProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D2F9A494-6C11-38B9-A90E-5993EDDD2C87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{211C770E-3D88-3536-B830-8D45F1A0E0A1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

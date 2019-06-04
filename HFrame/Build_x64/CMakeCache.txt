@@ -180,22 +180,34 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-HBaseTest_BINARY_DIR:STATIC=D:/SRC/Hackett/HFrame/Build_x64/HTest
-
-//Value Computed by CMake
-HBaseTest_SOURCE_DIR:STATIC=D:/SRC/Hackett/HFrame/HTest
-
-//Value Computed by CMake
 HBase_BINARY_DIR:STATIC=D:/SRC/Hackett/HFrame/Build_x64/HBase
 
 //Value Computed by CMake
 HBase_SOURCE_DIR:STATIC=D:/SRC/Hackett/HFrame/HBase
 
 //Value Computed by CMake
+HExample_BINARY_DIR:STATIC=D:/SRC/Hackett/HFrame/Build_x64/HExample
+
+//Value Computed by CMake
+HExample_SOURCE_DIR:STATIC=D:/SRC/Hackett/HFrame/HExample
+
+//Value Computed by CMake
+HExtras_BINARY_DIR:STATIC=D:/SRC/Hackett/HFrame/Build_x64/HExtras
+
+//Value Computed by CMake
+HExtras_SOURCE_DIR:STATIC=D:/SRC/Hackett/HFrame/HExtras
+
+//Value Computed by CMake
 HFrame_BINARY_DIR:STATIC=D:/SRC/Hackett/HFrame/Build_x64
 
 //Value Computed by CMake
 HFrame_SOURCE_DIR:STATIC=D:/SRC/Hackett/HFrame
+
+//Value Computed by CMake
+HModule_BINARY_DIR:STATIC=D:/SRC/Hackett/HFrame/Build_x64/HModule
+
+//Value Computed by CMake
+HModule_SOURCE_DIR:STATIC=D:/SRC/Hackett/HFrame/HModule
 
 
 ########################
@@ -280,7 +292,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RC_COMPILER

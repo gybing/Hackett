@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\AnimationAppDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\AnimationDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\BouncingBallWavetableDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\CameraDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\CodeEditorDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\ComponentDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\ComponentTransformsDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\DialogsDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\FlexBoxDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\FontsDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\GraphicsDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\GridDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\HelloWorldDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\ImagesDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\KeyMappingsDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\LookAndFeelDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\MDIDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\MenusDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\MultiTouchDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\OpenGLAppDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\OpenGLDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\OpenGLDemo2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\PropertiesDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\VideoDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\WebBrowserDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\WidgetsDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HExample\GUI\WindowsDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\SRC\Hackett\HFrame\HExample\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D2F9A494-6C11-38B9-A90E-5993EDDD2C87}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

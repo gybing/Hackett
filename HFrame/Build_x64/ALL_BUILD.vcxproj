@@ -169,6 +169,60 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExample\Assets.vcxproj">
+      <Project>{081D51FE-C5AC-30D5-977E-9BE9D1E7991A}</Project>
+      <Name>Assets</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExample\Audio.vcxproj">
+      <Project>{143068CC-24A8-3460-BEB0-78EA0BD9A2CC}</Project>
+      <Name>Audio</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExtras\AudioPerformanceTest.vcxproj">
+      <Project>{E0A67593-CE63-35AE-8311-49C0A34DBD46}</Project>
+      <Name>AudioPerformanceTest</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExtras\AudioPluginHost.vcxproj">
+      <Project>{ED97C72A-A636-3A13-8324-1E488789DAA4}</Project>
+      <Name>AudioPluginHost</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExtras\BLOCKS.vcxproj">
+      <Project>{49CD4CC6-321E-3B2B-ADA4-720F4FFA4DC6}</Project>
+      <Name>BLOCKS</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExtras\BinaryBuilder.vcxproj">
+      <Project>{849E14CE-403F-3077-BF94-996140F6E493}</Project>
+      <Name>BinaryBuilder</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExample\DSP.vcxproj">
+      <Project>{54CF226B-9A47-3D0E-95C2-EFA05A67B106}</Project>
+      <Name>DSP</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExample\DemoRunner.vcxproj">
+      <Project>{CB0A8167-0BC6-344A-B735-7D20C49629B5}</Project>
+      <Name>DemoRunner</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExample\GUI.vcxproj">
+      <Project>{A341BB50-1DD5-3B4A-B28C-B2C74328D471}</Project>
+      <Name>GUI</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
     <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HBase\HBase.vcxproj">
       <Project>{CB960D62-017D-348E-82B7-03089FC75006}</Project>
       <Name>HBase</Name>
@@ -184,6 +238,162 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HTest\HFrameUnitTest.vcxproj">
       <Project>{047B4A71-611A-3BF6-9ADE-FFE9AC2C41E8}</Project>
       <Name>HFrameUnitTest</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExtras\NetworkGraphicsDemo.vcxproj">
+      <Project>{943810A5-9B73-38C5-BA24-C2E5E62A8732}</Project>
+      <Name>NetworkGraphicsDemo</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExample\Plugins.vcxproj">
+      <Project>{58185D1B-928B-38B7-8A90-F91CC9BA50BB}</Project>
+      <Name>Plugins</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExtras\Projector.vcxproj">
+      <Project>{A2053A1F-7227-349B-BB75-566F963199BC}</Project>
+      <Name>Projector</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExtras\UnitTestRunner.vcxproj">
+      <Project>{C62B4363-1C57-3BC4-AAAC-9189D2612AF1}</Project>
+      <Name>UnitTestRunner</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExample\Utilities.vcxproj">
+      <Project>{3CB75614-0673-34E6-A3C7-C191C5C0635B}</Project>
+      <Name>Utilities</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HExtras\WindowsDLL.vcxproj">
+      <Project>{A6771C3A-4507-318A-B89F-A4370523CC83}</Project>
+      <Name>WindowsDLL</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\analytics.vcxproj">
+      <Project>{4E65E801-8CB0-3557-BCD7-07C50C2D0077}</Project>
+      <Name>analytics</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\audio_basics.vcxproj">
+      <Project>{B23B01DE-0A09-351A-BFEE-084C1FDE8CC9}</Project>
+      <Name>audio_basics</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\audio_devices.vcxproj">
+      <Project>{2333CFB2-9249-379A-A0FF-9715BDB648E2}</Project>
+      <Name>audio_devices</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\audio_formats.vcxproj">
+      <Project>{466F2E59-8FC5-3C7C-A57D-9743D43CDA1E}</Project>
+      <Name>audio_formats</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\audio_plugin_client.vcxproj">
+      <Project>{2EB09B35-59F1-33ED-A58A-B07A3840E931}</Project>
+      <Name>audio_plugin_client</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\audio_processors.vcxproj">
+      <Project>{0DC440C4-8947-33F4-8C6F-4BA0B442329B}</Project>
+      <Name>audio_processors</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\audio_utils.vcxproj">
+      <Project>{7B2E81BE-95F6-3738-8688-48CDA7A9B7B1}</Project>
+      <Name>audio_utils</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\blocks_basics.vcxproj">
+      <Project>{F1D06FEC-9400-393B-9B8C-2DC6CD1FA6E1}</Project>
+      <Name>blocks_basics</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\box2d.vcxproj">
+      <Project>{CF814C46-8DDE-31E5-980A-15B844B026AD}</Project>
+      <Name>box2d</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\cryptography.vcxproj">
+      <Project>{46BFBBC2-DE26-309C-B780-8EF2353D96A8}</Project>
+      <Name>cryptography</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\data_structures.vcxproj">
+      <Project>{C3C332F8-E5FD-34FB-B208-4C7C29B63552}</Project>
+      <Name>data_structures</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\dsp.vcxproj">
+      <Project>{188E3DAD-39EF-336C-A1D9-9E02A5964F77}</Project>
+      <Name>dsp</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\events.vcxproj">
+      <Project>{FD3F7264-8642-3F3D-B2C1-2B8C7449480C}</Project>
+      <Name>events</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\graphics.vcxproj">
+      <Project>{84C5D134-7D92-3C96-9E64-66CBF236D9DF}</Project>
+      <Name>graphics</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\gui_basics.vcxproj">
+      <Project>{7BE4F36A-F743-3806-B194-A234182DD408}</Project>
+      <Name>gui_basics</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\gui_extra.vcxproj">
+      <Project>{609B7C95-C2B6-3270-9AE3-BE8C092FD57D}</Project>
+      <Name>gui_extra</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\opengl.vcxproj">
+      <Project>{92292340-51DE-349B-803A-192AB3848039}</Project>
+      <Name>opengl</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\osc.vcxproj">
+      <Project>{AFF5B41A-6D00-3395-AD89-EA5F20BF7B3E}</Project>
+      <Name>osc</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\product_unlocking.vcxproj">
+      <Project>{BF8323FD-F2D2-3C5B-B54D-D1D1126A739D}</Project>
+      <Name>product_unlocking</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HModule\video.vcxproj">
+      <Project>{6D1AACEB-C2FA-3959-AB00-ECECEFBE0911}</Project>
+      <Name>video</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>

@@ -35,6 +35,9 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("D:/SRC/Hackett/HFrame/Build_x64/HBase/cmake_install.cmake")
+  include("D:/SRC/Hackett/HFrame/Build_x64/HModule/cmake_install.cmake")
+  include("D:/SRC/Hackett/HFrame/Build_x64/HExtras/cmake_install.cmake")
+  include("D:/SRC/Hackett/HFrame/Build_x64/HExample/cmake_install.cmake")
   include("D:/SRC/Hackett/HFrame/Build_x64/HTest/cmake_install.cmake")
 
 endif()

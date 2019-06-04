@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{84C5D134-7D92-3C96-9E64-66CBF236D9DF}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>graphics</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\SRC\Hackett\HFrame\Bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">graphics.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">graphics</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\SRC\Hackett\HFrame\Bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">graphics.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">graphics</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\SRC\Hackett\HFrame\Bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">graphics.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">graphics</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\SRC\Hackett\HFrame\Bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">graphics.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">graphics</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\Bin\Debug\HBase.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/SRC/Hackett/HFrame/Build_x64/HModule/Debug/graphics.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/SRC/Hackett/HFrame/Bin/Debug/graphics.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\Bin\Release\HBase.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/SRC/Hackett/HFrame/Build_x64/HModule/Release/graphics.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/SRC/Hackett/HFrame/Bin/Release/graphics.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\Bin\MinSizeRel\HBase.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/SRC/Hackett/HFrame/Build_x64/HModule/MinSizeRel/graphics.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/SRC/Hackett/HFrame/Bin/MinSizeRel/graphics.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;D:\SRC\Hackett\HFrame\HModule\..\HBase;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\Bin\RelWithDebInfo\HBase.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/SRC/Hackett/HFrame/Build_x64/HModule/RelWithDebInfo/graphics.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/SRC/Hackett/HFrame/Bin/RelWithDebInfo/graphics.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/SRC/Hackett/HFrame/HModule/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/SRC/Hackett/HFrame -BD:/SRC/Hackett/HFrame/Build_x64 --check-stamp-file D:/SRC/Hackett/HFrame/Build_x64/HModule/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/SRC/Hackett/HFrame/HModule/CMakeLists.txt;D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt;D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\SRC\Hackett\HFrame\Build_x64\HModule\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/SRC/Hackett/HFrame/HModule/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/SRC/Hackett/HFrame -BD:/SRC/Hackett/HFrame/Build_x64 --check-stamp-file D:/SRC/Hackett/HFrame/Build_x64/HModule/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/SRC/Hackett/HFrame/HModule/CMakeLists.txt;D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt;D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\SRC\Hackett\HFrame\Build_x64\HModule\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/SRC/Hackett/HFrame/HModule/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/SRC/Hackett/HFrame -BD:/SRC/Hackett/HFrame/Build_x64 --check-stamp-file D:/SRC/Hackett/HFrame/Build_x64/HModule/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/SRC/Hackett/HFrame/HModule/CMakeLists.txt;D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt;D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\SRC\Hackett\HFrame\Build_x64\HModule\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/SRC/Hackett/HFrame/HModule/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/SRC/Hackett/HFrame -BD:/SRC/Hackett/HFrame/Build_x64 --check-stamp-file D:/SRC/Hackett/HFrame/Build_x64/HModule/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/SRC/Hackett/HFrame/HModule/CMakeLists.txt;D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt;D:\SRC\Hackett\HFrame\HModule\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\SRC\Hackett\HFrame\Build_x64\HModule\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\colour\Colour.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\colour\Colour.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\colour\ColourGradient.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\colour\ColourGradient.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\colour\Colours.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\colour\Colours.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\colour\FillType.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\colour\FillType.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\colour\PixelFormats.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\contexts\GraphicsContext.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\contexts\GraphicsContext.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\contexts\LowLevelGraphicsContext.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\contexts\LowLevelGraphicsPostScriptRenderer.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\contexts\LowLevelGraphicsPostScriptRenderer.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\contexts\LowLevelGraphicsSoftwareRenderer.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\contexts\LowLevelGraphicsSoftwareRenderer.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\effects\DropShadowEffect.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\effects\DropShadowEffect.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\effects\GlowEffect.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\effects\GlowEffect.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\effects\ImageEffectFilter.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\AttributedString.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\AttributedString.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\CustomTypeface.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\CustomTypeface.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\Font.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\Font.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\GlyphArrangement.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\GlyphArrangement.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\TextLayout.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\TextLayout.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\Typeface.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\fonts\Typeface.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\AffineTransform.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\AffineTransform.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\BorderSize.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\EdgeTable.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\EdgeTable.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\Line.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\Parallelogram.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\Path.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\Path.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\PathIterator.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\PathIterator.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\PathStrokeType.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\PathStrokeType.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\Point.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\Rectangle.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\geometry\RectangleList.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\graphics.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\graphics.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\GIFLoader.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\JPEGLoader.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\PNGLoader.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\cderror.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jchuff.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jconfig.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jdct.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jdhuff.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jerror.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jinclude.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jmemsys.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jmorecfg.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jpegint.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jpeglib.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\jversion.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\jpglib\transupp.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\pnglib\png.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\pnglib\pngconf.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\pnglib\pnginfo.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\pnglib\pngpriv.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\image_formats\pnglib\pngstruct.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\images\Image.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\images\Image.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\images\ImageCache.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\images\ImageCache.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\images\ImageConvolutionKernel.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\images\ImageConvolutionKernel.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\images\ImageFileFormat.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\images\ImageFileFormat.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\RenderingHelpers.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\android_Fonts.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\android_GraphicsContext.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\android_IconHelpers.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\freetype_Fonts.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\linux_Fonts.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\linux_IconHelpers.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\mac_CoreGraphicsContext.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\mac_CoreGraphicsHelpers.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\mac_IconHelpers.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\win32_Direct2DGraphicsContext.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\win32_Direct2DGraphicsContext.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\win32_DirectWriteTypeLayout.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\win32_DirectWriteTypeface.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\win32_Fonts.cpp" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\native\win32_IconHelpers.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\placement\Justification.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HModule\graphics\placement\RectanglePlacement.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HModule\graphics\placement\RectanglePlacement.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\ZERO_CHECK.vcxproj">
+      <Project>{CE2169B5-5BEF-3DB8-9F0D-BDDAEEACE7A3}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\HBase\HBase.vcxproj">
+      <Project>{CB960D62-017D-348E-82B7-03089FC75006}</Project>
+      <Name>HBase</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
