@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CB960D62-017D-348E-82B7-03089FC75006}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>HBase</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\SRC\Hackett\HFrame\Bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HBase.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HBase</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\SRC\Hackett\HFrame\Bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HBase.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HBase</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\SRC\Hackett\HFrame\Bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">HBase.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">HBase</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\SRC\Hackett\HFrame\Bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">HBase.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">HBase</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\SRC\Hackett\HFrame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/SRC/Hackett/HFrame/HBase/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/SRC/Hackett/HFrame -BD:/SRC/Hackett/HFrame/Build_x64 --check-stamp-file D:/SRC/Hackett/HFrame/Build_x64/HBase/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/SRC/Hackett/HFrame/HBase/CMakeLists.txt;D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt;D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\SRC\Hackett\HFrame\Build_x64\HBase\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/SRC/Hackett/HFrame/HBase/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/SRC/Hackett/HFrame -BD:/SRC/Hackett/HFrame/Build_x64 --check-stamp-file D:/SRC/Hackett/HFrame/Build_x64/HBase/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/SRC/Hackett/HFrame/HBase/CMakeLists.txt;D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt;D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\SRC\Hackett\HFrame\Build_x64\HBase\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/SRC/Hackett/HFrame/HBase/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/SRC/Hackett/HFrame -BD:/SRC/Hackett/HFrame/Build_x64 --check-stamp-file D:/SRC/Hackett/HFrame/Build_x64/HBase/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/SRC/Hackett/HFrame/HBase/CMakeLists.txt;D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt;D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\SRC\Hackett\HFrame\Build_x64\HBase\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/SRC/Hackett/HFrame/HBase/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/SRC/Hackett/HFrame -BD:/SRC/Hackett/HFrame/Build_x64 --check-stamp-file D:/SRC/Hackett/HFrame/Build_x64/HBase/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/SRC/Hackett/HFrame/HBase/CMakeLists.txt;D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt;D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\SRC\Hackett\HFrame\Build_x64\HBase\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\AbstractFifo.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\AbstractFifo.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\Array.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ArrayAllocationBase.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ArrayBase.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ArrayBase.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\DynamicObject.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\DynamicObject.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ElementComparator.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\HashMap.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\HashMap_test.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\LinkedListPointer.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ListenerList.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\NamedValueSet.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\NamedValueSet.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\OwnedArray.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\OwnedArray.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\PropertySet.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\PropertySet.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ReferenceCountedArray.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ReferenceCountedArray.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ScopedValueSetter.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\SortedSet.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\SparseSet.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\SparseSet.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\Variant.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\Variant.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\DirectoryIterator.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\DirectoryIterator.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\File.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\File.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileFilter.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileFilter.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileInputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileInputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileOutputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileOutputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileSearchPath.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileSearchPath.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\MemoryMappedFile.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\TemporaryFile.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\TemporaryFile.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\WildcardFileFilter.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\WildcardFileFilter.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\javascript\JSON.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\javascript\JSON.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\javascript\Javascript.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\javascript\Javascript.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\logging\FileLogger.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\logging\FileLogger.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\logging\Logger.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\logging\Logger.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\BigInteger.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\BigInteger.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Expression.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Expression.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\MathsFunctions.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\NormalisableRange.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Random.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Random.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Range.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\StatisticsAccumulator.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\Atomic.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\ByteOrder.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\ContainerDeletePolicy.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\HeapBlock.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\HeavyweightLeakedObjectDetector.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\LeakedObjectDetector.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\Memory.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\MemoryBlock.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\MemoryBlock.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\OptionalScopedPointer.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\ReferenceCountedObject.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\ScopedPointer.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\SharedResourcePointer.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\Singleton.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\WeakReference.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\ConsoleApplication.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\ConsoleApplication.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\Result.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\Result.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\RuntimePermissions.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\RuntimePermissions.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\StdFunctionCompat.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\StdFunctionCompat.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\Uuid.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\Uuid.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\WindowsRegistry.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\BasicNativeHeaders.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_Files.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_JNIHelpers.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_JNIHelpers.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_Misc.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_Network.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_RuntimePermissions.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_SystemStats.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_Threads.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\curl_Network.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_CommonFile.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_Files.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_Network.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_SystemStats.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_Threads.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\mac_ClangBugWorkaround.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\osx_ObjCHelpers.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\posix_IPAddress.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\posix_NamedPipe.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\posix_SharedCode.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_ComSmartPtr.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_Files.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_Network.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_Registry.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_SystemStats.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_Threads.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\IPAddress.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\IPAddress.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\MACAddress.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\MACAddress.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\NamedPipe.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\NamedPipe.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\Socket.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\Socket.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\URL.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\URL.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\WebInputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\WebInputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\BufferedInputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\BufferedInputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\FileInputSource.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\FileInputSource.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\InputSource.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\InputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\InputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\MemoryInputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\MemoryInputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\MemoryOutputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\MemoryOutputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\OutputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\OutputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\SubregionStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\SubregionStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\URLInputSource.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\URLInputSource.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\CompilerSupport.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\PlatformDefs.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\StandardHeader.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\SystemStats.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\SystemStats.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\TargetPlatform.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\test\UnitTest.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\test\UnitTest.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\test\UnitTestCategories.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\Base64.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\Base64.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharPointer_ASCII.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharPointer_UTF16.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharPointer_UTF32.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharPointer_UTF8.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharacterFunctions.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharacterFunctions.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\Identifier.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\Identifier.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\LocalisedStrings.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\LocalisedStrings.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\NewLine.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\String.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\String.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringArray.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringArray.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringPairArray.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringPairArray.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringPool.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringPool.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringRef.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\TextDiff.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\TextDiff.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ChildProcess.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ChildProcess.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\CriticalSection.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\DynamicLibrary.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\HighResolutionTimer.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\HighResolutionTimer.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\InterProcessLock.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\Process.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ReadWriteLock.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ReadWriteLock.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ScopedLock.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ScopedReadLock.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ScopedWriteLock.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\SpinLock.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\Thread.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\Thread.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ThreadLocalValue.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ThreadPool.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ThreadPool.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\TimeSliceThread.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\TimeSliceThread.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\WaitableEvent.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\PerformanceCounter.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\PerformanceCounter.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\RelativeTime.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\RelativeTime.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\Time.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\Time.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\xml\XmlDocument.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\xml\XmlDocument.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\xml\XmlElement.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\xml\XmlElement.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\GZIPCompressorOutputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\GZIPCompressorOutputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\GZIPDecompressorInputStream.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\GZIPDecompressorInputStream.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\ZipFile.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\ZipFile.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\crc32.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\deflate.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\inffast.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\inffixed.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\inflate.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\inftrees.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\trees.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\zconf.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\zconf.in.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\zlib.h" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\zutil.h" />
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HBase\HBase.cpp" />
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\HBase.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\SRC\Hackett\HFrame\Build_x64\ZERO_CHECK.vcxproj">
+      <Project>{CE2169B5-5BEF-3DB8-9F0D-BDDAEEACE7A3}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

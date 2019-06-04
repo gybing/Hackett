@@ -116,7 +116,7 @@ def syncDir(sourceFoldername, destFoldername):
     
 def syncReplaceOther(destFoldername):
 
-    ReplaceContent(destFoldername, "juce_getTypefaceForFont","HGetTypefaceForFont")
+    ReplaceContent(destFoldername, "juce_getTypefaceForFont","GetTypefaceForFont")
 
     ReplaceContent(destFoldername, "juce_InterlockedExchange","HInterlockedExchange")
     ReplaceContent(destFoldername, "juce_InterlockedIncrement","HInterlockedIncrement")
@@ -125,10 +125,10 @@ def syncReplaceOther(destFoldername):
     ReplaceContent(destFoldername, "juce_InterlockedCompareExchange","HInterlockedCompareExchange")
     ReplaceContent(destFoldername, "juce_InterlockedCompareExchange64","HInterlockedCompareExchange64")
     ReplaceContent(destFoldername, "juce_MemoryBarrier","HMemoryBarrier")
-    ReplaceContent(destFoldername, "Process::isRunningUnderDebugger","Process::HRunningUnderDebugger")
-    ReplaceContent(destFoldername, "JUCE_CALLTYPE isRunningUnderDebugger","HCALLTYPE HRunningUnderDebugger")
-    ReplaceContent(destFoldername, "JUCE_CALLTYPE","HCALLTYPE")
-    ReplaceContent(destFoldername, "JUCE_API","HAPI")
+    ReplaceContent(destFoldername, "Process::isRunningUnderDebugger","Process::IsRunningUnderDebugger")
+    ReplaceContent(destFoldername, "JUCE_CALLTYPE isRunningUnderDebugger","CALLTYPE IsRunningUnderDebugger")
+    ReplaceContent(destFoldername, "JUCE_CALLTYPE","CALLTYPE")
+    ReplaceContent(destFoldername, "JUCE_API","API")
     ReplaceContent(destFoldername, "Projucer","Projector")
 
     ReplaceContent(destFoldername, "juce_", "")
@@ -149,29 +149,15 @@ def syncReplaceOther(destFoldername):
 # 主程序入口
 if  __name__ =="__main__":
 
-    juceSourceDir = "D:\\SRC\\Hackett\\JUCE"
-    destDir = "D:\\SRC\\Hackett\\HFoundation\\JUCE"
+    juceSourceDir = "D:\\JUCE"
+    destDir = "D:\\JUCE1"
 
     #os.system("git -C " + juceSourceDir + " pull")
 
     syncDir(juceSourceDir + "\\modules",destDir + "\\modules")
-    syncDir(juceSourceDir + "\\examples\\Assets", destDir + "\\examples\\Assets")
-    syncDir(juceSourceDir + "\\examples\\Audio", destDir + "\\examples\\Audio")
-    syncDir(juceSourceDir + "\\examples\\BLOCKS", destDir + "\\examples\\BLOCKS")
-    syncDir(juceSourceDir + "\\examples\\DemoRunner", destDir + "\\examples\\DemoRunner")
-    syncDir(juceSourceDir + "\\examples\\DSP", destDir + "\\examples\\DSP")
-    syncDir(juceSourceDir + "\\examples\\GUI", destDir + "\\examples\\GUI")
-    syncDir(juceSourceDir + "\\examples\\Plugins", destDir + "\\examples\\Plugins")
-    syncDir(juceSourceDir + "\\examples\\Utilities", destDir + "\\examples\\Utilities")
+    syncDir(juceSourceDir + "\\examples", destDir + "\\examples")
 
-    syncDir(juceSourceDir + "\\extras\\AudioPerformanceTest", destDir + "\\extras\\AudioPerformanceTest")
-    syncDir(juceSourceDir + "\\extras\\AudioPluginHost", destDir + "\\extras\\AudioPluginHost")
-    syncDir(juceSourceDir + "\\extras\\BinaryBuilder", destDir + "\\extras\\BinaryBuilder")
-    syncDir(juceSourceDir + "\\extras\\BLOCKS", destDir + "\\extras\\BLOCKS")
-    syncDir(juceSourceDir + "\\extras\\NetworkGraphicsDemo", destDir + "\\extras\\NetworkGraphicsDemo")
-    syncDir(juceSourceDir + "\\extras\\Projucer", destDir + "\\extras\\Projucer")
-    syncDir(juceSourceDir + "\\extras\\UnitTestRunner", destDir + "\\extras\\UnitTestRunner")
-    syncDir(juceSourceDir + "\\extras\\WindowsDLL", destDir + "\\extras\\WindowsDLL")
+    syncDir(juceSourceDir + "\\extras", destDir + "\\extras")
 
 
     #removeFile(destDir + "\\modules","module_info")

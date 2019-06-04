@@ -23,7 +23,6 @@ dependencies:
 
   equatable: any
   font_awesome_flutter: any
-  provide: any
   dio: any
   cookie_jar: any
 
@@ -34,7 +33,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

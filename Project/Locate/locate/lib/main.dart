@@ -1,20 +1,16 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:provide/provide.dart';
-import 'package:locate/bloc/bloc.dart';
 import 'package:locate/view/view.dart';
+import 'package:locate/model/model.dart';
 
 void main() {
   final providers = Providers()
-    ..provide(Provider.function((context) => AuthBloc()))
-    ..provide(Provider.function((context) => ContactBloc()))
-    ..provideValue(UserBloc);
+     ..provide(Provider.function((context) => AuthBloc()))
+     ..provide(Provider.function((context) => ContactBloc()))
+     ..provide(Provider.withFactory((context) => Provider.function((context) => UserBloc())));
 
-  runApp(ProviderNode(
-    providers: providers,
-    child: LocateApp(),
-  ));
+  runApp(ProviderNode(child: LocateApp(), providers: providers));
 
   // 设置android状态栏为透明
   if (Platform.isAndroid) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provide/provide.dart';
-import 'package:locate/bloc/bloc.dart';
+import 'package:locate/model/model.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -35,9 +34,7 @@ class HomeViewState extends State<HomeView>
         appBar: AppBar(
           title: Text('Home'),
         ),
-        body: Provide<AuthBloc>(
-          builder: (BuildContext context, Widget widget, AuthBloc auth) =>
-              Container(
+        body: Provide<AuthBloc>(builder: (context, child, auth) => Container(
                 child: Center(
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

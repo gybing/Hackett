@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provide/provide.dart';
-import 'package:locate/bloc/bloc.dart';
+import 'package:locate/model/model.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -16,9 +15,7 @@ class LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Provide<AuthBloc>(
-      builder: (BuildContext context, Widget widget, AuthBloc auth) {
-        return Scaffold(
+    return Provide<AuthBloc>(builder: (_, child, auth) => Scaffold(
           body: new Builder(builder: (BuildContext context) {
             return Container(
               padding: const EdgeInsets.all(45),
@@ -65,8 +62,7 @@ class LoginViewState extends State<LoginView> {
               ),
             );
           }),
-        );
-      },
+        )
     );
   }
 }
@@ -133,15 +129,15 @@ class LoginButtonWigetState extends State<LoginButtonWiget>
     with SingleTickerProviderStateMixin {
   AnimationController _animateControllerWidth;
   Animation _animateWidth;
-
   String get _text => widget.text;
 
-  void onTap() async {
+  void onTap(BuildContext context) async {
     if (_animateControllerWidth.isAnimating) {
       return;
     }
 
-    AuthBloc auth = Provide.value<AuthBloc>(context);
+    final auth = Provide.value<AuthBloc>(context);
+
     if (auth.isloading) {
       return;
     }
@@ -201,7 +197,7 @@ class LoginButtonWigetState extends State<LoginButtonWiget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: onTap,
+        onTap: () => onTap(context),
         child: Container(
             decoration: BoxDecoration(
                 color: const Color.fromRGBO(255, 120, 110, 1.0),

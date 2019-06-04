@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\SRC\Hackett\HFrame\HBase\HBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\AbstractFifo.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\AbstractFifo.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\Array.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ArrayAllocationBase.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ArrayBase.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ArrayBase.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\DynamicObject.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\DynamicObject.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ElementComparator.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\HashMap.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\HashMap_test.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\LinkedListPointer.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ListenerList.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\NamedValueSet.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\NamedValueSet.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\OwnedArray.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\OwnedArray.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\PropertySet.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\PropertySet.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ReferenceCountedArray.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ReferenceCountedArray.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\ScopedValueSetter.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\SortedSet.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\SparseSet.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\SparseSet.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\Variant.cpp">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\containers\Variant.h">
+      <Filter>containers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\DirectoryIterator.cpp">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\DirectoryIterator.h">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\File.cpp">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\File.h">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileFilter.cpp">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileFilter.h">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileInputStream.cpp">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileInputStream.h">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileOutputStream.cpp">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileOutputStream.h">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileSearchPath.cpp">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\FileSearchPath.h">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\MemoryMappedFile.h">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\TemporaryFile.cpp">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\TemporaryFile.h">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\WildcardFileFilter.cpp">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\files\WildcardFileFilter.h">
+      <Filter>files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\javascript\JSON.cpp">
+      <Filter>javascript</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\javascript\JSON.h">
+      <Filter>javascript</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\javascript\Javascript.cpp">
+      <Filter>javascript</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\javascript\Javascript.h">
+      <Filter>javascript</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\logging\FileLogger.cpp">
+      <Filter>logging</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\logging\FileLogger.h">
+      <Filter>logging</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\logging\Logger.cpp">
+      <Filter>logging</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\logging\Logger.h">
+      <Filter>logging</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\BigInteger.cpp">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\BigInteger.h">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Expression.cpp">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Expression.h">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\MathsFunctions.h">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\NormalisableRange.h">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Random.cpp">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Random.h">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\Range.h">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\maths\StatisticsAccumulator.h">
+      <Filter>maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\Atomic.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\ByteOrder.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\ContainerDeletePolicy.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\HeapBlock.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\HeavyweightLeakedObjectDetector.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\LeakedObjectDetector.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\Memory.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\MemoryBlock.cpp">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\MemoryBlock.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\OptionalScopedPointer.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\ReferenceCountedObject.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\ScopedPointer.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\SharedResourcePointer.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\Singleton.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\memory\WeakReference.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\ConsoleApplication.cpp">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\ConsoleApplication.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\Result.cpp">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\Result.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\RuntimePermissions.cpp">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\RuntimePermissions.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\StdFunctionCompat.cpp">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\StdFunctionCompat.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\Uuid.cpp">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\Uuid.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\misc\WindowsRegistry.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\BasicNativeHeaders.h">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_Files.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_JNIHelpers.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_JNIHelpers.h">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_Misc.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_Network.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_RuntimePermissions.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_SystemStats.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\android_Threads.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\curl_Network.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_CommonFile.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_Files.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_Network.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_SystemStats.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\linux_Threads.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\mac_ClangBugWorkaround.h">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\osx_ObjCHelpers.h">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\posix_IPAddress.h">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\posix_NamedPipe.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\posix_SharedCode.h">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_ComSmartPtr.h">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_Files.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_Network.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_Registry.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_SystemStats.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\native\win32_Threads.cpp">
+      <Filter>native</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\IPAddress.cpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\IPAddress.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\MACAddress.cpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\MACAddress.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\NamedPipe.cpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\NamedPipe.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\Socket.cpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\Socket.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\URL.cpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\URL.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\WebInputStream.cpp">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\network\WebInputStream.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\BufferedInputStream.cpp">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\BufferedInputStream.h">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\FileInputSource.cpp">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\FileInputSource.h">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\InputSource.h">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\InputStream.cpp">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\InputStream.h">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\MemoryInputStream.cpp">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\MemoryInputStream.h">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\MemoryOutputStream.cpp">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\MemoryOutputStream.h">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\OutputStream.cpp">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\OutputStream.h">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\SubregionStream.cpp">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\SubregionStream.h">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\URLInputSource.cpp">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\streams\URLInputSource.h">
+      <Filter>streams</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\CompilerSupport.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\PlatformDefs.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\StandardHeader.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\SystemStats.cpp">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\SystemStats.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\system\TargetPlatform.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\test\UnitTest.cpp">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\test\UnitTest.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\test\UnitTestCategories.h">
+      <Filter>test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\Base64.cpp">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\Base64.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharPointer_ASCII.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharPointer_UTF16.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharPointer_UTF32.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharPointer_UTF8.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharacterFunctions.cpp">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\CharacterFunctions.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\Identifier.cpp">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\Identifier.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\LocalisedStrings.cpp">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\LocalisedStrings.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\NewLine.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\String.cpp">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\String.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringArray.cpp">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringArray.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringPairArray.cpp">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringPairArray.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringPool.cpp">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringPool.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\StringRef.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\TextDiff.cpp">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\text\TextDiff.h">
+      <Filter>text</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ChildProcess.cpp">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ChildProcess.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\CriticalSection.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\DynamicLibrary.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\HighResolutionTimer.cpp">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\HighResolutionTimer.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\InterProcessLock.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\Process.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ReadWriteLock.cpp">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ReadWriteLock.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ScopedLock.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ScopedReadLock.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ScopedWriteLock.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\SpinLock.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\Thread.cpp">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\Thread.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ThreadLocalValue.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ThreadPool.cpp">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\ThreadPool.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\TimeSliceThread.cpp">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\TimeSliceThread.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\threads\WaitableEvent.h">
+      <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\PerformanceCounter.cpp">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\PerformanceCounter.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\RelativeTime.cpp">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\RelativeTime.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\Time.cpp">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\time\Time.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\xml\XmlDocument.cpp">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\xml\XmlDocument.h">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\xml\XmlElement.cpp">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\xml\XmlElement.h">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\GZIPCompressorOutputStream.cpp">
+      <Filter>zip</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\GZIPCompressorOutputStream.h">
+      <Filter>zip</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\GZIPDecompressorInputStream.cpp">
+      <Filter>zip</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\GZIPDecompressorInputStream.h">
+      <Filter>zip</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\ZipFile.cpp">
+      <Filter>zip</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\ZipFile.h">
+      <Filter>zip</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\crc32.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\deflate.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\inffast.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\inffixed.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\inflate.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\inftrees.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\trees.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\zconf.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\zconf.in.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\zlib.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\zip\zlib\zutil.h">
+      <Filter>zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\SRC\Hackett\HFrame\HBase\HBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\SRC\Hackett\HFrame\HBase\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D2F9A494-6C11-38B9-A90E-5993EDDD2C87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{211C770E-3D88-3536-B830-8D45F1A0E0A1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="containers">
+      <UniqueIdentifier>{667F1D48-2797-3E00-B4F7-164F429B6FE4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="files">
+      <UniqueIdentifier>{B4A466CF-39C9-334B-82A3-B645A8BD038D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="javascript">
+      <UniqueIdentifier>{66EEEDA8-15B3-3BED-9C09-CB6C566333A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logging">
+      <UniqueIdentifier>{B17578C7-621C-34B5-9C85-685BDCD2128E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="maths">
+      <UniqueIdentifier>{74C0CE9A-18C2-3ED7-85C6-5964CB1E4062}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="memory">
+      <UniqueIdentifier>{0E3F71EC-DED1-3AD1-BF23-9B483AF8D423}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc">
+      <UniqueIdentifier>{73558591-9BD2-3839-8602-C45DB7557CAF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="native">
+      <UniqueIdentifier>{F6FB88F7-C4D3-36F7-8C3D-8057BE786B2B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="network">
+      <UniqueIdentifier>{5C30902F-3E8C-3654-8B4C-8DA62A980734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="streams">
+      <UniqueIdentifier>{064A4AA0-276E-349A-93AC-01A22186F57D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="system">
+      <UniqueIdentifier>{980B8084-8384-3FB3-854A-1E577E5A0B63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{9DB6D3E9-9CB2-30D8-9A20-415B989DD33F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="text">
+      <UniqueIdentifier>{53C67D9F-3066-358A-9901-060218D84C3D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="threads">
+      <UniqueIdentifier>{B14CDF09-4DAC-359C-93A1-5B9E7793B0CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="time">
+      <UniqueIdentifier>{863B3FDB-19E3-3448-B07C-1EEA7465040A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="xml">
+      <UniqueIdentifier>{82E30DB4-5E36-3022-95E7-F83AC2075445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zip">
+      <UniqueIdentifier>{CD50B326-A4C8-3039-A347-F537408C32BB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zip\zlib">
+      <UniqueIdentifier>{1DF4A071-392F-3AA2-9FAA-25C8FFEADE77}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

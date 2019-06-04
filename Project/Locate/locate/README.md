@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+flutter packages pub run build_runner build
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
