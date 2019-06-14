@@ -79,7 +79,7 @@ private:
 
         Colour getColour() const
         {
-            if (colourValue.toString().isEmpty())
+            if (colourValue.toString().empty())
                 return defaultColour;
 
             return Colour::fromString (colourValue.toString());
@@ -184,7 +184,7 @@ private:
 
         Colour getColour() const
         {
-            if (colourValue.toString().isEmpty())
+            if (colourValue.toString().empty())
                 return defaultColour;
 
             return Colour::fromString (colourValue.toString());

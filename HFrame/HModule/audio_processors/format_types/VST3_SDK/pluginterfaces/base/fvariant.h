@@ -144,7 +144,7 @@ public:
 	inline FUnknown* getObject () const { return (type & kObject) ? object : 0; }
 
 	inline uint16 getType () const { return static_cast<uint16> (type & ~(kOwner)); }
-	inline bool isEmpty () const { return getType () == kEmpty; }
+	inline bool empty () const { return getType () == kEmpty; }
 	inline bool isOwner () const { return (type & kOwner) != 0; }
 	inline bool isString () const { return (type & (kString8 | kString16)) != 0; }
 	inline void setOwner (bool state)

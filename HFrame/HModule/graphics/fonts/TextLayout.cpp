@@ -465,13 +465,13 @@ namespace TextLayoutHelpers
 
         void appendText (const String& stringText, const Font& font, Colour colour)
         {
-            auto t = stringText.getCharPointer();
+            auto t = stringText.c_str();
             String currentString;
             int lastCharType = 0;
 
             for (;;)
             {
-                auto c = t.getAndAdvance();
+                auto c = *t++;
 
                 if (c == 0)
                     break;
@@ -480,14 +480,14 @@ namespace TextLayoutHelpers
 
                 if (charType == 0 || charType != lastCharType)
                 {
-                    if (currentString.isNotEmpty())
+                    if (currentString.!empty())
                         tokens.add (new Token (currentString, font, colour,
                                                lastCharType == 2 || lastCharType == 0));
 
                     currentString = String::charToString (c);
 
                     if (c == '\r' && *t == '\n')
-                        currentString += t.getAndAdvance();
+                        currentString += *t++;
                 }
                 else
                 {
@@ -497,7 +497,7 @@ namespace TextLayoutHelpers
                 lastCharType = charType;
             }
 
-            if (currentString.isNotEmpty())
+            if (currentString.!empty())
                 tokens.add (new Token (currentString, font, colour, lastCharType == 2));
         }
 
@@ -557,7 +557,7 @@ namespace TextLayoutHelpers
             {
                 auto& attr = text.getAttribute (i);
 
-                appendText (text.getText().substring (attr.range.getStart(), attr.range.getEnd()),
+                appendText (text.getText().substr (attr.range.getStart(), attr.range.getEnd()),
                             attr.font, attr.colour);
             }
         }
@@ -566,7 +566,7 @@ namespace TextLayoutHelpers
         {
             auto trimmed = s.trimEnd();
 
-            if (trimmed.isEmpty() && s.isNotEmpty())
+            if (trimmed.empty() && s.!empty())
                 trimmed = s.replaceCharacters ("\r\n\t", "   ");
 
             return trimmed;
@@ -588,7 +588,7 @@ void TextLayout::createStandardLayout (const AttributedString& text)
 
 void TextLayout::recalculateSize()
 {
-    if (! lines.isEmpty())
+    if (! lines.empty())
     {
         auto bounds = lines.getFirst()->getLineBounds();
 

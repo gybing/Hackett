@@ -115,7 +115,7 @@ struct LittleFootRemoteHeap
 
     void sendChanges (ImplementationClass& bi, bool forceSend)
     {
-        if ((needsSyncing && messagesSent.isEmpty()) || forceSend)
+        if ((needsSyncing && messagesSent.empty()) || forceSend)
         {
             for (int maxChanges = 30; --maxChanges >= 0;)
             {
@@ -128,7 +128,7 @@ struct LittleFootRemoteHeap
                 for (uint32 i = 0; i < blockSize; ++i)
                     data[i] = latestState[i];
 
-                uint32 packetIndex = messagesSent.isEmpty() ? lastPacketIndexReceived
+                uint32 packetIndex = messagesSent.empty() ? lastPacketIndexReceived
                                                             : messagesSent.getLast()->packetIndex;
 
                 packetIndex = (packetIndex + 1) & ImplementationClass::maxPacketCounter;
@@ -176,7 +176,7 @@ struct LittleFootRemoteHeap
                     dumpStatus();
                     sendChanges (bi, false);
 
-                    if (messagesSent.isEmpty())
+                    if (messagesSent.empty())
                         needsSyncing = false;
 
                     return;
@@ -218,7 +218,7 @@ private:
 
     uint16* getLatestExpectedDataState() noexcept
     {
-        return messagesSent.isEmpty() ? deviceState
+        return messagesSent.empty() ? deviceState
                                       : messagesSent.getLast()->resultDataState;
     }
 
@@ -292,7 +292,7 @@ private:
                                   OwnedArray<ChangeMessage>& messagesCreated,
                                   uint32 nextPacketIndex)
         {
-            if (ranges.isEmpty())
+            if (ranges.empty())
                 return false;
 
             auto deviceIndex = bi.getDeviceIndex();

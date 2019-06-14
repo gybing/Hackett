@@ -110,7 +110,7 @@ void Button::updateAutomaticTooltip (const ApplicationCommandInfo& info)
 {
     if (generateTooltip && commandManagerToUse != nullptr)
     {
-        auto tt = info.description.isNotEmpty() ? info.description
+        auto tt = info.description.!empty() ? info.description
                                                 : info.shortName;
 
         for (auto& kp : commandManagerToUse->getKeyMappings()->getKeyPressesAssignedToCommand (commandID))
@@ -506,7 +506,7 @@ void Button::visibilityChanged()
 
 void Button::parentHierarchyChanged()
 {
-    auto* newKeySource = shortcuts.isEmpty() ? nullptr : getTopLevelComponent();
+    auto* newKeySource = shortcuts.empty() ? nullptr : getTopLevelComponent();
 
     if (newKeySource != keySource.get())
     {

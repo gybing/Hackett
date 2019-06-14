@@ -330,7 +330,7 @@ public:
                     newRates.add ((double) rate);
         }
 
-        if (newRates.isEmpty())
+        if (newRates.empty())
         {
             auto cr = getSampleRate();
             HASIO_LOG ("No sample rates supported - current rate: " + String ((int) cr));
@@ -433,7 +433,7 @@ public:
             loadDriver();
             String initError = initDriver();
 
-            if (initError.isNotEmpty())
+            if (initError.!empty())
                 HASIO_LOG ("ASIOInit: " + initError);
 
             needToReset = false;
@@ -559,7 +559,7 @@ public:
             error = "Can't create i/o buffers";
         }
 
-        if (error.isNotEmpty())
+        if (error.!empty())
         {
             HASIO_LOG_ERROR (error, err);
             disposeBuffers();
@@ -1110,10 +1110,10 @@ private:
         if ((! initOk) || getName().containsIgnoreCase ("denon dj"))
             driverError = getLastDriverError();
 
-        if ((! initOk) && driverError.isEmpty())
+        if ((! initOk) && driverError.empty())
             driverError = "Driver failed to initialise";
 
-        if (driverError.isEmpty())
+        if (driverError.empty())
         {
             char buffer[512] = {};
             asioObject->getDriverName (buffer); // just in case any flimsy drivers expect this to be called..
@@ -1141,14 +1141,14 @@ private:
         currentCallback = nullptr;
         error.clear();
 
-        if (getName().isEmpty())
+        if (getName().empty())
             return error;
 
         long err = 0;
 
         if (loadDriver())
         {
-            if ((error = initDriver()).isEmpty())
+            if ((error = initDriver()).empty())
             {
                 numActiveInputChans = 0;
                 numActiveOutputChans = 0;
@@ -1217,7 +1217,7 @@ private:
             error = "No such device";
         }
 
-        if (error.isNotEmpty())
+        if (error.!empty())
         {
             HASIO_LOG_ERROR (error, err);
             disposeBuffers();
@@ -1462,10 +1462,10 @@ public:
                                  const String& inputDeviceName) override
     {
         // ASIO can't open two different devices for input and output - they must be the same one.
-        HAssert (inputDeviceName == outputDeviceName || outputDeviceName.isEmpty() || inputDeviceName.isEmpty());
+        HAssert (inputDeviceName == outputDeviceName || outputDeviceName.empty() || inputDeviceName.empty());
         HAssert (hasScanned); // need to call scanForDevices() before doing this
 
-        auto deviceName = outputDeviceName.isNotEmpty() ? outputDeviceName
+        auto deviceName = outputDeviceName.!empty() ? outputDeviceName
                                                         : inputDeviceName;
         auto index = deviceNames.indexOf (deviceName);
 

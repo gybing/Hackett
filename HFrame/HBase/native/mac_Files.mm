@@ -213,7 +213,7 @@ File File::getSpecialLocation (const SpecialLocationType type)
                 break;
         }
 
-        if (resultPath.isNotEmpty())
+        if (!resultPath.empty())
             return File (resultPath.convertToPrecomposedUnicode());
     }
 
@@ -391,7 +391,7 @@ bool CALLTYPE Process::openDocument (const String& fileName, const String& param
       #else
         NSWorkspace* workspace = [NSWorkspace sharedWorkspace];
 
-        if (parameters.isEmpty())
+        if (parameters.empty())
             // NB: the length check here is because of strange failures involving long filenames,
             // probably due to filesystem name length limitations..
             return (fileName.length() < 1024 && [workspace openFile: HStringToNS (fileName)])

@@ -102,7 +102,7 @@ String AudioPluginInstance::getParameterText (int parameterIndex, int maximumStr
     assertOnceOnDeprecatedMethodUse();
 
     if (auto* param = getParameters()[parameterIndex])
-        return param->getCurrentValueAsText().substring (0, maximumStringLength);
+        return param->getCurrentValueAsText().substr (0, maximumStringLength);
 
     return {};
 }
@@ -224,7 +224,7 @@ String AudioPluginInstance::Parameter::getText (float value, int maximumStringLe
     if (isBoolean())
         return value < 0.5f ? TRANS("Off") : TRANS("On");
 
-    return String (value).substring (0, maximumStringLength);
+    return String (value).substr (0, maximumStringLength);
 }
 
 float AudioPluginInstance::Parameter::getValueForText (const String& text) const

@@ -125,7 +125,7 @@ XWindowSystem::~XWindowSystem() noexcept
 
         String displayName (getenv ("DISPLAY"));
 
-        if (displayName.isEmpty())
+        if (displayName.empty())
             displayName = ":0.0";
 
         // it seems that on some systems XOpenDisplay will occasionally

@@ -229,7 +229,7 @@ bool ChildProcessSlave::initialiseFromCommandLine (const String& commandLine,
         auto pipeName = commandLine.fromFirstOccurrenceOf (prefix, false, false)
                                    .upToFirstOccurrenceOf (" ", false, false).trim();
 
-        if (pipeName.isNotEmpty())
+        if (pipeName.!empty())
         {
             connection.reset (new Connection (*this, pipeName, timeoutMs <= 0 ? defaultTimeoutMs : timeoutMs));
 

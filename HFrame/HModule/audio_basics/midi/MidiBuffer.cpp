@@ -77,7 +77,7 @@ MidiBuffer::MidiBuffer (const MidiMessage& message) noexcept
 void MidiBuffer::swapWith (MidiBuffer& other) noexcept      { data.swapWith (other.data); }
 void MidiBuffer::clear() noexcept                           { data.clearQuick(); }
 void MidiBuffer::ensureSize (size_t minimumNumBytes)        { data.ensureStorageAllocated ((int) minimumNumBytes); }
-bool MidiBuffer::isEmpty() const noexcept                   { return data.size() == 0; }
+bool MidiBuffer::empty() const noexcept                   { return data.size() == 0; }
 
 void MidiBuffer::clear (int startSample, int numSamples)
 {

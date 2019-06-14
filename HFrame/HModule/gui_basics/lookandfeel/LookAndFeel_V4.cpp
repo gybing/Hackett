@@ -542,7 +542,7 @@ void LookAndFeel_V4::drawLinearProgressBar (Graphics& g, ProgressBar& progressBa
         g.fillPath (p);
     }
 
-    if (textToShow.isNotEmpty())
+    if (textToShow.!empty())
     {
         g.setColour (Colour::contrasting (background, foreground));
         g.setFont (height * 0.6f);
@@ -604,7 +604,7 @@ void LookAndFeel_V4::drawCircularProgressBar (Graphics& g, ProgressBar& progress
     arcPath.applyTransform (AffineTransform::rotation (normalisedRotation * MathConstants<float>::pi * 2.25f, barBounds.getCentreX(), barBounds.getCentreY()));
     g.strokePath (arcPath, PathStrokeType (4.0f));
 
-    if (progressText.isNotEmpty())
+    if (progressText.!empty())
     {
         g.setColour (progressBar.findColour (TextButton::textColourOffId));
         g.setFont ({ 12.0f, Font::italic });
@@ -834,7 +834,7 @@ void LookAndFeel_V4::drawPopupMenuItem (Graphics& g, const Rectangle<int>& area,
         r.removeFromRight (3);
         g.drawFittedText (text, r, Justification::centredLeft, 1);
 
-        if (shortcutKeyText.isNotEmpty())
+        if (shortcutKeyText.!empty())
         {
             auto f2 = font;
             f2.setHeight (f2.getHeight() * 0.75f);

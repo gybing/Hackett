@@ -234,7 +234,7 @@ void StringArray::removeEmptyStrings (bool removeWhitespaceStrings)
     else
     {
         for (int i = size(); --i >= 0;)
-            if (strings.getReference(i).isEmpty())
+            if (strings.getReference(i).empty())
                 strings.remove (i);
     }
 }
@@ -276,23 +276,23 @@ String StringArray::joinIntoString (StringRef separator, int start, int numberTo
     if (start == last - 1)
         return strings.getReference (start);
 
-    auto separatorBytes = separator.text.sizeInBytes() - sizeof (String::CharPointerType::CharType);
+    auto separatorBytes = separator.text.sizeInBytes() - sizeof (char*::CharType);
     auto bytesNeeded = separatorBytes * (size_t) (last - start - 1);
 
     for (int i = start; i < last; ++i)
-        bytesNeeded += strings.getReference(i).getCharPointer().sizeInBytes() - sizeof (String::CharPointerType::CharType);
+        bytesNeeded += strings.getReference(i).c_str().sizeInBytes() - sizeof (char*::CharType);
 
     String result;
     result.preallocateBytes (bytesNeeded);
 
-    auto dest = result.getCharPointer();
+    auto dest = result.c_str();
 
     while (start < last)
     {
         auto& s = strings.getReference (start);
 
-        if (! s.isEmpty())
-            dest.writeAll (s.getCharPointer());
+        if (! s.empty())
+            dest.writeAll (s.c_str());
 
         if (++start < last && separatorBytes > 0)
             dest.writeAll (separator.text);
@@ -311,7 +311,7 @@ int StringArray::addTokens (StringRef text, StringRef breakCharacters, StringRef
 {
     int num = 0;
 
-    if (text.isNotEmpty())
+    if (text.!empty())
     {
         for (auto t = text.text;;)
         {
@@ -321,7 +321,7 @@ int StringArray::addTokens (StringRef text, StringRef breakCharacters, StringRef
             strings.add (String (t, tokenEnd));
             ++num;
 
-            if (tokenEnd.isEmpty())
+            if (tokenEnd.empty())
                 break;
 
             t = ++tokenEnd;
@@ -335,7 +335,7 @@ int StringArray::addLines (StringRef sourceText)
 {
     int numLines = 0;
     auto text = sourceText.text;
-    bool finished = text.isEmpty();
+    bool finished = text.empty();
 
     while (! finished)
     {
@@ -343,7 +343,7 @@ int StringArray::addLines (StringRef sourceText)
         {
             auto endOfLine = text;
 
-            switch (text.getAndAdvance())
+            switch (*text++)
             {
                 case 0:     finished = true; break;
                 case '\n':  break;

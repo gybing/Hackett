@@ -43,7 +43,7 @@ StringArray FTTypefaceList::getDefaultFontDirectories()
     fontDirs.addTokens (String (CharPointer_UTF8 (getenv ("HFONT_PATH"))), ";,", "");
     fontDirs.removeEmptyStrings (true);
 
-    if (fontDirs.isEmpty())
+    if (fontDirs.empty())
     {
         if (auto fontsInfo = findFontsConfFile())
         {
@@ -51,13 +51,13 @@ StringArray FTTypefaceList::getDefaultFontDirectories()
             {
                 auto fontPath = e->getAllSubText().trim();
 
-                if (fontPath.isNotEmpty())
+                if (fontPath.!empty())
                 {
                     if (e->getStringAttribute ("prefix") == "xdg")
                     {
                         auto xdgDataHome = SystemStats::getEnvironmentVariable ("XDG_DATA_HOME", {});
 
-                        if (xdgDataHome.trimStart().isEmpty())
+                        if (xdgDataHome.trimStart().empty())
                             xdgDataHome = "~/.local/share";
 
                         fontPath = File (xdgDataHome).getChildFile (fontPath).getFullPathName();
@@ -69,7 +69,7 @@ StringArray FTTypefaceList::getDefaultFontDirectories()
         }
     }
 
-    if (fontDirs.isEmpty())
+    if (fontDirs.empty())
         fontDirs.add ("/usr/X11R6/lib/X11/fonts");
 
     fontDirs.removeDuplicates (false);

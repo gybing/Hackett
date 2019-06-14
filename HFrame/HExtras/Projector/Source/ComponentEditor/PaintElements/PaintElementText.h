@@ -109,7 +109,7 @@ public:
     {
         customPaintCode.clear();
         
-        if (! snippets.isEmpty() && ! fillType.isInvisible())
+        if (! snippets.empty() && ! fillType.isInvisible())
         {
             customPaintCode = snippets[0];
             snippets.remove (0);
@@ -154,7 +154,7 @@ public:
             font.setExtraKerningFactor ((float) xml.getDoubleAttribute ("kerning", 0.0));
             justification = Justification (xml.getIntAttribute ("justification", Justification::centred));
             auto fontStyle = xml.getStringAttribute ("typefaceStyle");
-            if (! fontStyle.isEmpty())
+            if (! fontStyle.empty())
                 font.setTypefaceStyle (fontStyle);
 
             return true;

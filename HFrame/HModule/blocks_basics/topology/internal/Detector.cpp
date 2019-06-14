@@ -20,7 +20,7 @@ struct Detector   : public ReferenceCountedObject,
 
     ~Detector()
     {
-        HAssert (activeTopologySources.isEmpty());
+        HAssert (activeTopologySources.empty());
     }
 
     using Ptr = ReferenceCountedObjectPtr<Detector>;
@@ -45,7 +45,7 @@ struct Detector   : public ReferenceCountedObject,
     {
         activeTopologySources.removeAllInstancesOf (pts);
 
-        if (activeTopologySources.isEmpty())
+        if (activeTopologySources.empty())
         {
             for (auto& b : currentTopology.blocks)
                 if (auto bi = BlockImpl::getFrom (b))

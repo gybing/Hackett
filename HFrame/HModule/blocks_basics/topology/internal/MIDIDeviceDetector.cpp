@@ -48,7 +48,7 @@ struct MIDIDeviceDetector  : public PhysicalTopologySource::DeviceDetector
 
     bool isLockedFromOutside() const override
     {
-        return lockedFromOutside && ! findDevices().isEmpty();
+        return lockedFromOutside && ! findDevices().empty();
     }
 
     static bool isBlocksMidiDeviceName (const String& name)

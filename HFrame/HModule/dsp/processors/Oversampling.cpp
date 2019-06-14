@@ -653,7 +653,7 @@ size_t Oversampling<SampleType>::getOversamplingFactor() noexcept
 template <typename SampleType>
 void Oversampling<SampleType>::initProcessing (size_t maximumNumberOfSamplesBeforeOversampling)
 {
-    HAssert (! stages.isEmpty());
+    HAssert (! stages.empty());
     auto currentNumSamples = maximumNumberOfSamplesBeforeOversampling;
 
     for (auto* stage : stages)
@@ -669,7 +669,7 @@ void Oversampling<SampleType>::initProcessing (size_t maximumNumberOfSamplesBefo
 template <typename SampleType>
 void Oversampling<SampleType>::reset() noexcept
 {
-    HAssert (! stages.isEmpty());
+    HAssert (! stages.empty());
 
     if (isReady)
         for (auto* stage : stages)
@@ -679,7 +679,7 @@ void Oversampling<SampleType>::reset() noexcept
 template <typename SampleType>
 typename dsp::AudioBlock<SampleType> Oversampling<SampleType>::processSamplesUp (const dsp::AudioBlock<SampleType>& inputBlock) noexcept
 {
-    HAssert (! stages.isEmpty());
+    HAssert (! stages.empty());
 
     if (! isReady)
         return {};
@@ -698,7 +698,7 @@ typename dsp::AudioBlock<SampleType> Oversampling<SampleType>::processSamplesUp 
 template <typename SampleType>
 void Oversampling<SampleType>::processSamplesDown (dsp::AudioBlock<SampleType>& outputBlock) noexcept
 {
-    HAssert (! stages.isEmpty());
+    HAssert (! stages.empty());
 
     if (! isReady)
         return;

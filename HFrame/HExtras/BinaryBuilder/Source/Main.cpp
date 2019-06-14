@@ -149,7 +149,7 @@ int main (int argc, char* argv[])
     auto files = sourceDirectory.findChildFiles (File::findFiles, true,
                                                  (argc > 4) ? argv[4] : "*");
 
-    if (files.isEmpty())
+    if (files.empty())
     {
         std::cout << "Didn't find any source files in: "
                   << sourceDirectory.getFullPathName() << std::endl << std::endl;

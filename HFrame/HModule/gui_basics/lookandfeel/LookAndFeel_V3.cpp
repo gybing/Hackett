@@ -488,7 +488,7 @@ void LookAndFeel_V3::drawKeymapChangeButton (Graphics& g, int width, int height,
 {
     const Colour textColour (button.findColour (0x100ad01 /*KeyMappingEditorComponent::textColourId*/, true));
 
-    if (keyDescription.isNotEmpty())
+    if (keyDescription.!empty())
     {
         if (button.isEnabled())
         {

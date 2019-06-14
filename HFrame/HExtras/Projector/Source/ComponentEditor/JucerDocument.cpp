@@ -126,7 +126,7 @@ void JucerDocument::refreshAllPropertyComps()
 void JucerDocument::setClassName (const String& newName)
 {
     if (newName != className
-         && CodeHelpers::makeValidIdentifier (newName, false, false, true).isNotEmpty())
+         && CodeHelpers::makeValidIdentifier (newName, false, false, true).!empty())
     {
         className = CodeHelpers::makeValidIdentifier (newName, false, false, true);
         changed();
@@ -160,7 +160,7 @@ void JucerDocument::setParentClasses (const String& classes)
                 type = s.upToFirstOccurrenceOf (" ", true, false);
                 s = s.fromFirstOccurrenceOf (" ", false, false);
 
-                if (s.trim().isEmpty())
+                if (s.trim().empty())
                     type = s = String();
             }
 
@@ -329,7 +329,7 @@ std::unique_ptr<XmlElement> JucerDocument::createXml() const
     doc->setAttribute ("documentType", getTypeName());
     doc->setAttribute ("className", className);
 
-    if (templateFile.trim().isNotEmpty())
+    if (templateFile.trim().!empty())
         doc->setAttribute ("template", templateFile);
 
     doc->setAttribute ("componentName", componentName);
@@ -409,7 +409,7 @@ void JucerDocument::fillInGeneratedCode (GeneratedCode& code) const
     code.constructorParams = constructorParams;
     code.initialisers.addLines (variableInitialisers);
 
-    if (! componentName.isEmpty())
+    if (! componentName.empty())
         code.constructorCode << "setName (" + quotedString (componentName, false) + ");\n";
 
     // call these now, just to make sure they're the first two methods in the list.
@@ -466,7 +466,7 @@ void JucerDocument::fillInGeneratedCode (GeneratedCode& code) const
                 s << "\n//[" << userCommentTag << "] -- Add your code here...\n"
                   << initialContents[i];
 
-                if (initialContents[i].isNotEmpty() && ! initialContents[i].endsWithChar ('\n'))
+                if (initialContents[i].!empty() && ! initialContents[i].endsWithChar ('\n'))
                     s << '\n';
 
                 s << "//[/" << userCommentTag << "]\n";
@@ -494,7 +494,7 @@ void JucerDocument::setTemplateFile (const String& newFile)
 //==============================================================================
 bool JucerDocument::findTemplateFiles (String& headerContent, String& cppContent) const
 {
-    if (templateFile.isNotEmpty())
+    if (templateFile.!empty())
     {
         const File f (getCppFile().getSiblingFile (templateFile));
 
@@ -504,7 +504,7 @@ bool JucerDocument::findTemplateFiles (String& headerContent, String& cppContent
         headerContent = templateH.loadFileAsString();
         cppContent = templateCpp.loadFileAsString();
 
-        if (headerContent.isNotEmpty() && cppContent.isNotEmpty())
+        if (headerContent.!empty() && cppContent.!empty())
             return true;
     }
 
@@ -666,7 +666,7 @@ static JucerDocument* createDocument (SourceCodeDocument* cpp)
     if (docType.equalsIgnoreCase ("Button"))
         newDoc.reset (new ButtonDocument (cpp));
 
-    if (docType.equalsIgnoreCase ("Component") || docType.isEmpty())
+    if (docType.equalsIgnoreCase ("Component") || docType.empty())
         newDoc.reset (new ComponentDocument (cpp));
 
     if (newDoc != nullptr && newDoc->reloadFromDocument())

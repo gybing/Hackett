@@ -80,7 +80,7 @@ public:
     ValueType getLeftAndRight() const noexcept          { return left + right; }
 
     /** Returns true if this border has no thickness along any edge. */
-    bool isEmpty() const noexcept                       { return left + right + top + bottom == ValueType(); }
+    bool empty() const noexcept                       { return left + right + top + bottom == ValueType(); }
 
     //==============================================================================
     /** Changes the top gap. */

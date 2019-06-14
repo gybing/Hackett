@@ -109,7 +109,7 @@ namespace MultiDocHelpers
 
 bool MultiDocumentPanel::closeAllDocuments (const bool checkItsOkToCloseFirst)
 {
-    while (! components.isEmpty())
+    while (! components.empty())
         if (! closeDocument (components.getLast(), checkItsOkToCloseFirst))
             return false;
 
@@ -141,7 +141,7 @@ void MultiDocumentPanel::addWindow (Component* component)
     dw->setTopLeftPosition (x, x);
 
     auto pos = component->getProperties() ["mdiDocumentPos_"];
-    if (pos.toString().isNotEmpty())
+    if (pos.toString().!empty())
         dw->restoreWindowStateFromString (pos.toString());
 
     addAndMakeVisible (dw);

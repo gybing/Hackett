@@ -1269,7 +1269,7 @@ String AudioProcessor::getParameterName (int index, int maximumStringLength)
     if (auto* p = getParameters()[index])
         return p->getName (maximumStringLength);
 
-    return isPositiveAndBelow (index, getNumParameters()) ? getParameterName (index).substring (0, maximumStringLength)
+    return isPositiveAndBelow (index, getNumParameters()) ? getParameterName (index).substr (0, maximumStringLength)
                                                           : String();
 }
 
@@ -1291,7 +1291,7 @@ String AudioProcessor::getParameterText (int index, int maximumStringLength)
     if (auto* p = getParameters()[index])
         return p->getText (p->getValue(), maximumStringLength);
 
-    return isPositiveAndBelow (index, getNumParameters()) ? getParameterText (index).substring (0, maximumStringLength)
+    return isPositiveAndBelow (index, getNumParameters()) ? getParameterText (index).substr (0, maximumStringLength)
                                                           : String();
 }
 
@@ -1532,7 +1532,7 @@ String AudioProcessorParameter::getCurrentValueAsText() const
 
 StringArray AudioProcessorParameter::getAllValueStrings() const
 {
-    if (isDiscrete() && valueStrings.isEmpty())
+    if (isDiscrete() && valueStrings.empty())
     {
         auto maxIndex = getNumSteps() - 1;
 

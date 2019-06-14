@@ -30,10 +30,10 @@ struct EmptyString
 {
     int refCount;
     size_t allocatedBytes;
-    String::CharPointerType::CharType text;
+    char*::CharType text;
 };
 
-static const EmptyString emptyString = { 0x3fffffff, sizeof (String::CharPointerType::CharType), 0 };
+static const EmptyString emptyString = { 0x3fffffff, sizeof (char*::CharType), 0 };
 
 //==============================================================================
 class StringHolder
@@ -41,8 +41,8 @@ class StringHolder
 public:
     StringHolder() = delete;
 
-    using CharPointerType  = String::CharPointerType;
-    using CharType         = String::CharPointerType::CharType;
+    using CharPointerType  = char*;
+    using CharType         = char*::CharType;
 
     //==============================================================================
     static CharPointerType createUninitialisedBytes (size_t numBytes)
@@ -57,7 +57,7 @@ public:
     template <class CharPointer>
     static CharPointerType createFromCharPointer (const CharPointer text)
     {
-        if (text.getAddress() == nullptr || text.isEmpty())
+        if (text.getAddress() == nullptr || text.empty())
             return CharPointerType (&(emptyString.text));
 
         auto bytesNeeded = sizeof (CharType) + CharPointerType::getBytesRequiredFor (text);
@@ -69,14 +69,14 @@ public:
     template <class CharPointer>
     static CharPointerType createFromCharPointer (const CharPointer text, size_t maxChars)
     {
-        if (text.getAddress() == nullptr || text.isEmpty() || maxChars == 0)
+        if (text.getAddress() == nullptr || text.empty() || maxChars == 0)
             return CharPointerType (&(emptyString.text));
 
         auto end = text;
         size_t numChars = 0;
         size_t bytesNeeded = sizeof (CharType);
 
-        while (numChars < maxChars && ! end.isEmpty())
+        while (numChars < maxChars && ! end.empty())
         {
             bytesNeeded += CharPointerType::getBytesRequiredFor (end.getAndAdvance());
             ++numChars;
@@ -90,14 +90,14 @@ public:
     template <class CharPointer>
     static CharPointerType createFromCharPointer (const CharPointer start, const CharPointer end)
     {
-        if (start.getAddress() == nullptr || start.isEmpty())
+        if (start.getAddress() == nullptr || start.empty())
             return CharPointerType (&(emptyString.text));
 
         auto e = start;
         int numChars = 0;
         auto bytesNeeded = sizeof (CharType);
 
-        while (e < end && ! e.isEmpty())
+        while (e < end && ! e.empty())
         {
             bytesNeeded += CharPointerType::getBytesRequiredFor (e.getAndAdvance());
             ++numChars;
@@ -110,7 +110,7 @@ public:
 
     static CharPointerType createFromCharPointer (const CharPointerType start, const CharPointerType end)
     {
-        if (start.getAddress() == nullptr || start.isEmpty())
+        if (start.getAddress() == nullptr || start.empty())
             return CharPointerType (&(emptyString.text));
 
         auto numBytes = (size_t) (reinterpret_cast<const char*> (end.getAddress())
@@ -459,7 +459,7 @@ namespace NumberToStringConverters
     }
 
     template <typename IntegerType>
-    static String::CharPointerType createFromInteger (IntegerType number)
+    static char* createFromInteger (IntegerType number)
     {
         char buffer [charsNeededForInt];
         auto* end = buffer + numElementsInArray (buffer);
@@ -467,7 +467,7 @@ namespace NumberToStringConverters
         return StringHolder::createFromFixedLength (start, (size_t) (end - start - 1));
     }
 
-    static String::CharPointerType createFromDouble (double number, int numberOfDecimalPlaces, bool useScientificNotation)
+    static char* createFromDouble (double number, int numberOfDecimalPlaces, bool useScientificNotation)
     {
         char buffer [charsNeededForDouble];
         size_t len;
@@ -497,7 +497,7 @@ int String::length() const noexcept
     return (int) text.length();
 }
 
-static size_t findByteOffsetOfEnd (String::CharPointerType text) noexcept
+static size_t findByteOffsetOfEnd (char* text) noexcept
 {
     return (size_t) (((char*) text.findTerminatingNull().getAddress()) - (char*) text.getAddress());
 }
@@ -521,7 +521,7 @@ struct HashGenerator
     {
         Type result = {};
 
-        while (! t.isEmpty())
+        while (! t.empty())
             result = ((Type) multiplier) * result + (Type) t.getAndAdvance();
 
         return result;
@@ -541,29 +541,29 @@ API bool CALLTYPE operator== (const String& s1, const char* s2) noexcept        
 API bool CALLTYPE operator!= (const String& s1, const char* s2) noexcept              { return s1.compare (s2) != 0; }
 API bool CALLTYPE operator== (const String& s1, const wchar_t* s2) noexcept           { return s1.compare (s2) == 0; }
 API bool CALLTYPE operator!= (const String& s1, const wchar_t* s2) noexcept           { return s1.compare (s2) != 0; }
-API bool CALLTYPE operator== (const String& s1, StringRef s2) noexcept                { return s1.getCharPointer().compare (s2.text) == 0; }
-API bool CALLTYPE operator!= (const String& s1, StringRef s2) noexcept                { return s1.getCharPointer().compare (s2.text) != 0; }
-API bool CALLTYPE operator<  (const String& s1, StringRef s2) noexcept                { return s1.getCharPointer().compare (s2.text) < 0; }
-API bool CALLTYPE operator<= (const String& s1, StringRef s2) noexcept                { return s1.getCharPointer().compare (s2.text) <= 0; }
-API bool CALLTYPE operator>  (const String& s1, StringRef s2) noexcept                { return s1.getCharPointer().compare (s2.text) > 0; }
-API bool CALLTYPE operator>= (const String& s1, StringRef s2) noexcept                { return s1.getCharPointer().compare (s2.text) >= 0; }
-API bool CALLTYPE operator== (const String& s1, const CharPointer_UTF8 s2) noexcept   { return s1.getCharPointer().compare (s2) == 0; }
-API bool CALLTYPE operator!= (const String& s1, const CharPointer_UTF8 s2) noexcept   { return s1.getCharPointer().compare (s2) != 0; }
-API bool CALLTYPE operator== (const String& s1, const CharPointer_UTF16 s2) noexcept  { return s1.getCharPointer().compare (s2) == 0; }
-API bool CALLTYPE operator!= (const String& s1, const CharPointer_UTF16 s2) noexcept  { return s1.getCharPointer().compare (s2) != 0; }
-API bool CALLTYPE operator== (const String& s1, const CharPointer_UTF32 s2) noexcept  { return s1.getCharPointer().compare (s2) == 0; }
-API bool CALLTYPE operator!= (const String& s1, const CharPointer_UTF32 s2) noexcept  { return s1.getCharPointer().compare (s2) != 0; }
+API bool CALLTYPE operator== (const String& s1, StringRef s2) noexcept                { return s1.c_str().compare (s2.text) == 0; }
+API bool CALLTYPE operator!= (const String& s1, StringRef s2) noexcept                { return s1.c_str().compare (s2.text) != 0; }
+API bool CALLTYPE operator<  (const String& s1, StringRef s2) noexcept                { return s1.c_str().compare (s2.text) < 0; }
+API bool CALLTYPE operator<= (const String& s1, StringRef s2) noexcept                { return s1.c_str().compare (s2.text) <= 0; }
+API bool CALLTYPE operator>  (const String& s1, StringRef s2) noexcept                { return s1.c_str().compare (s2.text) > 0; }
+API bool CALLTYPE operator>= (const String& s1, StringRef s2) noexcept                { return s1.c_str().compare (s2.text) >= 0; }
+API bool CALLTYPE operator== (const String& s1, const CharPointer_UTF8 s2) noexcept   { return s1.c_str().compare (s2) == 0; }
+API bool CALLTYPE operator!= (const String& s1, const CharPointer_UTF8 s2) noexcept   { return s1.c_str().compare (s2) != 0; }
+API bool CALLTYPE operator== (const String& s1, const CharPointer_UTF16 s2) noexcept  { return s1.c_str().compare (s2) == 0; }
+API bool CALLTYPE operator!= (const String& s1, const CharPointer_UTF16 s2) noexcept  { return s1.c_str().compare (s2) != 0; }
+API bool CALLTYPE operator== (const String& s1, const CharPointer_UTF32 s2) noexcept  { return s1.c_str().compare (s2) == 0; }
+API bool CALLTYPE operator!= (const String& s1, const CharPointer_UTF32 s2) noexcept  { return s1.c_str().compare (s2) != 0; }
 
 bool String::equalsIgnoreCase (const wchar_t* const t) const noexcept
 {
     return t != nullptr ? text.compareIgnoreCase (castToCharPointer_wchar_t (t)) == 0
-                        : isEmpty();
+                        : empty();
 }
 
 bool String::equalsIgnoreCase (const char* const t) const noexcept
 {
     return t != nullptr ? text.compareIgnoreCase (CharPointer_UTF8 (t)) == 0
-                        : isEmpty();
+                        : empty();
 }
 
 bool String::equalsIgnoreCase (StringRef t) const noexcept
@@ -582,7 +582,7 @@ int String::compare (const char* const other) const noexcept       { return text
 int String::compare (const wchar_t* const other) const noexcept    { return text.compare (castToCharPointer_wchar_t (other)); }
 int String::compareIgnoreCase (const String& other) const noexcept { return (text == other.text) ? 0 : text.compareIgnoreCase (other.text); }
 
-static int stringCompareRight (String::CharPointerType s1, String::CharPointerType s2) noexcept
+static int stringCompareRight (char* s1, char* s2) noexcept
 {
     for (int bias = 0;;)
     {
@@ -603,7 +603,7 @@ static int stringCompareRight (String::CharPointerType s1, String::CharPointerTy
     }
 }
 
-static int stringCompareLeft (String::CharPointerType s1, String::CharPointerType s2) noexcept
+static int stringCompareLeft (char* s1, char* s2) noexcept
 {
     for (;;)
     {
@@ -621,7 +621,7 @@ static int stringCompareLeft (String::CharPointerType s1, String::CharPointerTyp
     }
 }
 
-static int naturalStringCompare (String::CharPointerType s1, String::CharPointerType s2, bool isCaseSensitive) noexcept
+static int naturalStringCompare (char* s1, char* s2, bool isCaseSensitive) noexcept
 {
     bool firstLoop = true;
 
@@ -632,8 +632,8 @@ static int naturalStringCompare (String::CharPointerType s1, String::CharPointer
 
         if ((! firstLoop) && (hasSpace1 ^ hasSpace2))
         {
-            if (s1.isEmpty())  return -1;
-            if (s2.isEmpty())  return 1;
+            if (s1.empty())  return -1;
+            if (s2.empty())  return 1;
 
             return hasSpace2 ? 1 : -1;
         }
@@ -683,7 +683,7 @@ static int naturalStringCompare (String::CharPointerType s1, String::CharPointer
 
 int String::compareNatural (StringRef other, bool isCaseSensitive) const noexcept
 {
-    return naturalStringCompare (getCharPointer(), other.text, isCaseSensitive);
+    return naturalStringCompare (c_str(), other.text, isCaseSensitive);
 }
 
 //==============================================================================
@@ -732,7 +732,7 @@ String& String::operator+= (const char* t)
 
 String& String::operator+= (const String& other)
 {
-    if (isEmpty())
+    if (empty())
         return operator= (other);
 
     if (this == &other)
@@ -778,7 +778,7 @@ namespace StringHelpers
         auto* start = NumberToStringConverters::numberToString (end, number);
 
        #if HSTRING_UTF_TYPE == 8
-        str.appendCharPointer (String::CharPointerType (start), String::CharPointerType (end));
+        str.appendCharPointer (char* (start), char* (end));
        #else
         str.appendCharPointer (CharPointer_ASCII (start), CharPointer_ASCII (end));
        #endif
@@ -863,7 +863,7 @@ int String::indexOfChar (int startIndex, wchar character) const noexcept
 {
     auto t = text;
 
-    for (int i = 0; ! t.isEmpty(); ++i)
+    for (int i = 0; ! t.empty(); ++i)
     {
         if (i >= startIndex)
         {
@@ -884,7 +884,7 @@ int String::lastIndexOfChar (wchar character) const noexcept
     auto t = text;
     int last = -1;
 
-    for (int i = 0; ! t.isEmpty(); ++i)
+    for (int i = 0; ! t.empty(); ++i)
         if (t.getAndAdvance() == character)
             last = i;
 
@@ -895,7 +895,7 @@ int String::indexOfAnyOf (StringRef charactersToLookFor, int startIndex, bool ig
 {
     auto t = text;
 
-    for (int i = 0; ! t.isEmpty(); ++i)
+    for (int i = 0; ! t.empty(); ++i)
     {
         if (i >= startIndex)
         {
@@ -913,24 +913,24 @@ int String::indexOfAnyOf (StringRef charactersToLookFor, int startIndex, bool ig
 
 int String::indexOf (StringRef other) const noexcept
 {
-    return other.isEmpty() ? 0 : text.indexOf (other.text);
+    return other.empty() ? 0 : text.indexOf (other.text);
 }
 
 int String::indexOfIgnoreCase (StringRef other) const noexcept
 {
-    return other.isEmpty() ? 0 : CharacterFunctions::indexOfIgnoreCase (text, other.text);
+    return other.empty() ? 0 : CharacterFunctions::indexOfIgnoreCase (text, other.text);
 }
 
 int String::indexOf (int startIndex, StringRef other) const noexcept
 {
-    if (other.isEmpty())
+    if (other.empty())
         return -1;
 
     auto t = text;
 
     for (int i = startIndex; --i >= 0;)
     {
-        if (t.isEmpty())
+        if (t.empty())
             return -1;
 
         ++t;
@@ -942,14 +942,14 @@ int String::indexOf (int startIndex, StringRef other) const noexcept
 
 int String::indexOfIgnoreCase (const int startIndex, StringRef other) const noexcept
 {
-    if (other.isEmpty())
+    if (other.empty())
         return -1;
 
     auto t = text;
 
     for (int i = startIndex; --i >= 0;)
     {
-        if (t.isEmpty())
+        if (t.empty())
             return -1;
 
         ++t;
@@ -961,7 +961,7 @@ int String::indexOfIgnoreCase (const int startIndex, StringRef other) const noex
 
 int String::lastIndexOf (StringRef other) const noexcept
 {
-    if (other.isNotEmpty())
+    if (other.!empty())
     {
         auto len = other.length();
         int i = length() - len;
@@ -983,7 +983,7 @@ int String::lastIndexOf (StringRef other) const noexcept
 
 int String::lastIndexOfIgnoreCase (StringRef other) const noexcept
 {
-    if (other.isNotEmpty())
+    if (other.!empty())
     {
         auto len = other.length();
         int i = length() - len;
@@ -1008,7 +1008,7 @@ int String::lastIndexOfAnyOf (StringRef charactersToLookFor, const bool ignoreCa
     auto t = text;
     int last = -1;
 
-    for (int i = 0; ! t.isEmpty(); ++i)
+    for (int i = 0; ! t.empty(); ++i)
         if (charactersToLookFor.text.indexOf (t.getAndAdvance(), ignoreCase) >= 0)
             last = i;
 
@@ -1032,7 +1032,7 @@ bool String::containsIgnoreCase (StringRef t) const noexcept
 
 int String::indexOfWholeWord (StringRef word) const noexcept
 {
-    if (word.isNotEmpty())
+    if (word.!empty())
     {
         auto t = text;
         auto wordLen = word.length();
@@ -1054,7 +1054,7 @@ int String::indexOfWholeWord (StringRef word) const noexcept
 
 int String::indexOfWholeWordIgnoreCase (StringRef word) const noexcept
 {
-    if (word.isNotEmpty())
+    if (word.!empty())
     {
         auto t = text;
         auto wordLen = word.length();
@@ -1092,10 +1092,10 @@ struct WildCardMatcher
     {
         for (;;)
         {
-            auto wc = wildcard.getAndAdvance();
+            auto wc = *wildcard++;
 
             if (wc == '*')
-                return wildcard.isEmpty() || matchesAnywhere (wildcard, test, ignoreCase);
+                return wildcard.empty() || matchesAnywhere (wildcard, test, ignoreCase);
 
             if (! characterMatches (wc, test.getAndAdvance(), ignoreCase))
                 return false;
@@ -1113,7 +1113,7 @@ struct WildCardMatcher
 
     static bool matchesAnywhere (const CharPointer wildcard, CharPointer test, const bool ignoreCase) noexcept
     {
-        for (; ! test.isEmpty(); ++test)
+        for (; ! test.empty(); ++test)
             if (matches (wildcard, test, ignoreCase))
                 return true;
 
@@ -1148,7 +1148,7 @@ String String::paddedLeft (const wchar padCharacter, int minimumLength) const
     auto extraChars = minimumLength;
     auto end = text;
 
-    while (! end.isEmpty())
+    while (! end.empty())
     {
         --extraChars;
         ++end;
@@ -1175,7 +1175,7 @@ String String::paddedRight (const wchar padCharacter, int minimumLength) const
     auto extraChars = minimumLength;
     CharPointerType end (text);
 
-    while (! end.isEmpty())
+    while (! end.empty())
     {
         --extraChars;
         ++end;
@@ -1218,7 +1218,7 @@ String String::replaceSection (int index, int numCharsToReplace, StringRef strin
 
     for (int i = 0; i < index; ++i)
     {
-        if (insertPoint.isEmpty())
+        if (insertPoint.empty())
         {
             // replacing beyond the end of the string?
             HAssertfalse;
@@ -1230,10 +1230,10 @@ String String::replaceSection (int index, int numCharsToReplace, StringRef strin
 
     auto startOfRemainder = insertPoint;
 
-    for (int i = 0; i < numCharsToReplace && ! startOfRemainder.isEmpty(); ++i)
+    for (int i = 0; i < numCharsToReplace && ! startOfRemainder.empty(); ++i)
         ++startOfRemainder;
 
-    if (insertPoint == text && startOfRemainder.isEmpty())
+    if (insertPoint == text && startOfRemainder.empty())
         return stringToInsert.text;
 
     auto initialBytes = (size_t) (((char*) insertPoint.getAddress()) - (char*) text.getAddress());
@@ -1294,33 +1294,33 @@ struct StringCreationHelper
     StringCreationHelper (size_t initialBytes)  : allocatedBytes (initialBytes)
     {
         result.preallocateBytes (allocatedBytes);
-        dest = result.getCharPointer();
+        dest = result.c_str();
     }
 
-    StringCreationHelper (const String::CharPointerType s)
+    StringCreationHelper (const char* s)
         : source (s), allocatedBytes (StringHolder::getAllocatedNumBytes (s))
     {
         result.preallocateBytes (allocatedBytes);
-        dest = result.getCharPointer();
+        dest = result.c_str();
     }
 
     void write (wchar c)
     {
-        bytesWritten += String::CharPointerType::getBytesRequiredFor (c);
+        bytesWritten += char*::getBytesRequiredFor (c);
 
         if (bytesWritten > allocatedBytes)
         {
             allocatedBytes += jmax ((size_t) 8, allocatedBytes / 16);
-            auto destOffset = (size_t) (((char*) dest.getAddress()) - (char*) result.getCharPointer().getAddress());
+            auto destOffset = (size_t) (((char*) dest.getAddress()) - (char*) result.c_str().getAddress());
             result.preallocateBytes (allocatedBytes);
-            dest = addBytesToPointer (result.getCharPointer().getAddress(), (int) destOffset);
+            dest = addBytesToPointer (result.c_str().getAddress(), (int) destOffset);
         }
 
         dest.write (c);
     }
 
     String result;
-    String::CharPointerType source { nullptr }, dest { nullptr };
+    char* source { nullptr }, dest { nullptr };
     size_t allocatedBytes, bytesWritten = 0;
 };
 
@@ -1394,7 +1394,7 @@ bool String::endsWithChar (const wchar character) const noexcept
 {
     HAssert (character != 0); // strings can't contain a null character!
 
-    if (text.isEmpty())
+    if (text.empty())
         return false;
 
     auto t = text.findTerminatingNull();
@@ -1475,10 +1475,10 @@ String String::toLowerCase() const
 //==============================================================================
 wchar String::getLastCharacter() const noexcept
 {
-    return isEmpty() ? wchar() : text [length() - 1];
+    return empty() ? wchar() : text [length() - 1];
 }
 
-String String::substring (int start, const int end) const
+String String::substr (int start, const int end) const
 {
     if (start < 0)
         start = 0;
@@ -1491,7 +1491,7 @@ String String::substring (int start, const int end) const
 
     while (i < start)
     {
-        if (t1.isEmpty())
+        if (t1.empty())
             return {};
 
         ++i;
@@ -1502,7 +1502,7 @@ String String::substring (int start, const int end) const
 
     while (i < end)
     {
-        if (t2.isEmpty())
+        if (t2.empty())
         {
             if (start == 0)
                 return *this;
@@ -1517,7 +1517,7 @@ String String::substring (int start, const int end) const
     return String (t1, t2);
 }
 
-String String::substring (int start) const
+String String::substr (int start) const
 {
     if (start <= 0)
         return *this;
@@ -1526,7 +1526,7 @@ String String::substring (int start) const
 
     while (--start >= 0)
     {
-        if (t.isEmpty())
+        if (t.empty())
             return {};
 
         ++t;
@@ -1552,7 +1552,7 @@ String String::fromFirstOccurrenceOf (StringRef sub, bool includeSubString, bool
     if (i < 0)
         return {};
 
-    return substring (includeSubString ? i : i + sub.length());
+    return substr (includeSubString ? i : i + sub.length());
 }
 
 String String::fromLastOccurrenceOf (StringRef sub, bool includeSubString, bool ignoreCase) const
@@ -1562,7 +1562,7 @@ String String::fromLastOccurrenceOf (StringRef sub, bool includeSubString, bool 
     if (i < 0)
         return *this;
 
-    return substring (includeSubString ? i : i + sub.length());
+    return substr (includeSubString ? i : i + sub.length());
 }
 
 String String::upToFirstOccurrenceOf (StringRef sub, bool includeSubString, bool ignoreCase) const
@@ -1572,7 +1572,7 @@ String String::upToFirstOccurrenceOf (StringRef sub, bool includeSubString, bool
     if (i < 0)
         return *this;
 
-    return substring (0, includeSubString ? i + sub.length() : i);
+    return substr (0, includeSubString ? i + sub.length() : i);
 }
 
 String String::upToLastOccurrenceOf (StringRef sub, bool includeSubString, bool ignoreCase) const
@@ -1582,7 +1582,7 @@ String String::upToLastOccurrenceOf (StringRef sub, bool includeSubString, bool 
     if (i < 0)
         return *this;
 
-    return substring (0, includeSubString ? i + sub.length() : i);
+    return substr (0, includeSubString ? i + sub.length() : i);
 }
 
 static bool isQuoteCharacter (wchar c) noexcept
@@ -1601,12 +1601,12 @@ String String::unquoted() const
         return *this;
 
     auto len = length();
-    return substring (1, len - (isQuoteCharacter (text[len - 1]) ? 1 : 0));
+    return substr (1, len - (isQuoteCharacter (text[len - 1]) ? 1 : 0));
 }
 
 String String::quoted (wchar quoteCharacter) const
 {
-    if (isEmpty())
+    if (empty())
         return charToString (quoteCharacter) + quoteCharacter;
 
     String t (*this);
@@ -1621,8 +1621,8 @@ String String::quoted (wchar quoteCharacter) const
 }
 
 //==============================================================================
-static String::CharPointerType findTrimmedEnd (const String::CharPointerType start,
-                                               String::CharPointerType end)
+static char* findTrimmedEnd (const char* start,
+                                               char* end)
 {
     while (end > start)
     {
@@ -1638,7 +1638,7 @@ static String::CharPointerType findTrimmedEnd (const String::CharPointerType sta
 
 String String::trim() const
 {
-    if (isNotEmpty())
+    if (!empty())
     {
         auto start = text.findEndOfWhitespace();
         auto end = start.findTerminatingNull();
@@ -1656,7 +1656,7 @@ String String::trim() const
 
 String String::trimStart() const
 {
-    if (isNotEmpty())
+    if (!empty())
     {
         auto t = text.findEndOfWhitespace();
 
@@ -1669,7 +1669,7 @@ String String::trimStart() const
 
 String String::trimEnd() const
 {
-    if (isNotEmpty())
+    if (!empty())
     {
         auto end = text.findTerminatingNull();
         auto trimmedEnd = findTrimmedEnd (text, end);
@@ -1693,7 +1693,7 @@ String String::trimCharactersAtStart (StringRef charactersToTrim) const
 
 String String::trimCharactersAtEnd (StringRef charactersToTrim) const
 {
-    if (isNotEmpty())
+    if (!empty())
     {
         auto end = text.findTerminatingNull();
         auto trimmedEnd = end;
@@ -1717,7 +1717,7 @@ String String::trimCharactersAtEnd (StringRef charactersToTrim) const
 //==============================================================================
 String String::retainCharacters (StringRef charactersToRetain) const
 {
-    if (isEmpty())
+    if (empty())
         return {};
 
     StringCreationHelper builder (text);
@@ -1739,7 +1739,7 @@ String String::retainCharacters (StringRef charactersToRetain) const
 
 String String::removeCharacters (StringRef charactersToRemove) const
 {
-    if (isEmpty())
+    if (empty())
         return {};
 
     StringCreationHelper builder (text);
@@ -1760,7 +1760,7 @@ String String::removeCharacters (StringRef charactersToRemove) const
 
 String String::initialSectionContainingOnly (StringRef permittedCharacters) const
 {
-    for (auto t = text; ! t.isEmpty(); ++t)
+    for (auto t = text; ! t.empty(); ++t)
         if (permittedCharacters.text.indexOf (*t) < 0)
             return String (text, t);
 
@@ -1769,7 +1769,7 @@ String String::initialSectionContainingOnly (StringRef permittedCharacters) cons
 
 String String::initialSectionNotContaining (StringRef charactersToStopAt) const
 {
-    for (auto t = text; ! t.isEmpty(); ++t)
+    for (auto t = text; ! t.empty(); ++t)
         if (charactersToStopAt.text.indexOf (*t) >= 0)
             return String (text, t);
 
@@ -1778,7 +1778,7 @@ String String::initialSectionNotContaining (StringRef charactersToStopAt) const
 
 bool String::containsOnly (StringRef chars) const noexcept
 {
-    for (auto t = text; ! t.isEmpty();)
+    for (auto t = text; ! t.empty();)
         if (chars.text.indexOf (t.getAndAdvance()) < 0)
             return false;
 
@@ -1787,7 +1787,7 @@ bool String::containsOnly (StringRef chars) const noexcept
 
 bool String::containsAnyOf (StringRef chars) const noexcept
 {
-    for (auto t = text; ! t.isEmpty();)
+    for (auto t = text; ! t.empty();)
         if (chars.text.indexOf (t.getAndAdvance()) >= 0)
             return true;
 
@@ -1796,7 +1796,7 @@ bool String::containsAnyOf (StringRef chars) const noexcept
 
 bool String::containsNonWhitespaceChars() const noexcept
 {
-    for (auto t = text; ! t.isEmpty(); ++t)
+    for (auto t = text; ! t.empty(); ++t)
         if (! t.isWhitespace())
             return true;
 
@@ -1876,7 +1876,7 @@ static const char hexDigits[] = "0123456789abcdef";
 template <typename Type>
 static String hexToString (Type v)
 {
-    String::CharPointerType::CharType buffer[32];
+    char*::CharType buffer[32];
     auto* end = buffer + numElementsInArray (buffer) - 1;
     auto* t = end;
     *t = 0;
@@ -1888,8 +1888,8 @@ static String hexToString (Type v)
 
     } while (v != 0);
 
-    return String (String::CharPointerType (t),
-                   String::CharPointerType (end));
+    return String (char* (t),
+                   char* (end));
 }
 
 String String::createHex (uint8 n)    { return hexToString (n); }
@@ -2001,15 +2001,15 @@ struct StringEncodingConverter
 
         using DestChar = typename CharPointerType_Dest::CharType;
 
-        if (source.isEmpty())
+        if (source.empty())
             return CharPointerType_Dest (reinterpret_cast<const DestChar*> (&emptyChar));
 
-        CharPointerType_Src text (source.getCharPointer());
+        CharPointerType_Src text (source.c_str());
         auto extraBytesNeeded = CharPointerType_Dest::getBytesRequiredFor (text) + sizeof (typename CharPointerType_Dest::CharType);
         auto endOffset = (text.sizeInBytes() + 3) & ~3u; // the new string must be word-aligned or many Windows
                                                          // functions will fail to read it correctly!
         source.preallocateBytes (endOffset + extraBytesNeeded);
-        text = source.getCharPointer();
+        text = source.c_str();
 
         void* const newSpace = addBytesToPointer (text.getAddress(), (int) endOffset);
         const CharPointerType_Dest extraSpace (static_cast<DestChar*> (newSpace));
@@ -2027,19 +2027,19 @@ struct StringEncodingConverter
 template <>
 struct StringEncodingConverter<CharPointer_UTF8, CharPointer_UTF8>
 {
-    static CharPointer_UTF8 convert (const String& source) noexcept   { return CharPointer_UTF8 (reinterpret_cast<CharPointer_UTF8::CharType*> (source.getCharPointer().getAddress())); }
+    static CharPointer_UTF8 convert (const String& source) noexcept   { return CharPointer_UTF8 (reinterpret_cast<CharPointer_UTF8::CharType*> (source.c_str().getAddress())); }
 };
 
 template <>
 struct StringEncodingConverter<CharPointer_UTF16, CharPointer_UTF16>
 {
-    static CharPointer_UTF16 convert (const String& source) noexcept  { return CharPointer_UTF16 (reinterpret_cast<CharPointer_UTF16::CharType*> (source.getCharPointer().getAddress())); }
+    static CharPointer_UTF16 convert (const String& source) noexcept  { return CharPointer_UTF16 (reinterpret_cast<CharPointer_UTF16::CharType*> (source.c_str().getAddress())); }
 };
 
 template <>
 struct StringEncodingConverter<CharPointer_UTF32, CharPointer_UTF32>
 {
-    static CharPointer_UTF32 convert (const String& source) noexcept  { return CharPointer_UTF32 (reinterpret_cast<CharPointer_UTF32::CharType*> (source.getCharPointer().getAddress())); }
+    static CharPointer_UTF32 convert (const String& source) noexcept  { return CharPointer_UTF32 (reinterpret_cast<CharPointer_UTF32::CharType*> (source.c_str().getAddress())); }
 };
 
 CharPointer_UTF8  String::toUTF8()  const { return StringEncodingConverter<CharPointerType, CharPointer_UTF8 >::convert (*this); }
@@ -2119,7 +2119,7 @@ String String::fromUTF8 (const char* const buffer, int bufferSizeBytes)
 #endif
 
 //==============================================================================
-StringRef::StringRef() noexcept  : text ((const String::CharPointerType::CharType*) "\0\0\0")
+StringRef::StringRef() noexcept  : text ((const char*::CharType*) "\0\0\0")
 {
 }
 
@@ -2131,7 +2131,7 @@ StringRef::StringRef (const char* stringLiteral) noexcept
    #endif
 {
    #if HSTRING_UTF_TYPE != 8
-    text = stringCopy.getCharPointer();
+    text = stringCopy.c_str();
    #endif
 
     HAssert (stringLiteral != nullptr); // This must be a valid string literal, not a null pointer!!
@@ -2154,19 +2154,19 @@ StringRef::StringRef (const char* stringLiteral) noexcept
    #endif
 }
 
-StringRef::StringRef (String::CharPointerType stringLiteral) noexcept  : text (stringLiteral)
+StringRef::StringRef (char* stringLiteral) noexcept  : text (stringLiteral)
 {
     HAssert (stringLiteral.getAddress() != nullptr); // This must be a valid string literal, not a null pointer!!
 }
 
-StringRef::StringRef (const String& string) noexcept   : text (string.getCharPointer()) {}
+StringRef::StringRef (const String& string) noexcept   : text (string.c_str()) {}
 StringRef::StringRef (const std::string& string)       : StringRef (string.c_str()) {}
 
 //==============================================================================
 
 static String reduceLengthOfFloatString (const String& input)
 {
-    const auto start = input.getCharPointer();
+    const auto start = input.c_str();
     const auto end = start + (int) input.length();
     auto trimStart = end;
     auto trimEnd = trimStart;
@@ -2348,8 +2348,8 @@ public:
             expect (String().length() == 0);
             expect (String() == String());
             String s1, s2 ("abcd");
-            expect (s1.isEmpty() && ! s1.isNotEmpty());
-            expect (s2.isNotEmpty() && ! s2.isEmpty());
+            expect (s1.empty() && ! s1.!empty());
+            expect (s2.!empty() && ! s2.empty());
             expect (s2.length() == 4);
             s1 = "abcd";
             expect (s2 == s1 && s1 == s2);
@@ -2392,14 +2392,14 @@ public:
             expect (String("10").compareNatural ("2") > 0);
             expect (String("Abc 10").compareNatural ("aBC 2") > 0);
             expect (String("Abc 1").compareNatural ("aBC 2") < 0);
-            expect (s.substring (2, 3) == String::charToString (s[2]));
-            expect (s.substring (0, 1) == String::charToString (s[0]));
+            expect (s.substr (2, 3) == String::charToString (s[2]));
+            expect (s.substr (0, 1) == String::charToString (s[0]));
             expect (s.getLastCharacter() == s [s.length() - 1]);
             expect (String::charToString (s.getLastCharacter()) == s.getLastCharacters (1));
-            expect (s.substring (0, 3) == L"012");
-            expect (s.substring (0, 100) == s);
-            expect (s.substring (-1, 100) == s);
-            expect (s.substring (3) == "345678");
+            expect (s.substr (0, 3) == L"012");
+            expect (s.substr (0, 100) == s);
+            expect (s.substr (-1, 100) == s);
+            expect (s.substr (3) == "345678");
             expect (s.indexOf (String (L"45")) == 4);
             expect (String ("444445").indexOf ("45") == 4);
             expect (String ("444445").lastIndexOfChar ('4') == 4);
@@ -2410,12 +2410,12 @@ public:
             expect (s.indexOfChar (L'4') == 4);
             expect (s + s == "012345678012345678");
             expect (s.startsWith (s));
-            expect (s.startsWith (s.substring (0, 4)));
+            expect (s.startsWith (s.substr (0, 4)));
             expect (s.startsWith (s.dropLastCharacters (4)));
-            expect (s.endsWith (s.substring (5)));
+            expect (s.endsWith (s.substr (5)));
             expect (s.endsWith (s));
-            expect (s.contains (s.substring (3, 6)));
-            expect (s.contains (s.substring (3)));
+            expect (s.contains (s.substr (3, 6)));
+            expect (s.contains (s.substr (3)));
             expect (s.startsWithChar (s[0]));
             expect (s.endsWithChar (s.getLastCharacter()));
             expect (s [s.length()] == 0);
@@ -2583,7 +2583,7 @@ public:
             s3 = "abcdeFGHIJ";
             expect (s3.equalsIgnoreCase ("ABCdeFGhiJ"));
             expect (s3.compareIgnoreCase (L"ABCdeFGhiJ") == 0);
-            expect (s3.containsIgnoreCase (s3.substring (3)));
+            expect (s3.containsIgnoreCase (s3.substr (3)));
             expect (s3.indexOfAnyOf ("xyzf", 2, true) == 5);
             expect (s3.indexOfAnyOf (String (L"xyzf"), 2, false) == -1);
             expect (s3.indexOfAnyOf ("xyzF", 2, false) == 5);
@@ -2645,9 +2645,9 @@ public:
             expect (String ("xx?y").matchesWildcard ("xx??", true));
 
             expectEquals (s5.fromFirstOccurrenceOf (String(), true, false), s5);
-            expectEquals (s5.fromFirstOccurrenceOf ("xword2", true, false), s5.substring (100));
-            expectEquals (s5.fromFirstOccurrenceOf (String (L"word2"), true, false), s5.substring (5));
-            expectEquals (s5.fromFirstOccurrenceOf ("Word2", true, true), s5.substring (5));
+            expectEquals (s5.fromFirstOccurrenceOf ("xword2", true, false), s5.substr (100));
+            expectEquals (s5.fromFirstOccurrenceOf (String (L"word2"), true, false), s5.substr (5));
+            expectEquals (s5.fromFirstOccurrenceOf ("Word2", true, true), s5.substr (5));
             expectEquals (s5.fromFirstOccurrenceOf ("word2", false, false), s5.getLastCharacters (6));
             expectEquals (s5.fromFirstOccurrenceOf ("Word2", false, true), s5.getLastCharacters (6));
 
@@ -2658,12 +2658,12 @@ public:
             expectEquals (s5.fromLastOccurrenceOf ("word", false, false), s5.getLastCharacters (1));
             expectEquals (s5.fromLastOccurrenceOf ("worD", false, true), s5.getLastCharacters (1));
 
-            expect (s5.upToFirstOccurrenceOf (String(), true, false).isEmpty());
+            expect (s5.upToFirstOccurrenceOf (String(), true, false).empty());
             expectEquals (s5.upToFirstOccurrenceOf ("word4", true, false), s5);
-            expectEquals (s5.upToFirstOccurrenceOf ("word2", true, false), s5.substring (0, 10));
-            expectEquals (s5.upToFirstOccurrenceOf ("Word2", true, true), s5.substring (0, 10));
-            expectEquals (s5.upToFirstOccurrenceOf ("word2", false, false), s5.substring (0, 5));
-            expectEquals (s5.upToFirstOccurrenceOf ("Word2", false, true), s5.substring (0, 5));
+            expectEquals (s5.upToFirstOccurrenceOf ("word2", true, false), s5.substr (0, 10));
+            expectEquals (s5.upToFirstOccurrenceOf ("Word2", true, true), s5.substr (0, 10));
+            expectEquals (s5.upToFirstOccurrenceOf ("word2", false, false), s5.substr (0, 5));
+            expectEquals (s5.upToFirstOccurrenceOf ("Word2", false, true), s5.substr (0, 5));
 
             expectEquals (s5.upToLastOccurrenceOf (String(), true, false), s5);
             expectEquals (s5.upToLastOccurrenceOf ("zword", true, false), s5);
@@ -2683,7 +2683,7 @@ public:
             expect (s5.replaceCharacters ("wo", "xy") != s5);
             expectEquals (s5.replaceCharacters ("wo", "xy").replaceCharacters ("xy", "wo"), s5);
             expectEquals (s5.retainCharacters ("1wordxya"), String ("wordwordword"));
-            expect (s5.retainCharacters (String()).isEmpty());
+            expect (s5.retainCharacters (String()).empty());
             expect (s5.removeCharacters ("1wordxya") == " 2 3");
             expectEquals (s5.removeCharacters (String()), s5);
             expect (s5.initialSectionContainingOnly ("word") == L"word");

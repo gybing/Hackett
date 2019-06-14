@@ -54,7 +54,7 @@ StringArray SystemStats::getDeviceIdentifiers()
             ids.add (address.toString());
     }
 
-    HAssert (! ids.isEmpty()); // Failed to create any IDs!
+    HAssert (! ids.empty()); // Failed to create any IDs!
     return ids;
 }
 

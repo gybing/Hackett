@@ -59,7 +59,7 @@ void DeletedAtShutdown::deleteAll()
 
     // if this fails, then it's likely that some new DeletedAtShutdown objects were
     // created while executing the destructors of the other ones.
-    HAssert (getDeletedAtShutdownObjects().isEmpty());
+    HAssert (getDeletedAtShutdownObjects().empty());
 
     getDeletedAtShutdownObjects().clear(); // just to make sure the array doesn't have any memory still allocated
 }

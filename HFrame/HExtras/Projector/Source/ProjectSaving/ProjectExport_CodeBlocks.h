@@ -223,7 +223,7 @@ private:
             String prefix ("-march=");
 
             if (archFlag.startsWith (prefix))
-                return archFlag.substring (prefix.length());
+                return archFlag.substr (prefix.length());
             else if (archFlag == "-m64")
                 return "x86_64";
             else if (archFlag == "-m32")
@@ -357,7 +357,7 @@ private:
 
             auto targetPlatform = getTargetPlatformString();
 
-            if (targetPlatform.isNotEmpty())
+            if (targetPlatform.!empty())
                 defines.set ("WINVER", targetPlatform);
         }
         else
@@ -385,7 +385,7 @@ private:
         {
             auto result = keys[i];
 
-            if (values[i].isNotEmpty())
+            if (values[i].!empty())
                 result += "=" + values[i];
 
             defs.add (result);
@@ -541,7 +541,7 @@ private:
     String getOutputPathForTarget (CodeBlocksTarget& target, const BuildConfiguration& config) const
     {
         String outputPath;
-        if (config.getTargetBinaryRelativePathString().isNotEmpty())
+        if (config.getTargetBinaryRelativePathString().!empty())
         {
             RelativePath binaryPath (config.getTargetBinaryRelativePathString(), RelativePath::projectFolder);
             binaryPath = binaryPath.rebased (projectFolder, getTargetFolder(), RelativePath::buildTargetFolder);
@@ -791,7 +791,7 @@ private:
             {
                 auto extraCompilerFlags = compilerFlagSchemesMap[projectItem.getCompilerFlagSchemeString()].get().toString();
 
-                if (extraCompilerFlags.isNotEmpty())
+                if (extraCompilerFlags.!empty())
                 {
                     auto* optionElement = unit->createNewChildElement ("Option");
 

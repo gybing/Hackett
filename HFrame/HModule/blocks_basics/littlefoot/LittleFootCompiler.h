@@ -122,14 +122,14 @@ private:
     //==============================================================================
     struct CodeLocation
     {
-        CodeLocation (const String& code, const File& srcFile) noexcept : program (code), location (program.getCharPointer()), sourceFile (srcFile) {}
+        CodeLocation (const String& code, const File& srcFile) noexcept : program (code), location (program.c_str()), sourceFile (srcFile) {}
         CodeLocation (const CodeLocation& other) = default;
 
         [[noreturn]] void throwError (const String& message) const
         {
             int col = 1, line = 1;
 
-            for (auto i = program.getCharPointer(); i < location && ! i.isEmpty(); ++i)
+            for (auto i = program.c_str(); i < location && ! i.empty(); ++i)
             {
                 ++col;
                 if (*i == '\n')  { col = 1; ++line; }
@@ -140,14 +140,14 @@ private:
         }
 
         String program;
-        String::CharPointerType location;
+        char* location;
         File sourceFile;
     };
 
     //==============================================================================
     struct TokenIterator
     {
-        TokenIterator (const String& code) : location (code, {}), p (code.getCharPointer()) { skip(); }
+        TokenIterator (const String& code) : location (code, {}), p (code.c_str()) { skip(); }
 
         TokenType skip()
         {
@@ -179,7 +179,7 @@ private:
         var currentValue;
 
     protected:
-        String::CharPointerType p;
+        char* p;
 
     private:
         static bool isIdentifierStart (wchar c) noexcept   { return CharacterFunctions::isLetter (c)        || c == '_'; }
@@ -214,7 +214,7 @@ private:
             #define LITTLEFOOT_COMPARE_OPERATOR(name, str) if (matchToken (Token::name, sizeof (str) - 1)) return Token::name;
             LITTLEFOOT_OPERATORS (LITTLEFOOT_COMPARE_OPERATOR)
 
-            if (! p.isEmpty())
+            if (! p.empty())
                 location.throwError ("Unexpected character '" + String::charToString (*p) + "' in source");
 
             return Token::eof;
@@ -242,7 +242,7 @@ private:
                     {
                         location.location = p;
                         p = CharacterFunctions::find (p + 2, CharPointer_ASCII ("*/"));
-                        if (p.isEmpty()) location.throwError ("Unterminated '/*' comment");
+                        if (p.empty()) location.throwError ("Unterminated '/*' comment");
                         p += 2; continue;
                     }
                 }
@@ -483,7 +483,7 @@ private:
             auto pToRestore = p;
 
             location = CodeLocation (codeToInclude, fileToInclude);
-            p = codeToInclude.getCharPointer();
+            p = codeToInclude.c_str();
             skip();
 
             parseCode();
@@ -496,7 +496,7 @@ private:
 
         File resolveIncludePath (String include)
         {
-            if (include.substring (include.length() - 11) != ".littlefoot")
+            if (include.substr (include.length() - 11) != ".littlefoot")
             {
                 location.throwError ("File extension must be .littlefoot");
                 return {};
@@ -1430,7 +1430,7 @@ private:
 
         bool alwaysReturns() const override
         {
-            return ! statements.isEmpty() && statements.getLast()->alwaysReturns();
+            return ! statements.empty() && statements.getLast()->alwaysReturns();
         }
 
         void visitSubStatements (Statement::Visitor& visit) const override
@@ -1502,7 +1502,7 @@ private:
                 if (array.name == name)
                     return start;
 
-                if (array.name.isNotEmpty())
+                if (array.name.!empty())
                     start += getArraySizeInBytes (array);
             }
 
@@ -1554,7 +1554,7 @@ private:
 
         void addVariable (Variable v, const CodeLocation& locationForError)
         {
-            if (v.name.isNotEmpty() && (indexOf (variables, v.name) >= 0 || indexOf (constants, v.name) >= 0 || indexOf (arrays, v.name) >= 0))
+            if (v.name.!empty() && (indexOf (variables, v.name) >= 0 || indexOf (constants, v.name) >= 0 || indexOf (arrays, v.name) >= 0))
                 locationForError.throwError ("Variable '" + v.name + "' already exists");
 
             (v.numElements == 0 ? (v.isConst ? constants : variables) : arrays).add (v);
@@ -2375,7 +2375,7 @@ private:
     static Array<Type> getArgTypesFromFunctionName (const char* nameAndTypes)
     {
         Array<Type> types;
-        auto args = String (nameAndTypes).fromFirstOccurrenceOf ("/", false, false).substring (1);
+        auto args = String (nameAndTypes).fromFirstOccurrenceOf ("/", false, false).substr (1);
 
         for (int i = 0; i < args.length(); ++i)
             types.add (static_cast<Type> (args[i]));

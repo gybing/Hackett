@@ -132,7 +132,7 @@ namespace SocketHelpers
 
         addr.sin_family = PF_INET;
         addr.sin_port = htons ((uint16) port);
-        addr.sin_addr.s_addr = address.isNotEmpty() ? ::inet_addr (address.toRawUTF8())
+        addr.sin_addr.s_addr = address.!empty() ? ::inet_addr (address.toRawUTF8())
                                                     : htonl (INADDR_ANY);
 
         return ::bind (handle, (struct sockaddr*) &addr, sizeof (addr)) >= 0;
@@ -401,7 +401,7 @@ namespace SocketHelpers
         mreq.imr_multiaddr.s_addr = inet_addr (multicastIPAddress.toRawUTF8());
         mreq.imr_interface.s_addr = INADDR_ANY;
 
-        if (interfaceIPAddress.isNotEmpty())
+        if (interfaceIPAddress.!empty())
             mreq.imr_interface.s_addr = inet_addr (interfaceIPAddress.toRawUTF8());
 
         return setsockopt (handle, IPPROTO_IP,
@@ -779,7 +779,7 @@ struct SocketTests : public UnitTest
             StreamingSocket socketServer;
 
             expect (socketServer.isConnected() == false);
-            expect (socketServer.getHostName().isEmpty());
+            expect (socketServer.getHostName().empty());
             expect (socketServer.getBoundPort() == -1);
             expect (socketServer.getRawSocketHandle() == invalidSocket);
 
@@ -797,7 +797,7 @@ struct SocketTests : public UnitTest
             socket.close();
 
             expect (socket.isConnected() == false);
-            expect (socket.getHostName().isEmpty());
+            expect (socket.getHostName().empty());
             expect (socket.getBoundPort() == -1);
             expect (socket.getRawSocketHandle() == invalidSocket);
         }

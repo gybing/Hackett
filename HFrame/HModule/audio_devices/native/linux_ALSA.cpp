@@ -75,7 +75,7 @@ static void getDeviceProperties (const String& deviceID,
 {
     minChansOut = maxChansOut = minChansIn = maxChansIn = 0;
 
-    if (deviceID.isEmpty())
+    if (deviceID.empty())
         return;
 
     HALSA_LOG ("getDeviceProperties(" << deviceID.toUTF8().getAddress() << ")");
@@ -521,11 +521,11 @@ public:
         // of drivers where doing it in the reverse order mysteriously fails.. If this
         // order also causes problems, let us know and we'll see if we can find a compromise!
 
-        if (inputChannelDataForCallback.size() > 0 && inputId.isNotEmpty())
+        if (inputChannelDataForCallback.size() > 0 && inputId.!empty())
         {
             inputDevice.reset (new ALSADevice (inputId, true));
 
-            if (inputDevice->error.isNotEmpty())
+            if (inputDevice->error.!empty())
             {
                 error = inputDevice->error;
                 inputDevice.reset();
@@ -558,11 +558,11 @@ public:
             }
         }
 
-        if (outputChannelDataForCallback.size() > 0 && outputId.isNotEmpty())
+        if (outputChannelDataForCallback.size() > 0 && outputId.!empty())
         {
             outputDevice.reset (new ALSADevice (outputId, false));
 
-            if (outputDevice->error.isNotEmpty())
+            if (outputDevice->error.!empty())
             {
                 error = outputDevice->error;
                 outputDevice.reset();
@@ -886,7 +886,7 @@ public:
         internal.open (inputChannels, outputChannels,
                        sampleRate, bufferSizeSamples);
 
-        isOpen_ = internal.error.isEmpty();
+        isOpen_ = internal.error.empty();
         return internal.error;
     }
 
@@ -898,7 +898,7 @@ public:
     }
 
     bool isOpen() override                           { return isOpen_; }
-    bool isPlaying() override                        { return isStarted && internal.error.isEmpty(); }
+    bool isPlaying() override                        { return isStarted && internal.error.empty(); }
     String getLastError() override                   { return internal.error; }
 
     int getCurrentBufferSizeSamples() override       { return internal.bufferSize; }
@@ -1048,7 +1048,7 @@ private:
         unsigned int minChansIn = 0, maxChansIn = 0;
         Array<double> rates;
 
-        bool isInput = inputName.isNotEmpty(), isOutput = outputName.isNotEmpty();
+        bool isInput = inputName.!empty(), isOutput = outputName.!empty();
         getDeviceProperties (id, minChansOut, maxChansOut, minChansIn, maxChansIn, rates, isOutput, isInput);
 
         isInput  = maxChansIn > 0;
@@ -1098,12 +1098,12 @@ private:
                 {
                     String cardId (snd_ctl_card_info_get_id (info));
 
-                    if (cardId.removeCharacters ("0123456789").isEmpty())
+                    if (cardId.removeCharacters ("0123456789").empty())
                         cardId = String (cardNum);
 
                     String cardName = snd_ctl_card_info_get_name (info);
 
-                    if (cardName.isEmpty())
+                    if (cardName.empty())
                         cardName = cardId;
 
                     int device = -1;
@@ -1192,14 +1192,14 @@ private:
                 String ss = id.fromFirstOccurrenceOf ("=", false, false)
                               .upToFirstOccurrenceOf (",", false, false);
 
-                if (id.isEmpty()
+                if (id.empty()
                      || id.startsWith ("default:") || id.startsWith ("sysdefault:")
                      || id.startsWith ("plughw:") || id == "null")
                     continue;
 
                 String name (description.replace ("\n", "; "));
 
-                if (name.isEmpty())
+                if (name.empty())
                     name = id;
 
                 bool isOutput = (ioid != "Input");

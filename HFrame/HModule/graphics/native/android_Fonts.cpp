@@ -222,7 +222,7 @@ public:
     float getStringWidth (const String& text) override
     {
         JNIEnv* env = getEnv();
-        auto numChars = CharPointer_UTF16::getBytesRequiredFor (text.getCharPointer());
+        auto numChars = CharPointer_UTF16::getBytesRequiredFor (text.c_str());
         jfloatArray widths = env->NewFloatArray ((int) numChars);
 
         const int numDone = paint.callIntMethod (AndroidPaint.getTextWidths, javaString (text).get(), widths);
@@ -242,7 +242,7 @@ public:
     void getGlyphPositions (const String& text, Array<int>& glyphs, Array<float>& xOffsets) override
     {
         JNIEnv* env = getEnv();
-        auto numChars = CharPointer_UTF16::getBytesRequiredFor (text.getCharPointer());
+        auto numChars = CharPointer_UTF16::getBytesRequiredFor (text.c_str());
         jfloatArray widths = env->NewFloatArray ((int) numChars);
 
         const int numDone = paint.callIntMethod (AndroidPaint.getTextWidths, javaString (text).get(), widths);
@@ -251,7 +251,7 @@ public:
         env->GetFloatArrayRegion (widths, 0, numDone, localWidths);
         env->DeleteLocalRef (widths);
 
-        auto s = text.getCharPointer();
+        auto s = text.c_str();
 
         xOffsets.add (0);
         float x = 0;
@@ -261,7 +261,7 @@ public:
             const float local = localWidths[i];
 
             // Android uses jchar (UTF-16) characters
-            jchar ch = (jchar) s.getAndAdvance();
+            jchar ch = (jchar) *s++;
 
             // Android has no proper glyph support, so we have to do
             // a hacky workaround for ligature detection
@@ -367,7 +367,7 @@ public:
 
         EdgeTable* et = nullptr;
 
-        if (! bounds.isEmpty())
+        if (! bounds.empty())
         {
             et = new EdgeTable (bounds);
 
@@ -426,7 +426,7 @@ private:
     {
         String path ("/system/fonts/" + family);
 
-        if (style.isNotEmpty())
+        if (style.!empty())
             path << '-' << style;
 
         return File (path + ".ttf");

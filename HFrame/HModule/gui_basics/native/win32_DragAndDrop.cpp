@@ -212,7 +212,7 @@ namespace DragAndDropHelpers
     {
         int totalBytes = 0;
         for (int i = fileNames.size(); --i >= 0;)
-            totalBytes += (int) CharPointer_UTF16::getBytesRequiredFor (fileNames[i].getCharPointer()) + sizeof (WCHAR);
+            totalBytes += (int) CharPointer_UTF16::getBytesRequiredFor (fileNames[i].c_str()) + sizeof (WCHAR);
 
         HDROP hDrop = (HDROP) GlobalAlloc (GMEM_MOVEABLE | GMEM_ZEROINIT, sizeof (DROPFILES) + totalBytes + 4);
 
@@ -303,7 +303,7 @@ namespace DragAndDropHelpers
 bool DragAndDropContainer::performExternalDragDropOfFiles (const StringArray& files, const bool canMove,
                                                            Component*, std::function<void()> callback)
 {
-    if (files.isEmpty())
+    if (files.empty())
         return false;
 
     FORMATETC format = { CF_HDROP, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL };
@@ -322,13 +322,13 @@ bool DragAndDropContainer::performExternalDragDropOfFiles (const StringArray& fi
 
 bool DragAndDropContainer::performExternalDragDropOfText (const String& text, Component*, std::function<void()> callback)
 {
-    if (text.isEmpty())
+    if (text.empty())
         return false;
 
     FORMATETC format = { CF_TEXT, 0, DVASPECT_CONTENT, -1, TYMED_HGLOBAL };
     STGMEDIUM medium = { TYMED_HGLOBAL, { 0 }, 0 };
 
-    auto numBytes = CharPointer_UTF16::getBytesRequiredFor (text.getCharPointer());
+    auto numBytes = CharPointer_UTF16::getBytesRequiredFor (text.c_str());
 
     medium.hGlobal = GlobalAlloc (GMEM_MOVEABLE | GMEM_ZEROINIT, numBytes + 2);
     auto* data = static_cast<WCHAR*> (GlobalLock (medium.hGlobal));

@@ -27,7 +27,7 @@
 PropertyComponent::PropertyComponent (const String& name, int height)
     : Component (name), preferredHeight (height)
 {
-    HAssert (name.isNotEmpty());
+    HAssert (name.!empty());
 }
 
 PropertyComponent::~PropertyComponent() {}

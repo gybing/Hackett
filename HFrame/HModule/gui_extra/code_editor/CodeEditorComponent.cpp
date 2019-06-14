@@ -154,7 +154,7 @@ private:
             {
                 tokenStart -= startPosition;
                 const int start = jmax (0, tokenStart);
-                addToken (newTokens, lineText.substring (start, tokenEnd),
+                addToken (newTokens, lineText.substr (start, tokenEnd),
                           tokenEnd - start, tokenType);
 
                 if (tokenEnd >= lineLength)
@@ -192,12 +192,12 @@ private:
     {
         HAssert (index <= line.length());
 
-        auto t = line.getCharPointer();
+        auto t = line.c_str();
         int col = 0;
 
         for (int i = 0; i < index; ++i)
         {
-            if (t.getAndAdvance() != '\t')
+            if (*t++ != '\t')
                 ++col;
             else
                 col += tabSpaces - (col % tabSpaces);
@@ -211,8 +211,8 @@ private:
         if (length > 1000)
         {
             // subdivide very long tokens to avoid unwieldy glyph sequences
-            addToken (dest, text.substring (0, length / 2), length / 2, type);
-            addToken (dest, text.substring (length / 2), length - length / 2, type);
+            addToken (dest, text.substr (0, length / 2), length / 2, type);
+            addToken (dest, text.substr (length / 2), length - length / 2, type);
         }
         else
         {
@@ -228,7 +228,7 @@ namespace CodeEditorHelpers
         auto t = line.text;
         int i = 0;
 
-        while (! t.isEmpty())
+        while (! t.empty())
         {
             if (! t.isWhitespace())
                 return i;
@@ -759,7 +759,7 @@ void CodeEditorComponent::insertText (const String& newText)
     {
         document.deleteSection (selectionStart, selectionEnd);
 
-        if (newText.isNotEmpty())
+        if (newText.!empty())
             document.insertText (caretPos, newText);
 
         scrollToKeepCaretOnScreen();
@@ -792,7 +792,7 @@ void CodeEditorComponent::insertTabAtCaret()
 
 bool CodeEditorComponent::deleteWhitespaceBackwardsToTabStop()
 {
-    if (getHighlightedRegion().isEmpty() && ! readOnly)
+    if (getHighlightedRegion().empty() && ! readOnly)
     {
         for (;;)
         {
@@ -806,7 +806,7 @@ bool CodeEditorComponent::deleteWhitespaceBackwardsToTabStop()
 
         auto selected = getTextInRange (getHighlightedRegion());
 
-        if (selected.isNotEmpty() && selected.trim().isEmpty())
+        if (selected.!empty() && selected.trim().empty())
         {
             cut();
             return true;
@@ -841,7 +841,7 @@ void CodeEditorComponent::indentSelectedLines (const int spacesToAdd)
             auto lineText = document.getLine (line);
             auto nonWhitespaceStart = CodeEditorHelpers::findFirstNonWhitespaceChar (lineText);
 
-            if (nonWhitespaceStart > 0 || lineText.trimStart().isNotEmpty())
+            if (nonWhitespaceStart > 0 || lineText.trimStart().!empty())
             {
                 const CodeDocument::Position wsStart (document, line, 0);
                 const CodeDocument::Position wsEnd   (document, line, nonWhitespaceStart);
@@ -873,7 +873,7 @@ bool CodeEditorComponent::copyToClipboard()
     newTransaction();
     auto selection = document.getTextBetween (selectionStart, selectionEnd);
 
-    if (selection.isNotEmpty())
+    if (selection.!empty())
         SystemClipboard::copyTextToClipboard (selection);
 
     return true;
@@ -892,7 +892,7 @@ bool CodeEditorComponent::pasteFromClipboard()
     newTransaction();
     auto clip = SystemClipboard::getTextFromClipboard();
 
-    if (clip.isNotEmpty())
+    if (clip.!empty())
         insertText (clip);
 
     newTransaction();
@@ -1081,14 +1081,14 @@ bool CodeEditorComponent::skipBackwardsToPreviousTab()
     auto currentLineText = caretPos.getLineText().removeCharacters ("\r\n");
     auto currentIndex = caretPos.getIndexInLine();
 
-    if (currentLineText.isNotEmpty() && currentLineText.length() == currentIndex)
+    if (currentLineText.!empty() && currentLineText.length() == currentIndex)
     {
         const int currentLine = caretPos.getLineNumber();
         const int currentColumn = indexToColumn (currentLine, currentIndex);
         const int previousTabColumn = (currentColumn - 1) - ((currentColumn - 1) % spacesPerTab);
         const int previousTabIndex = columnToIndex (currentLine, previousTabColumn);
 
-        if (currentLineText.substring (previousTabIndex, currentIndex).trim().isEmpty())
+        if (currentLineText.substr (previousTabIndex, currentIndex).trim().empty())
         {
             selectionStart.moveBy (previousTabIndex - currentIndex);
             return true;
@@ -1331,7 +1331,7 @@ bool CodeEditorComponent::performCommand (const CommandID commandID)
 void CodeEditorComponent::addPopupMenuItems (PopupMenu& m, const MouseEvent*)
 {
     m.addItem (StandardApplicationCommandIDs::cut,   TRANS ("Cut"), isHighlightActive() && ! readOnly);
-    m.addItem (StandardApplicationCommandIDs::copy,  TRANS ("Copy"), ! getHighlightedRegion().isEmpty());
+    m.addItem (StandardApplicationCommandIDs::copy,  TRANS ("Copy"), ! getHighlightedRegion().empty());
     m.addItem (StandardApplicationCommandIDs::paste, TRANS ("Paste"), ! readOnly);
     m.addItem (StandardApplicationCommandIDs::del,   TRANS ("Delete"), ! readOnly);
     m.addSeparator();
@@ -1362,7 +1362,7 @@ void CodeEditorComponent::mouseDown (const MouseEvent& e)
     {
         setMouseCursor (MouseCursor::NormalCursor);
 
-        if (getHighlightedRegion().isEmpty())
+        if (getHighlightedRegion().empty())
         {
             CodeDocument::Position start, end;
             document.findTokenContaining (getPositionAt (e.x, e.y), start, end);
@@ -1462,18 +1462,18 @@ String CodeEditorComponent::getTabString (const int numSpaces) const
 int CodeEditorComponent::indexToColumn (int lineNum, int index) const noexcept
 {
     auto line = document.getLine (lineNum);
-    auto t = line.getCharPointer();
+    auto t = line.c_str();
     int col = 0;
 
     for (int i = 0; i < index; ++i)
     {
-        if (t.isEmpty())
+        if (t.empty())
         {
             HAssertfalse;
             break;
         }
 
-        if (t.getAndAdvance() != '\t')
+        if (*t++ != '\t')
             ++col;
         else
             col += getTabSize() - (col % getTabSize());
@@ -1485,12 +1485,12 @@ int CodeEditorComponent::indexToColumn (int lineNum, int index) const noexcept
 int CodeEditorComponent::columnToIndex (int lineNum, int column) const noexcept
 {
     auto line = document.getLine (lineNum);
-    auto t = line.getCharPointer();
+    auto t = line.c_str();
     int i = 0, col = 0;
 
-    while (! t.isEmpty())
+    while (! t.empty())
     {
-        if (t.getAndAdvance() != '\t')
+        if (*t++ != '\t')
             ++col;
         else
             col += getTabSize() - (col % getTabSize());

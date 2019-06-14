@@ -87,7 +87,7 @@ public:
         font.setItalic (xml.getBoolAttribute ("italic", false));
         font.setExtraKerningFactor ((float) xml.getDoubleAttribute ("kerning", 0.0));
         auto fontStyle = xml.getStringAttribute ("typefaceStyle");
-        if (! fontStyle.isEmpty())
+        if (! fontStyle.empty())
             font.setTypefaceStyle (fontStyle);
 
         l->setFont (font);
@@ -161,7 +161,7 @@ public:
                                                      "labelTextChanged (Label* labelThatHasChanged)",
                                                      true);
 
-            if (callback.trim().isNotEmpty())
+            if (callback.trim().!empty())
                 callback << "else ";
 
             const String memberVariableName (code.document->getComponentLayout()->getComponentMemberVariableName (component));

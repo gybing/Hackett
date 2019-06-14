@@ -83,7 +83,7 @@ public:
        #endif
 
         auto output = p.readAllProcessOutput();
-        expect (output.isNotEmpty());
+        expect (output.!empty());
       #endif
     }
 };

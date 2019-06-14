@@ -54,7 +54,7 @@ NamedValueSet& NamedValueSet::operator= (const NamedValueSet& other)
 
 NamedValueSet& NamedValueSet::operator= (NamedValueSet&& other) noexcept
 {
-    other.values.swapWith (values);
+    other.values.swap (values);
     return *this;
 }
 
@@ -73,9 +73,9 @@ bool NamedValueSet::operator== (const NamedValueSet& other) const noexcept
     for (int i = 0; i < num; ++i)
     {
         // optimise for the case where the keys are in the same order
-        if (values.getReference(i).name == other.values.getReference(i).name)
+        if (values[i].name == other.values[i].name)
         {
-            if (values.getReference(i).value != other.values.getReference(i).value)
+            if (values[i].value != other.values[i].value)
                 return false;
         }
         else
@@ -83,8 +83,8 @@ bool NamedValueSet::operator== (const NamedValueSet& other) const noexcept
             // if we encounter keys that are in a different order, search remaining items by brute force..
             for (int j = i; j < num; ++j)
             {
-                if (auto* otherVal = other.getVarPointer (values.getReference(j).name))
-                    if (values.getReference(j).value == *otherVal)
+                if (auto* otherVal = other.getVarPointer (values[j].name))
+                    if (values[j].value == *otherVal)
                         continue;
 
                 return false;
@@ -100,7 +100,7 @@ bool NamedValueSet::operator== (const NamedValueSet& other) const noexcept
 bool NamedValueSet::operator!= (const NamedValueSet& other) const noexcept   { return ! operator== (other); }
 
 int NamedValueSet::size() const noexcept        { return values.size(); }
-bool NamedValueSet::isEmpty() const noexcept    { return values.isEmpty(); }
+bool NamedValueSet::empty() const noexcept    { return values.empty(); }
 
 static const var& getNullVarRef() noexcept
 {
@@ -153,7 +153,7 @@ bool NamedValueSet::set (const Identifier& name, var&& newValue)
         return true;
     }
 
-    values.add ({ name, std::move (newValue) });
+    values.push_back ({ name, std::move (newValue) });
     return true;
 }
 
@@ -168,7 +168,7 @@ bool NamedValueSet::set (const Identifier& name, const var& newValue)
         return true;
     }
 
-    values.add ({ name, newValue });
+    values.push_back ({ name, newValue });
     return true;
 }
 
@@ -182,7 +182,7 @@ int NamedValueSet::indexOf (const Identifier& name) const noexcept
     auto numValues = values.size();
 
     for (int i = 0; i < numValues; ++i)
-        if (values.getReference(i).name == name)
+        if (values[i].name == name)
             return i;
 
     return -1;
@@ -194,9 +194,9 @@ bool NamedValueSet::remove (const Identifier& name)
 
     for (int i = 0; i < numValues; ++i)
     {
-        if (values.getReference(i).name == name)
+        if (values[i].name == name)
         {
-            values.remove (i);
+            values.erase (values.begin() + i);
             return true;
         }
     }
@@ -207,7 +207,7 @@ bool NamedValueSet::remove (const Identifier& name)
 Identifier NamedValueSet::getName (const int index) const noexcept
 {
     if (isPositiveAndBelow (index, values.size()))
-        return values.getReference (index).name;
+        return values[index].name;
 
     HAssertfalse;
     return {};
@@ -216,7 +216,7 @@ Identifier NamedValueSet::getName (const int index) const noexcept
 const var& NamedValueSet::getValueAt (const int index) const noexcept
 {
     if (isPositiveAndBelow (index, values.size()))
-        return values.getReference (index).value;
+        return values[index].value;
 
     HAssertfalse;
     return getNullVarRef();
@@ -225,7 +225,7 @@ const var& NamedValueSet::getValueAt (const int index) const noexcept
 var* NamedValueSet::getVarPointerAt (int index) noexcept
 {
     if (isPositiveAndBelow (index, values.size()))
-        return &(values.getReference (index).value);
+        return &(values[index].value);
 
     return {};
 }
@@ -233,29 +233,29 @@ var* NamedValueSet::getVarPointerAt (int index) noexcept
 const var* NamedValueSet::getVarPointerAt (int index) const noexcept
 {
     if (isPositiveAndBelow (index, values.size()))
-        return &(values.getReference (index).value);
+        return &(values[index].value);
 
     return {};
 }
 
 void NamedValueSet::setFromXmlAttributes (const XmlElement& xml)
 {
-    values.clearQuick();
+    values.clear();
 
     for (auto* att = xml.attributes.get(); att != nullptr; att = att->nextListItem)
     {
-        if (att->name.toString().startsWith ("base64:"))
+        if (att->name.toString().compare (0, 7, "base64:") == 0)
         {
             MemoryBlock mb;
 
             if (mb.fromBase64Encoding (att->value))
             {
-                values.add ({ att->name.toString().substring (7), var (mb) });
+                values.push_back ({ att->name.toString().substr (7), var (mb) });
                 continue;
             }
         }
 
-        values.add ({ att->name, var (att->value) });
+        values.push_back ({ att->name, var (att->value) });
     }
 }
 

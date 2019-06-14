@@ -323,7 +323,7 @@ private:
 
                 auto identifier = getInterfaceIDForDevice ((UINT) i);
 
-                if (identifier.isNotEmpty())
+                if (identifier.!empty())
                     deviceIDs.add (identifier);
                 else
                     deviceIDs.add (deviceNames[i]);
@@ -1029,7 +1029,7 @@ private:
             {
                 auto containerID = getGUIDFromInspectable (*containerIDValue);
 
-                if (containerID.isNotEmpty())
+                if (containerID.!empty())
                 {
                     DeviceInfo info = { containerID };
 
@@ -1411,12 +1411,12 @@ private:
                 deviceInfo = midiDeviceWatcher.getWinRTDeviceInfoForDevice (deviceIdentifier);
             }
 
-            if (deviceInfo.deviceID.isEmpty())
+            if (deviceInfo.deviceID.empty())
                 throw std::runtime_error ("Invalid device index");
 
             HWINRT_MIDI_LOG ("Creating H MIDI IO: " << deviceInfo.deviceID);
 
-            if (deviceInfo.containerID.isNotEmpty())
+            if (deviceInfo.containerID.!empty())
             {
                 bleDeviceWatcher.addListener (this);
 
@@ -1799,7 +1799,7 @@ MidiDeviceInfo MidiInput::getDefaultDevice()
 
 std::unique_ptr<MidiInput> MidiInput::openDevice (const String& deviceIdentifier, MidiInputCallback* callback)
 {
-    if (deviceIdentifier.isEmpty() || callback == nullptr)
+    if (deviceIdentifier.empty() || callback == nullptr)
         return {};
 
     std::unique_ptr<MidiInput> in (new MidiInput ({}, deviceIdentifier));
@@ -1866,7 +1866,7 @@ MidiDeviceInfo MidiOutput::getDefaultDevice()
 
 std::unique_ptr<MidiOutput> MidiOutput::openDevice (const String& deviceIdentifier)
 {
-    if (deviceIdentifier.isEmpty())
+    if (deviceIdentifier.empty())
         return {};
 
     std::unique_ptr<MidiServiceType::OutputWrapper> wrapper;

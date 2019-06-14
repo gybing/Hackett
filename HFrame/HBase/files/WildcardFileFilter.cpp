@@ -27,7 +27,7 @@ static bool matchWildcard (const File& file, const StringArray& wildcards)
 WildcardFileFilter::WildcardFileFilter (const String& fileWildcardPatterns,
                                         const String& directoryWildcardPatterns,
                                         const String& desc)
-    : FileFilter (desc.isEmpty() ? fileWildcardPatterns
+    : FileFilter (desc.empty() ? fileWildcardPatterns
                                  : (desc + " (" + fileWildcardPatterns + ")"))
 {
     parseWildcard (fileWildcardPatterns, fileWildcards);

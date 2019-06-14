@@ -119,7 +119,7 @@ public:
 
         for (int i = 0; i < lines.size(); ++i)
         {
-            if (lines[i].trim().isEmpty())
+            if (lines[i].trim().empty())
                 s << memberVariableName << "->addSeparator();\n";
             else
                 s << memberVariableName << "->addItem ("
@@ -145,7 +145,7 @@ public:
                                                      "comboBoxChanged (ComboBox* comboBoxThatHasChanged)",
                                                      true);
 
-            if (callback.trim().isNotEmpty())
+            if (callback.trim().!empty())
                 callback << "else ";
 
             const String memberVariableName (code.document->getComponentLayout()->getComponentMemberVariableName (component));
@@ -167,7 +167,7 @@ public:
 
         for (int i = 0; i < lines.size(); ++i)
         {
-            if (lines[i].trim().isEmpty())
+            if (lines[i].trim().empty())
                 c->addSeparator();
             else
                 c->addItem (lines[i], itemId++);

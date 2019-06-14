@@ -507,7 +507,7 @@ MidiDeviceInfo MidiInput::getDefaultDevice()
 
 std::unique_ptr<MidiInput> MidiInput::openDevice (const String& deviceIdentifier, MidiInputCallback* callback)
 {
-    if (deviceIdentifier.isEmpty())
+    if (deviceIdentifier.empty())
         return {};
 
     std::unique_ptr<MidiInput> midiInput (new MidiInput (deviceIdentifier, deviceIdentifier));

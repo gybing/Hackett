@@ -698,11 +698,11 @@ void UIViewComponentPeer::setFullScreen (bool shouldBeFullScreen)
         Rectangle<int> r (shouldBeFullScreen ? Desktop::getInstance().getDisplays().getMainDisplay().userArea
                                              : lastNonFullscreenBounds);
 
-        if ((! shouldBeFullScreen) && r.isEmpty())
+        if ((! shouldBeFullScreen) && r.empty())
             r = getBounds();
 
         // (can't call the component's setBounds method because that'll reset our fullscreen flag)
-        if (! r.isEmpty())
+        if (! r.empty())
             setBounds (ScalingHelpers::scaledScreenPosToUnscaled (component, r), shouldBeFullScreen);
 
         component.repaint();
@@ -981,8 +981,8 @@ BOOL UIViewComponentPeer::textViewReplaceCharacters (Range<int> range, const Str
     {
         const Range<int> currentSelection (target->getHighlightedRegion());
 
-        if (range.getLength() == 1 && text.isEmpty()) // (detect backspace)
-            if (currentSelection.isEmpty())
+        if (range.getLength() == 1 && text.empty()) // (detect backspace)
+            if (currentSelection.empty())
                 target->setHighlightedRegion (currentSelection.withStart (currentSelection.getStart() - 1));
 
         if (text == "\r" || text == "\n" || text == "\r\n")

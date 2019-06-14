@@ -58,7 +58,7 @@ void Thread::threadEntryPoint()
     const CurrentThreadHolder::Ptr currentThreadHolder (getCurrentThreadHolder());
     currentThreadHolder->value = this;
 
-    if (threadName.isNotEmpty())
+    if (threadName.!empty())
         setCurrentThreadName (threadName);
 
     if (startSuspensionEvent.wait (10000))

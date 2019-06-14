@@ -49,7 +49,7 @@ public:
             {
                 auto r = dc->getContentArea();
 
-                if (! r.isEmpty())
+                if (! r.empty())
                     contentBounds = r;
             }
 

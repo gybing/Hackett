@@ -97,7 +97,7 @@ bool UndoManager::perform (UndoableAction* newAction, const String& actionName)
 {
     if (perform (newAction))
     {
-        if (actionName.isNotEmpty())
+        if (actionName.!empty())
             setCurrentTransactionName (actionName);
 
         return true;

@@ -165,8 +165,8 @@ struct AndroidBluetoothMidiDevice
         : name (deviceName), bluetoothAddress (address), connectionStatus (status)
     {
         // can't create a device without a valid name and bluetooth address!
-        HAssert (! name.isEmpty());
-        HAssert (! bluetoothAddress.isEmpty());
+        HAssert (! name.empty());
+        HAssert (! bluetoothAddress.empty());
     }
 
     bool operator== (const AndroidBluetoothMidiDevice& other) const noexcept
@@ -406,13 +406,13 @@ public:
         setVisible (true);
         addToDesktop (ComponentPeer::windowHasDropShadow);
 
-        if (bounds.isEmpty())
+        if (bounds.empty())
             setBounds (0, 0, getParentWidth(), getParentHeight());
         else
             setBounds (bounds);
 
         toFront (true);
-        setOpaque (! bounds.isEmpty());
+        setOpaque (! bounds.empty());
 
         addAndMakeVisible (bluetoothDevicesList);
         enterModalState (true, exitCallback.release(), true);
@@ -425,7 +425,7 @@ public:
 
     void paint (Graphics& g) override
     {
-        g.fillAll (bounds.isEmpty() ? Colours::black.withAlpha (0.6f) : Colours::black);
+        g.fillAll (bounds.empty() ? Colours::black.withAlpha (0.6f) : Colours::black);
 
         g.setColour (Colour (0xffdfdfdf));
         Rectangle<int> overlayBounds = getOverlayBounds();
@@ -456,7 +456,7 @@ private:
 
     void update()
     {
-        if (bounds.isEmpty())
+        if (bounds.empty())
             setBounds (0, 0, getParentWidth(), getParentHeight());
         else
             setBounds (bounds);
@@ -466,7 +466,7 @@ private:
 
     Rectangle<int> getOverlayBounds() const noexcept
     {
-        if (bounds.isEmpty())
+        if (bounds.empty())
         {
             const int pw = getParentWidth();
             const int ph = getParentHeight();

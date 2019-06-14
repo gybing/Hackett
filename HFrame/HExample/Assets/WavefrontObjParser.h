@@ -141,13 +141,13 @@ private:
         }
     };
 
-    static float parseFloat (String::CharPointerType& t)
+    static float parseFloat (char*& t)
     {
         t = t.findEndOfWhitespace();
         return (float) CharacterFunctions::readDoubleValue (t);
     }
 
-    static Vertex parseVertex (String::CharPointerType t)
+    static Vertex parseVertex (char* t)
     {
         Vertex v;
         v.x = parseFloat (t);
@@ -156,7 +156,7 @@ private:
         return v;
     }
 
-    static TextureCoord parseTextureCoord (String::CharPointerType t)
+    static TextureCoord parseTextureCoord (char* t)
     {
         TextureCoord tc;
         tc.x = parseFloat (t);
@@ -164,7 +164,7 @@ private:
         return tc;
     }
 
-    static bool matchToken (String::CharPointerType& t, const char* token)
+    static bool matchToken (char*& t, const char* token)
     {
         auto len = (int) strlen (token);
 
@@ -172,7 +172,7 @@ private:
         {
             auto end = t + len;
 
-            if (end.isEmpty() || end.isWhitespace())
+            if (end.empty() || end.isWhitespace())
             {
                 t = end.findEndOfWhitespace();
                 return true;
@@ -184,9 +184,9 @@ private:
 
     struct Face
     {
-        Face (String::CharPointerType t)
+        Face (char* t)
         {
-            while (! t.isEmpty())
+            while (! t.empty())
                 triples.add (parseTriple (t));
         }
 
@@ -207,7 +207,7 @@ private:
             }
         }
 
-        static TripleIndex parseTriple (String::CharPointerType& t)
+        static TripleIndex parseTriple (char*& t)
         {
             TripleIndex i;
 
@@ -215,7 +215,7 @@ private:
             i.vertexIndex = t.getIntValue32() - 1;
             t = findEndOfFaceToken (t);
 
-            if (t.isEmpty() || t.getAndAdvance() != '/')
+            if (t.empty() || *t++ != '/')
                 return i;
 
             if (*t == '/')
@@ -227,7 +227,7 @@ private:
                 i.textureIndex = t.getIntValue32() - 1;
                 t = findEndOfFaceToken (t);
 
-                if (t.isEmpty() || t.getAndAdvance() != '/')
+                if (t.empty() || *t++ != '/')
                     return i;
             }
 
@@ -236,9 +236,9 @@ private:
             return i;
         }
 
-        static String::CharPointerType findEndOfFaceToken (String::CharPointerType t) noexcept
+        static char* findEndOfFaceToken (char* t) noexcept
         {
-            return CharacterFunctions::findEndOfToken (t, CharPointer_ASCII ("/ \t"), String().getCharPointer());
+            return CharacterFunctions::findEndOfToken (t, CharPointer_ASCII ("/ \t"), String().c_str());
         }
     };
 
@@ -273,7 +273,7 @@ private:
 
         for (auto lineNum = 0; lineNum < lines.size(); ++lineNum)
         {
-            auto l = lines[lineNum].getCharPointer().findEndOfWhitespace();
+            auto l = lines[lineNum].c_str().findEndOfWhitespace();
 
             if (matchToken (l, "v"))    { mesh.vertices     .add (parseVertex (l));       continue; }
             if (matchToken (l, "vn"))   { mesh.normals      .add (parseVertex (l));       continue; }
@@ -334,7 +334,7 @@ private:
 
         for (auto line : lines)
         {
-            auto l = line.getCharPointer().findEndOfWhitespace();
+            auto l = line.c_str().findEndOfWhitespace();
 
             if (matchToken (l, "newmtl"))   { materials.add (material); material.name = String (l).trim(); continue; }
 

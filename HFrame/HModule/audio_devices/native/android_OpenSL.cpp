@@ -1150,8 +1150,8 @@ public:
     {
         std::unique_ptr<OpenSLAudioIODevice> dev;
 
-        if (outputDeviceName.isNotEmpty() || inputDeviceName.isNotEmpty())
-            dev.reset (new OpenSLAudioIODevice (outputDeviceName.isNotEmpty() ? outputDeviceName
+        if (outputDeviceName.!empty() || inputDeviceName.!empty())
+            dev.reset (new OpenSLAudioIODevice (outputDeviceName.!empty() ? outputDeviceName
                                                                               : inputDeviceName));
 
         return dev.release();

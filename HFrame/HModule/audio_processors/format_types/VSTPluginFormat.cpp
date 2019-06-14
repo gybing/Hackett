@@ -763,7 +763,7 @@ struct ModuleHandle    : public ReferenceCountedObject
                                 }
                             }
 
-                            if (pluginName.isEmpty())
+                            if (pluginName.empty())
                                 pluginName = file.getFileNameWithoutExtension();
 
                            #if HMAC
@@ -779,7 +779,7 @@ struct ModuleHandle    : public ReferenceCountedObject
                                                    #endif
                                                     .findChildFiles (File::findFiles, false, "*.vstxml");
 
-                            if (! vstXmlFiles.isEmpty())
+                            if (! vstXmlFiles.empty())
                                 vstXml = parseXML (vstXmlFiles.getReference(0));
                         }
                     }
@@ -913,7 +913,7 @@ struct VSTPluginInstance     : public AudioPluginInstance,
 
         String getCurrentValueAsText() const override
         {
-            if (valueType != nullptr || ! vstValueStrings.isEmpty())
+            if (valueType != nullptr || ! vstValueStrings.empty())
                 return getText (getValue(), 1024);
 
             return pluginInstance.getTextForOpcode (getParameterIndex(), Vst2::effGetParamDisplay);
@@ -926,14 +926,14 @@ struct VSTPluginInstance     : public AudioPluginInstance,
 
         String getName (int maximumStringLength) const override
         {
-            if (name.isEmpty())
+            if (name.empty())
                 return pluginInstance.getTextForOpcode (getParameterIndex(),
                                                         Vst2::effGetParamName);
 
             if (name.length() <= maximumStringLength)
                 return name;
 
-            if (! shortNames.isEmpty())
+            if (! shortNames.empty())
             {
                 for (auto& n : shortNames)
                     if (n.length() <= maximumStringLength)
@@ -947,7 +947,7 @@ struct VSTPluginInstance     : public AudioPluginInstance,
 
         String getLabel() const override
         {
-            return label.isEmpty() ? pluginInstance.getTextForOpcode (getParameterIndex(),
+            return label.empty() ? pluginInstance.getTextForOpcode (getParameterIndex(),
                                                                       Vst2::effGetParamLabel)
                                    : label;
         }
@@ -1174,7 +1174,7 @@ struct VSTPluginInstance     : public AudioPluginInstance,
 
             desc.descriptiveName = String::createStringFromData (buffer, (int) sizeof (buffer)).trim();
 
-            if (desc.descriptiveName.isEmpty())
+            if (desc.descriptiveName.empty())
                 desc.descriptiveName = name;
         }
 
@@ -1271,7 +1271,7 @@ struct VSTPluginInstance     : public AudioPluginInstance,
             {
                 String productName = String::createStringFromData (buffer, (int) sizeof (buffer));
 
-                if (productName.isNotEmpty())
+                if (productName.!empty())
                     return productName;
             }
         }
@@ -1580,7 +1580,7 @@ struct VSTPluginInstance     : public AudioPluginInstance,
         if (index >= 0 && index == getCurrentProgram())
         {
             if (getNumPrograms() > 0 && newName != getCurrentProgramName())
-                dispatch (Vst2::effSetProgramName, 0, 0, (void*) newName.substring (0, 24).toRawUTF8(), 0.0f);
+                dispatch (Vst2::effSetProgramName, 0, 0, (void*) newName.substr (0, 24).toRawUTF8(), 0.0f);
         }
         else
         {
@@ -2526,7 +2526,7 @@ private:
 
             const int index = getCurrentProgram();
 
-            if (index >= 0 && programNames[index].isEmpty())
+            if (index >= 0 && programNames[index].empty())
             {
                 while (programNames.size() < index)
                     programNames.add (String());

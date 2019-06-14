@@ -34,7 +34,7 @@ bool File::isHidden() const
 
 bool File::isSymbolicLink() const
 {
-    return getNativeLinkedTarget().isNotEmpty();
+    return !getNativeLinkedTarget().empty();
 }
 
 String File::getNativeLinkedTarget() const

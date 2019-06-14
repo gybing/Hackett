@@ -1192,7 +1192,7 @@ struct iOSAudioIODevice::Pimpl      : public AudioPlayHead,
                 }
 
                 // A fallback for the iOS simulator and older iOS versions
-                if (result.isEmpty())
+                if (result.empty())
                     return { "Left", "Right" };
 
                 return result;

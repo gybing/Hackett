@@ -63,7 +63,7 @@ public:
     HCONSTEXPR inline ValueType getEnd() const noexcept            { return end; }
 
     /** Returns true if the range has a length of zero. */
-    HCONSTEXPR inline bool isEmpty() const noexcept                { return start == end; }
+    HCONSTEXPR inline bool empty() const noexcept                { return start == end; }
 
     //==============================================================================
     /** Changes the start position of the range, leaving the end position unchanged.

@@ -129,7 +129,7 @@ public:
 
         //======================================================================
         auto version = project.getEnabledModules().getModuleInfo (moduleID).getVersion();
-        if (version.isEmpty())
+        if (version.empty())
             version = "?";
 
         g.drawFittedText (version, bounds.removeFromLeft (roundToInt (listHeader->getProportionAtIndex (1) * width)), Justification::centredLeft, 1);
@@ -163,7 +163,7 @@ public:
     {
         auto moduleID = project.getEnabledModules().getModuleID (row);
 
-        if (moduleID.isNotEmpty())
+        if (moduleID.!empty())
             if (auto* pcc = findParentComponentOfClass<ProjectContentComponent>())
                 pcc->showModule (moduleID);
     }
@@ -274,7 +274,7 @@ private:
         auto& moduleList = project.getEnabledModules();
         auto moduleToCopy = moduleList.getModuleID (list.getSelectedRow());
 
-        if (moduleToCopy.isNotEmpty())
+        if (moduleToCopy.!empty())
         {
             PopupMenu m;
             m.addItem (copyPathsToAllModulesID, "Copy the paths from the module '" + moduleToCopy + "' to all other modules");

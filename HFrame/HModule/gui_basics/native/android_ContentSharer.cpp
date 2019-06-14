@@ -322,9 +322,9 @@ private:
             auto scheme = f.getScheme();
 
             // Only "file://" scheme or no scheme (for files in app bundle) are allowed!
-            HAssert (scheme.isEmpty() || scheme == "file");
+            HAssert (scheme.empty() || scheme == "file");
 
-            if (scheme.isEmpty())
+            if (scheme.empty())
             {
                 // Raw resource names need to be all lower case
                 HAssert (f.toString (true).toLowerCase() == f.toString (true));
@@ -332,7 +332,7 @@ private:
                 // This will get us a file with file:// URI
                 f = copyAssetFileToTemporaryFile (env, f.toString (true));
 
-                if (f.isEmpty())
+                if (f.empty())
                     continue;
             }
 
@@ -351,7 +351,7 @@ private:
                                                                        javaString (contentString).get()));
 
             if (canSpecifyMimeTypes)
-                canSpecifyMimeTypes = fileExtension.isNotEmpty();
+                canSpecifyMimeTypes = fileExtension.!empty();
 
             if (canSpecifyMimeTypes)
                 mimeTypes.addArray (getMimeTypesForFileExtension (fileExtension));
@@ -543,7 +543,7 @@ public:
 
         auto uriElements = getContentUriElements (env, uri);
 
-        if (uriElements.filepath.isEmpty())
+        if (uriElements.filepath.empty())
             return nullptr;
 
         return getAssetFileDescriptor (env, contentProvider, uriElements.filepath);
@@ -567,7 +567,7 @@ public:
         }
 
         // Unsupported columns were queried, file sharing may fail.
-        if (resultColumns.isEmpty())
+        if (resultColumns.empty())
             return nullptr;
 
         auto resultJavaColumns = HStringArrayToJava (resultColumns);
@@ -579,7 +579,7 @@ public:
 
         auto uriElements = getContentUriElements (env, uri);
 
-        if (uriElements.filepath.isEmpty())
+        if (uriElements.filepath.empty())
             return cursor->getNativeCursor();
 
         auto values = LocalRef<jobjectArray> (env->NewObjectArray ((jsize) resultColumns.size(),
@@ -614,7 +614,7 @@ public:
 
         auto extension = getContentUriElements (env, uri).filename.fromLastOccurrenceOf (".", false, true);
 
-        if (extension.isEmpty())
+        if (extension.empty())
             return nullptr;
 
         return HStringArrayToJava (filterMimeTypes (getMimeTypesForFileExtension (extension),

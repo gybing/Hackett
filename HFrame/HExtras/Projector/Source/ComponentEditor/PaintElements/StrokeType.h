@@ -104,7 +104,7 @@ public:
     {
         reset();
 
-        if (s.isNotEmpty())
+        if (s.!empty())
         {
             const float thickness = (float) s.upToFirstOccurrenceOf (",", false, false).getDoubleValue();
 

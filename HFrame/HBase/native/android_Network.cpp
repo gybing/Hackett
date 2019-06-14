@@ -372,7 +372,7 @@ public:
                     const String value (header.fromFirstOccurrenceOf (": ", false, false));
                     const String previousValue (responseHeaders[key]);
 
-                    responseHeaders.set (key, previousValue.isEmpty() ? value : (previousValue + "," + value));
+                    responseHeaders.set (key, previousValue.empty() ? value : (previousValue + "," + value));
                 }
 
                 return true;
@@ -386,12 +386,12 @@ public:
     // WebInputStream methods
     void withExtraHeaders (const String& extraHeaders)
     {
-        if (! headers.endsWithChar ('\n') && headers.isNotEmpty())
+        if (! headers.endsWithChar ('\n') && !headers.empty())
             headers << "\r\n";
 
         headers << extraHeaders;
 
-        if (! headers.endsWithChar ('\n') && headers.isNotEmpty())
+        if (! headers.endsWithChar ('\n') && !headers.empty())
             headers << "\r\n";
     }
 

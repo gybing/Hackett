@@ -150,7 +150,7 @@ public:
                 return getLocalFileFromContentUri (URL ("content://downloads/public_downloads/" + documentId));
             }
         }
-        else if (authority == "com.android.providers.media.documents" && documentId.isNotEmpty())
+        else if (authority == "com.android.providers.media.documents" && !documentId.empty())
         {
             auto type    = tokens[0];
             auto mediaId = tokens[1];
@@ -177,7 +177,7 @@ public:
         auto filename = getStringUsingDataColumn ("_display_name", env, uri, contentResolver);
 
         // Fallback to "_data" column
-        if (filename.isEmpty())
+        if (filename.empty())
         {
             auto path = getStringUsingDataColumn ("_data", env, uri, contentResolver);
             filename = path.fromLastOccurrenceOf ("/", false, true);
@@ -202,7 +202,7 @@ private:
 
             LocalRef<jobjectArray> args;
 
-            if (selection.isNotEmpty())
+            if (!selection.empty())
             {
                 args = LocalRef<jobjectArray> (env->NewObjectArray (selectionArgs.size(), JavaString, javaString ("").get()));
 
@@ -210,7 +210,7 @@ private:
                     env->SetObjectArrayElement (args.get(), i, javaString (selectionArgs[i]).get());
             }
 
-            LocalRef<jstring> jSelection (selection.isNotEmpty() ? javaString (selection) : LocalRef<jstring>());
+            LocalRef<jstring> jSelection (!selection.empty() ? javaString (selection) : LocalRef<jstring>());
             LocalRef<jobject> cursor (env->CallObjectMethod (contentResolver.get(), ContentResolver.query,
                                                              uri.get(), projection.get(), jSelection.get(),
                                                              args.get(), nullptr));

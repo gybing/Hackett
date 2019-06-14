@@ -83,7 +83,7 @@ void ProjectorApplication::initialise (const String& commandLine)
 
         initialiseBasics();
 
-        isRunningCommandLine = commandLine.isNotEmpty()
+        isRunningCommandLine = commandLine.!empty()
                                 && ! commandLine.startsWith ("-NSDocumentRevisionsDebugMode");
 
         licenseController.reset (new LicenseController);
@@ -174,7 +174,7 @@ void ProjectorApplication::handleAsyncUpdate()
     MenuBarModel::setMacMainMenu (menuModel.get(), &extraAppleMenuItems); //, "Open Recent");
    #endif
 
-    if (getGlobalProperties().getValue (Ids::dontQueryForUpdate, {}).isEmpty())
+    if (getGlobalProperties().getValue (Ids::dontQueryForUpdate, {}).empty())
         LatestVersionCheckerAndUpdater::getInstance()->checkForNewVersion (false);
 
     if (licenseController != nullptr)
@@ -191,7 +191,7 @@ void ProjectorApplication::initialiseWindows (const String& commandLine)
 {
     const String commandLineWithoutNSDebug (commandLine.replace ("-NSDocumentRevisionsDebugMode YES", StringRef()));
 
-    if (commandLineWithoutNSDebug.trim().isNotEmpty() && ! commandLineWithoutNSDebug.trim().startsWithChar ('-'))
+    if (commandLineWithoutNSDebug.trim().!empty() && ! commandLineWithoutNSDebug.trim().startsWithChar ('-'))
         anotherInstanceStarted (commandLine);
     else
         mainWindowList.reopenLastProjects();

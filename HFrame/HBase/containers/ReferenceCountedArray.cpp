@@ -86,7 +86,7 @@ public:
             for (int i = 0; i < 1025; ++i)
                 arr.add (new DestructorObj (*this, arr));
 
-            while (! arr.isEmpty())
+            while (! arr.empty())
                 arr.remove (0);
 
             for (int i = 0; i < 1025; ++i)

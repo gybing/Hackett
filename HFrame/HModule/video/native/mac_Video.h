@@ -84,7 +84,7 @@ struct VideoComponent::Pimpl   : public Base
 
     void loadAsync (const URL& url, std::function<void(const URL&, Result)> callback)
     {
-        if (url.isEmpty())
+        if (url.empty())
         {
             HAssertfalse;
             return;

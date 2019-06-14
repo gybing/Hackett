@@ -36,8 +36,8 @@ namespace
     {
         auto s = CodeHelpers::makeValidIdentifier (seed, false, true, false) + "xxxx";
 
-        return s.substring (0, 1).toUpperCase()
-             + s.substring (1, 4).toLowerCase();
+        return s.substr (0, 1).toUpperCase()
+             + s.substr (1, 4).toLowerCase();
     }
 }
 
@@ -436,7 +436,7 @@ void Project::updatePluginCategories()
     {
         auto vstCategory = projectRoot.getProperty (Ids::pluginVSTCategory, {}).toString();
 
-        if (vstCategory.isNotEmpty() && getAllVSTCategoryStrings().contains (vstCategory))
+        if (vstCategory.!empty() && getAllVSTCategoryStrings().contains (vstCategory))
             pluginVSTCategoryValue = Array<var> (vstCategory);
         else
             pluginVSTCategoryValue.resetToDefault();
@@ -445,7 +445,7 @@ void Project::updatePluginCategories()
     {
         auto auMainType = projectRoot.getProperty (Ids::pluginAUMainType, {}).toString();
 
-        if (auMainType.isNotEmpty())
+        if (auMainType.!empty())
         {
             if (getAllAUMainTypeVars().contains (auMainType))
                 pluginAUMainTypeValue = Array<var> (auMainType);
@@ -778,7 +778,7 @@ bool Project::hasProjectBeenModified()
 //==============================================================================
 File Project::resolveFilename (String filename) const
 {
-    if (filename.isEmpty())
+    if (filename.empty())
         return {};
 
     filename = replacePreprocessorDefs (getPreprocessorDefs(), filename);
@@ -804,10 +804,10 @@ String Project::getRelativePathForFile (const File& file) const
     auto p2 = file.getFullPathName();
 
     while (p1.startsWithChar (File::getSeparatorChar()))
-        p1 = p1.substring (1);
+        p1 = p1.substr (1);
 
     while (p2.startsWithChar (File::getSeparatorChar()))
-        p2 = p2.substring (1);
+        p2 = p2.substr (1);
 
     if (p1.upToFirstOccurrenceOf (File::getSeparatorString(), true, false)
           .equalsIgnoreCase (p2.upToFirstOccurrenceOf (File::getSeparatorString(), true, false)))
@@ -1729,7 +1729,7 @@ void Project::removeCompilerFlagScheme (const String& schemeToRemove)
             {
                 arr->remove (i);
 
-                if (arr->isEmpty())
+                if (arr->empty())
                     compilerFlagSchemesValue.resetToDefault();
                 else
                     compilerFlagSchemesValue.setValue ({ *arr }, getUndoManager());
@@ -1743,7 +1743,7 @@ void Project::removeCompilerFlagScheme (const String& schemeToRemove)
 //==============================================================================
 static String getCompanyNameOrDefault (StringRef str)
 {
-    if (str.isEmpty())
+    if (str.empty())
         return "yourcompany";
 
     return str;
@@ -2045,13 +2045,13 @@ static StringArray getModulePathsFromExporters (Project& project, bool onlyThisO
 
             auto path = exporter->getPathForModuleString (id);
 
-            if (path.isNotEmpty())
+            if (path.!empty())
                 paths.addIfNotAlreadyThere (path);
         }
 
         auto oldPath = exporter->getLegacyModulePath();
 
-        if (oldPath.isNotEmpty())
+        if (oldPath.!empty())
             paths.addIfNotAlreadyThere (oldPath);
     }
 
@@ -2062,7 +2062,7 @@ static Array<File> getExporterModulePathsToScan (Project& project)
 {
     auto exporterPaths = getModulePathsFromExporters (project, true);
 
-    if (exporterPaths.isEmpty())
+    if (exporterPaths.empty())
         exporterPaths = getModulePathsFromExporters (project, false);
 
     Array<File> files;

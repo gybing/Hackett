@@ -26,7 +26,7 @@
 
 namespace RelativePointHelpers
 {
-    inline void skipComma (String::CharPointerType& s)
+    inline void skipComma (char*& s)
     {
         s = s.findEndOfWhitespace();
 
@@ -58,7 +58,7 @@ RelativePoint::RelativePoint (const RelativeCoordinate& x_, const RelativeCoordi
 RelativePoint::RelativePoint (const String& s)
 {
     String error;
-    String::CharPointerType text (s.getCharPointer());
+    char* text (s.c_str());
     x = RelativeCoordinate (Expression::parse (text, error));
     RelativePointHelpers::skipComma (text);
     y = RelativeCoordinate (Expression::parse (text, error));

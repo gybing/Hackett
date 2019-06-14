@@ -85,14 +85,14 @@ struct JavascriptEngine::RootObject   : public DynamicObject
     //==============================================================================
     struct CodeLocation
     {
-        CodeLocation (const String& code) noexcept        : program (code), location (program.getCharPointer()) {}
+        CodeLocation (const String& code) noexcept        : program (code), location (program.c_str()) {}
         CodeLocation (const CodeLocation& other) noexcept : program (other.program), location (other.location) {}
 
         void throwError (const String& message) const
         {
             int col = 1, line = 1;
 
-            for (auto i = program.getCharPointer(); i < location && ! i.isEmpty(); ++i)
+            for (auto i = program.c_str(); i < location && ! i.empty(); ++i)
             {
                 ++col;
                 if (*i == '\n')  { col = 1; ++line; }
@@ -102,7 +102,7 @@ struct JavascriptEngine::RootObject   : public DynamicObject
         }
 
         String program;
-        String::CharPointerType location;
+        char* location;
     };
 
     //==============================================================================
@@ -841,7 +841,7 @@ struct JavascriptEngine::RootObject   : public DynamicObject
     //==============================================================================
     struct TokenIterator
     {
-        TokenIterator (const String& code) : location (code), p (code.getCharPointer()) { skip(); }
+        TokenIterator (const String& code) : location (code), p (code.c_str()) { skip(); }
 
         void skip()
         {
@@ -867,7 +867,7 @@ struct JavascriptEngine::RootObject   : public DynamicObject
         var currentValue;
 
     private:
-        String::CharPointerType p;
+        char* p;
 
         static bool isIdentifierStart (wchar c) noexcept   { return CharacterFunctions::isLetter (c)        || c == '_'; }
         static bool isIdentifierBody  (wchar c) noexcept   { return CharacterFunctions::isLetterOrDigit (c) || c == '_'; }
@@ -901,7 +901,7 @@ struct JavascriptEngine::RootObject   : public DynamicObject
             #define HJS_COMPARE_OPERATOR(name, str) if (matchToken (TokenTypes::name, sizeof (str) - 1)) return TokenTypes::name;
             HJS_OPERATORS (HJS_COMPARE_OPERATOR)
 
-            if (! p.isEmpty())
+            if (! p.empty())
                 location.throwError ("Unexpected character '" + String::charToString (*p) + "' in source");
 
             return TokenTypes::eof;
@@ -929,7 +929,7 @@ struct JavascriptEngine::RootObject   : public DynamicObject
                     {
                         location.location = p;
                         p = CharacterFunctions::find (p + 2, CharPointer_ASCII ("*/"));
-                        if (p.isEmpty()) location.throwError ("Unterminated '/*' comment");
+                        if (p.empty()) location.throwError ("Unterminated '/*' comment");
                         p += 2; continue;
                     }
                 }
@@ -1628,7 +1628,7 @@ struct JavascriptEngine::RootObject   : public DynamicObject
     {
         StringClass()
         {
-            setMethod ("substring",     substring);
+            setMethod ("substr",     substr);
             setMethod ("indexOf",       indexOf);
             setMethod ("charAt",        charAt);
             setMethod ("charCodeAt",    charCodeAt);
@@ -1639,10 +1639,10 @@ struct JavascriptEngine::RootObject   : public DynamicObject
         static Identifier getClassName()  { static const Identifier i ("String"); return i; }
 
         static var fromCharCode (Args a)  { return String::charToString (static_cast<wchar> (getInt (a, 0))); }
-        static var substring (Args a)     { return a.thisObject.toString().substring (getInt (a, 0), getInt (a, 1)); }
+        static var substr (Args a)     { return a.thisObject.toString().substr (getInt (a, 0), getInt (a, 1)); }
         static var indexOf (Args a)       { return a.thisObject.toString().indexOf (getString (a, 0)); }
         static var charCodeAt (Args a)    { return (int) a.thisObject.toString() [getInt (a, 0)]; }
-        static var charAt (Args a)        { int p = getInt (a, 0); return a.thisObject.toString().substring (p, p + 1); }
+        static var charAt (Args a)        { int p = getInt (a, 0); return a.thisObject.toString().substr (p, p + 1); }
 
         static var split (Args a)
         {
@@ -1650,10 +1650,10 @@ struct JavascriptEngine::RootObject   : public DynamicObject
             auto sep = getString (a, 0);
             StringArray strings;
 
-            if (sep.isNotEmpty())
-                strings.addTokens (str, sep.substring (0, 1), {});
+            if (!sep.empty())
+                strings.addTokens (str, sep.substr (0, 1), {});
             else // special-case for empty separator: split all chars separately
-                for (auto pos = str.getCharPointer(); ! pos.isEmpty(); ++pos)
+                for (auto pos = str.c_str(); ! pos.empty(); ++pos)
                     strings.add (String::charToString (*pos));
 
             var array;
@@ -1752,7 +1752,7 @@ struct JavascriptEngine::RootObject   : public DynamicObject
         {
             auto s = getString (a, 0).trim();
 
-            return s[0] == '0' ? (s[1] == 'x' ? s.substring(2).getHexValue64() : getOctalValue (s))
+            return s[0] == '0' ? (s[1] == 'x' ? s.substr(2).getHexValue64() : getOctalValue (s))
                                : s.getLargeIntValue();
         }
     };

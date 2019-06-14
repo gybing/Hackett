@@ -30,7 +30,7 @@ StringArray DirectoryIterator::parseWildcards (const String& pattern)
 bool DirectoryIterator::fileMatches (const StringArray& wildcards, const String& filename)
 {
     for (auto& w : wildcards)
-        if (filename.matchesWildcard (w, ! File::areFileNamesCaseSensitive()))
+        if (WildCardMatcher<String>::matches(w, filename, !File::areFileNamesCaseSensitive()))
             return true;
 
     return false;
@@ -65,7 +65,7 @@ bool DirectoryIterator::next (bool* isDirResult, bool* isHiddenResult, int64* fi
         {
             ++index;
 
-            if (! filename.containsOnly ("."))
+            if (std::string::npos == filename.find ("."))
             {
                 bool matches = false;
 

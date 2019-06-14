@@ -76,7 +76,7 @@ public:
         If there's a syntax error in parsing, the parseError argument will be set
         to a description of the problem.
     */
-    static Expression parse (String::CharPointerType& stringToParse, String& parseError);
+    static Expression parse (char*& stringToParse, String& parseError);
 
     //==============================================================================
     /** When evaluating an Expression object, this class is used to resolve symbols and

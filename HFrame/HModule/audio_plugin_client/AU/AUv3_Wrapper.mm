@@ -1171,7 +1171,7 @@ private:
             flags |= (UInt32) kAudioUnitParameterFlag_IsHighResolution;
 
         // Set whether the param is automatable (unnamed parameters aren't allowed to be automated).
-        if (name.isEmpty() || ! parameter->isAutomatable())
+        if (name.empty() || ! parameter->isAutomatable())
             flags |= kAudioUnitParameterFlag_NonRealTime;
 
         const bool isParameterDiscrete = parameter->isDiscrete();

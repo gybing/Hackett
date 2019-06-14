@@ -167,7 +167,7 @@ public:
     */
     Rectangle<int> getRectangle (const Rectangle<int>& target) const noexcept
     {
-        HAssert (! target.isEmpty());
+        HAssert (! target.empty());
 
         double x_, y_, w_, h_;
         applyPosAndSize (x_, w_, x, w, xMode, wMode, target.getX(), target.getWidth());
@@ -179,7 +179,7 @@ public:
     void getRectangleDouble (const Rectangle<int>& target,
                              double& x_, double& y_, double& w_, double& h_) const noexcept
     {
-        HAssert (! target.isEmpty());
+        HAssert (! target.empty());
         applyPosAndSize (x_, w_, x, w, xMode, wMode, target.getX(), target.getWidth());
         applyPosAndSize (y_, h_, y, h, yMode, hMode, target.getY(), target.getHeight());
     }

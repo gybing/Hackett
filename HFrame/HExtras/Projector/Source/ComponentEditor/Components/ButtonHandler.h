@@ -151,7 +151,7 @@ public:
                                                      "buttonClicked (Button* buttonThatWasClicked)",
                                                      true);
 
-            if (callback.isNotEmpty())
+            if (callback.!empty())
                 callback << "else ";
 
             const String memberVariableName (code.document->getComponentLayout()->getComponentMemberVariableName (component));

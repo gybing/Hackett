@@ -183,7 +183,7 @@ private:
     static void setPropertyCallback (const char* key, const char* value)
     {
         auto keyStr = String (key);
-        if (keyStr.isNotEmpty())
+        if (keyStr.!empty())
             getGlobalProperties().setValue (key, value);
         else
             HAssertfalse;

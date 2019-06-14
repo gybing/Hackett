@@ -120,7 +120,7 @@ public:
                 {
                     auto dragDescription = m->getDragSourceDescription (rowsToDrag);
 
-                    if (! (dragDescription.isVoid() || (dragDescription.isString() && dragDescription.toString().isEmpty())))
+                    if (! (dragDescription.isVoid() || (dragDescription.isString() && dragDescription.toString().empty())))
                     {
                         isDragging = true;
                         owner.startDragAndDrop (e, rowsToDrag, dragDescription, true);
@@ -576,7 +576,7 @@ void ListBox::flipRowSelection (const int row)
 
 void ListBox::deselectAllRows()
 {
-    if (! selected.isEmpty())
+    if (! selected.empty())
     {
         selected.clear();
         lastRowSelected = -1;

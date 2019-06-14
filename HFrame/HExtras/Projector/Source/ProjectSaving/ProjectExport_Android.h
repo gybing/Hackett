@@ -220,7 +220,7 @@ public:
 
         auto androidExtraAssetsFolderValue = androidExtraAssetsFolder.get().toString();
 
-        if (androidExtraAssetsFolderValue.isNotEmpty())
+        if (androidExtraAssetsFolderValue.!empty())
         {
             auto extraAssets = getProject().getFile().getParentDirectory().getChildFile (androidExtraAssetsFolderValue);
 
@@ -391,7 +391,7 @@ private:
         }
 
         auto cfgExtraLinkerFlags = getExtraLinkerFlagsString();
-        if (cfgExtraLinkerFlags.isNotEmpty())
+        if (cfgExtraLinkerFlags.!empty())
         {
             mo << "SET( HLDFLAGS \"" << cfgExtraLinkerFlags.replace ("\"", "\\\"") << "\")" << newLine;
             mo << "SET( CMAKE_SHARED_LINKER_FLAGS  \"${CMAKE_EXE_LINKER_FLAGS} ${HLDFLAGS}\")" << newLine << newLine;
@@ -426,7 +426,7 @@ private:
 
                     auto binaryLocation = cfg.getTargetBinaryRelativePathString();
 
-                    if (binaryLocation.isNotEmpty())
+                    if (binaryLocation.!empty())
                     {
                         auto locationRelativeToCmake = RelativePath (binaryLocation, RelativePath::projectFolder)
                                                         .rebased (getProject().getFile().getParentDirectory(),
@@ -510,7 +510,7 @@ private:
             mo << newLine;
         }
 
-        if (! extraCompilerFlags.isEmpty())
+        if (! extraCompilerFlags.empty())
         {
             for (auto& extra : extraCompilerFlags)
                 mo << "set_source_files_properties(\"" << extra.first.toUnixStyle() << "\" PROPERTIES COMPILE_FLAGS " << extra.second << " )" << newLine;
@@ -621,7 +621,7 @@ private:
 
             mo << "        " << cfg.getProductFlavourNameIdentifier() << " {" << newLine;
 
-            if (cfg.getArchitectures().isNotEmpty())
+            if (cfg.getArchitectures().!empty())
             {
                 mo << "            ndk {" << newLine;
                 mo << "                abiFilters " << toGradleList (StringArray::fromTokens (cfg.getArchitectures(),  " ", "")) << newLine;
@@ -1139,7 +1139,7 @@ private:
             {
                 auto remoteNotifsConfigFilePath = cfg.getRemoteNotifsConfigFile();
 
-                if (remoteNotifsConfigFilePath.isEmpty())
+                if (remoteNotifsConfigFilePath.empty())
                     remoteNotifsConfigFilePath = androidRemoteNotificationsConfigFile.get().toString();
 
                 File file (getProject().getFile().getChildFile (remoteNotifsConfigFilePath));
@@ -1319,7 +1319,7 @@ private:
             {
                 auto extraFlags = compilerFlagSchemesMap[projectItem.getCompilerFlagSchemeString()].get().toString();
 
-                if (extraFlags.isNotEmpty())
+                if (extraFlags.!empty())
                     extraCompilerFlags.add ({ file, extraFlags });
             }
         }
@@ -1494,7 +1494,7 @@ private:
             auto escaped = "\"-D" + defs.getAllKeys()[i];
             auto value = defs.getAllValues()[i];
 
-            if (value.isNotEmpty())
+            if (value.!empty())
             {
                 value = value.replace ("\"", "\\\"");
                 if (value.containsChar (L' '))
@@ -1593,7 +1593,7 @@ private:
 
             forEachXmlChildElementWithTagName (manifest, child, "uses-feature")
             {
-                if (child->getStringAttribute ("android:glEsVersion").isNotEmpty())
+                if (child->getStringAttribute ("android:glEsVersion").!empty())
                 {
                     glVersion = child;
                     break;
@@ -1614,7 +1614,7 @@ private:
         setAttributeIfNotPresent (*app, "android:label", "@string/app_name");
         setAttributeIfNotPresent (*app, "android:name", getApplicationClass());
 
-        if (androidTheme.get().toString().isNotEmpty())
+        if (androidTheme.get().toString().!empty())
             setAttributeIfNotPresent (*app, "android:theme", androidTheme.get());
 
         if (! app->hasAttribute ("android:icon"))

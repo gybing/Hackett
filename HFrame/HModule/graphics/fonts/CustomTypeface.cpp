@@ -299,9 +299,9 @@ float CustomTypeface::getStringWidth (const String& text)
 {
     float x = 0;
 
-    for (auto t = text.getCharPointer(); ! t.isEmpty();)
+    for (auto t = text.c_str(); ! t.empty();)
     {
-        auto c = t.getAndAdvance();
+        auto c = *t++;
 
         if (auto* glyph = findGlyph (c, true))
         {
@@ -323,12 +323,12 @@ void CustomTypeface::getGlyphPositions (const String& text, Array<int>& resultGl
     xOffsets.add (0);
     float x = 0;
 
-    for (auto t = text.getCharPointer(); ! t.isEmpty();)
+    for (auto t = text.c_str(); ! t.empty();)
     {
         float width = 0.0f;
         int glyphChar = 0;
 
-        auto c = t.getAndAdvance();
+        auto c = *t++;
 
         if (auto* glyph = findGlyph (c, true))
         {
@@ -378,7 +378,7 @@ EdgeTable* CustomTypeface::getEdgeTableForGlyph (int glyphNumber, const AffineTr
 {
     if (auto* glyph = findGlyph ((wchar) glyphNumber, true))
     {
-        if (! glyph->path.isEmpty())
+        if (! glyph->path.empty())
             return new EdgeTable (glyph->path.getBoundsTransformed (transform)
                                              .getSmallestIntegerContainer().expanded (1, 0),
                                   glyph->path, transform);

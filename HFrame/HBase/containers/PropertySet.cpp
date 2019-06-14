@@ -57,7 +57,7 @@ int PropertySet::getIntValue (StringRef keyName, int defaultValue) const noexcep
     auto index = properties.getAllKeys().indexOf (keyName, ignoreCaseOfKeys);
 
     if (index >= 0)
-        return properties.getAllValues() [index].getIntValue();
+        return std::atoi(properties.getAllValues()[index].c_str());
 
     return fallbackProperties != nullptr ? fallbackProperties->getIntValue (keyName, defaultValue)
                                          : defaultValue;
@@ -69,7 +69,7 @@ double PropertySet::getDoubleValue (StringRef keyName, double defaultValue) cons
     auto index = properties.getAllKeys().indexOf (keyName, ignoreCaseOfKeys);
 
     if (index >= 0)
-        return properties.getAllValues()[index].getDoubleValue();
+        return std::atof(properties.getAllValues()[index].c_str());
 
     return fallbackProperties != nullptr ? fallbackProperties->getDoubleValue (keyName, defaultValue)
                                          : defaultValue;
@@ -81,7 +81,7 @@ bool PropertySet::getBoolValue (StringRef keyName, bool defaultValue) const noex
     auto index = properties.getAllKeys().indexOf (keyName, ignoreCaseOfKeys);
 
     if (index >= 0)
-        return properties.getAllValues() [index].getIntValue() != 0;
+        return std::atoi(properties.getAllValues()[index].c_str()) != 0;
 
     return fallbackProperties != nullptr ? fallbackProperties->getBoolValue (keyName, defaultValue)
                                          : defaultValue;
@@ -94,9 +94,9 @@ std::unique_ptr<XmlElement> PropertySet::getXmlValue (StringRef keyName) const
 
 void PropertySet::setValue (const String& keyName, const var& v)
 {
-    HAssert (keyName.isNotEmpty()); // shouldn't use an empty key name!
+    HAssert (!keyName.empty()); // shouldn't use an empty key name!
 
-    if (keyName.isNotEmpty())
+    if (!keyName.empty())
     {
         auto value = v.toString();
         const ScopedLock sl (lock);
@@ -112,7 +112,7 @@ void PropertySet::setValue (const String& keyName, const var& v)
 
 void PropertySet::removeValue (StringRef keyName)
 {
-    if (keyName.isNotEmpty())
+    if (!keyName.empty())
     {
         const ScopedLock sl (lock);
         auto index = properties.getAllKeys().indexOf (keyName, ignoreCaseOfKeys);

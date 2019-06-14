@@ -213,7 +213,7 @@ void MainWindow::restoreWindowPosition()
     if (currentProject != nullptr)
         windowState = currentProject->getStoredProperties().getValue (getProjectWindowPosName());
 
-    if (windowState.isEmpty())
+    if (windowState.empty())
         windowState = getGlobalProperties().getValue ("lastMainWindowPos");
 
     restoreWindowStateFromString (windowState);
@@ -299,7 +299,7 @@ static bool isDivider (const String& line)
 
     if (afterIndent.startsWith ("//") && afterIndent.length() > 20)
     {
-        afterIndent = afterIndent.substring (2);
+        afterIndent = afterIndent.substr (2);
 
         if (afterIndent.containsOnly ("=")
             || afterIndent.containsOnly ("/")
@@ -428,7 +428,7 @@ bool MainWindow::shouldDropFilesWhenDraggedExternally (const DragAndDropTarget::
             if (auto* b = dynamic_cast<JucerTreeViewBase*> (tv->getSelectedItem(i)))
                 selected.add (b);
 
-        if (! selected.isEmpty())
+        if (! selected.empty())
         {
             for (int i = selected.size(); --i >= 0;)
             {
@@ -442,7 +442,7 @@ bool MainWindow::shouldDropFilesWhenDraggedExternally (const DragAndDropTarget::
             }
 
             canMoveFiles = false;
-            return ! files.isEmpty();
+            return ! files.empty();
         }
     }
 
@@ -727,7 +727,7 @@ MainWindow* MainWindowList::createNewMainWindow()
 
 MainWindow* MainWindowList::getFrontmostWindow (bool createIfNotFound)
 {
-    if (windows.isEmpty())
+    if (windows.empty())
     {
         if (createIfNotFound)
         {

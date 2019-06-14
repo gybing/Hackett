@@ -210,7 +210,7 @@ Image Image::getClippedImage (const Rectangle<int>& area) const
 
     auto validArea = area.getIntersection (getBounds());
 
-    if (validArea.isEmpty())
+    if (validArea.empty())
         return {};
 
     return Image (*new SubsectionPixelData (image, validArea));

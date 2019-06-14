@@ -408,7 +408,7 @@ struct Component::ComponentHelpers
             {
                 auto newClip = clipRect.getIntersection (child.boundsRelativeToParent);
 
-                if (! newClip.isEmpty())
+                if (! newClip.empty())
                 {
                     if (child.isOpaque() && child.componentTransparency == 0)
                     {
@@ -1209,7 +1209,7 @@ void Component::setBoundsInset (BorderSize<int> borders)
 
 void Component::setBoundsToFit (Rectangle<int> targetArea, Justification justification, bool onlyReduceInSize)
 {
-    if (getLocalBounds().isEmpty() || targetArea.isEmpty())
+    if (getLocalBounds().empty() || targetArea.empty())
     {
         // it's no good calling this method unless both the component and
         // target rectangle have a finite size.
@@ -1238,7 +1238,7 @@ void Component::setBoundsToFit (Rectangle<int> targetArea, Justification justifi
                                        roundToInt (targetArea.getHeight() / sourceRatio)));
     }
 
-    if (! sourceArea.isEmpty())
+    if (! sourceArea.empty())
         setBounds (justification.appliedToRectangle (sourceArea, targetArea));
 }
 
@@ -1523,13 +1523,13 @@ Component* Component::removeChildComponent (int index, bool sendParentEvents, bo
 //==============================================================================
 void Component::removeAllChildren()
 {
-    while (! childComponentList.isEmpty())
+    while (! childComponentList.empty())
         removeChildComponent (childComponentList.size() - 1);
 }
 
 void Component::deleteAllChildren()
 {
-    while (! childComponentList.isEmpty())
+    while (! childComponentList.empty())
         delete (removeChildComponent (childComponentList.size() - 1));
 }
 
@@ -1586,7 +1586,7 @@ void Component::childrenChanged() {}
 
 void Component::internalChildrenChanged()
 {
-    if (componentListeners.isEmpty())
+    if (componentListeners.empty())
     {
         childrenChanged();
     }
@@ -1825,7 +1825,7 @@ void Component::internalRepaint (Rectangle<int> area)
 {
     area = area.getIntersection (getLocalBounds());
 
-    if (! area.isEmpty())
+    if (! area.empty())
         internalRepaintUnchecked (area, false);
 }
 
@@ -1867,7 +1867,7 @@ void Component::paint (Graphics&)
 {
     // if your component is marked as opaque, you must implement a paint
     // method and ensure that its entire area is completely painted.
-    HAssert (getBounds().isEmpty() || ! isOpaque());
+    HAssert (getBounds().empty() || ! isOpaque());
 }
 
 void Component::paintOverChildren (Graphics&)
@@ -2029,7 +2029,7 @@ Image Component::createComponentSnapshot (Rectangle<int> areaToGrab,
     if (clipImageToComponentBounds)
         r = r.getIntersection (getLocalBounds());
 
-    if (r.isEmpty())
+    if (r.empty())
         return {};
 
     auto w = roundToInt (scaleFactor * r.getWidth());

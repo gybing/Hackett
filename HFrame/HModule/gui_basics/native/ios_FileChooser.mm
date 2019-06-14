@@ -159,7 +159,7 @@ private:
         {
             for (auto filter : filters)
             {
-                if (filter.isEmpty())
+                if (filter.empty())
                     continue;
 
                 // iOS only supports file extension wild cards
@@ -168,7 +168,7 @@ private:
                 auto fileExtension = filter.fromLastOccurrenceOf (".", false, false);
                 auto fileExtensionCF = fileExtension.toCFString();
 
-                if (firstExtension.isEmpty())
+                if (firstExtension.empty())
                     firstExtension = fileExtension;
 
                 auto tag = UTTypeCreatePreferredIdentifierForTag (kUTTagClassFilenameExtension, fileExtensionCF, nullptr);
@@ -191,15 +191,15 @@ private:
     static String getFilename (const File& path, const String& fallbackExtension)
     {
         auto filename  = path.getFileNameWithoutExtension();
-        auto extension = path.getFileExtension().substring (1);
+        auto extension = path.getFileExtension().substr (1);
 
-        if (filename.isEmpty())
+        if (filename.empty())
             filename = "Untitled";
 
-        if (extension.isEmpty())
+        if (extension.empty())
             extension = fallbackExtension;
 
-        if (extension.isNotEmpty())
+        if (extension.!empty())
             filename += "." + extension;
 
         return filename;

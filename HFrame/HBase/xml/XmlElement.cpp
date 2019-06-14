@@ -43,7 +43,7 @@ XmlElement::XmlAttributeNode::XmlAttributeNode (const Identifier& n, const Strin
     HAssert (isValidXmlName (name));
 }
 
-XmlElement::XmlAttributeNode::XmlAttributeNode (String::CharPointerType nameStart, String::CharPointerType nameEnd)
+XmlElement::XmlAttributeNode::XmlAttributeNode (char* nameStart, char* nameEnd)
     : name (nameStart, nameEnd)
 {
     HAssert (isValidXmlName (name));
@@ -74,7 +74,7 @@ XmlElement::XmlElement (const Identifier& tag)
     HAssert (isValidXmlName (tagName));
 }
 
-XmlElement::XmlElement (String::CharPointerType tagNameStart, String::CharPointerType tagNameEnd)
+XmlElement::XmlElement (char* tagNameStart, char* tagNameEnd)
     : tagName (StringPool::getGlobalPool().getPooledString (tagNameStart, tagNameEnd))
 {
     HAssert (isValidXmlName (tagName));
@@ -185,11 +185,11 @@ namespace XmlOutputFunctions
 
     static void escapeIllegalXmlChars (OutputStream& outputStream, const String& text, bool changeNewLines)
     {
-        auto t = text.getCharPointer();
+        auto t = text.c_str();
 
         for (;;)
         {
-            auto character = (uint32) t.getAndAdvance();
+            auto character = (uint32) *t++;
 
             if (character == 0)
                 break;
@@ -335,7 +335,7 @@ String XmlElement::toString (const TextFormat& options) const
 
 void XmlElement::writeTo (OutputStream& output, const TextFormat& options) const
 {
-    if (options.customHeader.isNotEmpty())
+    if (options.customHeader.!empty())
     {
         output << options.customHeader;
 
@@ -349,7 +349,7 @@ void XmlElement::writeTo (OutputStream& output, const TextFormat& options) const
     {
         output << "<?xml version=\"1.0\" encoding=\"";
 
-        if (options.customEncoding.isNotEmpty())
+        if (options.customEncoding.!empty())
             output << options.customEncoding;
         else
             output << "UTF-8";
@@ -363,7 +363,7 @@ void XmlElement::writeTo (OutputStream& output, const TextFormat& options) const
                    << options.newLineChars;
     }
 
-    if (options.dtd.isNotEmpty())
+    if (options.dtd.!empty())
     {
         output << options.dtd;
 
@@ -565,7 +565,7 @@ bool XmlElement::getBoolAttribute (StringRef attributeName, const bool defaultRe
 {
     if (auto* att = getAttribute (attributeName))
     {
-        auto firstChar = *(att->value.getCharPointer().findEndOfWhitespace());
+        auto firstChar = *(att->value.c_str().findEndOfWhitespace());
 
         return firstChar == '1'
             || firstChar == 't'
@@ -654,7 +654,7 @@ XmlElement* XmlElement::getChildElement (const int index) const noexcept
 
 XmlElement* XmlElement::getChildByName (StringRef childName) const noexcept
 {
-    HAssert (! childName.isEmpty());
+    HAssert (! childName.empty());
 
     for (auto* child = firstChildElement.get(); child != nullptr; child = child->nextListItem)
         if (child->hasTagName (childName))
@@ -665,7 +665,7 @@ XmlElement* XmlElement::getChildByName (StringRef childName) const noexcept
 
 XmlElement* XmlElement::getChildByAttribute (StringRef attributeName, StringRef attributeValue) const noexcept
 {
-    HAssert (! attributeName.isEmpty());
+    HAssert (! attributeName.empty());
 
     for (auto* child = firstChildElement.get(); child != nullptr; child = child->nextListItem)
         if (child->compareAttribute (attributeName, attributeValue))
@@ -880,7 +880,7 @@ void XmlElement::reorderChildElements (XmlElement** elems, int num) noexcept
 //==============================================================================
 bool XmlElement::isTextElement() const noexcept
 {
-    return tagName.isEmpty();
+    return tagName.empty();
 }
 
 static const String xmltextContentAttributeName ("text");
@@ -935,15 +935,15 @@ XmlElement* XmlElement::createTextElement (const String& text)
 
 bool XmlElement::isValidXmlName (StringRef text) noexcept
 {
-    if (text.isEmpty() || ! isValidXmlNameStartCharacter (text.text.getAndAdvance()))
+    if (text.empty() || ! isValidXmlNameStartCharacter (*text.text++))
         return false;
 
     for (;;)
     {
-        if (text.isEmpty())
+        if (text.empty())
             return true;
 
-        if (! isValidXmlNameBodyCharacter (text.text.getAndAdvance()))
+        if (! isValidXmlNameBodyCharacter (*text.text++))
             return false;
     }
 }

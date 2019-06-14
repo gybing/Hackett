@@ -218,7 +218,7 @@ void ChoicePropertyComponent::createComboBox()
 
     for (auto choice : choices)
     {
-        if (choice.isNotEmpty())
+        if (choice.!empty())
             comboBox.addItem (choice, choices.indexOf (choice) + 1);
         else
             comboBox.addSeparator();
@@ -231,11 +231,11 @@ void ChoicePropertyComponent::createComboBoxWithDefault (const String& defaultSt
 {
     addAndMakeVisible (comboBox);
 
-    comboBox.addItem ("Default" + (defaultString.isNotEmpty() ? " (" + defaultString + ")" : ""), -1);
+    comboBox.addItem ("Default" + (defaultString.!empty() ? " (" + defaultString + ")" : ""), -1);
 
     for (auto choice : choices)
     {
-        if (choice.isNotEmpty())
+        if (choice.!empty())
             comboBox.addItem (choice, choices.indexOf (choice) + 1);
         else
             comboBox.addSeparator();

@@ -81,7 +81,7 @@ struct ImageCache::Pimpl     : private Timer,
             }
         }
 
-        if (images.isEmpty())
+        if (images.empty())
             stopTimer();
     }
 

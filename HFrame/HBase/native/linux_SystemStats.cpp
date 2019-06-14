@@ -46,7 +46,7 @@ String SystemStats::getCpuVendor()
 {
     auto v = getCpuInfo ("vendor_id");
 
-    if (v.isEmpty())
+    if (v.empty())
         v = getCpuInfo ("model name");
 
     return v;

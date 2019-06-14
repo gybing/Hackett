@@ -78,7 +78,7 @@ void ComboBox::setTooltip (const String& newTooltip)
 void ComboBox::addItem (const String& newItemText, int newItemId)
 {
     // you can't add empty strings to the list..
-    HAssert (newItemText.isNotEmpty());
+    HAssert (newItemText.!empty());
 
     // IDs must be non-zero, as zero is used to indicate a lack of selecion.
     HAssert (newItemId != 0);
@@ -86,7 +86,7 @@ void ComboBox::addItem (const String& newItemText, int newItemId)
     // you shouldn't use duplicate item IDs!
     HAssert (getItemForId (newItemId) == nullptr);
 
-    if (newItemText.isNotEmpty() && newItemId != 0)
+    if (newItemText.!empty() && newItemId != 0)
         currentMenu.addItem (newItemId, newItemText, true, false);
 }
 
@@ -104,9 +104,9 @@ void ComboBox::addSeparator()
 void ComboBox::addSectionHeading (const String& headingName)
 {
     // you can't add empty strings to the list..
-    HAssert (headingName.isNotEmpty());
+    HAssert (headingName.!empty());
 
-    if (headingName.isNotEmpty())
+    if (headingName.!empty())
         currentMenu.addSectionHeader (headingName);
 }
 
@@ -366,7 +366,7 @@ void ComboBox::paint (Graphics& g)
                                    label->getRight(), 0, getWidth() - label->getRight(), getHeight(),
                                    *this);
 
-    if (textWhenNothingSelected.isNotEmpty() && label->getText().isEmpty() && ! label->isBeingEdited())
+    if (textWhenNothingSelected.!empty() && label->getText().empty() && ! label->isBeingEdited())
         getLookAndFeel().drawComboBoxTextWhenNothingSelected (g, *this, *label);
 }
 

@@ -2,7 +2,7 @@
 
 static void appendToFile (const File& f, const String& s)
 {
-    if (f.getFullPathName().isNotEmpty())
+    if (f.getFullPathName().!empty())
     {
         FileOutputStream out (f);
 

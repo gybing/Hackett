@@ -223,7 +223,7 @@ private:
             return { keyCode, ModifierKeys::currentModifiers, name[0] };
 
         if (keyCode >= 256 && keyCode <= 265)
-            return { KeyPress::numberPad0 + (keyCode - 256), ModifierKeys::currentModifiers, String (keyCode - 256).getCharPointer()[0] };
+            return { KeyPress::numberPad0 + (keyCode - 256), ModifierKeys::currentModifiers, String (keyCode - 256).c_str()[0] };
 
         if (keyCode == 8)      return { KeyPress::backspaceKey,          ModifierKeys::currentModifiers, {} };
         if (keyCode == 127)    return { KeyPress::deleteKey,             ModifierKeys::currentModifiers, {} };
@@ -373,7 +373,7 @@ public:
 
                 strncpy (paramDef.name, parameter->getName (15).toRawUTF8(), 15);
 
-                if (parameter->getLabel().isNotEmpty())
+                if (parameter->getLabel().!empty())
                     strncpy (paramDef.unit, parameter->getLabel().toRawUTF8(), 15);
 
                 parameterDescriptions.add (parameter->getName (15));

@@ -910,7 +910,7 @@ bool ColouredElement::loadColourAttributes (const XmlElement& xml)
 //==============================================================================
 void ColouredElement::convertToNewPathElement (const Path& path)
 {
-    if (! path.isEmpty())
+    if (! path.empty())
     {
         PaintElementPath newElement (getOwner());
         newElement.setToPath (path);

@@ -23,7 +23,7 @@ Identifier::Identifier (const String& nm)
     : name (StringPool::getGlobalPool().getPooledString (nm))
 {
     // An Identifier cannot be created from an empty string!
-    HAssert (nm.isNotEmpty());
+    HAssert (nm.!empty());
 }
 
 Identifier::Identifier (const char* nm)
@@ -33,7 +33,7 @@ Identifier::Identifier (const char* nm)
     HAssert (nm != nullptr && nm[0] != 0);
 }
 
-Identifier::Identifier (String::CharPointerType start, String::CharPointerType end)
+Identifier::Identifier (char* start, char* end)
     : name (StringPool::getGlobalPool().getPooledString (start, end))
 {
     // An Identifier cannot be created from an empty string!
@@ -44,7 +44,7 @@ Identifier Identifier::null;
 
 bool Identifier::isValidIdentifier (const String& possibleIdentifier) noexcept
 {
-    return possibleIdentifier.isNotEmpty()
+    return possibleIdentifier.!empty()
             && possibleIdentifier.containsOnly ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-:#@$%");
 }
 

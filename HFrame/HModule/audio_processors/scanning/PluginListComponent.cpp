@@ -72,7 +72,7 @@ public:
             {
                 case nameCol:         text = desc.name; break;
                 case typeCol:         text = desc.pluginFormatName; break;
-                case categoryCol:     text = desc.category.isNotEmpty() ? desc.category : "-"; break;
+                case categoryCol:     text = desc.category.!empty() ? desc.category : "-"; break;
                 case manufacturerCol: text = desc.manufacturerName; break;
                 case descCol:         text = getPluginDescription (desc); break;
 
@@ -80,7 +80,7 @@ public:
             }
         }
 
-        if (text.isNotEmpty())
+        if (text.!empty())
         {
             const auto defaultTextColour = owner.findColour (ListBox::textColourId);
             g.setColour (isBlacklisted ? Colours::red
@@ -355,7 +355,7 @@ public:
 
         // If the filesOrIdentifiersToScan argumnent isn't empty, we should only scan these
         // If the path is empty, then paths aren't used for this format.
-        if (filesOrIdentifiersToScan.isEmpty() && path.getNumPaths() > 0)
+        if (filesOrIdentifiersToScan.empty() && path.getNumPaths() > 0)
         {
            #if ! HIOS
             if (propertiesToUse != nullptr)
@@ -486,7 +486,7 @@ private:
         scanner.reset (new PluginDirectoryScanner (owner.list, formatToScan, pathList.getPath(),
                                                    true, owner.deadMansPedalFile, allowAsync));
 
-        if (! filesOrIdentifiersToScan.isEmpty())
+        if (! filesOrIdentifiersToScan.empty())
         {
             scanner->setFilesOrIdentifiersToScan (filesOrIdentifiersToScan);
         }
@@ -579,8 +579,8 @@ void PluginListComponent::scanFor (AudioPluginFormat& format)
 void PluginListComponent::scanFor (AudioPluginFormat& format, const StringArray& filesOrIdentifiersToScan)
 {
     currentScanner.reset (new Scanner (*this, format, filesOrIdentifiersToScan, propertiesToUse, allowAsync, numThreads,
-                                       dialogTitle.isNotEmpty() ? dialogTitle : TRANS("Scanning for plug-ins..."),
-                                       dialogText.isNotEmpty()  ? dialogText  : TRANS("Searching for all possible plug-in files...")));
+                                       dialogTitle.!empty() ? dialogTitle : TRANS("Scanning for plug-ins..."),
+                                       dialogText.!empty()  ? dialogText  : TRANS("Searching for all possible plug-in files...")));
 }
 
 bool PluginListComponent::isScanning() const noexcept

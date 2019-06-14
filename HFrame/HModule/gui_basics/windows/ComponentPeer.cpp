@@ -411,7 +411,7 @@ namespace DragHelpers
 {
     static bool isFileDrag (const ComponentPeer::DragInfo& info)
     {
-        return ! info.files.isEmpty();
+        return ! info.files.empty();
     }
 
     static bool isSuitableTarget (const ComponentPeer::DragInfo& info, Component* target)

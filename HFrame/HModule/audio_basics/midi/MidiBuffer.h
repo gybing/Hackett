@@ -49,12 +49,12 @@ public:
     /** Returns true if the buffer is empty.
         To actually retrieve the events, use a MidiBuffer::Iterator object
     */
-    bool isEmpty() const noexcept;
+    bool empty() const noexcept;
 
     /** Counts the number of events in the buffer.
 
         This is actually quite a slow operation, as it has to iterate through all
-        the events, so you might prefer to call isEmpty() if that's all you need
+        the events, so you might prefer to call empty() if that's all you need
         to know.
     */
     int getNumEvents() const noexcept;

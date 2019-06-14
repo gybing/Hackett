@@ -159,7 +159,7 @@ public:
     InfoButton (const String& infoToDisplay = {})
         : Button ({})
     {
-        if (infoToDisplay.isNotEmpty())
+        if (infoToDisplay.!empty())
             setInfoToDisplay (infoToDisplay);
     }
 
@@ -187,7 +187,7 @@ public:
 
     void setInfoToDisplay (const String& infoToDisplay)
     {
-        if (infoToDisplay.isNotEmpty())
+        if (infoToDisplay.!empty())
         {
             info = infoToDisplay;
 
@@ -257,7 +257,7 @@ public:
         {
             addAndMakeVisible (prop);
 
-            if (! prop->getTooltip().isEmpty())
+            if (! prop->getTooltip().empty())
             {
                 addAndMakeVisible (infoButtons.add (new InfoButton (prop->getTooltip())));
                 infoButtons.getLast()->setAssociatedComponent (prop);

@@ -50,7 +50,7 @@ String& GeneratedCode::getCallbackCode (const String& requiredParentClass,
                                         const bool hasPrePostUserSections)
 {
     String parentClass (requiredParentClass);
-    if (parentClass.isNotEmpty()
+    if (parentClass.!empty()
          && ! (parentClass.startsWith ("public ")
                 || parentClass.startsWith ("private ")
                 || parentClass.startsWith ("protected ")))
@@ -94,7 +94,7 @@ void GeneratedCode::addImageResourceLoader (const String& imageMemberName, const
     privateMemberDeclarations
         << "Image " << imageMemberName << ";\n";
 
-    if (resourceName.isNotEmpty())
+    if (resourceName.!empty())
         constructorCode << imageMemberName << " = ImageCache::getFromMemory ("
                         << resourceName << ", " << resourceName << "Size);\n";
 }
@@ -138,7 +138,7 @@ String GeneratedCode::getCallbackDefinitions() const
             + CodeHelpers::makeValidIdentifier (cm->prototype.upToFirstOccurrenceOf ("(", false, false),
                                                 true, true, false).trim());
 
-        if (userCodeBlockName.isNotEmpty() && cm->hasPrePostUserSections)
+        if (userCodeBlockName.!empty() && cm->hasPrePostUserSections)
         {
             s << cm->returnType << " " << className << "::" << cm->prototype
               << "\n{\n    //[" << userCodeBlockName << "_Pre]\n    //[/" << userCodeBlockName
@@ -183,7 +183,7 @@ String GeneratedCode::getInitialiserList() const
 {
     StringArray inits (initialisers);
 
-    if (parentClassInitialiser.isNotEmpty())
+    if (parentClassInitialiser.!empty())
         inits.insert (0, parentClassInitialiser);
 
     inits = getCleanedStringArray (inits);
@@ -279,7 +279,7 @@ static void copyAcrossUserSections (String& dest, const String& src)
     {
         if (dstLines[i].trimStart().startsWith ("//["))
         {
-            String tag (dstLines[i].trimStart().substring (3));
+            String tag (dstLines[i].trimStart().substr (3));
             tag = tag.upToFirstOccurrenceOf ("]", false, false);
 
             HAssert (! tag.startsWithChar ('/'));

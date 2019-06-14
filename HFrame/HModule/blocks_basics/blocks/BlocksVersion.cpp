@@ -11,10 +11,10 @@ String BlocksVersion::toString (bool extended) const
 
     if (extended)
     {
-        if (releaseType.isNotEmpty())
+        if (releaseType.!empty())
             output += "-" + releaseType + "-" + String (releaseCount);
 
-        if (commit.isNotEmpty())
+        if (commit.!empty())
             output += "-" + commit;
 
         if (forced)

@@ -26,7 +26,7 @@
 
 struct LuaTokeniserFunctions
 {
-    static bool isReservedKeyword (String::CharPointerType token, const int tokenLength) noexcept
+    static bool isReservedKeyword (char* token, const int tokenLength) noexcept
     {
         static const char* const keywords2Char[] =
             { "if", "or", "in", "do", nullptr };
@@ -76,8 +76,8 @@ struct LuaTokeniserFunctions
     static int parseIdentifier (Iterator& source) noexcept
     {
         int tokenLength = 0;
-        String::CharPointerType::CharType possibleIdentifier[100];
-        String::CharPointerType possible (possibleIdentifier);
+        char*::CharType possibleIdentifier[100];
+        char* possible (possibleIdentifier);
 
         while (CppTokeniserFunctions::isIdentifierBody (source.peekNextChar()))
         {
@@ -93,7 +93,7 @@ struct LuaTokeniserFunctions
         {
             possible.writeNull();
 
-            if (isReservedKeyword (String::CharPointerType (possibleIdentifier), tokenLength))
+            if (isReservedKeyword (char* (possibleIdentifier), tokenLength))
                 return LuaTokeniser::tokenType_keyword;
         }
 

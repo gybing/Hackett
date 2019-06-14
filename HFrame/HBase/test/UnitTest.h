@@ -263,10 +263,10 @@ private:
     {
         if (! result)
         {
-            if (failureMessage.isNotEmpty())
+            if (failureMessage.!empty())
                 failureMessage << " -- ";
 
-            failureMessage << "Expected value" << (compDescription.isEmpty() ? "" : " ")
+            failureMessage << "Expected value" << (compDescription.empty() ? "" : " ")
                            << compDescription << ": " << valueToCompareTo
                            << ", Actual value: " << value;
         }

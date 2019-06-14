@@ -54,15 +54,15 @@ public:
     bool operator== (const NamedValueSet&) const noexcept;
     bool operator!= (const NamedValueSet&) const noexcept;
 
-    const NamedValueSet::NamedValue* begin() const noexcept     { return values.begin(); }
-    const NamedValueSet::NamedValue* end() const noexcept       { return values.end();   }
+    const NamedValueSet::NamedValue* begin() const noexcept     { return values.empty() ? nullptr : &values.front(); }
+    const NamedValueSet::NamedValue* end() const noexcept       { return values.empty() ? nullptr : &values.back();   }
 
     //==============================================================================
     /** Returns the total number of values that the set contains. */
     int size() const noexcept;
 
     /** Returns true if the set is empty. */
-    bool isEmpty() const noexcept;
+    bool empty() const noexcept;
 
     /** Returns the value of a named item.
         If the name isn't found, this will return a void variant.
@@ -157,7 +157,7 @@ public:
 
 private:
     //==============================================================================
-    Array<NamedValue> values;
+    std::vector<NamedValue> values;
 };
 
 

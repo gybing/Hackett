@@ -101,7 +101,7 @@ public:
         {
             shader.reset();
 
-            if (fragmentCode.isNotEmpty())
+            if (fragmentCode.!empty())
             {
                 shader.reset (new OpenGLGraphicsContextCustomShader (fragmentCode));
 

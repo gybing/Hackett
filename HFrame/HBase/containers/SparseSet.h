@@ -33,12 +33,12 @@ public:
     /** Checks whether the set is empty.
         This is much quicker than using (size() == 0).
     */
-    bool isEmpty() const noexcept               { return ranges.isEmpty(); }
+    bool empty() const noexcept               { return ranges.empty(); }
 
     /** Returns the number of values in the set.
 
         Because of the way the data is stored, this method can take longer if there
-        are a lot of items in the set. Use isEmpty() for a quick test of whether there
+        are a lot of items in the set. Use empty() for a quick test of whether there
         are any items.
     */
     Type size() const noexcept
@@ -106,7 +106,7 @@ public:
     */
     Range<Type> getTotalRange() const noexcept
     {
-        if (ranges.isEmpty())
+        if (ranges.empty())
             return {};
 
         return { ranges.getFirst().getStart(),
@@ -119,7 +119,7 @@ public:
     */
     void addRange (Range<Type> range)
     {
-        if (! range.isEmpty())
+        if (! range.empty())
         {
             removeRange (range);
             ranges.add (range);
@@ -134,7 +134,7 @@ public:
     */
     void removeRange (Range<Type> rangeToRemove)
     {
-        if (getTotalRange().intersects (rangeToRemove) && ! rangeToRemove.isEmpty())
+        if (getTotalRange().intersects (rangeToRemove) && ! rangeToRemove.empty())
         {
             for (int i = ranges.size(); --i >= 0;)
             {
@@ -156,14 +156,14 @@ public:
                     auto r2 = r.withStart (rangeToRemove.getEnd());
 
                     // this should be covered in if (rangeToRemove.contains (r))
-                    HAssert (! r1.isEmpty() || ! r2.isEmpty());
+                    HAssert (! r1.empty() || ! r2.empty());
 
                     r = r1;
 
-                    if (r.isEmpty())
+                    if (r.empty())
                         r = r2;
 
-                    if (! r1.isEmpty() && ! r2.isEmpty())
+                    if (! r1.empty() && ! r2.empty())
                         ranges.insert (i + 1, r2);
                 }
                 else if (rangeToRemove.getEnd() > r.getEnd())
@@ -196,7 +196,7 @@ public:
     /** Checks whether any part of a given range overlaps any part of this set. */
     bool overlapsRange (Range<Type> range) const noexcept
     {
-        if (! range.isEmpty())
+        if (! range.empty())
             for (auto& r : ranges)
                 if (r.intersects (range))
                     return true;
@@ -207,7 +207,7 @@ public:
     /** Checks whether the whole of a given range is contained within this one. */
     bool containsRange (Range<Type> range) const noexcept
     {
-        if (! range.isEmpty())
+        if (! range.empty())
             for (auto& r : ranges)
                 if (r.contains (range))
                     return true;

@@ -153,10 +153,10 @@ struct NativeFunction
 
         HAssert (slash > 0); // The slash can't be the first character in this string!
         HAssert (nameAndArgTypes[slash + 1] != 0);  // The slash must be followed by a return type character
-        HAssert (String (nameAndArgTypes).substring (0, slash).containsOnly ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"));
+        HAssert (String (nameAndArgTypes).substr (0, slash).containsOnly ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"));
         HAssert (! String ("0123456789").containsChar (nameAndArgTypes[0]));
-        HAssert (String (nameAndArgTypes).substring (slash + 1).containsOnly ("vifb"));
-        HAssert (String (nameAndArgTypes).substring (slash + 2).containsOnly ("ifb")); // arguments must only be of these types
+        HAssert (String (nameAndArgTypes).substr (slash + 1).containsOnly ("vifb"));
+        HAssert (String (nameAndArgTypes).substr (slash + 2).containsOnly ("ifb")); // arguments must only be of these types
 
         uint32 hash = 0, i = 0;
 

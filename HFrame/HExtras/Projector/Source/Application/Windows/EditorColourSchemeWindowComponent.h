@@ -282,7 +282,7 @@ private:
             void setValue (const var& newValue) override
             {
                 auto font = Font::fromString (sourceValue.toString());
-                font.setTypefaceName (newValue.toString().isEmpty() ? Font::getDefaultMonospacedFontName()
+                font.setTypefaceName (newValue.toString().empty() ? Font::getDefaultMonospacedFontName()
                                       : newValue.toString());
                 sourceValue = font.toString();
             }

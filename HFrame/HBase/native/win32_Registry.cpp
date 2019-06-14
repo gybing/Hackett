@@ -6,13 +6,13 @@ struct RegistryKeyWrapper
     {
         if (HKEY rootKey = getRootKey (name))
         {
-            name = name.substring (name.indexOfChar ('\\') + 1);
+            name = name.substr (name.indexOfChar ('\\') + 1);
 
             auto lastSlash = name.lastIndexOfChar ('\\');
-            valueName = name.substring (lastSlash + 1);
+            valueName = name.substr (lastSlash + 1);
             wideCharValueName = valueName.toWideCharPointer();
 
-            name = name.substring (0, lastSlash);
+            name = name.substr (0, lastSlash);
             auto wideCharName = name.toWideCharPointer();
             DWORD result;
 
@@ -140,7 +140,7 @@ String CALLTYPE WindowsRegistry::getValue (const String& regValuePath, const Str
 bool CALLTYPE WindowsRegistry::setValue (const String& regValuePath, const String& value, WoW64Mode mode)
 {
     return RegistryKeyWrapper::setValue (regValuePath, REG_SZ, value.toWideCharPointer(),
-                                         CharPointer_UTF16::getBytesRequiredFor (value.getCharPointer()), mode);
+                                         CharPointer_UTF16::getBytesRequiredFor (value.c_str()), mode);
 }
 
 bool CALLTYPE WindowsRegistry::setValue (const String& regValuePath, const uint32 value, WoW64Mode mode)

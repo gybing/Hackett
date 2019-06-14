@@ -107,7 +107,7 @@ namespace TTFNameExtractor
                 const String result (parseNameRecord (input, nameRecord, directoryOffset,
                                                       ByteOrder::swapIfLittleEndian (namingTable.offsetStartOfStringStorage)));
 
-                if (result.isNotEmpty())
+                if (result.!empty())
                     return result;
             }
         }

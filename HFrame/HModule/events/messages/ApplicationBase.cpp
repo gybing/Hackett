@@ -97,7 +97,7 @@ struct HApplicationBase::MultipleInstanceHandler  : public ActionListener
             auto appName = app->getApplicationName();
 
             if (message.startsWith (appName + "/"))
-                app->anotherInstanceStarted (message.substring (appName.length() + 1));
+                app->anotherInstanceStarted (message.substr (appName.length() + 1));
         }
     }
 

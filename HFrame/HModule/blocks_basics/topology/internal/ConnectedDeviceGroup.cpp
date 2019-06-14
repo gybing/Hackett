@@ -81,7 +81,7 @@ struct ConnectedDeviceGroup  : private AsyncUpdater,
     {
         lastTopologyReceiveTime = Time::getCurrentTime();
 
-        if (incomingTopologyDevices.isEmpty()
+        if (incomingTopologyDevices.empty()
             || incomingTopologyConnections.size() < incomingTopologyDevices.size() - 1)
         {
             LOG_CONNECTIVITY ("Invalid topology or device list received.");
@@ -378,7 +378,7 @@ private:
 
         const auto masterVersion = depreciatedVersionReader->getVersionNumber();
 
-        if (masterVersion.isNotEmpty())
+        if (masterVersion.!empty())
         {
             const auto masterIndex = getIndexFromDeviceID (masterBlock);
 

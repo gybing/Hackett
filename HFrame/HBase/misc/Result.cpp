@@ -41,7 +41,7 @@ bool Result::operator!= (const Result& other) const noexcept
 
 Result Result::fail (const String& errorMessage) noexcept
 {
-    return Result (errorMessage.isEmpty() ? "Unknown Error" : errorMessage);
+    return Result (errorMessage.empty() ? "Unknown Error" : errorMessage);
 }
 
 const String& Result::getErrorMessage() const noexcept
@@ -49,9 +49,9 @@ const String& Result::getErrorMessage() const noexcept
     return errorMessage;
 }
 
-bool Result::wasOk() const noexcept         { return errorMessage.isEmpty(); }
-Result::operator bool() const noexcept      { return errorMessage.isEmpty(); }
-bool Result::failed() const noexcept        { return errorMessage.isNotEmpty(); }
-bool Result::operator!() const noexcept     { return errorMessage.isNotEmpty(); }
+bool Result::wasOk() const noexcept         { return errorMessage.empty(); }
+Result::operator bool() const noexcept      { return errorMessage.empty(); }
+bool Result::failed() const noexcept        { return !errorMessage.empty(); }
+bool Result::operator!() const noexcept     { return !errorMessage.empty(); }
 
 

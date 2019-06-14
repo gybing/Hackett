@@ -37,7 +37,7 @@ public:
           modulesLabel (String(), TRANS("Modules Folder") + ":"),
           useGlobalPathsToggle ("Use global module path")
     {
-        if (initialFileOrDirectory.isEmpty())
+        if (initialFileOrDirectory.empty())
             initialFileOrDirectory = getAppSettings().getStoredPath (Ids::defaultJuceModulePath, TargetOS::getThisOS()).get().toString();
 
         setModulesFolder (initialFileOrDirectory);
@@ -493,7 +493,7 @@ private:
 
     void updateCreateButton()
     {
-        createButton.setEnabled (projectName.getText().trim().isNotEmpty());
+        createButton.setEnabled (projectName.getText().trim().!empty());
     }
 
     void lookAndFeelChanged() override

@@ -110,7 +110,7 @@ public:
     }
 
     /** Returns true if the array is empty, false otherwise. */
-    inline bool isEmpty() const noexcept
+    inline bool empty() const noexcept
     {
         return size() == 0;
     }

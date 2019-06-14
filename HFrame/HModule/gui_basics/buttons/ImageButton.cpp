@@ -188,7 +188,7 @@ bool ImageButton::hitTest (int x, int y)
 
     Image im (getCurrentImage());
 
-    return im.isNull() || ((! imageBounds.isEmpty())
+    return im.isNull() || ((! imageBounds.empty())
                             && alphaThreshold < im.getPixelAt (((x - imageBounds.getX()) * im.getWidth()) / imageBounds.getWidth(),
                                                                ((y - imageBounds.getY()) * im.getHeight()) / imageBounds.getHeight()).getAlpha());
 }

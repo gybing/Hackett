@@ -81,7 +81,7 @@ public:
         if (tc->getDocument() != nullptr)
             HrCompClassName = tc->getDocument()->getClassName();
 
-        if (HrCompClassName.isEmpty())
+        if (HrCompClassName.empty())
             HrCompClassName = "Component";
 
         return HrCompClassName;

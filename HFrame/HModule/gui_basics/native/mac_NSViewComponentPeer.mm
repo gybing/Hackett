@@ -365,7 +365,7 @@ public:
                         r = component.getParentMonitorArea();
 
                     // (can't call the component's setBounds method because that'll reset our fullscreen flag)
-                    if (r != component.getBounds() && ! r.isEmpty())
+                    if (r != component.getBounds() && ! r.empty())
                         setBounds (ScalingHelpers::scaledScreenPosToUnscaled (component, r), shouldBeFullScreen);
                 }
             }
@@ -707,15 +707,15 @@ public:
         DBG ("unmodified: " + unmodified + " " + String::toHexString ((int) unmodified[0]));
        #endif
 
-        if (keyCode != 0 || unicode.isNotEmpty())
+        if (keyCode != 0 || unicode.!empty())
         {
             if (isKeyDown)
             {
                 bool used = false;
 
-                for (auto u = unicode.getCharPointer(); ! u.isEmpty();)
+                for (auto u = unicode.c_str(); ! u.empty();)
                 {
-                    auto textCharacter = u.getAndAdvance();
+                    auto textCharacter = *u++;
 
                     switch (keyCode)
                     {
@@ -860,7 +860,7 @@ public:
             RectangleList<int> clip;
             getClipRects (clip, offset, clipW, clipH);
 
-            if (! clip.isEmpty())
+            if (! clip.empty())
             {
                 Image temp (component.isOpaque() ? Image::RGB : Image::ARGB,
                             roundToInt (clipW * displayScale),
@@ -1157,7 +1157,7 @@ public:
         }
 
         // did the above layout conversion fail
-        if (unmodified.isEmpty())
+        if (unmodified.empty())
        #endif
         {
             unmodified = nsStringToJuce ([ev charactersIgnoringModifiers]);
@@ -1258,7 +1258,7 @@ public:
         else
             dragInfo.files = getDroppedFiles (pasteboard, contentType);
 
-        if (! dragInfo.isEmpty())
+        if (! dragInfo.empty())
         {
             switch (type)
             {
@@ -1758,7 +1758,7 @@ private:
     {
         if (auto* owner = getOwner (self))
         {
-            if (owner->stringBeingComposed.isNotEmpty())
+            if (owner->stringBeingComposed.!empty())
             {
                 if (auto* target = owner->findCurrentTextInputTarget())
                 {
@@ -1774,7 +1774,7 @@ private:
     static BOOL hasMarkedText (id self, SEL)
     {
         auto* owner = getOwner (self);
-        return owner != nullptr && owner->stringBeingComposed.isNotEmpty();
+        return owner != nullptr && owner->stringBeingComposed.!empty();
     }
 
     static long conversationIdentifier (id self, SEL)
@@ -1801,7 +1801,7 @@ private:
     static NSRange markedRange (id self, SEL)
     {
         if (auto* owner = getOwner (self))
-            if (owner->stringBeingComposed.isNotEmpty())
+            if (owner->stringBeingComposed.!empty())
                 return NSMakeRange (0, (NSUInteger) owner->stringBeingComposed.length());
 
         return NSMakeRange (NSNotFound, 0);
@@ -1815,7 +1815,7 @@ private:
             {
                 auto highlight = target->getHighlightedRegion();
 
-                if (! highlight.isEmpty())
+                if (! highlight.empty())
                     return NSMakeRange ((NSUInteger) highlight.getStart(),
                                         (NSUInteger) highlight.getLength());
             }

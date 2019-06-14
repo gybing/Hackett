@@ -743,7 +743,7 @@ private:
                     HCAMERA_LOG ("Key: " + keyName);
 
                     for (int j = 0, k = 1; j < keyValueString.length(); j += chunkSize, ++k)
-                        HCAMERA_LOG ("value part " + String (k) + ": " + keyValueString.substring (j, k + chunkSize));
+                        HCAMERA_LOG ("value part " + String (k) + ": " + keyValueString.substr (j, k + chunkSize));
                 }
                 else
                 {
@@ -3020,7 +3020,7 @@ private:
     {
         HCAMERA_LOG ("cameraOpenFinished(), error = " + error);
 
-        if (error.isEmpty())
+        if (error.empty())
         {
             setupStillImageSize();
             startPreviewMode (*imageReader);
@@ -3100,9 +3100,9 @@ private:
 
         // None of the supported sizes matches required width & height limitations, picking
         // the first one available...
-        HAssert (! result.isEmpty());
+        HAssert (! result.empty());
 
-        if (result.isEmpty())
+        if (result.empty())
             result = supportedSizes[0];
 
         return result;

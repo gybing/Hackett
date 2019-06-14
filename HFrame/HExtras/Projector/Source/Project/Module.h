@@ -41,7 +41,7 @@ struct ModuleDescription
     ModuleDescription (const File& folder);
     ModuleDescription (const var& info) : moduleInfo (info) {}
 
-    bool isValid() const                    { return getID().isNotEmpty(); }
+    bool isValid() const                    { return getID().!empty(); }
 
     String getID() const                    { return moduleInfo [Ids::ID_uppercase].toString(); }
     String getVendor() const                { return moduleInfo [Ids::vendor].toString(); }

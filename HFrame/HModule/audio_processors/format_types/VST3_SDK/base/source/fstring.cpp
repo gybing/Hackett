@@ -562,7 +562,7 @@ int32 ConstString::copyTo8 (char8* str, uint32 idx, int32 n) const
 		return tmp.copyTo8 (str, idx, n);
 	}
 
-	if (isEmpty () || idx >= len || !buffer8)
+	if (empty () || idx >= len || !buffer8)
 	{
 		str[0] = 0;
 		return 0;
@@ -590,7 +590,7 @@ int32 ConstString::copyTo16 (char16* str, uint32 idx, int32 n) const
 		return tmp.copyTo16 (str, idx, n);
 	}
 	
-	if (isEmpty () || idx >= len || !buffer16)
+	if (empty () || idx >= len || !buffer16)
 	{
 		str[0] = 0;
 		return 0;
@@ -654,13 +654,13 @@ int32 ConstString::compare (const ConstString& str, int32 n, CompareMode mode) c
 	if (n == 0)
 		return 0;
 
-	if (str.isEmpty ())
+	if (str.empty ())
 	{
-		if (isEmpty ())
+		if (empty ())
 			return 0;
 		return 1;
 	}
-	else if (isEmpty ())
+	else if (empty ())
 		return -1;
 
 	if (!isWide && !str.isWide)
@@ -712,13 +712,13 @@ int32 ConstString::compareAt (uint32 index, const ConstString& str, int32 n, Com
 	if (n == 0)
 		return 0;
 
-	if (str.isEmpty ())
+	if (str.empty ())
 	{
-		if (isEmpty ())
+		if (empty ())
 			return 0;
 		return 1;
 	}
-	else if (isEmpty ())
+	else if (empty ())
 		return -1;
 
 	if (!isWide && !str.isWide)
@@ -728,7 +728,7 @@ int32 ConstString::compareAt (uint32 index, const ConstString& str, int32 n, Com
 		{
 			if (index >= len)
 			{
-				if (str.isEmpty ())
+				if (str.empty ())
 					return 0;
 				return -1;
 			}
@@ -757,7 +757,7 @@ int32 ConstString::compareAt (uint32 index, const ConstString& str, int32 n, Com
 		{
 			if (index >= len)
 			{
-				if (str.isEmpty ())
+				if (str.empty ())
 					return 0;
 				return -1;
 			}
@@ -801,13 +801,13 @@ int32 ConstString::compareAt (uint32 index, const ConstString& str, int32 n, Com
 //------------------------------------------------------------------------
 Steinberg::int32 ConstString::naturalCompare (const ConstString& str, CompareMode mode /*= kCaseSensitive*/) const
 {
-	if (str.isEmpty ())
+	if (str.empty ())
 	{
-		if (isEmpty ())
+		if (empty ())
 			return 0;
 		return 1;
 	}
-	else if (isEmpty ())
+	else if (empty ())
 		return -1;
 
 	if (!isWide && !str.isWide)
@@ -834,11 +834,11 @@ Steinberg::int32 ConstString::naturalCompare (const ConstString& str, CompareMod
 //-----------------------------------------------------------------------------
 bool ConstString::startsWith (const ConstString& str, CompareMode mode /*= kCaseSensitive*/) const
 {
-	if (str.isEmpty ())
+	if (str.empty ())
 	{
-		return isEmpty ();
+		return empty ();
 	}
-	else if (isEmpty ())
+	else if (empty ())
 	{
 		return false;
 	}
@@ -883,11 +883,11 @@ bool ConstString::startsWith (const ConstString& str, CompareMode mode /*= kCase
 //-----------------------------------------------------------------------------
 bool ConstString::endsWith (const ConstString& str, CompareMode mode /*= kCaseSensitive*/) const
 {
-	if (str.isEmpty ())
+	if (str.empty ())
 	{
-		return isEmpty ();
+		return empty ();
 	}
-	else if (isEmpty ())
+	else if (empty ())
 	{
 		return false;
 	}
@@ -1363,7 +1363,7 @@ int32 ConstString::getFirstDifferent (const ConstString& str, CompareMode mode) 
 //-----------------------------------------------------------------------------
 bool ConstString::scanInt64 (int64& value, uint32 offset, bool scanToEnd) const
 {
-	if (isEmpty () || offset >= len)
+	if (empty () || offset >= len)
 		return false;
 
 	if (isWide)
@@ -1375,7 +1375,7 @@ bool ConstString::scanInt64 (int64& value, uint32 offset, bool scanToEnd) const
 //-----------------------------------------------------------------------------
 bool ConstString::scanUInt64 (uint64& value, uint32 offset, bool scanToEnd) const
 {
-	if (isEmpty () || offset >= len)
+	if (empty () || offset >= len)
 		return false;
 
 	if (isWide)
@@ -1387,7 +1387,7 @@ bool ConstString::scanUInt64 (uint64& value, uint32 offset, bool scanToEnd) cons
 //-----------------------------------------------------------------------------
 bool ConstString::scanHex (uint8& value, uint32 offset, bool scanToEnd) const
 {
-	if (isEmpty () || offset >= len)
+	if (empty () || offset >= len)
 		return false;
 
 	if (isWide)
@@ -1399,7 +1399,7 @@ bool ConstString::scanHex (uint8& value, uint32 offset, bool scanToEnd) const
 //-----------------------------------------------------------------------------
 bool ConstString::scanInt32 (int32& value, uint32 offset, bool scanToEnd) const
 {
-	if (isEmpty () || offset >= len)
+	if (empty () || offset >= len)
 		return false;
 
 	if (isWide)
@@ -1411,7 +1411,7 @@ bool ConstString::scanInt32 (int32& value, uint32 offset, bool scanToEnd) const
 //-----------------------------------------------------------------------------
 bool ConstString::scanUInt32 (uint32& value, uint32 offset, bool scanToEnd) const
 {
-	if (isEmpty () || offset >= len)
+	if (empty () || offset >= len)
 		return false;
 
 	if (isWide)
@@ -1535,7 +1535,7 @@ bool ConstString::scanHex (const tchar* text, uint8& value, bool scanToEnd)
 //-----------------------------------------------------------------------------
 bool ConstString::scanFloat (double& value, uint32 offset, bool scanToEnd) const
 {
-	if (isEmpty () || offset >= len)
+	if (empty () || offset >= len)
 		return false;
 
 	String str (*this);
@@ -1757,7 +1757,7 @@ bool ConstString::isCharLower (char16 character)
 //-----------------------------------------------------------------------------
 bool ConstString::isDigit (uint32 index) const
 {
-	if (isEmpty () || index >= len)
+	if (empty () || index >= len)
 		return false;
 
 	if (isWide)
@@ -1769,7 +1769,7 @@ bool ConstString::isDigit (uint32 index) const
 //-----------------------------------------------------------------------------
 int32 ConstString::getTrailingNumberIndex (uint32 width) const
 {
-	if (isEmpty ())
+	if (empty ())
 		return -1;
 
 	int32 endIndex = len - 1;
@@ -2075,7 +2075,7 @@ String::String (const char16* str, int32 n, bool isTerminated)
 String::String (const String& str, int32 n)
 {
 	isWide = str.isWideString ();
-	if (!str.isEmpty ())
+	if (!str.empty ())
 		assign (str, n);
 }
 
@@ -2083,7 +2083,7 @@ String::String (const String& str, int32 n)
 String::String (const ConstString& str, int32 n)
 {
 	isWide = str.isWideString ();
-	if (!str.isEmpty ())
+	if (!str.empty ())
 		assign (str, n);
 }
 
@@ -2185,7 +2185,7 @@ bool String::toWideString (uint32 sourceCodePage)
 //-----------------------------------------------------------------------------
 bool String::checkToMultiByte (uint32 destCodePage) const
 {
-	if (!isWide || isEmpty ())
+	if (!isWide || empty ())
 		return true;
 
 #if DEVELOPMENT && SMTG_STRING_CHECK_CONVERSION
@@ -2996,7 +2996,7 @@ static bool performReplace (T* str, const T* toReplace, T toReplaceBy)
 //-----------------------------------------------------------------------------
 bool String::replaceChars8 (const char8* toReplace, char8 toReplaceBy)
 {
-	if (isEmpty ())
+	if (empty ())
 		return false;
 
 	if (isWide)
@@ -3023,7 +3023,7 @@ bool String::replaceChars8 (const char8* toReplace, char8 toReplaceBy)
 //-----------------------------------------------------------------------------
 bool String::replaceChars16 (const char16* toReplace, char16 toReplaceBy)
 {
-	if (isEmpty ())
+	if (empty ())
 		return false;
 
 	if (!isWide)
@@ -3057,7 +3057,7 @@ bool String::replaceChars16 (const char16* toReplace, char16 toReplaceBy)
 //-----------------------------------------------------------------------------
 String& String::remove (uint32 idx, int32 n)
 {
-	if (isEmpty () || idx >= len || n == 0)
+	if (empty () || idx >= len || n == 0)
 		return *this;
 
 	if ((idx + n > len) || n < 0)
@@ -3133,7 +3133,7 @@ static uint32 performTrim (T* str, uint32 length, F func, bool funcResult)
 //-----------------------------------------------------------------------------
 bool String::trim (String::CharGroup group)
 {
-	if (isEmpty ())
+	if (empty ())
 		return false;
 
 	uint32 newLength;
@@ -3196,7 +3196,7 @@ static uint32 performRemove (T* str, uint32 length, F func, bool funcResult)
 //-----------------------------------------------------------------------------
 void String::removeChars (CharGroup group)
 {
-	if (isEmpty ())
+	if (empty ())
 		return;
 
 	uint32 newLength;
@@ -3270,7 +3270,7 @@ static uint32 performRemoveChars (T* str, uint32 length, const T* toRemove)
 //-----------------------------------------------------------------------------
 bool String::removeChars8 (const char8* toRemove)
 {
-	if (isEmpty () || toRemove == 0)
+	if (empty () || toRemove == 0)
 		return true;
 
 	if (isWide)
@@ -3294,7 +3294,7 @@ bool String::removeChars8 (const char8* toRemove)
 //-----------------------------------------------------------------------------
 bool String::removeChars16 (const char16* toRemove)
 {
-	if (isEmpty () || toRemove == 0)
+	if (empty () || toRemove == 0)
 		return true;
 
 	if (!isWide)
@@ -3452,7 +3452,7 @@ bool String::incrementTrailingNumber (uint32 width, tchar separator, uint32 minN
 	{
 		char16 format[64];
 		char16 trail[128];
-		if (separator && isEmpty () == false)
+		if (separator && empty () == false)
 		{
 			sprintf16 (format, STR16 ("%%c%%0%uu"), width);
 			sprintf16 (trail, format, separator, (uint32) number);
@@ -3468,7 +3468,7 @@ bool String::incrementTrailingNumber (uint32 width, tchar separator, uint32 minN
 	{
 		char format[64];
 		char trail[128];
-		if (separator && isEmpty () == false)
+		if (separator && empty () == false)
 		{
 			sprintf (format, "%%c%%0%uu", width);
 			sprintf (trail, format, separator, (uint32) number);

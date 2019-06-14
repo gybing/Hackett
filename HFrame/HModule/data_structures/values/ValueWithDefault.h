@@ -94,7 +94,7 @@ public:
         if (isUsingDefault())
             return defaultValue;
 
-        if (delimiter.isNotEmpty())
+        if (delimiter.!empty())
             return delimitedStringToVarArray (targetTree[targetProperty].toString());
 
         return targetTree[targetProperty];
@@ -215,7 +215,7 @@ private:
     {
         // if you are trying to control a var that is an array then you need to
         // set a delimiter string that will be used when writing to XML!
-        HAssert (delimiter.isNotEmpty());
+        HAssert (delimiter.!empty());
 
         StringArray elements;
 

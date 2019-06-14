@@ -39,7 +39,7 @@ namespace
             if (pattern == patternEnd)
                 return matchTerminator (target, targetEnd);
 
-            auto c = pattern.getAndAdvance();
+            auto c = *pattern++;
 
             switch (c)
             {
@@ -61,7 +61,7 @@ namespace
         //==============================================================================
         static bool matchChar (wchar c, CharPtr pattern, CharPtr patternEnd, CharPtr target, CharPtr targetEnd)
         {
-            if (target == targetEnd || c != target.getAndAdvance())
+            if (target == targetEnd || c != *target++)
                 return false;
 
             return match (pattern, patternEnd, target, targetEnd);
@@ -102,7 +102,7 @@ namespace
 
             while (pattern != patternEnd)
             {
-                auto c = pattern.getAndAdvance();
+                auto c = *pattern++;
 
                 switch (c)
                 {
@@ -133,7 +133,7 @@ namespace
                 return match (pattern, patternEnd, target, targetEnd);
 
             for (auto& str : set)
-                if (str.getCharPointer().compareUpTo (target, str.length()) == 0)
+                if (str.c_str().compareUpTo (target, str.length()) == 0)
                     if (match (pattern, patternEnd, target + str.length(), targetEnd))
                         return true;
 
@@ -152,7 +152,7 @@ namespace
 
             while (pattern != patternEnd)
             {
-                auto c = pattern.getAndAdvance();
+                auto c = *pattern++;
 
                 switch (c)
                 {
@@ -227,7 +227,7 @@ namespace
                 return false;
 
             auto rangeStart = set.getLast();
-            auto rangeEnd = pattern.getAndAdvance();
+            auto rangeEnd = *pattern++;
 
             if (rangeEnd == ']')
             {
@@ -248,10 +248,10 @@ namespace
     //==============================================================================
     static bool matchOscPattern (const String& pattern, const String& target)
     {
-        return OSCPatternMatcherImpl<String::CharPointerType>::match (pattern.getCharPointer(),
-                                                                      pattern.getCharPointer().findTerminatingNull(),
-                                                                      target.getCharPointer(),
-                                                                      target.getCharPointer().findTerminatingNull());
+        return OSCPatternMatcherImpl<char*>::match (pattern.c_str(),
+                                                                      pattern.c_str().findTerminatingNull(),
+                                                                      target.c_str(),
+                                                                      target.c_str().findTerminatingNull());
     }
 
     //==============================================================================
@@ -278,9 +278,9 @@ namespace
 
         static bool containsOnlyAllowedPrintableASCIIChars (const String& string) noexcept
         {
-            for (auto charPtr = string.getCharPointer(); ! charPtr.isEmpty();)
+            for (auto charPtr = string.c_str(); ! charPtr.empty();)
             {
-                auto c = charPtr.getAndAdvance();
+                auto c = *charPtr++;
 
                 if (! isPrintableASCIIChar (c) || isDisallowedChar (c))
                     return false;
@@ -292,7 +292,7 @@ namespace
         //==============================================================================
         static StringArray tokenise (const String& address)
         {
-            if (address.isEmpty())
+            if (address.empty())
                 throw OSCFormatError ("OSC format error: address string cannot be empty.");
 
             if (! address.startsWithChar ('/'))

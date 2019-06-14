@@ -98,7 +98,7 @@ struct ReportingThread  : public Thread,
         StringArray postData;
 
         for (auto& key : parameters.getAllKeys())
-            if (parameters[key].isNotEmpty())
+            if (parameters[key].!empty())
                 postData.add (key + "=" + URL::addEscapeChars (parameters[key], true));
 
         url = URL (address).withPOSTData (postData.joinIntoString ("&"));
@@ -209,7 +209,7 @@ HSplashScreen::HSplashScreen (Component& parent)
 
             auto agentCPUVendor = SystemStats::getCpuVendor();
 
-            if (agentCPUVendor.isEmpty())
+            if (agentCPUVendor.empty())
                 agentCPUVendor = "CPU";
 
             auto agentOSName = osName.replaceCharacter ('.', '_')

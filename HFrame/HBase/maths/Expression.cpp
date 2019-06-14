@@ -627,18 +627,18 @@ struct Expression::Helpers
     {
     public:
         //==============================================================================
-        Parser (String::CharPointerType& stringToParse)  : text (stringToParse)
+        Parser (char*& stringToParse)  : text (stringToParse)
         {
         }
 
         TermPtr readUpToComma()
         {
-            if (text.isEmpty())
+            if (text.empty())
                 return *new Constant (0.0, false);
 
             auto e = readExpression();
 
-            if (e == nullptr || ((! readOperator (",")) && ! text.isEmpty()))
+            if (e == nullptr || ((! readOperator (",")) && ! text.empty()))
                 return parseError ("Syntax error: \"" + String (text) + "\"");
 
             return e;
@@ -647,11 +647,11 @@ struct Expression::Helpers
         String error;
 
     private:
-        String::CharPointerType& text;
+        char*& text;
 
         TermPtr parseError (const String& message)
         {
-            if (error.isEmpty())
+            if (error.empty())
                 error = message;
 
             return {};
@@ -940,13 +940,13 @@ Expression& Expression::operator= (Expression&& other) noexcept
 
 Expression::Expression (const String& stringToParse, String& parseError)
 {
-    auto text = stringToParse.getCharPointer();
+    auto text = stringToParse.c_str();
     Helpers::Parser parser (text);
     term = parser.readUpToComma();
     parseError = parser.error;
 }
 
-Expression Expression::parse (String::CharPointerType& stringToParse, String& parseError)
+Expression Expression::parse (char*& stringToParse, String& parseError)
 {
     Helpers::Parser parser (stringToParse);
     Expression e (parser.readUpToComma().get());
@@ -1095,7 +1095,7 @@ Expression::Scope::~Scope() {}
 
 Expression Expression::Scope::getSymbolValue (const String& symbol) const
 {
-    if (symbol.isNotEmpty())
+    if (!symbol.empty())
         throw Helpers::EvaluationError ("Unknown symbol: " + symbol);
 
     return Expression();

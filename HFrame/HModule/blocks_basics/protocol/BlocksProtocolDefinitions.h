@@ -121,7 +121,7 @@ struct BlockStringData
 
     static const size_t maxLength { MaxSize };
 
-    bool isNotEmpty() const
+    bool !empty() const
     {
         return length > 0;
     }

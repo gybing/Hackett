@@ -253,7 +253,7 @@ public:
 
     bool getOutlineForGlyph (int glyphNumber, Path& path)
     {
-        HAssert (path.isEmpty());  // we might need to apply a transform to the path, so this must be empty
+        HAssert (path.empty());  // we might need to apply a transform to the path, so this must be empty
         auto glyphIndex = (UINT16) glyphNumber;
         ComSmartPtr<PathGeometrySink> pathGeometrySink (new PathGeometrySink());
 

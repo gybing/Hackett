@@ -199,11 +199,11 @@ public:
                 << ", "
                 << CodeHelpers::colourToCode (t->getTabBackgroundColour (i));
 
-            if (contentClassName.isNotEmpty())
+            if (contentClassName.!empty())
             {
                 code.constructorCode << ", new " << contentClassName;
 
-                if (getTabConstructorParams (t, i).trim().isNotEmpty())
+                if (getTabConstructorParams (t, i).trim().!empty())
                     code.constructorCode << " ";
 
                 code.constructorCode << "(" << getTabConstructorParams (t, i).trim() << "), true);\n";

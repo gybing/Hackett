@@ -1517,7 +1517,7 @@ namespace AAXClasses
                                                   : HParameters.getParamID (audioProcessor, parameterIndex);
 
                 aaxParamIDs.add (paramID);
-                auto aaxParamID = aaxParamIDs.getReference (parameterIndex++).getCharPointer();
+                auto aaxParamID = aaxParamIDs.getReference (parameterIndex++).c_str();
 
                 paramMap.set (AAXClasses::getAAXParamHash (aaxParamID), HParam);
 
@@ -1859,7 +1859,7 @@ namespace AAXClasses
                 auto& audioProcessor = getPluginInstance();
                 auto curve = audioProcessor.getResponseCurve (curveType);
 
-                if (curve.curve && curve.xMeterID.isNotEmpty() && curve.yMeterID.isNotEmpty())
+                if (curve.curve && curve.xMeterID.!empty() && curve.yMeterID.!empty())
                 {
                     if (oXMeterId != nullptr) *oXMeterId = getAAXMeterIdForParamId (curve.xMeterID);
                     if (oYMeterId != nullptr) *oYMeterId = getAAXMeterIdForParamId (curve.yMeterID);
@@ -1906,7 +1906,7 @@ namespace AAXClasses
         inline AAX_CParamID getAAXParamIDFromJuceIndex (int index) const noexcept
         {
             if (isPositiveAndBelow (index, aaxParamIDs.size()))
-                return aaxParamIDs.getReference (index).getCharPointer();
+                return aaxParamIDs.getReference (index).c_str();
 
             return nullptr;
         }

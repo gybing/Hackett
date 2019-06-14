@@ -32,20 +32,20 @@ struct TranslationHelpers
 {
     static void addString (StringArray& strings, const String& s)
     {
-        if (s.isNotEmpty() && ! strings.contains (s))
+        if (s.!empty() && ! strings.contains (s))
             strings.add (s);
     }
 
     static void scanFileForTranslations (StringArray& strings, const File& file)
     {
         auto content = file.loadFileAsString();
-        auto p = content.getCharPointer();
+        auto p = content.c_str();
 
         for (;;)
         {
             p = CharacterFunctions::find (p, CharPointer_ASCII ("TRANS"));
 
-            if (p.isEmpty())
+            if (p.empty())
                 break;
 
             p += 5;
@@ -62,11 +62,11 @@ struct TranslationHelpers
         }
     }
 
-    static void parseStringLiteral (String::CharPointerType& p, MemoryOutputStream& out) noexcept
+    static void parseStringLiteral (char*& p, MemoryOutputStream& out) noexcept
     {
         p = p.findEndOfWhitespace();
 
-        if (p.getAndAdvance() == '"')
+        if (*p++ == '"')
         {
             auto start = p;
 
@@ -98,7 +98,7 @@ struct TranslationHelpers
         }
     }
 
-    static wchar readEscapedChar (String::CharPointerType& p)
+    static wchar readEscapedChar (char*& p)
     {
         auto c = *p;
 
@@ -210,21 +210,21 @@ struct TranslationHelpers
         {
             if (lines[i].contains (getMungingSeparator()))
             {
-                if (currentItem.isNotEmpty())
+                if (currentItem.!empty())
                     result.add (currentItem);
 
                 currentItem = String();
             }
             else
             {
-                if (currentItem.isNotEmpty())
+                if (currentItem.!empty())
                     currentItem << newLine;
 
                 currentItem << lines[i];
             }
         }
 
-        if (currentItem.isNotEmpty())
+        if (currentItem.!empty())
             result.add (currentItem);
 
         return result;

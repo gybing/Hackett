@@ -31,7 +31,7 @@ void KnownPluginList::clear()
 {
     ScopedLock lock (typesArrayLock);
 
-    if (! types.isEmpty())
+    if (! types.empty())
     {
         types.clear();
         sendChangeMessage();
@@ -186,7 +186,7 @@ bool KnownPluginList::scanAndAddFile (const String& fileOrIdentifier,
         typesFound.add (new PluginDescription (*desc));
     }
 
-    return ! found.isEmpty();
+    return ! found.empty();
 }
 
 void KnownPluginList::scanAndAddDragAndDroppedFiles (AudioPluginFormatManager& formatManager,
@@ -389,8 +389,8 @@ struct PluginTreeUtils
             auto path = pd.fileOrIdentifier.replaceCharacter ('\\', '/')
                                            .upToLastOccurrenceOf ("/", false, false);
 
-            if (path.substring (1, 2) == ":")
-                path = path.substring (2);
+            if (path.substr (1, 2) == ":")
+                path = path.substr (2);
 
             addPlugin (tree, pd, path);
         }
@@ -405,7 +405,7 @@ struct PluginTreeUtils
             auto& sub = *tree.subFolders.getUnchecked(i);
             optimiseFolders (sub, concatenateName || (tree.subFolders.size() > 1));
 
-            if (sub.plugins.isEmpty())
+            if (sub.plugins.empty())
             {
                 for (auto* s : sub.subFolders)
                 {
@@ -460,7 +460,7 @@ struct PluginTreeUtils
 
     static void addPlugin (KnownPluginList::PluginTree& tree, PluginDescription pd, String path)
     {
-        if (path.isEmpty())
+        if (path.empty())
         {
             tree.plugins.add (pd);
         }

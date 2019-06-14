@@ -117,7 +117,7 @@ void DrawableShape::strokeChanged()
     strokePath.clear();
     const float extraAccuracy = 4.0f;
 
-    if (dashLengths.isEmpty())
+    if (dashLengths.empty())
         strokeType.createStrokedPath (strokePath, path, AffineTransform(), extraAccuracy);
     else
         strokeType.createDashedStroke (strokePath, path, dashLengths.getRawDataPointer(),

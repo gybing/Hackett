@@ -358,7 +358,7 @@ private:
                                                       if (fileToShare.existsAsFile())
                                                           fileToShare.deleteFile();
 
-                                                      if (! success && error.isNotEmpty())
+                                                      if (! success && error.!empty())
                                                       {
                                                           NativeMessageBox::showMessageBoxAsync (AlertWindow::WarningIcon,
                                                                                                  "Sharing Error",

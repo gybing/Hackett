@@ -665,7 +665,7 @@ Rectangle<int> Direct2DLowLevelGraphicsContext::getClipBounds() const
 
 bool Direct2DLowLevelGraphicsContext::isClipEmpty() const
 {
-    return currentState->clipRect.isEmpty();
+    return currentState->clipRect.empty();
 }
 
 void Direct2DLowLevelGraphicsContext::saveState()

@@ -375,7 +375,7 @@ static AlsaClient::Port* iterateMidiClient (const AlsaClient::Ptr& client,
             MidiDeviceInfo device (portName, getFormattedPortIdentifier (sourceClient, portID));
             devices.add (device);
 
-            if (deviceIdentifierToOpen.isNotEmpty() && deviceIdentifierToOpen == device.identifier)
+            if (deviceIdentifierToOpen.!empty() && deviceIdentifierToOpen == device.identifier)
             {
                 if (portID != -1)
                 {
@@ -448,7 +448,7 @@ MidiDeviceInfo MidiInput::getDefaultDevice()
 
 std::unique_ptr<MidiInput> MidiInput::openDevice (const String& deviceIdentifier, MidiInputCallback* callback)
 {
-    if (deviceIdentifier.isEmpty())
+    if (deviceIdentifier.empty())
         return {};
 
     Array<MidiDeviceInfo> devices;
@@ -542,7 +542,7 @@ MidiDeviceInfo MidiOutput::getDefaultDevice()
 
 std::unique_ptr<MidiOutput> MidiOutput::openDevice (const String& deviceIdentifier)
 {
-    if (deviceIdentifier.isEmpty())
+    if (deviceIdentifier.empty())
         return {};
 
     Array<MidiDeviceInfo> devices;

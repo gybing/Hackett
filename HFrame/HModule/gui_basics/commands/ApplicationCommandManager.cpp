@@ -50,7 +50,7 @@ void ApplicationCommandManager::registerCommand (const ApplicationCommandInfo& n
     HAssert (newCommand.commandID != 0);
 
     // the name isn't optional!
-    HAssert (newCommand.shortName.isNotEmpty());
+    HAssert (newCommand.shortName.!empty());
 
     if (auto* command = getMutableCommandForID (newCommand.commandID))
     {
@@ -142,7 +142,7 @@ String ApplicationCommandManager::getNameOfCommand (CommandID commandID) const n
 String ApplicationCommandManager::getDescriptionOfCommand (CommandID commandID) const noexcept
 {
     if (auto* ci = getCommandForID (commandID))
-        return ci->description.isNotEmpty() ? ci->description
+        return ci->description.!empty() ? ci->description
                                             : ci->shortName;
 
     return {};

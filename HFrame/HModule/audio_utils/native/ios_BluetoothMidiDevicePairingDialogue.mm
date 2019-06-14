@@ -42,13 +42,13 @@ public:
         setVisible (true);
         addToDesktop (ComponentPeer::windowHasDropShadow);
 
-        if (bounds.isEmpty())
+        if (bounds.empty())
             setBounds (0, 0, getParentWidth(), getParentHeight());
         else
             setBounds (bounds);
 
         toFront (true);
-        setOpaque (! bounds.isEmpty());
+        setOpaque (! bounds.empty());
 
         controller = [[CABTMIDICentralViewController alloc] init];
         nativeSelectorComponent.setView ([controller view]);
@@ -66,7 +66,7 @@ public:
 
     void paint (Graphics& g) override
     {
-        g.fillAll (bounds.isEmpty() ? Colours::black.withAlpha (0.5f) : Colours::black);
+        g.fillAll (bounds.empty() ? Colours::black.withAlpha (0.5f) : Colours::black);
     }
 
     void inputAttemptWhenModal() override           { close(); }
@@ -78,7 +78,7 @@ public:
 private:
     void update()
     {
-        if (bounds.isEmpty())
+        if (bounds.empty())
         {
             const int pw = getParentWidth();
             const int ph = getParentHeight();

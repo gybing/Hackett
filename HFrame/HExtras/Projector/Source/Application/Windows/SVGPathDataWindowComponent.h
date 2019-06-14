@@ -72,12 +72,12 @@ public:
 
         path = Drawable::parseSVGPath (text);
 
-        if (path.isEmpty())
+        if (path.empty())
             path = pathFromPoints (text);
 
         String result = "No path generated.. Not a valid SVG path string?";
 
-        if (! path.isEmpty())
+        if (! path.empty())
         {
             MemoryOutputStream data;
             path.writePathToStream (data);

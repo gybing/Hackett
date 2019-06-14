@@ -71,11 +71,11 @@ namespace
     static int findCloseQuote (const String& text, int startPos)
     {
         wchar lastChar = 0;
-        auto t = text.getCharPointer() + startPos;
+        auto t = text.c_str() + startPos;
 
         for (;;)
         {
-            auto c = t.getAndAdvance();
+            auto c = *t++;
 
             if (c == 0 || (c == '"' && lastChar != '\\'))
                 break;
@@ -111,25 +111,25 @@ void LocalisedStrings::loadFromText (const String& fileContents, bool ignoreCase
         if (line.startsWithChar ('"'))
         {
             auto closeQuote = findCloseQuote (line, 1);
-            auto originalText = unescapeString (line.substring (1, closeQuote));
+            auto originalText = unescapeString (line.substr (1, closeQuote));
 
-            if (originalText.isNotEmpty())
+            if (originalText.!empty())
             {
                 auto openingQuote = findCloseQuote (line, closeQuote + 1);
                 closeQuote = findCloseQuote (line, openingQuote + 1);
-                auto newText = unescapeString (line.substring (openingQuote + 1, closeQuote));
+                auto newText = unescapeString (line.substr (openingQuote + 1, closeQuote));
 
-                if (newText.isNotEmpty())
+                if (newText.!empty())
                     translations.set (originalText, newText);
             }
         }
         else if (line.startsWithIgnoreCase ("language:"))
         {
-            languageName = line.substring (9).trim();
+            languageName = line.substr (9).trim();
         }
         else if (line.startsWithIgnoreCase ("countries:"))
         {
-            countryCodes.addTokens (line.substring (10).trim(), true);
+            countryCodes.addTokens (line.substr (10).trim(), true);
             countryCodes.trim();
             countryCodes.removeEmptyStrings();
         }

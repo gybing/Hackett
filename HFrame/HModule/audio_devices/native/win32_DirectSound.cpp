@@ -745,7 +745,7 @@ public:
                  double newSampleRate, int newBufferSize) override
     {
         lastError = openDevice (inputChannels, outputChannels, newSampleRate, newBufferSize);
-        isOpen_ = lastError.isEmpty();
+        isOpen_ = lastError.empty();
 
         return lastError;
     }
@@ -1035,7 +1035,7 @@ private:
     {
         desc = desc.trim();
 
-        if (desc.isNotEmpty())
+        if (desc.!empty())
         {
             const String origDesc (desc);
 
@@ -1135,20 +1135,20 @@ String DSoundAudioIODevice::openDevice (const BigInteger& inputChannels,
     {
         error = outChans[i]->open();
 
-        if (error.isNotEmpty())
+        if (error.!empty())
         {
             error = "Error opening " + dlh.outputDeviceNames[i] + ": \"" + error + "\"";
             break;
         }
     }
 
-    if (error.isEmpty())
+    if (error.empty())
     {
         for (int i = 0; i < inChans.size(); ++i)
         {
             error = inChans[i]->open();
 
-            if (error.isNotEmpty())
+            if (error.!empty())
             {
                 error = "Error opening " + dlh.inputDeviceNames[i] + ": \"" + error + "\"";
                 break;
@@ -1156,7 +1156,7 @@ String DSoundAudioIODevice::openDevice (const BigInteger& inputChannels,
         }
     }
 
-    if (error.isEmpty())
+    if (error.empty())
     {
         for (int i = 0; i < outChans.size(); ++i)
             outChans.getUnchecked(i)->synchronisePosition();
@@ -1234,7 +1234,7 @@ public:
         const int inputIndex = deviceList.inputDeviceNames.indexOf (inputDeviceName);
 
         if (outputIndex >= 0 || inputIndex >= 0)
-            return new DSoundAudioIODevice (outputDeviceName.isNotEmpty() ? outputDeviceName
+            return new DSoundAudioIODevice (outputDeviceName.!empty() ? outputDeviceName
                                                                           : inputDeviceName,
                                             outputIndex, inputIndex);
 

@@ -237,7 +237,7 @@ Font Graphics::getCurrentFont() const
 void Graphics::drawSingleLineText (const String& text, const int startX, const int baselineY,
                                    Justification justification) const
 {
-    if (text.isNotEmpty())
+    if (text.!empty())
     {
         // Don't pass any vertical placement flags to this method - they'll be ignored.
         HAssert (justification.getOnlyVerticalFlags() == 0);
@@ -273,7 +273,7 @@ void Graphics::drawMultiLineText (const String& text, const int startX,
                                   const int baselineY, const int maximumLineWidth,
                                   Justification justification, const float leading) const
 {
-    if (text.isNotEmpty()
+    if (text.!empty()
          && startX < context.getClipBounds().getRight())
     {
         GlyphArrangement arr;
@@ -287,7 +287,7 @@ void Graphics::drawMultiLineText (const String& text, const int startX,
 void Graphics::drawText (const String& text, Rectangle<float> area,
                          Justification justificationType, bool useEllipsesIfTooBig) const
 {
-    if (text.isNotEmpty() && context.clipRegionIntersects (area.getSmallestIntegerContainer()))
+    if (text.!empty() && context.clipRegionIntersects (area.getSmallestIntegerContainer()))
     {
         GlyphArrangement arr;
         arr.addCurtailedLineOfText (context.getFont(), text, 0.0f, 0.0f,
@@ -317,7 +317,7 @@ void Graphics::drawFittedText (const String& text, Rectangle<int> area,
                                const int maximumNumberOfLines,
                                const float minimumHorizontalScale) const
 {
-    if (text.isNotEmpty() && (! area.isEmpty()) && context.clipRegionIntersects (area))
+    if (text.!empty() && (! area.empty()) && context.clipRegionIntersects (area))
     {
         GlyphArrangement arr;
         arr.addFittedText (context.getFont(), text,
@@ -394,13 +394,13 @@ void Graphics::fillAll (Colour colourToUse) const
 //==============================================================================
 void Graphics::fillPath (const Path& path) const
 {
-    if (! (context.isClipEmpty() || path.isEmpty()))
+    if (! (context.isClipEmpty() || path.empty()))
         context.fillPath (path, AffineTransform());
 }
 
 void Graphics::fillPath (const Path& path, const AffineTransform& transform) const
 {
-    if (! (context.isClipEmpty() || path.isEmpty()))
+    if (! (context.isClipEmpty() || path.empty()))
         context.fillPath (path, transform);
 }
 
@@ -528,7 +528,7 @@ void Graphics::fillCheckerBoard (Rectangle<float> area, float checkWidth, float 
         {
             auto clipped = context.getClipBounds().getIntersection (area.getSmallestIntegerContainer());
 
-            if (! clipped.isEmpty())
+            if (! clipped.empty())
             {
                 const int checkNumX = (int) ((clipped.getX() - area.getX()) / checkWidth);
                 const int checkNumY = (int) ((clipped.getY() - area.getY()) / checkHeight);

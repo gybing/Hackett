@@ -583,7 +583,7 @@ tresult ProgramList::getProgramInfo (int32 programIndex, CString attributeId,
 		StringMap::const_iterator it = programInfos[programIndex].find (attributeId);
 		if (it != programInfos[programIndex].end ())
 		{
-			if (!it->second.isEmpty ())
+			if (!it->second.empty ())
 			{
 				it->second.copyTo16 (value, 0, 128);
 				return kResultTrue;

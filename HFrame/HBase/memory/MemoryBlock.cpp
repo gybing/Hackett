@@ -306,7 +306,7 @@ void MemoryBlock::loadFromHexString (StringRef hex)
 
             for (;;)
             {
-                auto c = t.getAndAdvance();
+                auto c = *t++;
 
                 if (c >= '0' && c <= '9')    { byte |= c - '0';        break; }
                 if (c >= 'a' && c <= 'z')    { byte |= c - ('a' - 10); break; }
@@ -333,9 +333,9 @@ String MemoryBlock::toBase64Encoding() const
 
     String destString ((unsigned int) size); // store the length, followed by a '.', and then the data.
     auto initialLen = destString.length();
-    destString.preallocateBytes (sizeof (String::CharPointerType::CharType) * (size_t) initialLen + 2 + numChars);
+    destString.preallocateBytes (sizeof (char*::CharType) * (size_t) initialLen + 2 + numChars);
 
-    auto d = destString.getCharPointer();
+    auto d = destString.c_str();
     d += initialLen;
     d.write ('.');
 
@@ -357,7 +357,7 @@ bool MemoryBlock::fromBase64Encoding (StringRef s)
 {
     auto dot = CharacterFunctions::find (s.text, (wchar) '.');
 
-    if (dot.isEmpty())
+    if (dot.empty())
         return false;
 
     auto numBytesNeeded = String (s.text, dot).getIntValue();
@@ -369,7 +369,7 @@ bool MemoryBlock::fromBase64Encoding (StringRef s)
 
     for (;;)
     {
-        auto c = (int) srcChars.getAndAdvance();
+        auto c = (int) *srcChars++;
 
         if (c == 0)
             return true;

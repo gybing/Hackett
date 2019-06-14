@@ -1232,7 +1232,7 @@ struct StateHelpers
             {
                 auto r = i.getIntersection (clip);
 
-                if (! r.isEmpty())
+                if (! r.empty())
                     add (r, colour);
             }
         }
@@ -1859,7 +1859,7 @@ struct CustomProgram  : public ReferenceCountedObject,
             ReferenceCountedObjectPtr<CustomProgram> c (new CustomProgram (*sc, code));
             errorMessage = c->lastError;
 
-            if (errorMessage.isEmpty())
+            if (errorMessage.empty())
             {
                 if (auto context = OpenGLContext::getCurrentContext())
                 {

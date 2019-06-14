@@ -178,7 +178,7 @@ public:
             if (text.isDigit())
             {
                 lastDigit = digit;
-                digit = (int) text.getAndAdvance() - '0';
+                digit = (int) *text++ - '0';
                 digitsFound = true;
 
                 if (decPointIndex != 0)
@@ -256,7 +256,7 @@ public:
             }
 
             while (text.isDigit())
-                exponent = (exponent * 10) + ((int) text.getAndAdvance() - '0');
+                exponent = (exponent * 10) + ((int) *text++ - '0');
 
             if (negativeExponent)
                 exponent = -exponent;
@@ -278,7 +278,7 @@ public:
         {
             if (text.isDigit())
             {
-                auto digit = (int) text.getAndAdvance() - '0';
+                auto digit = (int) *text++ - '0';
 
                 if (decimalPointFound)
                 {
@@ -344,7 +344,7 @@ public:
 
             while (text.isDigit())
             {
-                auto digit = (int) text.getAndAdvance() - '0';
+                auto digit = (int) *text++ - '0';
 
                 if (digit != 0 || exponent != 0)
                     exponent = (exponent * 10) + digit;
@@ -406,7 +406,7 @@ public:
 
         for (;;)
         {
-            auto c = s.getAndAdvance();
+            auto c = *s++;
 
             if (c >= '0' && c <= '9')
                 v = v * 10 + (UIntType) (c - '0');
@@ -426,9 +426,9 @@ public:
         {
             ResultType result = 0;
 
-            while (! t.isEmpty())
+            while (! t.empty())
             {
-                auto hexValue = CharacterFunctions::getHexDigitValue (t.getAndAdvance());
+                auto hexValue = CharacterFunctions::getHexDigitValue (*t++);
 
                 if (hexValue >= 0)
                     result = (result << 4) | hexValue;
@@ -446,7 +446,7 @@ public:
     {
         size_t len = 0;
 
-        while (len < maxCharsToCount && text.getAndAdvance() != 0)
+        while (len < maxCharsToCount && *text++ != 0)
             ++len;
 
         return len;
@@ -459,7 +459,7 @@ public:
     {
         size_t len = 0;
 
-        while (start < end && start.getAndAdvance() != 0)
+        while (start < end && *start++ != 0)
             ++len;
 
         return len;
@@ -469,7 +469,7 @@ public:
     template <typename DestCharPointerType, typename SrcCharPointerType>
     static void copyAll (DestCharPointerType& dest, SrcCharPointerType src) noexcept
     {
-        while (auto c = src.getAndAdvance())
+        while (auto c = *src++)
             dest.write (c);
 
         dest.writeNull();
@@ -486,7 +486,7 @@ public:
 
         for (;;)
         {
-            auto c = src.getAndAdvance();
+            auto c = *src++;
             auto bytesNeeded = DestCharPointerType::getBytesRequiredFor (c);
             maxBytes -= bytesNeeded;
 
@@ -509,7 +509,7 @@ public:
     {
         while (--maxChars > 0)
         {
-            auto c = src.getAndAdvance();
+            auto c = *src++;
 
             if (c == 0)
                 break;
@@ -535,9 +535,9 @@ public:
     {
         for (;;)
         {
-            auto c1 = s1.getAndAdvance();
+            auto c1 = *s1++;
 
-            if (auto diff = compare (c1, s2.getAndAdvance()))
+            if (auto diff = compare (c1, *s2++))
                 return diff;
 
             if (c1 == 0)
@@ -553,9 +553,9 @@ public:
     {
         while (--maxChars >= 0)
         {
-            auto c1 = s1.getAndAdvance();
+            auto c1 = *s1++;
 
-            if (auto diff = compare (c1, s2.getAndAdvance()))
+            if (auto diff = compare (c1, *s2++))
                 return diff;
 
             if (c1 == 0)
@@ -577,9 +577,9 @@ public:
     {
         for (;;)
         {
-            auto c1 = s1.getAndAdvance();
+            auto c1 = *s1++;
 
-            if (auto diff = compareIgnoreCase (c1, s2.getAndAdvance()))
+            if (auto diff = compareIgnoreCase (c1, *s2++))
                 return diff;
 
             if (c1 == 0)
@@ -595,9 +595,9 @@ public:
     {
         while (--maxChars >= 0)
         {
-            auto c1 = s1.getAndAdvance();
+            auto c1 = *s1++;
 
-            if (auto diff = compareIgnoreCase (c1, s2.getAndAdvance()))
+            if (auto diff = compareIgnoreCase (c1, *s2++))
                 return diff;
 
             if (c1 == 0)
@@ -607,8 +607,8 @@ public:
         return 0;
     }
 
-    /** Finds the character index of a given substring in another string.
-        Returns -1 if the substring is not found.
+    /** Finds the character index of a given substr in another string.
+        Returns -1 if the substr is not found.
     */
     template <typename CharPointerType1, typename CharPointerType2>
     static int indexOf (CharPointerType1 textToSearch, const CharPointerType2 substringToLookFor) noexcept
@@ -621,15 +621,15 @@ public:
             if (textToSearch.compareUpTo (substringToLookFor, substringLength) == 0)
                 return index;
 
-            if (textToSearch.getAndAdvance() == 0)
+            if (*textToSearch++ == 0)
                 return -1;
 
             ++index;
         }
     }
 
-    /** Returns a pointer to the first occurrence of a substring in a string.
-        If the substring is not found, this will return a pointer to the string's
+    /** Returns a pointer to the first occurrence of a substr in a string.
+        If the substr is not found, this will return a pointer to the string's
         null terminator.
     */
     template <typename CharPointerType1, typename CharPointerType2>
@@ -638,14 +638,14 @@ public:
         auto substringLength = (int) substringToLookFor.length();
 
         while (textToSearch.compareUpTo (substringToLookFor, substringLength) != 0
-                 && ! textToSearch.isEmpty())
+                 && ! textToSearch.empty())
             ++textToSearch;
 
         return textToSearch;
     }
 
-    /** Returns a pointer to the first occurrence of a substring in a string.
-        If the substring is not found, this will return a pointer to the string's
+    /** Returns a pointer to the first occurrence of a substr in a string.
+        If the substr is not found, this will return a pointer to the string's
         null terminator.
     */
     template <typename CharPointerType>
@@ -662,9 +662,9 @@ public:
         return textToSearch;
     }
 
-    /** Finds the character index of a given substring in another string, using
+    /** Finds the character index of a given substr in another string, using
         a case-independent match.
-        Returns -1 if the substring is not found.
+        Returns -1 if the substr is not found.
     */
     template <typename CharPointerType1, typename CharPointerType2>
     static int indexOfIgnoreCase (CharPointerType1 haystack, const CharPointerType2 needle) noexcept
@@ -677,7 +677,7 @@ public:
             if (haystack.compareIgnoreCaseUpTo (needle, needleLength) == 0)
                 return index;
 
-            if (haystack.getAndAdvance() == 0)
+            if (*haystack++ == 0)
                 return -1;
 
             ++index;
@@ -692,9 +692,9 @@ public:
     {
         int i = 0;
 
-        while (! text.isEmpty())
+        while (! text.empty())
         {
-            if (text.getAndAdvance() == charToFind)
+            if (*text++ == charToFind)
                 return i;
 
             ++i;
@@ -713,7 +713,7 @@ public:
         charToFind = CharacterFunctions::toLowerCase (charToFind);
         int i = 0;
 
-        while (! text.isEmpty())
+        while (! text.empty())
         {
             if (text.toLowerCase() == charToFind)
                 return i;
@@ -746,9 +746,9 @@ public:
     {
         wchar currentQuoteChar = 0;
 
-        while (! text.isEmpty())
+        while (! text.empty())
         {
-            auto c = text.getAndAdvance();
+            auto c = *text++;
 
             if (currentQuoteChar == 0 && breakCharacters.indexOf (c) >= 0)
             {
@@ -770,6 +770,43 @@ public:
 
 private:
     static double mulexp10 (double value, int exponent) noexcept;
+};
+
+//==============================================================================
+template <typename CharPointer>
+struct WildCardMatcher
+{
+	static bool matches(CharPointer wildcard, CharPointer test, const bool ignoreCase) noexcept
+	{
+		for (;;)
+		{
+			auto wc = *wildcard++;
+
+			if (wc == '*')
+				return wildcard.empty() || matchesAnywhere(wildcard, test, ignoreCase);
+
+			if (!characterMatches(wc, test.getAndAdvance(), ignoreCase))
+				return false;
+
+			if (wc == 0)
+				return true;
+		}
+	}
+
+	static bool characterMatches(const wchar wc, const wchar tc, const bool ignoreCase) noexcept
+	{
+		return (wc == tc) || (wc == '?' && tc != 0)
+			|| (ignoreCase && CharacterFunctions::toLowerCase(wc) == CharacterFunctions::toLowerCase(tc));
+	}
+
+	static bool matchesAnywhere(const CharPointer wildcard, CharPointer test, const bool ignoreCase) noexcept
+	{
+		for (; !test.empty(); ++test)
+			if (matches(wildcard, test, ignoreCase))
+				return true;
+
+		return false;
+	}
 };
 
 

@@ -17,7 +17,7 @@ Array<UnitTest*>& UnitTest::getAllTests()
 
 Array<UnitTest*> UnitTest::getTestsInCategory (const String& category)
 {
-    if (category.isEmpty())
+    if (category.empty())
         return getAllTests();
 
     Array<UnitTest*> unitTests;
@@ -34,7 +34,7 @@ StringArray UnitTest::getAllCategories()
     StringArray categories;
 
     for (auto* test : getAllTests())
-        if (test->getCategory().isNotEmpty())
+        if (test->getCategory().!empty())
             categories.addIfNotAlreadyThere (test->getCategory());
 
     return categories;
@@ -242,7 +242,7 @@ void UnitTestRunner::addFail (const String& failureMessage)
         String message ("!!! Test ");
         message << (r->failures + r->passes) << " failed";
 
-        if (failureMessage.isNotEmpty())
+        if (failureMessage.!empty())
             message << ": " << failureMessage;
 
         r->messages.add (message);

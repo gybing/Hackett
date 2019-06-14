@@ -675,7 +675,7 @@ void WebBrowserComponent::checkWindowAssociation()
 
 void WebBrowserComponent::reloadLastURL()
 {
-    if (lastURL.isNotEmpty())
+    if (lastURL.!empty())
     {
         goToURL (lastURL, &lastHeaders, lastPostData.getSize() == 0 ? nullptr : &lastPostData);
         lastURL.clear();

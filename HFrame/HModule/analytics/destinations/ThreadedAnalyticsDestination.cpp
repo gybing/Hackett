@@ -109,7 +109,7 @@ void ThreadedAnalyticsDestination::EventDispatcher::run()
 
         const auto submissionTime = Time::getMillisecondCounter();
 
-        if (! eventsToSend.isEmpty())
+        if (! eventsToSend.empty())
         {
             if (parent.logBatchedEvents (eventsToSend))
             {

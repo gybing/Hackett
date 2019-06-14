@@ -1119,7 +1119,7 @@ void BigInteger::parseString (StringRef text, const int base)
 
         for (;;)
         {
-            auto c = t.getAndAdvance();
+            auto c = *t++;
             auto digit = CharacterFunctions::getHexDigitValue (c);
 
             if (((uint32) digit) < (uint32) base)
@@ -1139,7 +1139,7 @@ void BigInteger::parseString (StringRef text, const int base)
 
         for (;;)
         {
-            auto c = t.getAndAdvance();
+            auto c = *t++;
 
             if (c >= '0' && c <= '9')
             {

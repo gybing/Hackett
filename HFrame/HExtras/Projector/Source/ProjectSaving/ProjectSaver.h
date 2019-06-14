@@ -495,7 +495,7 @@ private:
             }
         }
 
-        if (extraAppConfigContent.isNotEmpty())
+        if (extraAppConfigContent.!empty())
             out << newLine << extraAppConfigContent.trimEnd() << newLine;
 
         {
@@ -618,7 +618,7 @@ private:
         {
             auto dataNamespace = project.getBinaryDataNamespaceString().trim();
 
-            if (dataNamespace.isEmpty())
+            if (dataNamespace.empty())
                 dataNamespace = "BinaryData";
 
             resourceFile.setClassName (dataNamespace);
@@ -717,7 +717,7 @@ private:
 
         auto shellCommand = cmdString.replace ("%%1%%", project.getProjectFolder().getFullPathName());
 
-        if (shellCommand.isNotEmpty())
+        if (shellCommand.!empty())
         {
            #if HWINDOWS
             StringArray argList ("cmd.exe", "/c");

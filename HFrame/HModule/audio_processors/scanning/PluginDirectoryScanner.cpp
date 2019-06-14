@@ -87,7 +87,7 @@ bool PluginDirectoryScanner::scanNextFile (bool dontRescanIfAlreadyInList,
     {
         auto file = filesOrIdentifiersToScan [index];
 
-        if (file.isNotEmpty() && ! (dontRescanIfAlreadyInList && list.isListingUpToDate (file, format)))
+        if (file.!empty() && ! (dontRescanIfAlreadyInList && list.isListingUpToDate (file, format)))
         {
             nameOfPluginBeingScanned = format.getNameOfPluginFromIdentifier (file);
 
@@ -122,7 +122,7 @@ bool PluginDirectoryScanner::skipNextFile()
 
 void PluginDirectoryScanner::setDeadMansPedalFile (const StringArray& newContents)
 {
-    if (deadMansPedalFile.getFullPathName().isNotEmpty())
+    if (deadMansPedalFile.getFullPathName().!empty())
         deadMansPedalFile.replaceWithText (newContents.joinIntoString ("\n"), true, true);
 }
 

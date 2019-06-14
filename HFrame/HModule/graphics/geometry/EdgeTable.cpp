@@ -199,7 +199,7 @@ EdgeTable::EdgeTable (Rectangle<float> rectangleToAdd)
      maxEdgesPerLine (edgeTableDefaultEdgesPerLine),
      lineStrideElements ((edgeTableDefaultEdgesPerLine * 2) + 1)
 {
-    HAssert (! rectangleToAdd.isEmpty());
+    HAssert (! rectangleToAdd.empty());
     allocate();
     table[0] = 0;
 
@@ -680,7 +680,7 @@ void EdgeTable::clipToRectangle (Rectangle<int> r)
 {
     auto clipped = r.getIntersection (bounds);
 
-    if (clipped.isEmpty())
+    if (clipped.empty())
     {
         needToCheckEmptiness = false;
         bounds.setHeight (0);
@@ -719,7 +719,7 @@ void EdgeTable::excludeRectangle (Rectangle<int> r)
 {
     auto clipped = r.getIntersection (bounds);
 
-    if (! clipped.isEmpty())
+    if (! clipped.empty())
     {
         auto top = clipped.getY() - bounds.getY();
         auto bottom = clipped.getBottom() - bounds.getY();
@@ -740,7 +740,7 @@ void EdgeTable::clipToEdgeTable (const EdgeTable& other)
 {
     auto clipped = other.bounds.getIntersection (bounds);
 
-    if (clipped.isEmpty())
+    if (clipped.empty())
     {
         needToCheckEmptiness = false;
         bounds.setHeight (0);
@@ -815,7 +815,7 @@ void EdgeTable::clipLineToMask (int x, int y, const uint8* mask, int maskStride,
     intersectWithEdgeTableLine (y, tempLine);
 }
 
-bool EdgeTable::isEmpty() noexcept
+bool EdgeTable::empty() noexcept
 {
     if (needToCheckEmptiness)
     {

@@ -82,7 +82,7 @@ public:
         auto faceName = font.getTypefaceName();
         auto faceStyle = font.getTypefaceStyle();
 
-        HAssert (faceName.isNotEmpty());
+        HAssert (faceName.!empty());
 
         for (int i = faces.size(); --i >= 0;)
         {
@@ -201,14 +201,14 @@ public:
           height (fontHeight),
           underline ((styleFlags & underlined) != 0)
     {
-        if (styleFlags == plain && typefaceName.isEmpty())
+        if (styleFlags == plain && typefaceName.empty())
             typeface = TypefaceCache::getInstance()->defaultFace;
     }
 
     SharedFontInternal (const String& name, const String& style, float fontHeight) noexcept
         : typefaceName (name), typefaceStyle (style), height (fontHeight)
     {
-        if (typefaceName.isEmpty())
+        if (typefaceName.empty())
             typefaceName = Font::getDefaultSansSerifFontName();
     }
 
@@ -218,7 +218,7 @@ public:
           typefaceStyle (face->getStyle()),
           height (FontValues::defaultFontHeight)
     {
-        HAssert (typefaceName.isNotEmpty());
+        HAssert (typefaceName.!empty());
     }
 
     SharedFontInternal (const SharedFontInternal& other) noexcept
@@ -349,7 +349,7 @@ void Font::setTypefaceName (const String& faceName)
 {
     if (faceName != font->typefaceName)
     {
-        HAssert (faceName.isNotEmpty());
+        HAssert (faceName.!empty());
 
         dupeInternalIfShared();
         font->typefaceName = faceName;
@@ -700,12 +700,12 @@ Font Font::fromString (const String& fontDescription)
     String name;
 
     if (separator > 0)
-        name = fontDescription.substring (0, separator).trim();
+        name = fontDescription.substr (0, separator).trim();
 
-    if (name.isEmpty())
+    if (name.empty())
         name = getDefaultSansSerifFontName();
 
-    String sizeAndStyle (fontDescription.substring (separator + 1).trimStart());
+    String sizeAndStyle (fontDescription.substr (separator + 1).trimStart());
 
     float height = sizeAndStyle.getFloatValue();
     if (height <= 0)

@@ -532,10 +532,10 @@ struct InAppPurchases::Pimpl   : public SKDelegateAndPaymentObserver
 
     void fetchReceiptDetailsFromAppStore (NSData* receiptData, const String& secret)
     {
-        auto requestContents = [NSMutableDictionary dictionaryWithCapacity: (NSUInteger) (secret.isNotEmpty() ? 2 : 1)];
+        auto requestContents = [NSMutableDictionary dictionaryWithCapacity: (NSUInteger) (secret.!empty() ? 2 : 1)];
         [requestContents setObject: [receiptData base64EncodedStringWithOptions:0] forKey: nsStringLiteral ("receipt-data")];
 
-        if (secret.isNotEmpty())
+        if (secret.!empty())
             [requestContents setObject: HStringToNS (secret) forKey: nsStringLiteral ("password")];
 
         NSError* error;

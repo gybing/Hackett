@@ -103,7 +103,7 @@ void DirectoryContentsList::clear()
 void DirectoryContentsList::refresh()
 {
     stopSearching();
-    wasEmpty = files.isEmpty();
+    wasEmpty = files.empty();
     files.clear();
 
     if (root.isDirectory())
@@ -219,7 +219,7 @@ bool DirectoryContentsList::checkNextFile (bool& hasChanged)
 
         fileFindHandle.reset();
 
-        if (! wasEmpty && files.isEmpty())
+        if (! wasEmpty && files.empty())
             hasChanged = true;
     }
 

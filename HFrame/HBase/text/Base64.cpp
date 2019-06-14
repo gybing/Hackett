@@ -49,13 +49,13 @@ bool Base64::convertToBase64 (OutputStream& base64Result, const void* sourceData
 
 bool Base64::convertFromBase64 (OutputStream& binaryOutput, StringRef base64TextInput)
 {
-    for (auto s = base64TextInput.text; ! s.isEmpty();)
+    for (auto s = base64TextInput.text; ! s.empty();)
     {
         uint8 data[4];
 
         for (int i = 0; i < 4; ++i)
         {
-            auto c = (uint32) s.getAndAdvance();
+            auto c = (uint32) *s++;
 
             if (c >= 'A' && c <= 'Z')         c -= 'A';
             else if (c >= 'a' && c <= 'z')    c -= 'a' - 26;

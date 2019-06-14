@@ -85,7 +85,7 @@ public:
     void refreshAll() const;
 
     /** Returns true if the panel contains no properties. */
-    bool isEmpty() const;
+    bool empty() const;
 
     /** Returns the height that the panel needs in order to display all of its content
         without scrolling.

@@ -140,7 +140,7 @@ public:
     {
         ListBox::paint (g);
 
-        if (items.isEmpty())
+        if (items.empty())
         {
             g.setColour (Colours::grey);
             g.setFont (0.5f * getRowHeight());
@@ -387,7 +387,7 @@ public:
             }
         }
 
-        if (error.isNotEmpty())
+        if (error.!empty())
             AlertWindow::showMessageBoxAsync (AlertWindow::WarningIcon,
                                               TRANS("Error when trying to open audio device!"),
                                               error);
@@ -831,7 +831,7 @@ public:
         {
             ListBox::paint (g);
 
-            if (items.isEmpty())
+            if (items.empty())
             {
                 g.setColour (Colours::grey);
                 g.setFont (0.5f * getRowHeight());
@@ -860,15 +860,15 @@ public:
             String commonBit;
 
             for (int j = 0; j < name1.length(); ++j)
-                if (name1.substring (0, j).equalsIgnoreCase (name2.substring (0, j)))
-                    commonBit = name1.substring (0, j);
+                if (name1.substr (0, j).equalsIgnoreCase (name2.substr (0, j)))
+                    commonBit = name1.substr (0, j);
 
             // Make sure we only split the name at a space, because otherwise, things
             // like "input 11" + "input 12" would become "input 11 + 2"
-            while (commonBit.isNotEmpty() && ! CharacterFunctions::isWhitespace (commonBit.getLastCharacter()))
+            while (commonBit.!empty() && ! CharacterFunctions::isWhitespace (commonBit.getLastCharacter()))
                 commonBit = commonBit.dropLastCharacters (1);
 
-            return name1.trim() + " + " + name2.substring (commonBit.length()).trim();
+            return name1.trim() + " + " + name2.substr (commonBit.length()).trim();
         }
 
         void flipEnablement (int row)
@@ -1177,7 +1177,7 @@ void AudioDeviceSelectorComponent::updateAllControls()
         {
             midiOutputSelector->addItem (out.name, i + 1);
 
-            if (defaultOutputIdentifier.isNotEmpty() && out.identifier == defaultOutputIdentifier)
+            if (defaultOutputIdentifier.!empty() && out.identifier == defaultOutputIdentifier)
                 midiOutputSelector->setSelectedId (i + 1);
 
             ++i;

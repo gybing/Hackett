@@ -60,12 +60,12 @@ public:
     // WebInputStream methods
     void withExtraHeaders (const String& extraHeaders)
     {
-        if (! headers.endsWithChar ('\n') && headers.isNotEmpty())
+        if (! headers.endsWithChar ('\n') && !headers.empty())
             headers << "\r\n";
 
         headers << extraHeaders;
 
-        if (! headers.endsWithChar ('\n') && headers.isNotEmpty())
+        if (! headers.endsWithChar ('\n') && !headers.empty())
             headers << "\r\n";
     }
 
@@ -85,7 +85,7 @@ public:
                 const String key (headersEntry.upToFirstOccurrenceOf (": ", false, false));
                 const String value (headersEntry.fromFirstOccurrenceOf (": ", false, false));
                 const String previousValue (responseHeaders [key]);
-                responseHeaders.set (key, previousValue.isEmpty() ? value : (previousValue + "," + value));
+                responseHeaders.set (key, previousValue.empty() ? value : (previousValue + "," + value));
             }
         }
 
@@ -359,18 +359,18 @@ private:
         String responseHeader (readResponse (timeOutTime));
         position = 0;
 
-        if (responseHeader.isNotEmpty())
+        if (!responseHeader.empty())
         {
             headerLines = StringArray::fromLines (responseHeader);
 
             const int status = responseHeader.fromFirstOccurrenceOf (" ", false, false)
-                                             .substring (0, 3).getIntValue();
+                                             .substr (0, 3).getIntValue();
 
             String location (findHeaderItem (headerLines, "Location:"));
 
             if (++levelsOfRedirection <= numRedirects
                  && status >= 300 && status < 400
-                 && location.isNotEmpty() && location != address)
+                 && !location.empty() && location != address)
             {
                 if (! (location.startsWithIgnoreCase ("http://")
                         || location.startsWithIgnoreCase ("https://")
@@ -389,7 +389,7 @@ private:
 
             String contentLengthString (findHeaderItem (headerLines, "Content-Length:"));
 
-            if (contentLengthString.isNotEmpty())
+            if (!contentLengthString.empty())
                 contentLength = contentLengthString.getLargeIntValue();
 
             isChunked = (findHeaderItem (headerLines, "Transfer-Encoding:") == "chunked");
@@ -456,7 +456,7 @@ private:
     {
         MemoryOutputStream header;
 
-        if (proxyName.isEmpty())
+        if (proxyName.empty())
             writeHost (header, httpRequestCmd, hostPath, hostName, hostPort);
         else
             writeHost (header, httpRequestCmd, originalURL, proxyName, proxyPort);
@@ -469,7 +469,7 @@ private:
         if (isPost)
             writeValueIfNotPresent (header, userHeaders, "Content-Length:", String ((int) postData.getSize()));
 
-        if (userHeaders.isNotEmpty())
+        if (!userHeaders.empty())
             header << "\r\n" << userHeaders;
 
         header << "\r\n\r\n";
@@ -516,25 +516,25 @@ private:
 
         if (nextColon >= 0)
         {
-            host = url.substring (7, nextColon);
+            host = url.substr (7, nextColon);
 
             if (nextSlash >= 0)
-                port = url.substring (nextColon + 1, nextSlash).getIntValue();
+                port = url.substr (nextColon + 1, nextSlash).getIntValue();
             else
-                port = url.substring (nextColon + 1).getIntValue();
+                port = url.substr (nextColon + 1).getIntValue();
         }
         else
         {
             port = 80;
 
             if (nextSlash >= 0)
-                host = url.substring (7, nextSlash);
+                host = url.substr (7, nextSlash);
             else
-                host = url.substring (7);
+                host = url.substr (7);
         }
 
         if (nextSlash >= 0)
-            path = url.substring (nextSlash);
+            path = url.substr (nextSlash);
         else
             path = "/";
 
@@ -545,7 +545,7 @@ private:
     {
         for (int i = 0; i < lines.size(); ++i)
             if (lines[i].startsWithIgnoreCase (itemName))
-                return lines[i].substring (itemName.length()).trim();
+                return lines[i].substr (itemName.length()).trim();
 
         return {};
     }

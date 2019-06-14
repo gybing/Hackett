@@ -56,7 +56,7 @@ public:
     Polynomial (const FloatingType* coefficients, int numCoefficients)
         : coeffs (coefficients, numCoefficients)
     {
-        HAssert (! coeffs.isEmpty());
+        HAssert (! coeffs.empty());
     }
 
     /** Creates a copy of another polynomial. */
@@ -78,7 +78,7 @@ public:
     template <typename... Values>
     Polynomial (Values... items)  : coeffs (items...)
     {
-        HAssert (! coeffs.isEmpty());
+        HAssert (! coeffs.empty());
     }
 
     //==============================================================================

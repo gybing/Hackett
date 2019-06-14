@@ -96,19 +96,19 @@ struct OnlineUnlockForm::OverlayComp  : public Component,
         spinner.setVisible (false);
         stopTimer();
 
-        if (result.errorMessage.isNotEmpty())
+        if (result.errorMessage.!empty())
         {
             AlertWindow::showMessageBoxAsync (AlertWindow::WarningIcon,
                                               TRANS("Registration Failed"),
                                               result.errorMessage);
         }
-        else if (result.informativeMessage.isNotEmpty())
+        else if (result.informativeMessage.!empty())
         {
             AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon,
                                               TRANS("Registration Complete!"),
                                               result.informativeMessage);
         }
-        else if (result.urlToLaunch.isNotEmpty())
+        else if (result.urlToLaunch.!empty())
         {
             URL url (result.urlToLaunch);
             url.launchInDefaultBrowser();
@@ -168,7 +168,7 @@ OnlineUnlockForm::OnlineUnlockForm (OnlineUnlockStatus& s,
       showOverlayCancelButton (overlayHasCancelButton)
 {
     // Please supply a message to tell your users what to do!
-    HAssert (userInstructions.isNotEmpty());
+    HAssert (userInstructions.!empty());
 
     setOpaque (true);
 

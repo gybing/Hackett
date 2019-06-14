@@ -172,7 +172,7 @@ PluginWindow* FilterGraph::getOrCreateWindowFor (AudioProcessorGraph::Node* node
 
 bool FilterGraph::closeAnyOpenPluginWindows()
 {
-    bool wasEmpty = activePluginWindows.isEmpty();
+    bool wasEmpty = activePluginWindows.empty();
     activePluginWindows.clear();
     return ! wasEmpty;
 }
@@ -281,7 +281,7 @@ static void readBusLayoutFromXml (AudioProcessor::BusesLayout& busesLayout, Audi
 
             auto layout = e->getStringAttribute ("layout");
 
-            if (layout.isNotEmpty())
+            if (layout.!empty())
                 targetBuses.getReference (busIdx) = AudioChannelSet::fromAbbreviatedString (layout);
         }
     }

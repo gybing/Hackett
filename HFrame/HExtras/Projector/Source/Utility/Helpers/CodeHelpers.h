@@ -54,7 +54,7 @@ namespace CodeHelpers
                               const StringArray& strings, const StringArray& codeToExecute, int indentLevel);
 
     String getLeadingWhitespace (String line);
-    int getBraceCount (String::CharPointerType line);
+    int getBraceCount (char* line);
     bool getIndentForCurrentBlock (CodeDocument::Position pos, const String& tab,
                                    String& blockIndent, String& lastLineIndent);
 }

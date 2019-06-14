@@ -474,7 +474,7 @@ void PaintElementPath::applyCustomPaintSnippets (StringArray& snippets)
 {
     customPaintCode.clear();
 
-    if (! snippets.isEmpty() && (! fillType.isInvisible() || (isStrokePresent && ! strokeType.isInvisible())))
+    if (! snippets.empty() && (! fillType.isInvisible() || (isStrokePresent && ! strokeType.isInvisible())))
     {
         customPaintCode = snippets[0];
         snippets.remove(0);
@@ -696,7 +696,7 @@ void PaintElementPath::setToPath (const Path& newPath)
 
 void PaintElementPath::updateStoredPath (const ComponentLayout* layout, const Rectangle<int>& relativeTo) const
 {
-    if (lastPathBounds != relativeTo && ! relativeTo.isEmpty())
+    if (lastPathBounds != relativeTo && ! relativeTo.empty())
     {
         lastPathBounds = relativeTo;
         path.clear();

@@ -1580,13 +1580,13 @@ double Slider::getValueFromText (const String& text)
     auto t = text.trimStart();
 
     if (t.endsWith (getTextValueSuffix()))
-        t = t.substring (0, t.length() - getTextValueSuffix().length());
+        t = t.substr (0, t.length() - getTextValueSuffix().length());
 
     if (valueFromTextFunction != nullptr)
         return valueFromTextFunction (t);
 
     while (t.startsWithChar ('+'))
-        t = t.substring (1).trimStart();
+        t = t.substr (1).trimStart();
 
     return t.initialSectionContainingOnly ("0123456789.,-")
             .getDoubleValue();

@@ -112,7 +112,7 @@ public:
     inline int size() const noexcept                                    { return strings.size(); }
 
     /** Returns true if the array is empty, false otherwise. */
-    inline bool isEmpty() const noexcept                                { return size() == 0; }
+    inline bool empty() const noexcept                                { return size() == 0; }
 
     /** Returns one of the strings from the array.
 
@@ -386,8 +386,8 @@ public:
     */
     void appendNumbersToDuplicates (bool ignoreCaseWhenComparing,
                                     bool appendNumberToFirstInstance,
-                                    CharPointer_UTF8 preNumberString = CharPointer_UTF8 (nullptr),
-                                    CharPointer_UTF8 postNumberString = CharPointer_UTF8 (nullptr));
+                                    CharPointer_UTF8 preNumberString = nullptr,
+                                    CharPointer_UTF8 postNumberString = nullptr);
 
     //==============================================================================
     /** Joins the strings in the array together into one string.

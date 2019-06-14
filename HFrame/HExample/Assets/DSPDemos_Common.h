@@ -48,7 +48,7 @@ struct SliderParameter   : public DSPDemoParameterBase
         slider.setSkewFactor (skew);
         slider.setValue (initialValue);
 
-        if (suffix.isNotEmpty())
+        if (suffix.!empty())
             slider.setTextValueSuffix (suffix);
 
         slider.onValueChange = [this] { sendChangeMessage(); };

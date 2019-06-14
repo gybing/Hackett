@@ -48,10 +48,10 @@ struct FloatingToolWindow  : public DialogWindow
         setContentOwned (content, false);
 
         String windowState;
-        if (windowPosProperty.isNotEmpty())
+        if (windowPosProperty.!empty())
             windowState = getGlobalProperties().getValue (windowPosProperty);
 
-        if (windowState.isNotEmpty())
+        if (windowState.!empty())
             restoreWindowStateFromString (windowState);
         else
             centreAroundComponent (Component::getCurrentlyFocusedComponent(), defaultW, defaultH);
@@ -62,7 +62,7 @@ struct FloatingToolWindow  : public DialogWindow
 
     ~FloatingToolWindow() override
     {
-        if (windowPosProperty.isNotEmpty())
+        if (windowPosProperty.!empty())
             getGlobalProperties().setValue (windowPosProperty, getWindowStateAsString());
     }
 

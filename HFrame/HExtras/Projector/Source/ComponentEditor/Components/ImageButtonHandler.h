@@ -163,7 +163,7 @@ public:
     {
         const String resName (getImageResource (ib, role));
 
-        if (resName.isEmpty())
+        if (resName.empty())
             return "Image()";
 
         return "ImageCache::getFromMemory (" + resName + ", " + resName + "Size)";

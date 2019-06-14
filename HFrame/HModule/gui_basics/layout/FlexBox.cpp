@@ -770,7 +770,7 @@ FlexBox::FlexBox (Direction d, Wrap w, AlignContent ac, AlignItems ai, JustifyCo
 
 void FlexBox::performLayout (Rectangle<float> targetArea)
 {
-    if (! items.isEmpty())
+    if (! items.empty())
     {
         FlexBoxLayoutCalculation layout (*this, targetArea.getWidth(), targetArea.getHeight());
 

@@ -102,7 +102,7 @@ struct CppParserHelpers
 
     static int parseSingleToken (const String& text)
     {
-        if (text.isEmpty())
+        if (text.empty())
             return CPlusPlusCodeTokeniser::tokenType_error;
 
         CppTokeniserFunctions::StringIterator i (text);
@@ -168,7 +168,7 @@ struct CppParserHelpers
         int firstAngleBracket = cls.indexOfChar ('<');
 
         if (firstAngleBracket > 0)
-            cls = cls.substring (firstAngleBracket + 1).upToLastOccurrenceOf (">", false, false).trim();
+            cls = cls.substr (firstAngleBracket + 1).upToLastOccurrenceOf (">", false, false).trim();
 
         while (cls.endsWithChar ('*') || cls.endsWithChar ('&'))
             cls = cls.dropLastCharacters (1).trim();
@@ -216,17 +216,17 @@ struct CodeChange
 
     bool mergeWith (const CodeChange& next)
     {
-        if (text.isEmpty())
+        if (text.empty())
         {
-            if (next.text.isNotEmpty()
-                && next.range.isEmpty()
+            if (next.text.!empty()
+                && next.range.empty()
                 && next.range.getStart() == range.getStart())
             {
                 text = next.text;
                 return true;
             }
 
-            if (next.text.isEmpty())
+            if (next.text.empty())
             {
                 Range<int> nextRange (next.range);
 
@@ -244,7 +244,7 @@ struct CodeChange
                 }
             }
         }
-        else if (next.text.isEmpty())
+        else if (next.text.empty())
         {
             if (next.range.getEnd() == range.getStart())
             {

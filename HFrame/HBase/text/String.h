@@ -214,7 +214,7 @@ public:
 
         size_t extraBytesNeeded = 0, numChars = 1;
 
-        for (auto t = startOfTextToAppend; t != endOfTextToAppend && ! t.isEmpty(); ++numChars)
+        for (auto t = startOfTextToAppend; t != endOfTextToAppend && ! t.empty(); ++numChars)
             extraBytesNeeded += CharPointerType::getBytesRequiredFor (t.getAndAdvance());
 
         if (extraBytesNeeded > 0)
@@ -242,7 +242,7 @@ public:
         {
             size_t extraBytesNeeded = 0, numChars = 1;
 
-            for (auto t = textToAppend; numChars <= maxCharsToTake && ! t.isEmpty(); ++numChars)
+            for (auto t = textToAppend; numChars <= maxCharsToTake && ! t.empty(); ++numChars)
                 extraBytesNeeded += CharPointerType::getBytesRequiredFor (t.getAndAdvance());
 
             if (extraBytesNeeded > 0)
@@ -267,16 +267,16 @@ public:
     // Comparison methods..
 
     /** Returns true if the string contains no characters.
-        Note that there's also an isNotEmpty() method to help write readable code.
+        Note that there's also an !empty() method to help write readable code.
         @see containsNonWhitespaceChars()
     */
-    inline bool isEmpty() const noexcept                    { return text.isEmpty(); }
+    inline bool empty() const noexcept                    { return text.empty(); }
 
     /** Returns true if the string contains at least one character.
-        Note that there's also an isEmpty() method to help write readable code.
+        Note that there's also an empty() method to help write readable code.
         @see containsNonWhitespaceChars()
     */
-    inline bool isNotEmpty() const noexcept                 { return ! text.isEmpty(); }
+    inline bool !empty() const noexcept                 { return ! text.empty(); }
 
     /** Resets this string to be empty. */
     void clear() noexcept;
@@ -363,7 +363,7 @@ public:
     */
     bool endsWithIgnoreCase (StringRef text) const noexcept;
 
-    /** Tests whether the string contains another substring.
+    /** Tests whether the string contains another substr.
         If the parameter is an empty string, this will always return true.
         Uses a case-sensitive comparison.
     */
@@ -374,12 +374,12 @@ public:
     */
     bool containsChar (wchar character) const noexcept;
 
-    /** Tests whether the string contains another substring.
+    /** Tests whether the string contains another substr.
         Uses a case-insensitive comparison.
     */
     bool containsIgnoreCase (StringRef text) const noexcept;
 
-    /** Tests whether the string contains another substring as a distinct word.
+    /** Tests whether the string contains another substr as a distinct word.
 
         @returns    true if the string contains this word, surrounded by
                     non-alphanumeric characters
@@ -387,7 +387,7 @@ public:
     */
     bool containsWholeWord (StringRef wordToLookFor) const noexcept;
 
-    /** Tests whether the string contains another substring as a distinct word.
+    /** Tests whether the string contains another substr as a distinct word.
 
         @returns    true if the string contains this word, surrounded by
                     non-alphanumeric characters
@@ -395,19 +395,19 @@ public:
     */
     bool containsWholeWordIgnoreCase (StringRef wordToLookFor) const noexcept;
 
-    /** Finds an instance of another substring if it exists as a distinct word.
+    /** Finds an instance of another substr if it exists as a distinct word.
 
         @returns    if the string contains this word, surrounded by non-alphanumeric characters,
-                    then this will return the index of the start of the substring. If it isn't
+                    then this will return the index of the start of the substr. If it isn't
                     found, then it will return -1
         @see indexOfWholeWordIgnoreCase, containsWholeWord
     */
     int indexOfWholeWord (StringRef wordToLookFor) const noexcept;
 
-    /** Finds an instance of another substring if it exists as a distinct word.
+    /** Finds an instance of another substr if it exists as a distinct word.
 
         @returns    if the string contains this word, surrounded by non-alphanumeric characters,
-                    then this will return the index of the start of the substring. If it isn't
+                    then this will return the index of the start of the substr. If it isn't
                     found, then it will return -1
         @see indexOfWholeWord, containsWholeWordIgnoreCase
     */
@@ -435,7 +435,7 @@ public:
         This will return false if the string contains only whitespace characters, or
         if it's empty.
 
-        It is equivalent to calling "myString.trim().isNotEmpty()".
+        It is equivalent to calling "myString.trim().!empty()".
     */
     bool containsNonWhitespaceChars() const noexcept;
 
@@ -483,34 +483,34 @@ public:
                       int startIndex = 0,
                       bool ignoreCase = false) const noexcept;
 
-    /** Searches for a substring within this string.
+    /** Searches for a substr within this string.
         Uses a case-sensitive comparison.
-        @returns    the index of the first occurrence of this substring, or -1 if it's not found.
+        @returns    the index of the first occurrence of this substr, or -1 if it's not found.
                     If textToLookFor is an empty string, this will always return 0.
     */
     int indexOf (StringRef textToLookFor) const noexcept;
 
-    /** Searches for a substring within this string.
+    /** Searches for a substr within this string.
         Uses a case-sensitive comparison.
         @param startIndex       the index from which the search should proceed
         @param textToLookFor    the string to search for
-        @returns                the index of the first occurrence of this substring, or -1 if it's not found.
+        @returns                the index of the first occurrence of this substr, or -1 if it's not found.
                                 If textToLookFor is an empty string, this will always return -1.
     */
     int indexOf (int startIndex, StringRef textToLookFor) const noexcept;
 
-    /** Searches for a substring within this string.
+    /** Searches for a substr within this string.
         Uses a case-insensitive comparison.
-        @returns    the index of the first occurrence of this substring, or -1 if it's not found.
+        @returns    the index of the first occurrence of this substr, or -1 if it's not found.
                     If textToLookFor is an empty string, this will always return 0.
     */
     int indexOfIgnoreCase (StringRef textToLookFor) const noexcept;
 
-    /** Searches for a substring within this string.
+    /** Searches for a substr within this string.
         Uses a case-insensitive comparison.
         @param startIndex       the index from which the search should proceed
         @param textToLookFor    the string to search for
-        @returns                the index of the first occurrence of this substring, or -1 if it's not found.
+        @returns                the index of the first occurrence of this substr, or -1 if it's not found.
                                 If textToLookFor is an empty string, this will always return -1.
     */
     int indexOfIgnoreCase (int startIndex, StringRef textToLookFor) const noexcept;
@@ -521,16 +521,16 @@ public:
     */
     int lastIndexOfChar (wchar character) const noexcept;
 
-    /** Searches for a substring inside this string (working backwards from the end of the string).
+    /** Searches for a substr inside this string (working backwards from the end of the string).
         Uses a case-sensitive comparison.
-        @returns    the index of the start of the last occurrence of the substring within this string,
+        @returns    the index of the start of the last occurrence of the substr within this string,
                     or -1 if it's not found. If textToLookFor is an empty string, this will always return -1.
     */
     int lastIndexOf (StringRef textToLookFor) const noexcept;
 
-    /** Searches for a substring inside this string (working backwards from the end of the string).
+    /** Searches for a substr inside this string (working backwards from the end of the string).
         Uses a case-insensitive comparison.
-        @returns    the index of the start of the last occurrence of the substring within this string, or -1
+        @returns    the index of the start of the last occurrence of the substr within this string, or -1
                     if it's not found. If textToLookFor is an empty string, this will always return -1.
     */
     int lastIndexOfIgnoreCase (StringRef textToLookFor) const noexcept;
@@ -561,9 +561,9 @@ public:
         Also beware that depending on the encoding format that the string is using internally, this
         method may execute in either O(1) or O(n) time, so be careful when using it in your algorithms.
         If you're scanning through a string to inspect its characters, you should never use this operator
-        for random access, it's far more efficient to call getCharPointer() to return a pointer, and
+        for random access, it's far more efficient to call c_str() to return a pointer, and
         then to use that to iterate the string.
-        @see getCharPointer
+        @see c_str
     */
     wchar operator[] (int index) const noexcept;
 
@@ -578,22 +578,22 @@ public:
         If the range specified is beyond the limits of the string, as much as
         possible is returned.
 
-        @param startIndex   the index of the start of the substring needed
+        @param startIndex   the index of the start of the substr needed
         @param endIndex     all characters from startIndex up to (but not including)
                             this index are returned
         @see fromFirstOccurrenceOf, dropLastCharacters, getLastCharacters, upToFirstOccurrenceOf
     */
-    String substring (int startIndex, int endIndex) const;
+    String substr (int startIndex, int endIndex) const;
 
     /** Returns a section of the string, starting from a given position.
 
         @param startIndex   the first character to include. If this is beyond the end
                             of the string, an empty string is returned. If it is zero or
                             less, the whole string is returned.
-        @returns            the substring from startIndex up to the end of the string
+        @returns            the substr from startIndex up to the end of the string
         @see dropLastCharacters, getLastCharacters, fromFirstOccurrenceOf, upToFirstOccurrenceOf, fromLastOccurrenceOf
     */
-    String substring (int startIndex) const;
+    String substr (int startIndex) const;
 
     /** Returns a version of this string with a number of characters removed
         from the end.
@@ -602,7 +602,7 @@ public:
                                 string. If this is greater than the length of the string,
                                 an empty string will be returned. If zero or less, the
                                 original string will be returned.
-        @see substring, fromFirstOccurrenceOf, upToFirstOccurrenceOf, fromLastOccurrenceOf, getLastCharacter
+        @see substr, fromFirstOccurrenceOf, upToFirstOccurrenceOf, fromLastOccurrenceOf, getLastCharacter
     */
     String dropLastCharacters (int numberToDrop) const;
 
@@ -611,21 +611,21 @@ public:
         This returns the last numCharacters characters from the end of the string. If the
         string is shorter than numCharacters, the whole string is returned.
 
-        @see substring, dropLastCharacters, getLastCharacter
+        @see substr, dropLastCharacters, getLastCharacter
     */
     String getLastCharacters (int numCharacters) const;
 
     //==============================================================================
-    /** Returns a section of the string starting from a given substring.
+    /** Returns a section of the string starting from a given substr.
 
-        This will search for the first occurrence of the given substring, and
+        This will search for the first occurrence of the given substr, and
         return the section of the string starting from the point where this is
-        found (optionally not including the substring itself).
+        found (optionally not including the substr itself).
 
         e.g. for the string "123456", fromFirstOccurrenceOf ("34", true) would return "3456", and
                                       fromFirstOccurrenceOf ("34", false) would return "56".
 
-        If the substring isn't found, the method will return an empty string.
+        If the substr isn't found, the method will return an empty string.
 
         If ignoreCase is true, the comparison will be case-insensitive.
 
@@ -635,10 +635,10 @@ public:
                                   bool includeSubStringInResult,
                                   bool ignoreCase) const;
 
-    /** Returns a section of the string starting from the last occurrence of a given substring.
+    /** Returns a section of the string starting from the last occurrence of a given substr.
 
-        Similar to fromFirstOccurrenceOf(), but using the last occurrence of the substring, and
-        unlike fromFirstOccurrenceOf(), if the substring isn't found, this method will
+        Similar to fromFirstOccurrenceOf(), but using the last occurrence of the substr, and
+        unlike fromFirstOccurrenceOf(), if the substr isn't found, this method will
         return the whole of the original string.
 
         @see fromFirstOccurrenceOf, upToLastOccurrenceOf
@@ -647,16 +647,16 @@ public:
                                  bool includeSubStringInResult,
                                  bool ignoreCase) const;
 
-    /** Returns the start of this string, up to the first occurrence of a substring.
+    /** Returns the start of this string, up to the first occurrence of a substr.
 
-        This will search for the first occurrence of a given substring, and then
-        return a copy of the string, up to the position of this substring,
-        optionally including or excluding the substring itself in the result.
+        This will search for the first occurrence of a given substr, and then
+        return a copy of the string, up to the position of this substr,
+        optionally including or excluding the substr itself in the result.
 
         e.g. for the string "123456", upTo ("34", false) would return "12", and
                                       upTo ("34", true) would return "1234".
 
-        If the substring isn't found, this will return the whole of the original string.
+        If the substr isn't found, this will return the whole of the original string.
 
         @see upToLastOccurrenceOf, fromFirstOccurrenceOf
     */
@@ -664,10 +664,10 @@ public:
                                   bool includeSubStringInResult,
                                   bool ignoreCase) const;
 
-    /** Returns the start of this string, up to the last occurrence of a substring.
+    /** Returns the start of this string, up to the last occurrence of a substr.
 
         Similar to upToFirstOccurrenceOf(), but this finds the last occurrence rather than the first.
-        If the substring isn't found, this will return the whole of the original string.
+        If the substr isn't found, this will return the whole of the original string.
 
         @see upToFirstOccurrenceOf, fromFirstOccurrenceOf
     */
@@ -728,7 +728,7 @@ public:
                            int numCharactersToReplace,
                            StringRef stringToInsert) const;
 
-    /** Replaces all occurrences of a substring with another string.
+    /** Replaces all occurrences of a substr with another string.
 
         Returns a copy of this string, with any occurrences of stringToReplace
         swapped for stringToInsertInstead.
@@ -739,7 +739,7 @@ public:
                     StringRef stringToInsertInstead,
                     bool ignoreCase = false) const;
 
-    /** Replaces the first occurrence of a substring with another string.
+    /** Replaces the first occurrence of a substr with another string.
 
         Returns a copy of this string, with the first occurrence of stringToReplace
         swapped for stringToInsertInstead.
@@ -1172,7 +1172,7 @@ public:
         that is returned must not be stored anywhere, as it can be deleted whenever the
         string changes.
     */
-    inline CharPointerType getCharPointer() const noexcept      { return text; }
+    inline CharPointerType c_str() const noexcept      { return text; }
 
     /** Returns a pointer to a UTF-8 version of this string.
 
@@ -1181,9 +1181,9 @@ public:
         string changes.
 
         To find out how many bytes you need to store this string as UTF-8, you can call
-        CharPointer_UTF8::getBytesRequiredFor (myString.getCharPointer())
+        CharPointer_UTF8::getBytesRequiredFor (myString.c_str())
 
-        @see toRawUTF8, getCharPointer, toUTF16, toUTF32
+        @see toRawUTF8, c_str, toUTF16, toUTF32
     */
     CharPointer_UTF8 toUTF8() const;
 
@@ -1194,9 +1194,9 @@ public:
         string changes.
 
         To find out how many bytes you need to store this string as UTF-8, you can call
-        CharPointer_UTF8::getBytesRequiredFor (myString.getCharPointer())
+        CharPointer_UTF8::getBytesRequiredFor (myString.c_str())
 
-        @see getCharPointer, toUTF8, toUTF16, toUTF32
+        @see c_str, toUTF8, toUTF16, toUTF32
     */
     const char* toRawUTF8() const;
 
@@ -1207,9 +1207,9 @@ public:
         string changes.
 
         To find out how many bytes you need to store this string as UTF-16, you can call
-        CharPointer_UTF16::getBytesRequiredFor (myString.getCharPointer())
+        CharPointer_UTF16::getBytesRequiredFor (myString.c_str())
 
-        @see getCharPointer, toUTF8, toUTF32
+        @see c_str, toUTF8, toUTF32
     */
     CharPointer_UTF16 toUTF16() const;
 
@@ -1219,7 +1219,7 @@ public:
         that is returned must not be stored anywhere, as it can be deleted whenever the
         string changes.
 
-        @see getCharPointer, toUTF8, toUTF16
+        @see c_str, toUTF8, toUTF16
     */
     CharPointer_UTF32 toUTF32() const;
 
@@ -1233,7 +1233,7 @@ public:
         Windows, this will be equivalent to calling toUTF16(), on unix it'll be the same
         as calling toUTF32(), etc.
 
-        @see getCharPointer, toUTF8, toUTF16, toUTF32
+        @see c_str, toUTF8, toUTF16, toUTF32
     */
     const wchar_t* toWideCharPointer() const;
 
@@ -1259,7 +1259,7 @@ public:
         character.
 
         To find out how many bytes you need to store this string as UTF-8, you can call
-        CharPointer_UTF8::getBytesRequiredFor (myString.getCharPointer())
+        CharPointer_UTF8::getBytesRequiredFor (myString.c_str())
 
         @param destBuffer       the place to copy it to; if this is a null pointer, the method just
                                 returns the number of bytes required (including the terminating null character).
@@ -1276,7 +1276,7 @@ public:
         character.
 
         To find out how many bytes you need to store this string as UTF-16, you can call
-        CharPointer_UTF16::getBytesRequiredFor (myString.getCharPointer())
+        CharPointer_UTF16::getBytesRequiredFor (myString.c_str())
 
         @param destBuffer       the place to copy it to; if this is a null pointer, the method just
                                 returns the number of bytes required (including the terminating null character).
@@ -1293,7 +1293,7 @@ public:
         character.
 
         To find out how many bytes you need to store this string as UTF-32, you can call
-        CharPointer_UTF32::getBytesRequiredFor (myString.getCharPointer())
+        CharPointer_UTF32::getBytesRequiredFor (myString.c_str())
 
         @param destBuffer       the place to copy it to; if this is a null pointer, the method just
                                 returns the number of bytes required (including the terminating null character).

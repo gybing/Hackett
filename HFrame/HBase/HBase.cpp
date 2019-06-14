@@ -137,7 +137,6 @@
 #include "text/CharacterFunctions.cpp"
 #include "text/Identifier.cpp"
 #include "text/LocalisedStrings.cpp"
-#include "text/String.cpp"
 #include "streams/OutputStream.cpp"
 #include "text/StringArray.cpp"
 #include "text/StringPairArray.cpp"

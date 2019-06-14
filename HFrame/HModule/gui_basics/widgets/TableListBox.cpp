@@ -169,7 +169,7 @@ public:
             {
                 auto dragDescription = owner.getModel()->getDragSourceDescription (rowsToDrag);
 
-                if (! (dragDescription.isVoid() || (dragDescription.isString() && dragDescription.toString().isEmpty())))
+                if (! (dragDescription.isVoid() || (dragDescription.isString() && dragDescription.toString().empty())))
                 {
                     isDragging = true;
                     owner.startDragAndDrop (e, rowsToDrag, dragDescription, true);

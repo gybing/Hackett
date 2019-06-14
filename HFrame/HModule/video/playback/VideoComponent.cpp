@@ -123,11 +123,11 @@ void VideoComponent::resized()
 {
     auto r = getLocalBounds();
 
-    if (isVideoOpen() && ! r.isEmpty())
+    if (isVideoOpen() && ! r.empty())
     {
         auto nativeSize = getVideoNativeSize();
 
-        if (nativeSize.isEmpty())
+        if (nativeSize.empty())
         {
             // if we've just opened the file and are still waiting for it to
             // figure out the size, start our timer..

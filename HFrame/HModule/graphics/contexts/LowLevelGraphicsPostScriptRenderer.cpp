@@ -156,7 +156,7 @@ Rectangle<int> LowLevelGraphicsPostScriptRenderer::getClipBounds() const
 
 bool LowLevelGraphicsPostScriptRenderer::isClipEmpty() const
 {
-    return stateStack.getLast()->clip.isEmpty();
+    return stateStack.getLast()->clip.empty();
 }
 
 //==============================================================================

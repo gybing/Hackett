@@ -125,10 +125,7 @@ public:
     explicit XmlElement (const Identifier& tagName);
 
     /** Creates an XmlElement with this tag name. */
-    explicit XmlElement (StringRef tagName);
-
-    /** Creates an XmlElement with this tag name. */
-    XmlElement (String::CharPointerType tagNameBegin, String::CharPointerType tagNameEnd);
+    XmlElement (char* tagNameBegin, char* tagNameEnd);
 
     /** Creates a (deep) copy of another element. */
     XmlElement (const XmlElement&);
@@ -696,7 +693,7 @@ private:
     {
         XmlAttributeNode (const XmlAttributeNode&) noexcept;
         XmlAttributeNode (const Identifier&, const String&) noexcept;
-        XmlAttributeNode (String::CharPointerType, String::CharPointerType);
+        XmlAttributeNode (char*, char*);
 
         LinkedListPointer<XmlAttributeNode> nextListItem;
         Identifier name;

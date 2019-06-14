@@ -428,7 +428,7 @@ struct RenderSequenceBuilder
         auto sources = getSourcesForChannel (node, inputChan);
 
         // Handle an unconnected input channel...
-        if (sources.isEmpty())
+        if (sources.empty())
         {
             if (inputChan >= numOuts)
                 return readOnlyEmptyBufferIndex;
@@ -557,7 +557,7 @@ struct RenderSequenceBuilder
         auto sources = getSourcesForChannel (node, AudioProcessorGraph::midiChannelIndex);
 
         // No midi inputs..
-        if (sources.isEmpty())
+        if (sources.empty())
         {
             auto midiBufferToUse = getFreeBuffer (midiBuffers); // need to pick a buffer even if the processor doesn't use midi
 
@@ -895,7 +895,7 @@ void AudioProcessorGraph::clear()
 {
     const ScopedLock sl (getCallbackLock());
 
-    if (nodes.isEmpty())
+    if (nodes.empty())
         return;
 
     nodes.clear();

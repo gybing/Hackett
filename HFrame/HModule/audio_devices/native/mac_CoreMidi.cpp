@@ -129,8 +129,8 @@ namespace CoreMidiHelpers
 
                         if (deviceInfo != MidiDeviceInfo())
                         {
-                            if (result.name.isNotEmpty())        result.name += ", ";
-                            if (result.identifier.isNotEmpty())  result.identifier += ", ";
+                            if (result.name.!empty())        result.name += ", ";
+                            if (result.identifier.!empty())  result.identifier += ", ";
 
                             result.name       += deviceInfo.name;
                             result.identifier += deviceInfo.identifier;
@@ -174,7 +174,7 @@ namespace CoreMidiHelpers
         }
        #endif
 
-        if (uniqueID.isEmpty())
+        if (uniqueID.empty())
             uniqueID = String (Random::getSystemRandom().nextInt (1024));
 
         uniqueID += "." + deviceName + (isInput ? ".input" : ".output");
@@ -374,7 +374,7 @@ MidiDeviceInfo MidiInput::getDefaultDevice()
 
 std::unique_ptr<MidiInput> MidiInput::openDevice (const String& deviceIdentifier, MidiInputCallback* callback)
 {
-    if (deviceIdentifier.isEmpty())
+    if (deviceIdentifier.empty())
         return nullptr;
 
     using namespace CoreMidiHelpers;
@@ -527,7 +527,7 @@ MidiDeviceInfo MidiOutput::getDefaultDevice()
 
 std::unique_ptr<MidiOutput> MidiOutput::openDevice (const String& deviceIdentifier)
 {
-    if (deviceIdentifier.isEmpty())
+    if (deviceIdentifier.empty())
         return nullptr;
 
     using namespace CoreMidiHelpers;

@@ -95,10 +95,10 @@ int64 parseInt (String s)
     s = s.trimStart();
 
     if (s.startsWithChar ('-'))
-        return -parseInt (s.substring (1));
+        return -parseInt (s.substr (1));
 
     if (s.startsWith ("0x"))
-        return s.substring(2).getHexValue64();
+        return s.substr(2).getHexValue64();
 
     return s.getLargeIntValue();
 }
@@ -199,11 +199,11 @@ void LivePropertyEditorBase::findOriginalValueInCode()
 {
     CodeDocument::Position pos (document, value.sourceLine, 0);
     auto line = pos.getLineText();
-    auto p = line.getCharPointer();
+    auto p = line.c_str();
 
     p = CharacterFunctions::find (p, CharPointer_ASCII ("HLIVE_CONSTANT"));
 
-    if (p.isEmpty())
+    if (p.empty())
     {
         // Not sure how this would happen - some kind of mix-up between source code and line numbers..
         HAssertfalse;
@@ -213,7 +213,7 @@ void LivePropertyEditorBase::findOriginalValueInCode()
     p += (int) (sizeof ("HLIVE_CONSTANT") - 1);
     p = p.findEndOfWhitespace();
 
-    if (! CharacterFunctions::find (p, CharPointer_ASCII ("HLIVE_CONSTANT")).isEmpty())
+    if (! CharacterFunctions::find (p, CharPointer_ASCII ("HLIVE_CONSTANT")).empty())
     {
         // Aargh! You've added two HLIVE_CONSTANT macros on the same line!
         // They're identified by their line number, so you must make sure each
@@ -221,15 +221,15 @@ void LivePropertyEditorBase::findOriginalValueInCode()
         HAssertfalse;
     }
 
-    if (p.getAndAdvance() == '(')
+    if (*p++ == '(')
     {
         auto start = p, end = p;
 
         int depth = 1;
 
-        while (! end.isEmpty())
+        while (! end.empty())
         {
-            auto c = end.getAndAdvance();
+            auto c = *end++;
 
             if (c == '(')  ++depth;
             if (c == ')')  --depth;
@@ -243,8 +243,8 @@ void LivePropertyEditorBase::findOriginalValueInCode()
 
         if (end > start)
         {
-            valueStart = CodeDocument::Position (document, value.sourceLine, (int) (start - line.getCharPointer()));
-            valueEnd   = CodeDocument::Position (document, value.sourceLine, (int) (end   - line.getCharPointer()));
+            valueStart = CodeDocument::Position (document, value.sourceLine, (int) (start - line.c_str()));
+            valueEnd   = CodeDocument::Position (document, value.sourceLine, (int) (end   - line.c_str()));
 
             valueStart.setPositionMaintained (true);
             valueEnd.setPositionMaintained (true);

@@ -419,7 +419,7 @@ public:
         bool reinitialiseCharPtr() const;
 
         const CodeDocument* document;
-        mutable String::CharPointerType charPointer { nullptr };
+        mutable char* charPointer { nullptr };
         int line = 0, position = 0;
     };
 

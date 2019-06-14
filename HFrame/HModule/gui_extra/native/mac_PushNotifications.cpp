@@ -61,7 +61,7 @@ namespace PushNotificationsDelegateDetailsOsx
         {
             notification.soundName = NSUserNotificationDefaultSoundName;
         }
-        else if (soundToPlayString.isNotEmpty())
+        else if (soundToPlayString.!empty())
         {
             auto* soundName = HStringToNS (soundToPlayString.fromLastOccurrenceOf ("/", false, false)
                                                                .upToLastOccurrenceOf (".", false, false));

@@ -34,15 +34,10 @@ public:
     */
     String getPooledString (const char* original);
 
-    /** Returns a pointer to a shared copy of the string that is passed in.
-        The pool will always return the same String object when asked for a string that matches it.
-    */
-    String getPooledString (StringRef original);
-
     /** Returns a pointer to a copy of the string that is passed in.
         The pool will always return the same String object when asked for a string that matches it.
     */
-    String getPooledString (String::CharPointerType start, String::CharPointerType end);
+    String getPooledString (char* start, char* end);
 
     //==============================================================================
     /** Scans the pool, and removes any strings that are unreferenced.

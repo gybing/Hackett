@@ -192,7 +192,7 @@ public:
                                                              : nullptr)
             relCompName = compLayout->getComponentMemberVariableName (relComp);
 
-        HAssert (relCompName.isNotEmpty());
+        HAssert (relCompName.!empty());
 
         PopupMenu m;
 

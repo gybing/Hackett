@@ -122,7 +122,7 @@ FileBrowserComponent::FileBrowserComponent (int flags_,
 
     setRoot (currentRoot);
 
-    if (filename.isNotEmpty())
+    if (filename.!empty())
         setFileName (filename);
 
     thread.startThread (4);
@@ -156,7 +156,7 @@ bool FileBrowserComponent::isSaveMode() const noexcept
 
 int FileBrowserComponent::getNumSelectedFiles() const noexcept
 {
-    if (chosenFiles.isEmpty() && currentFileIsValid())
+    if (chosenFiles.empty() && currentFileIsValid())
         return 1;
 
     return chosenFiles.size();
@@ -164,7 +164,7 @@ int FileBrowserComponent::getNumSelectedFiles() const noexcept
 
 File FileBrowserComponent::getSelectedFile (int index) const noexcept
 {
-    if ((flags & canSelectDirectories) != 0 && filenameBox.getText().isEmpty())
+    if ((flags & canSelectDirectories) != 0 && filenameBox.getText().empty())
         return currentRoot;
 
     if (! filenameBox.isReadOnly())
@@ -232,7 +232,7 @@ void FileBrowserComponent::setRoot (const File& newRootDirectory)
 
         String path (newRootDirectory.getFullPathName());
 
-        if (path.isEmpty())
+        if (path.empty())
             path = File::getSeparatorString();
 
         StringArray rootNames, rootPaths;
@@ -264,7 +264,7 @@ void FileBrowserComponent::setRoot (const File& newRootDirectory)
 
     auto currentRootName = currentRoot.getFullPathName();
 
-    if (currentRootName.isEmpty())
+    if (currentRootName.empty())
         currentRootName = File::getSeparatorString();
 
     currentPathBox.setText (currentRootName, dontSendNotification);
@@ -295,7 +295,7 @@ void FileBrowserComponent::resetRecentPaths()
 
     for (int i = 0; i < rootNames.size(); ++i)
     {
-        if (rootNames[i].isEmpty())
+        if (rootNames[i].empty())
             currentPathBox.addSeparator();
         else
             currentPathBox.addItem (rootNames[i], i + 1);
@@ -480,14 +480,14 @@ void FileBrowserComponent::updateSelectedPath()
 {
     auto newText = currentPathBox.getText().trim().unquoted();
 
-    if (newText.isNotEmpty())
+    if (newText.!empty())
     {
         auto index = currentPathBox.getSelectedId() - 1;
 
         StringArray rootNames, rootPaths;
         getRoots (rootNames, rootPaths);
 
-        if (rootPaths[index].isNotEmpty())
+        if (rootPaths[index].!empty())
         {
             setRoot (File (rootPaths[index]));
         }
@@ -530,7 +530,7 @@ void FileBrowserComponent::getDefaultRoots (StringArray& rootNames, StringArray&
         {
             String volume (drive.getVolumeLabel());
 
-            if (volume.isEmpty())
+            if (volume.empty())
                 volume = TRANS("Hard Drive");
 
             name << " [" << volume << ']';

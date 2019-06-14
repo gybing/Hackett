@@ -128,14 +128,14 @@ public:
     //==============================================================================
 private:
     String originalText;
-    String::CharPointerType input { nullptr };
+    char* input { nullptr };
     bool outOfData = false, errorOccurred = false;
     String lastError, dtdText;
     StringArray tokenisedDTD;
     bool needToLoadDTD = false, ignoreEmptyTextElements = true;
     std::unique_ptr<InputSource> inputSource;
 
-    std::unique_ptr<XmlElement> parseDocumentElement (String::CharPointerType, bool outer);
+    std::unique_ptr<XmlElement> parseDocumentElement (char*, bool outer);
     void setLastError (const String&, bool carryOn);
     bool parseHeader();
     bool parseDTD();

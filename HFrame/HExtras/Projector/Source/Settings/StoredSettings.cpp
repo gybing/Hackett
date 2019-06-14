@@ -366,7 +366,7 @@ void StoredSettings::checkHPaths()
 bool StoredSettings::shouldAskUserToSetHPath() noexcept
 {
     if (! isGlobalPathValid ({}, Ids::HPath, getStoredPath (Ids::HPath, TargetOS::getThisOS()).get().toString())
-        && getGlobalProperties().getValue ("dontAskAboutHPath", {}).isEmpty())
+        && getGlobalProperties().getValue ("dontAskAboutHPath", {}).empty())
         return true;
 
     return false;
@@ -423,7 +423,7 @@ static String getFallbackPathForOS (const Identifier& key, DependencyPathOS os)
             auto regValue = WindowsRegistry::getValue ("HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Applications\\clion64.exe\\shell\\open\\command\\", {}, {});
             auto openCmd = StringArray::fromTokens (regValue, true);
 
-            if (! openCmd.isEmpty())
+            if (! openCmd.empty())
                 return openCmd[0].unquoted();
           #endif
 
@@ -445,7 +445,7 @@ static String getFallbackPathForOS (const Identifier& key, DependencyPathOS os)
            #if HWINDOWS
             auto path = WindowsRegistry::getValue ("HKEY_LOCAL_MACHINE\\SOFTWARE\\Android Studio\\Path", {}, {});
 
-            if (! path.isEmpty())
+            if (! path.empty())
                 return path.unquoted() + "\\bin\\studio64.exe";
            #endif
 

@@ -327,7 +327,7 @@ public:
         invalid.subtract (validArea);
         validArea = viewportArea;
 
-        if (! invalid.isEmpty())
+        if (! invalid.empty())
         {
             clearRegionInFrameBuffer (invalid);
 

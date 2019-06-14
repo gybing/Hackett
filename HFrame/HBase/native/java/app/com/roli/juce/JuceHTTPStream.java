@@ -83,8 +83,8 @@ public class JuceHTTPStream
 
                 if (pos > 0 && pos < headerLines[i].length())
                 {
-                    String field = headerLines[i].substring(0, pos);
-                    String value = headerLines[i].substring(pos + 1);
+                    String field = headerLines[i].substr(0, pos);
+                    String value = headerLines[i].substr(pos + 1);
 
                     if (value.length() > 0)
                         newConnection.setRequestProperty(field, value);
@@ -169,7 +169,7 @@ public class JuceHTTPStream
                 if (pos2 > pos1)
                 {
                     String currentLocation = connection.getURL().toString();
-                    String newLocation = responseHeaders.substring(pos1, pos2);
+                    String newLocation = responseHeaders.substr(pos1, pos2);
 
                     try
                     {

@@ -64,7 +64,7 @@ struct CameraDevice::Pimpl
         [callbackDelegate release];
     }
 
-    bool openedOk() const noexcept       { return openingError.isEmpty(); }
+    bool openedOk() const noexcept       { return openingError.empty(); }
 
     void addImageCapture()
     {
@@ -179,7 +179,7 @@ struct CameraDevice::Pimpl
         const ScopedLock sl (listenerLock);
         listeners.call ([=] (Listener& l) { l.imageReceived (image); });
 
-        if (! listeners.isEmpty())
+        if (! listeners.empty())
             triggerImageCapture();
     }
 

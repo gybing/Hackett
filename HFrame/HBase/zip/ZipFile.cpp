@@ -386,7 +386,7 @@ Result ZipFile::uncompressEntry (int index, const File& targetDirectory, bool sh
     auto entryPath = zei->entry.filename.replaceCharacter ('\\', '/');
    #endif
 
-    if (entryPath.isEmpty())
+    if (entryPath.empty())
         return Result::ok();
 
     auto targetFile = targetDirectory.getChildFile (entryPath);
@@ -568,14 +568,14 @@ ZipFile::Builder::~Builder() {}
 void ZipFile::Builder::addFile (const File& file, int compression, const String& path)
 {
     items.add (new Item (file, nullptr, compression,
-                         path.isEmpty() ? file.getFileName() : path,
+                         path.empty() ? file.getFileName() : path,
                          file.getLastModificationTime()));
 }
 
 void ZipFile::Builder::addEntry (InputStream* stream, int compression, const String& path, Time time)
 {
     HAssert (stream != nullptr); // must not be null!
-    HAssert (path.isNotEmpty());
+    HAssert (path.!empty());
     items.add (new Item ({}, stream, compression, path, time));
 }
 

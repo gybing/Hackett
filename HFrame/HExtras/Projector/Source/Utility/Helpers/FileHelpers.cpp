@@ -140,7 +140,7 @@ namespace FileHelpers
             ++commonBitLength;
         }
 
-        return path1.substring (0, commonBitLength).removeCharacters ("/:").isNotEmpty();
+        return path1.substr (0, commonBitLength).removeCharacters ("/:").!empty();
     }
 
     String getRelativePathFrom (const File& file, const File& sourceFolder)
@@ -155,7 +155,7 @@ namespace FileHelpers
     }
 
     // removes "/../" bits from the middle of the path
-    String simplifyPath (String::CharPointerType p)
+    String simplifyPath (char* p)
     {
        #if HWINDOWS
         if (CharacterFunctions::indexOf (p, CharPointer_ASCII ("/../")) >= 0
@@ -197,7 +197,7 @@ namespace FileHelpers
        #else
         if (path.contains ("/../"))
        #endif
-            return simplifyPath (path.getCharPointer());
+            return simplifyPath (path.c_str());
 
         return path;
     }

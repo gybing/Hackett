@@ -60,7 +60,7 @@ AudioParameterFloat::AudioParameterFloat (const String& idToUse, const String& n
         stringFromValueFunction = [numDecimalPlacesToDisplay] (float v, int length)
         {
             String asText (v, numDecimalPlacesToDisplay);
-            return length > 0 ? asText.substring (0, length) : asText;
+            return length > 0 ? asText.substr (0, length) : asText;
         };
     }
 

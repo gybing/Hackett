@@ -33,14 +33,14 @@ namespace PathHelpers
 {
     const float ellipseAngularIncrement = 0.05f;
 
-    static String nextToken (String::CharPointerType& t)
+    static String nextToken (char*& t)
     {
         t = t.findEndOfWhitespace();
 
         auto start = t;
         size_t numChars = 0;
 
-        while (! (t.isEmpty() || t.isWhitespace()))
+        while (! (t.empty() || t.isWhitespace()))
         {
             ++t;
             ++numChars;
@@ -174,7 +174,7 @@ void Path::scaleToFit (float x, float y, float w, float h, bool preserveProporti
 }
 
 //==============================================================================
-bool Path::isEmpty() const noexcept
+bool Path::empty() const noexcept
 {
     for (auto i = data.begin(), e = data.end(); i != e; ++i)
     {
@@ -215,7 +215,7 @@ void Path::startNewSubPath (const float x, const float y)
 {
     HCHECK_COORDS_ARE_VALID (x, y)
 
-    if (data.isEmpty())
+    if (data.empty())
         bounds.reset (x, y);
     else
         bounds.extend (x, y);
@@ -232,7 +232,7 @@ void Path::lineTo (const float x, const float y)
 {
     HCHECK_COORDS_ARE_VALID (x, y)
 
-    if (data.isEmpty())
+    if (data.empty())
         startNewSubPath (0, 0);
 
     data.add (lineMarker, x, y);
@@ -250,7 +250,7 @@ void Path::quadraticTo (const float x1, const float y1,
     HCHECK_COORDS_ARE_VALID (x1, y1)
     HCHECK_COORDS_ARE_VALID (x2, y2)
 
-    if (data.isEmpty())
+    if (data.empty())
         startNewSubPath (0, 0);
 
     data.add (quadMarker, x1, y1, x2, y2);
@@ -271,7 +271,7 @@ void Path::cubicTo (const float x1, const float y1,
     HCHECK_COORDS_ARE_VALID (x2, y2)
     HCHECK_COORDS_ARE_VALID (x3, y3)
 
-    if (data.isEmpty())
+    if (data.empty())
         startNewSubPath (0, 0);
 
     data.add (cubicMarker, x1, y1, x2, y2, x3, y3);
@@ -289,13 +289,13 @@ void Path::cubicTo (Point<float> controlPoint1,
 
 void Path::closeSubPath()
 {
-    if (! (data.isEmpty() || isMarker (data.getLast(), closeSubPathMarker)))
+    if (! (data.empty() || isMarker (data.getLast(), closeSubPathMarker)))
         data.add (closeSubPathMarker);
 }
 
 Point<float> Path::getCurrentPosition() const
 {
-    if (data.isEmpty())
+    if (data.empty())
         return {};
 
     auto* i = data.end() - 1;
@@ -325,7 +325,7 @@ void Path::addRectangle (float x, float y, float w, float h)
     if (w < 0) std::swap (x1, x2);
     if (h < 0) std::swap (y1, y2);
 
-    if (data.isEmpty())
+    if (data.empty())
     {
         bounds.pathXMin = x1;
         bounds.pathXMax = x2;
@@ -888,7 +888,7 @@ AffineTransform Path::getTransformToScaleToFit (float x, float y, float w, float
 
     if (preserveProportions)
     {
-        if (w <= 0 || h <= 0 || boundsRect.isEmpty())
+        if (w <= 0 || h <= 0 || boundsRect.empty())
             return AffineTransform();
 
         float newW, newH;

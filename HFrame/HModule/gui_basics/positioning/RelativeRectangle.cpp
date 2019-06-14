@@ -26,7 +26,7 @@
 
 namespace RelativeRectangleHelpers
 {
-    inline void skipComma (String::CharPointerType& s)
+    inline void skipComma (char*& s)
     {
         s = s.findEndOfWhitespace();
 
@@ -87,7 +87,7 @@ RelativeRectangle::RelativeRectangle (const Rectangle<float>& rect)
 RelativeRectangle::RelativeRectangle (const String& s)
 {
     String error;
-    String::CharPointerType text (s.getCharPointer());
+    char* text (s.c_str());
     left = RelativeCoordinate (Expression::parse (text, error));
     RelativeRectangleHelpers::skipComma (text);
     top = RelativeCoordinate (Expression::parse (text, error));

@@ -228,9 +228,9 @@ MD5 MD5::fromUTF32 (StringRef text)
     MD5Generator generator;
     auto t = text.text;
 
-    while (! t.isEmpty())
+    while (! t.empty())
     {
-        auto unicodeChar = ByteOrder::swapIfBigEndian ((uint32) t.getAndAdvance());
+        auto unicodeChar = ByteOrder::swapIfBigEndian ((uint32) *t++);
         generator.processBlock (&unicodeChar, sizeof (unicodeChar));
     }
 

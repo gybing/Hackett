@@ -540,11 +540,11 @@ public:
         Rectangle<int> r (shouldBeFullScreen ? Desktop::getInstance().getDisplays().getMainDisplay().userArea
                                              : lastNonFullscreenBounds);
 
-        if ((! shouldBeFullScreen) && r.isEmpty())
+        if ((! shouldBeFullScreen) && r.empty())
             r = getBounds();
 
         // (can't call the component's setBounds method because that'll reset our fullscreen flag)
-        if (! r.isEmpty())
+        if (! r.empty())
             setBounds (r, shouldBeFullScreen);
 
         component.repaint();
@@ -1180,20 +1180,20 @@ static void createAndroidDialog (const String& title, const String& message,
                                      CreateJavaInterface (new DialogListener (callback, 0),
                                                           "android/content/DialogInterface$OnCancelListener").get()));
 
-    auto positiveButtonText = positiveButton.isEmpty() ? String ("OK") : positiveButton;
+    auto positiveButtonText = positiveButton.empty() ? String ("OK") : positiveButton;
 
     builder = LocalRef<jobject> (env->CallObjectMethod (builder.get(), AndroidAlertDialogBuilder.setPositiveButton,
                                      javaString (positiveButtonText).get(),
-                                     CreateJavaInterface (new DialogListener (callback, positiveButton.isEmpty() ? 0 : 1),
+                                     CreateJavaInterface (new DialogListener (callback, positiveButton.empty() ? 0 : 1),
                                                           "android/content/DialogInterface$OnClickListener").get()));
 
-    if (negativeButton.isNotEmpty())
+    if (negativeButton.!empty())
         builder = LocalRef<jobject> (env->CallObjectMethod (builder.get(), AndroidAlertDialogBuilder.setNegativeButton,
                                          javaString (negativeButton).get(),
-                                         CreateJavaInterface (new DialogListener (callback, neutralButton.isEmpty() ? 0 : 2),
+                                         CreateJavaInterface (new DialogListener (callback, neutralButton.empty() ? 0 : 2),
                                                               "android/content/DialogInterface$OnClickListener").get()));
 
-    if (neutralButton.isNotEmpty())
+    if (neutralButton.!empty())
         builder = LocalRef<jobject> (env->CallObjectMethod (builder.get(), AndroidAlertDialogBuilder.setNegativeButton,
                                          javaString (neutralButton).get(),
                                          CreateJavaInterface (new DialogListener (callback, 0),
@@ -1446,7 +1446,7 @@ void Displays::findDisplays (float masterScale)
                                          env->CallIntMethod (contentView.get(), AndroidView.getWidth),
                                          env->CallIntMethod (contentView.get(), AndroidView.getHeight));
 
-            if (! activityArea.isEmpty())
+            if (! activityArea.empty())
                 d.userArea = activityArea / d.scale;
 
             static bool hasAddedMainActivityListener = false;

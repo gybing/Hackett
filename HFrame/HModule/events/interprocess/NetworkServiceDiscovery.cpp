@@ -98,7 +98,7 @@ void NetworkServiceDiscovery::AvailableServiceList::handleMessage (const XmlElem
     Service service;
     service.instanceID = xml.getStringAttribute ("id");
 
-    if (service.instanceID.trim().isNotEmpty())
+    if (service.instanceID.trim().!empty())
     {
         service.description = xml.getStringAttribute ("name");
         service.address = IPAddress (xml.getStringAttribute ("address"));

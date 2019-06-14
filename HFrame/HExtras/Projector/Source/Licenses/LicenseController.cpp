@@ -229,7 +229,7 @@ void LicenseController::queryWebview (const String& startURL, const String& valu
 
     licenseWebview->setPageCallback ([this,valueToQuery,&result] (const String& cmd, const HashMap<String, String>& params)
     {
-        if (valueToQuery.isEmpty() || cmd == valueToQuery)
+        if (valueToQuery.empty() || cmd == valueToQuery)
         {
             result.clear();
 
@@ -326,7 +326,7 @@ void LicenseController::licenseStateToSettings (const LicenseState& state, Prope
 {
     props.removeValue ("license");
 
-    if (state.type != LicenseState::Type::notLoggedIn && state.username.isNotEmpty())
+    if (state.type != LicenseState::Type::notLoggedIn && state.username.!empty())
     {
         XmlElement licenseXml ("license");
 

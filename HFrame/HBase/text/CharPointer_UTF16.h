@@ -51,10 +51,10 @@ public:
     inline operator const CharType*() const noexcept    { return data; }
 
     /** Returns true if this pointer is pointing to a null character. */
-    inline bool isEmpty() const noexcept                { return *data == 0; }
+    inline bool empty() const noexcept                { return *data == 0; }
 
     /** Returns true if this pointer is not pointing to a null character. */
-    inline bool isNotEmpty() const noexcept             { return *data != 0; }
+    inline bool !empty() const noexcept             { return *data != 0; }
 
     /** Returns the unicode character that this pointer is pointing to. */
     wchar operator*() const noexcept
@@ -339,7 +339,7 @@ public:
     }
    #endif
 
-    /** Returns the character index of a substring, or -1 if it isn't found. */
+    /** Returns the character index of a substr, or -1 if it isn't found. */
     template <typename CharPointer>
     int indexOf (CharPointer stringToFind) const noexcept
     {

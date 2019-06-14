@@ -42,7 +42,7 @@ Block::Array BlockGraph::getTraversalPathFromMaster (Block::Ptr masterBlock) con
 {
     for (const auto& path : traversalPaths)
     {
-        if (! path.isEmpty() && path[0] == masterBlock)
+        if (! path.empty() && path[0] == masterBlock)
             return path;
     }
 

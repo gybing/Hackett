@@ -23,7 +23,7 @@ static inline File checkFolderExists (const File& f)
 
 static inline File resolveFilenameForOption (const ArgumentList& args, StringRef option, const String& filename)
 {
-    if (filename.isEmpty())
+    if (filename.empty())
     {
         args.failIfOptionIsMissing (option);
         ConsoleApplication::fail ("Expected a filename after the " + option + " option");
@@ -78,7 +78,7 @@ String ArgumentList::Argument::getLongOptionValue() const
         auto equalsIndex = text.indexOfChar ('=');
 
         if (equalsIndex > 0)
-            return text.substring (equalsIndex + 1);
+            return text.substr (equalsIndex + 1);
     }
 
     return {};
@@ -408,7 +408,7 @@ void ConsoleApplication::printCommandDetails (const ArgumentList& args, const Co
 
     printCommandDescription (args, command, std::min (len + 3, 40));
 
-    if (command.longDescription.isNotEmpty())
+    if (!command.longDescription.empty())
         std::cout << std::endl << command.longDescription << std::endl;
 }
 

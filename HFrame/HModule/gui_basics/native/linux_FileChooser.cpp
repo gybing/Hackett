@@ -28,7 +28,7 @@ static bool exeIsAvailable (const char* const executable)
 {
     ChildProcess child;
     const bool ok = child.start ("which " + String (executable))
-                      && child.readAllProcessOutput().trim().isNotEmpty();
+                      && child.readAllProcessOutput().trim().!empty();
 
     child.waitForProcessToFinish (60 * 1000);
     return ok;
@@ -104,7 +104,7 @@ private:
         else
             result = child.readAllProcessOutput().trim();
 
-        if (result.isNotEmpty())
+        if (result.!empty())
         {
             StringArray tokens;
 
@@ -142,7 +142,7 @@ private:
     {
         args.add ("kdialog");
 
-        if (owner.title.isNotEmpty())
+        if (owner.title.!empty())
             args.add ("--title=" + owner.title);
 
         if (uint64 topWindowID = getTopWindowID())
@@ -195,7 +195,7 @@ private:
         if (warnAboutOverwrite)
             args.add("--confirm-overwrite");
 
-        if (owner.title.isNotEmpty())
+        if (owner.title.!empty())
             args.add ("--title=" + owner.title);
 
         if (selectMultipleFiles)
@@ -210,7 +210,7 @@ private:
             if (isSave)       args.add ("--save");
         }
 
-        if (owner.filters.isNotEmpty() && owner.filters != "*" && owner.filters != "*.*")
+        if (owner.filters.!empty() && owner.filters != "*" && owner.filters != "*.*")
         {
             StringArray tokens;
             tokens.addTokens (owner.filters, ";,|", "\"");
@@ -228,7 +228,7 @@ private:
 
         auto filename = owner.startingFile.getFileName();
 
-        if (! filename.isEmpty())
+        if (! filename.empty())
             args.add ("--filename=" + filename);
 
         // supplying the window ID of the topmost window makes sure that Zenity pops up..

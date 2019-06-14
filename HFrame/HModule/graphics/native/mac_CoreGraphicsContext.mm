@@ -262,7 +262,7 @@ bool CoreGraphicsContext::clipToRectangle (const Rectangle<int>& r)
         // doesn't actually fix anything because CoreGraphics also ignores complex regions
         // when calculating the resultant clip bounds, and makes the same mistake!
         lastClipRect = lastClipRect.getIntersection (r);
-        return ! lastClipRect.isEmpty();
+        return ! lastClipRect.empty();
     }
 
     return ! isClipEmpty();
@@ -270,7 +270,7 @@ bool CoreGraphicsContext::clipToRectangle (const Rectangle<int>& r)
 
 bool CoreGraphicsContext::clipToRectangleListWithoutTest (const RectangleList<int>& clipRegion)
 {
-    if (clipRegion.isEmpty())
+    if (clipRegion.empty())
     {
         CGContextClipToRect (context, CGRectZero);
         lastClipRectIsValid = true;
@@ -363,7 +363,7 @@ Rectangle<int> CoreGraphicsContext::getClipBounds() const
 
 bool CoreGraphicsContext::isClipEmpty() const
 {
-    return getClipBounds().isEmpty();
+    return getClipBounds().empty();
 }
 
 //==============================================================================

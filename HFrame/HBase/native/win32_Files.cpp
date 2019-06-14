@@ -74,10 +74,10 @@ namespace WindowsFileHelpers
 
     String getDriveFromPath (String path)
     {
-        if (path.isNotEmpty() && path[1] == ':' && path[2] == 0)
+        if (!path.empty() && path[1] == ':' && path[2] == 0)
             path << '\\';
 
-        const size_t numBytes = CharPointer_UTF16::getBytesRequiredFor (path.getCharPointer()) + 4;
+        const size_t numBytes = CharPointer_UTF16::getBytesRequiredFor (path.c_str()) + 4;
         HeapBlock<WCHAR> pathCopy;
         pathCopy.calloc (numBytes, 1);
         path.copyToUTF16 (pathCopy, numBytes);
@@ -138,7 +138,7 @@ namespace WindowsFileHelpers
 HDECLARE_DEPRECATED_STATIC (const wchar File::separator = '\\';)
 HDECLARE_DEPRECATED_STATIC (const StringRef File::separatorString ("\\");)
 
-wchar File::getSeparatorChar()    { return '\\'; }
+char File::getSeparatorChar()    { return '\\'; }
 StringRef File::getSeparatorString()   { return "\\"; }
 
 void* getUser32Function (const char*);
@@ -146,13 +146,13 @@ void* getUser32Function (const char*);
 //==============================================================================
 bool File::exists() const
 {
-    return fullPath.isNotEmpty()
+    return !fullPath.empty()
             && WindowsFileHelpers::getAtts (fullPath) != INVALID_FILE_ATTRIBUTES;
 }
 
 bool File::existsAsFile() const
 {
-    return fullPath.isNotEmpty()
+    return !fullPath.empty()
             && (WindowsFileHelpers::getAtts (fullPath) & FILE_ATTRIBUTE_DIRECTORY) == 0;
 }
 
@@ -164,7 +164,7 @@ bool File::isDirectory() const
 
 bool File::hasWriteAccess() const
 {
-    if (fullPath.isEmpty())
+    if (fullPath.empty())
         return true;
 
     auto attr = WindowsFileHelpers::getAtts (fullPath);
@@ -211,7 +211,7 @@ bool File::moveToTrash() const
         return true;
 
     // The string we pass in must be double null terminated..
-    const size_t numBytes = CharPointer_UTF16::getBytesRequiredFor (fullPath.getCharPointer()) + 8;
+    const size_t numBytes = CharPointer_UTF16::getBytesRequiredFor (fullPath.c_str()) + 8;
     HeapBlock<WCHAR> doubleNullTermPath;
     doubleNullTermPath.calloc (numBytes, 1);
     fullPath.copyToUTF16 (doubleNullTermPath, numBytes);
@@ -552,7 +552,7 @@ bool File::isOnCDRomDrive() const
 
 bool File::isOnHardDisk() const
 {
-    if (fullPath.isEmpty())
+    if (fullPath.empty())
         return false;
 
     auto n = WindowsFileHelpers::getWindowsDriveType (getFullPathName());
@@ -565,7 +565,7 @@ bool File::isOnHardDisk() const
 
 bool File::isOnRemovableDrive() const
 {
-    if (fullPath.isEmpty())
+    if (fullPath.empty())
         return false;
 
     auto n = WindowsFileHelpers::getWindowsDriveType (getFullPathName());
@@ -760,12 +760,12 @@ static String readWindowsShortcutOrLink (const File& shortcut, bool wantsAbsolut
                             break;
                     }
 
-                    if (targetPath.isNotEmpty())
+                    if (!targetPath.empty())
                     {
                         const StringRef prefix ("\\??\\");
 
                         if (targetPath.startsWith (prefix))
-                            targetPath = targetPath.substring (prefix.length());
+                            targetPath = targetPath.substr (prefix.length());
 
                         return targetPath;
                     }
@@ -803,7 +803,7 @@ static String readWindowsShortcutOrLink (const File& shortcut, bool wantsAbsolut
 
                     // It turns out that GetFinalPathNameByHandleW prepends \\?\ to the path.
                     // This is not a bug, it's feature. See MSDN for more information.
-                    return path.startsWith (prefix) ? path.substring (prefix.length()) : path;
+                    return path.startsWith (prefix) ? path.substr (prefix.length()) : path;
                 }
             }
 
@@ -825,7 +825,7 @@ File File::getLinkedTarget() const
 {
     auto target = readWindowsShortcutOrLink (*this, true);
 
-    if (target.isNotEmpty() && File::isAbsolutePath (target))
+    if (!target.empty() && File::isAbsolutePath (target))
         return File (target);
 
     return *this;
@@ -852,7 +852,7 @@ class DirectoryIterator::NativeIterator::Pimpl
 {
 public:
     Pimpl (const File& directory, const String& wildCard)
-        : directoryWithWildCard (directory.getFullPathName().isNotEmpty() ? File::addTrailingSeparator (directory.getFullPathName()) + wildCard : String()),
+        : directoryWithWildCard (directory.!getFullPathName().empty() ? File::addTrailingSeparator (directory.getFullPathName()) + wildCard : String()),
           handle (INVALID_HANDLE_VALUE)
     {
     }

@@ -139,7 +139,7 @@ static File getCodeCacheDirectory()
 
     auto bundleId = cmdline.loadFileAsString().trimStart().trimEnd();
 
-    if (bundleId.isEmpty())
+    if (bundleId.empty())
         return {};
 
     return File("/data/data/" + bundleId + "/code_cache");

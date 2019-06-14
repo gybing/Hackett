@@ -162,7 +162,7 @@ private:
                 return f.exists() ? f.getFileName() : compileUnit;
             }
 
-            if (! compileUnit.isEmpty())
+            if (! compileUnit.empty())
                 return compileUnit;
 
             return String ("Global");

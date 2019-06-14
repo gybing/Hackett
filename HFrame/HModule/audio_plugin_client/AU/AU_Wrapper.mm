@@ -897,7 +897,7 @@ public:
                 const String name = param->getName (1024);
 
                 // Set whether the param is automatable (unnamed parameters aren't allowed to be automated)
-                if (name.isEmpty() || ! param->isAutomatable())
+                if (name.empty() || ! param->isAutomatable())
                     outParameterInfo.flags |= kAudioUnitParameterFlag_NonRealTime;
 
                 const bool isParameterDiscrete = param->isDiscrete();
@@ -910,7 +910,7 @@ public:
 
                 auto parameterGroupHierarchy = HFilter->getParameterTree().getGroupsForParameter (param);
 
-                if (! parameterGroupHierarchy.isEmpty())
+                if (! parameterGroupHierarchy.empty())
                 {
                     outParameterInfo.flags |= kAudioUnitParameterFlag_HasClump;
                     outParameterInfo.clumpID = (UInt32) parameterGroups.indexOf (parameterGroupHierarchy.getLast()) + 1;
@@ -1349,7 +1349,7 @@ public:
 
         // process midi output
       #if JucePlugin_ProducesMidiOutput || JucePlugin_IsMidiEffect
-        if (! midiEvents.isEmpty() && midiCallback.midiOutputCallback != nullptr)
+        if (! midiEvents.empty() && midiCallback.midiOutputCallback != nullptr)
             pushMidiOutput (nFrames);
       #endif
 
@@ -1407,7 +1407,7 @@ public:
             for (int i = 0; i < numPrograms; ++i)
             {
                 String name (HFilter->getProgramName(i));
-                if (name.isEmpty())
+                if (name.empty())
                     name = "Untitled";
 
                 AUPreset& p = presetsArray.getReference(i);

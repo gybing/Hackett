@@ -163,7 +163,7 @@ void TabBarButton::resized()
         Rectangle<int> extraComp, textArea;
         calcAreas (extraComp, textArea);
 
-        if (! extraComp.isEmpty())
+        if (! extraComp.empty())
             extraComponent->setBounds (extraComp);
     }
 }
@@ -243,9 +243,9 @@ void TabbedButtonBar::addTab (const String& tabName,
                               Colour tabBackgroundColour,
                               int insertIndex)
 {
-    HAssert (tabName.isNotEmpty()); // you have to give them all a name..
+    HAssert (tabName.!empty()); // you have to give them all a name..
 
-    if (tabName.isNotEmpty())
+    if (tabName.!empty())
     {
         if (! isPositiveAndBelow (insertIndex, tabs.size()))
             insertIndex = tabs.size();

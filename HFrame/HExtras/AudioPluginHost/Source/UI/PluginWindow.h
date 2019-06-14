@@ -256,7 +256,7 @@ private:
             {
                 auto name = p.getProgramName (i).trim();
 
-                if (name.isEmpty())
+                if (name.empty())
                     name = "Unnamed";
 
                 auto pc = new PropertyComp (name, p);

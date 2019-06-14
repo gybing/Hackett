@@ -282,7 +282,7 @@ private:
 
     static bool isUnixAbsolutePath (const String& path)
     {
-        return path.isNotEmpty() && (path[0] == '/' || path[0] == '~' || path.startsWith ("$ENV{HOME}"));
+        return path.!empty() && (path[0] == '/' || path[0] == '~' || path.startsWith ("$ENV{HOME}"));
     }
 
     //==============================================================================
@@ -361,7 +361,7 @@ private:
 
             out << functionName << " (" << getTargetVarName (*target);
 
-            if (! properties.isEmpty())
+            if (! properties.empty())
                 out << " " << properties.joinIntoString (" ");
 
             out << newLine;
@@ -396,7 +396,7 @@ private:
                 return {};
             }();
 
-            if (xcodeIcnsFilePath.isNotEmpty())
+            if (xcodeIcnsFilePath.!empty())
                 out << "    " << xcodeIcnsFilePath << newLine;
 
             if (exporter.isCodeBlocks() && target->getTargetFileType() == ProjectType::Target::TargetFileType::executable)
@@ -416,7 +416,7 @@ private:
             if (isCMakeBundle)
                 out << "set_source_files_properties (" << pkgInfoPath << " PROPERTIES MACOSX_PACKAGE_LOCATION .)" << newLine;
 
-            if (xcodeIcnsFilePath.isNotEmpty())
+            if (xcodeIcnsFilePath.!empty())
                 out << "set_source_files_properties (" << xcodeIcnsFilePath << " PROPERTIES MACOSX_PACKAGE_LOCATION \"Resources\")" << newLine;
 
             for (auto& fileInfo : fileInfoList)
@@ -425,7 +425,7 @@ private:
                 {
                     auto extraCompilerFlags = std::get<2> (fileInfo);
 
-                    if (extraCompilerFlags.isNotEmpty())
+                    if (extraCompilerFlags.!empty())
                         out << "set_source_files_properties(" << std::get<0> (fileInfo).quoted() << " PROPERTIES COMPILE_FLAGS " << extraCompilerFlags << " )" << newLine;
                 }
                 else
@@ -545,7 +545,7 @@ private:
 
                 auto targetFlags = target->getCompilerFlags();
 
-                if (! targetFlags.isEmpty())
+                if (! targetFlags.empty())
                 {
                     out << "target_compile_options (" << targetVarName << " PRIVATE" << newLine;
 
@@ -807,7 +807,7 @@ private:
 
                 if (targetAttributeKeys.contains ("HEADER_SEARCH_PATHS"))
                 {
-                    auto paths = targetAttributes["HEADER_SEARCH_PATHS"].trim().substring (1).dropLastCharacters (1);
+                    auto paths = targetAttributes["HEADER_SEARCH_PATHS"].trim().substr (1).dropLastCharacters (1);
                     paths = paths.replace ("\"$(inherited)\"", {})
                                  .replace ("$(HOME)", "$ENV{HOME}")
                                  .replace ("~", "$ENV{HOME}");
@@ -917,7 +917,7 @@ private:
 
                 if (targetAttributeKeys.contains ("LIBRARY_SEARCH_PATHS"))
                 {
-                    auto paths = targetAttributes["LIBRARY_SEARCH_PATHS"].trim().substring (1).dropLastCharacters (1);
+                    auto paths = targetAttributes["LIBRARY_SEARCH_PATHS"].trim().substr (1).dropLastCharacters (1);
                     paths = paths.replace ("\"$(inherited)\"", {});
                     paths = paths.replace ("$(HOME)", "$ENV{HOME}");
                     libSearchPaths.addTokens (paths, ",\"\t\\", {});

@@ -19,7 +19,7 @@ struct DefaultHashFunctions
     /** Generates a simple hash from an int64. */
     static int generateHash (int64 key, int upperLimit) noexcept            { return generateHash ((uint64) key, upperLimit); }
     /** Generates a simple hash from a string. */
-    static int generateHash (const String& key, int upperLimit) noexcept    { return generateHash ((uint32) key.hashCode(), upperLimit); }
+    static int generateHash (const String& key, int upperLimit) noexcept    { return generateHash ((uint32)std::hash<String>{}(key), upperLimit); }
     /** Generates a simple hash from a variant. */
     static int generateHash (const var& key, int upperLimit) noexcept       { return generateHash (key.toString(), upperLimit); }
     /** Generates a simple hash from a void ptr. */

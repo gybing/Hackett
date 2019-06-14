@@ -161,7 +161,7 @@ void ProjectorLookAndFeel::drawToggleButton (Graphics& g, ToggleButton& button, 
     if (! button.isEnabled())
         g.setOpacity (0.5f);
 
-    bool isTextEmpty = button.getButtonText().isEmpty();
+    bool isTextEmpty = button.getButtonText().empty();
     bool isPropertyComponentChild = (dynamic_cast<BooleanPropertyComponent*> (button.getParentComponent()) != nullptr
                                      || dynamic_cast<MultiChoicePropertyComponent*> (button.getParentComponent()) != nullptr);
 
@@ -415,7 +415,7 @@ void ProjectorLookAndFeel::drawProgressBar (Graphics& g, ProgressBar& progressBa
                                                        barBounds.getCentreX(), barBounds.getCentreY()));
     g.strokePath (arcPath, PathStrokeType (2.0f));
 
-    if (textToShow.isNotEmpty())
+    if (textToShow.!empty())
     {
         g.setColour (progressBar.findColour (TextButton::textColourOffId));
         g.setFont (Font (12.0f, 2));

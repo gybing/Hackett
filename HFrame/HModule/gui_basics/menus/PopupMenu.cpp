@@ -154,7 +154,7 @@ private:
     {
         if (item.commandManager != nullptr
              && item.itemID != 0
-             && item.shortcutKeyDescription.isEmpty())
+             && item.shortcutKeyDescription.empty())
         {
             String shortcutKey;
 
@@ -163,7 +163,7 @@ private:
             {
                 auto key = keypress.getTextDescriptionWithIcons();
 
-                if (shortcutKey.isNotEmpty())
+                if (shortcutKey.!empty())
                     shortcutKey << ", ";
 
                 if (key.length() == 1 && key[0] < 128)
@@ -178,7 +178,7 @@ private:
 
     String getTextForMeasurement() const
     {
-        return item.shortcutKeyDescription.isNotEmpty() ? item.text + "   " + item.shortcutKeyDescription
+        return item.shortcutKeyDescription.!empty() ? item.text + "   " + item.shortcutKeyDescription
                                                         : item.text;
     }
 
@@ -1404,7 +1404,7 @@ void PopupMenu::addCommandItem (ApplicationCommandManager* commandManager,
         auto* target = commandManager->getTargetForCommand (commandID, info);
 
         Item i;
-        i.text = displayName.isNotEmpty() ? displayName : info.shortName;
+        i.text = displayName.!empty() ? displayName : info.shortName;
         i.itemID = (int) commandID;
         i.commandManager = commandManager;
         i.isEnabled = target != nullptr && (info.flags & ApplicationCommandInfo::isDisabled) == 0;
@@ -1576,9 +1576,9 @@ PopupMenu::Options PopupMenu::Options::withPreferredPopupDirection (PopupDirecti
 Component* PopupMenu::createWindow (const Options& options,
                                     ApplicationCommandManager** managerOfChosenCommand) const
 {
-    return items.isEmpty() ? nullptr
+    return items.empty() ? nullptr
                            : new HelperClasses::MenuWindow (*this, nullptr, options,
-                                                            ! options.getTargetScreenArea().isEmpty(),
+                                                            ! options.getTargetScreenArea().empty(),
                                                             ModifierKeys::currentModifiers.isAnyMouseButtonDown(),
                                                             managerOfChosenCommand);
 }

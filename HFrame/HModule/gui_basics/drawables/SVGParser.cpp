@@ -165,7 +165,7 @@ public:
         if (xml->hasAttribute ("viewBox"))
         {
             auto viewBoxAtt = xml->getStringAttribute ("viewBox");
-            auto viewParams = viewBoxAtt.getCharPointer();
+            auto viewParams = viewBoxAtt.c_str();
             Point<float> vwh;
 
             if (parseCoords (viewParams, viewboxXY, true)
@@ -202,18 +202,18 @@ public:
     //==============================================================================
     void parsePathString (Path& path, const String& pathString) const
     {
-        auto d = pathString.getCharPointer().findEndOfWhitespace();
+        auto d = pathString.c_str().findEndOfWhitespace();
 
         Point<float> subpathStart, last, last2, p1, p2, p3;
         wchar currentCommand = 0, previousCommand = 0;
         bool isRelative = true;
         bool carryOn = true;
 
-        while (! d.isEmpty())
+        while (! d.empty())
         {
             if (CharPointer_ASCII ("MmLlHhVvCcSsQqTtAaZz").indexOf (*d) >= 0)
             {
-                currentCommand = d.getAndAdvance();
+                currentCommand = *d++;
                 isRelative = currentCommand >= 'a';
             }
 
@@ -611,7 +611,7 @@ private:
     void parsePolygon (const XmlPath& xml, const bool isPolyline, Path& path) const
     {
         auto pointsAtt = xml->getStringAttribute ("points");
-        auto points = pointsAtt.getCharPointer();
+        auto points = pointsAtt.c_str();
         Point<float> p;
 
         if (parseCoords (points, p, true))
@@ -636,7 +636,7 @@ private:
         auto link = xml->getStringAttribute ("xlink:href");
 
         if (link.startsWithChar ('#'))
-            return link.substring (1);
+            return link.substr (1);
 
         return {};
     }
@@ -645,7 +645,7 @@ private:
     {
         auto linkedID = getLinkedID (xml);
 
-        if (linkedID.isNotEmpty())
+        if (linkedID.!empty())
         {
             UsePathOp op = { this, &path };
             return topLevelXml.applyOperationToChildWithID (linkedID, op);
@@ -703,7 +703,7 @@ private:
 
         auto strokeType = getStyleAttribute (xml, "stroke");
 
-        if (strokeType.isNotEmpty() && ! isNone (strokeType))
+        if (strokeType.!empty() && ! isNone (strokeType))
         {
             dp->setStrokeFill (getPathFillType (path, xml, "stroke",
                                                 getStyleAttribute (xml, "stroke-opacity"),
@@ -715,7 +715,7 @@ private:
 
         auto strokeDashArray = getStyleAttribute (xml, "stroke-dasharray");
 
-        if (strokeDashArray.isNotEmpty())
+        if (strokeDashArray.!empty())
             parseDashArray (strokeDashArray, *dp);
 
         return dp;
@@ -737,7 +737,7 @@ private:
 
         Array<float> dashLengths;
 
-        for (auto t = dashList.getCharPointer();;)
+        for (auto t = dashList.c_str();;)
         {
             float value;
             if (! parseCoord (t, value, true, true))
@@ -781,11 +781,11 @@ private:
     {
         const String clipPath (getStyleAttribute (xml, "clip-path"));
 
-        if (clipPath.isNotEmpty())
+        if (clipPath.!empty())
         {
             auto urlID = parseURL (clipPath);
 
-            if (urlID.isNotEmpty())
+            if (urlID.!empty())
             {
                 GetClipPathOp op = { this, &d };
                 return topLevelXml.applyOperationToChildWithID (urlID, op);
@@ -849,7 +849,7 @@ private:
         {
             auto linkedID = getLinkedID (fillXml);
 
-            if (linkedID.isNotEmpty())
+            if (linkedID.!empty())
             {
                 SetGradientStopsOp op = { this, &gradient, };
                 topLevelXml.applyOperationToChildWithID (linkedID, op);
@@ -972,16 +972,16 @@ private:
     {
         float opacity = 1.0f;
 
-        if (overallOpacity.isNotEmpty())
+        if (overallOpacity.!empty())
             opacity = jlimit (0.0f, 1.0f, overallOpacity.getFloatValue());
 
-        if (fillOpacity.isNotEmpty())
+        if (fillOpacity.!empty())
             opacity *= (jlimit (0.0f, 1.0f, fillOpacity.getFloatValue()));
 
         String fill (getStyleAttribute (xml, fillAttribute));
         String urlID = parseURL (fill);
 
-        if (urlID.isNotEmpty())
+        if (urlID.!empty())
         {
             GetFillTypeOp op = { this, &path, opacity, FillType() };
 
@@ -1034,7 +1034,7 @@ private:
 
         auto linkedID = getLinkedID (xml);
 
-        if (linkedID.isNotEmpty())
+        if (linkedID.!empty())
             topLevelXml.applyOperationToChildWithID (linkedID, op);
 
         return op.target;
@@ -1112,7 +1112,7 @@ private:
         Font f;
         auto family = getStyleAttribute (xml, "font-family").unquoted();
 
-        if (family.isNotEmpty())
+        if (family.!empty())
             f.setTypefaceName (family);
 
         if (getStyleAttribute (xml, "font-style").containsIgnoreCase ("italic"))
@@ -1134,7 +1134,7 @@ private:
 
         auto linkedID = getLinkedID (xml);
 
-        if (linkedID.isNotEmpty())
+        if (linkedID.!empty())
             topLevelXml.applyOperationToChildWithID (linkedID, op);
 
         return op.target;
@@ -1165,16 +1165,16 @@ private:
         if (link.startsWith ("data:"))
         {
             const auto indexOfComma = link.indexOf (",");
-            auto format = link.substring (5, indexOfComma).trim();
+            auto format = link.substr (5, indexOfComma).trim();
             auto indexOfSemi = format.indexOf (";");
 
-            if (format.substring (indexOfSemi + 1).trim().equalsIgnoreCase ("base64"))
+            if (format.substr (indexOfSemi + 1).trim().equalsIgnoreCase ("base64"))
             {
-                auto mime = format.substring (0, indexOfSemi).trim();
+                auto mime = format.substr (0, indexOfSemi).trim();
 
                 if (mime.equalsIgnoreCase ("image/png") || mime.equalsIgnoreCase ("image/jpeg"))
                 {
-                    auto base64text = link.substring (indexOfComma + 1).removeCharacters ("\t\n\r ");
+                    auto base64text = link.substr (indexOfComma + 1).removeCharacters ("\t\n\r ");
 
                     if (Base64::convertFromBase64 (imageStream, base64text))
                         inputStream.reset (new MemoryInputStream (imageStream.getData(), imageStream.getDataSize(), false));
@@ -1226,7 +1226,7 @@ private:
     }
 
     //==============================================================================
-    bool parseCoord (String::CharPointerType& s, float& value, const bool allowUnits, const bool isX) const
+    bool parseCoord (char*& s, float& value, const bool allowUnits, const bool isX) const
     {
         String number;
 
@@ -1240,18 +1240,18 @@ private:
         return true;
     }
 
-    bool parseCoords (String::CharPointerType& s, Point<float>& p, const bool allowUnits) const
+    bool parseCoords (char*& s, Point<float>& p, const bool allowUnits) const
     {
         return parseCoord (s, p.x, allowUnits, true)
             && parseCoord (s, p.y, allowUnits, false);
     }
 
-    bool parseCoordsOrSkip (String::CharPointerType& s, Point<float>& p, const bool allowUnits) const
+    bool parseCoordsOrSkip (char*& s, Point<float>& p, const bool allowUnits) const
     {
         if (parseCoords (s, p, allowUnits))
             return true;
 
-        if (! s.isEmpty()) ++s;
+        if (! s.empty()) ++s;
         return false;
     }
 
@@ -1284,7 +1284,7 @@ private:
 
     void getCoordList (Array<float>& coords, const String& list, bool allowUnits, const bool isX) const
     {
-        auto text = list.getCharPointer();
+        auto text = list.c_str();
         float value;
 
         while (parseCoord (text, value, allowUnits, isX))
@@ -1303,13 +1303,13 @@ private:
             parseCSSStyle (xml.getChild (style));
     }
 
-    static String::CharPointerType findStyleItem (String::CharPointerType source, String::CharPointerType name)
+    static char* findStyleItem (char* source, char* name)
     {
         auto nameLength = (int) name.length();
 
-        while (! source.isEmpty())
+        while (! source.empty())
         {
-            if (source.getAndAdvance() == '.'
+            if (*source++ == '.'
                  && CharacterFunctions::compareIgnoreCaseUpTo (source, name, nameLength) == 0)
             {
                 auto endOfName = (source + nameLength).findEndOfWhitespace();
@@ -1332,30 +1332,30 @@ private:
 
         auto styleAtt = xml->getStringAttribute ("style");
 
-        if (styleAtt.isNotEmpty())
+        if (styleAtt.!empty())
         {
             auto value = getAttributeFromStyleList (styleAtt, attributeName, {});
 
-            if (value.isNotEmpty())
+            if (value.!empty())
                 return value;
         }
         else if (xml->hasAttribute ("class"))
         {
-            for (auto i = cssStyleText.getCharPointer();;)
+            for (auto i = cssStyleText.c_str();;)
             {
-                auto openBrace = findStyleItem (i, xml->getStringAttribute ("class").getCharPointer());
+                auto openBrace = findStyleItem (i, xml->getStringAttribute ("class").c_str());
 
-                if (openBrace.isEmpty())
+                if (openBrace.empty())
                     break;
 
                 auto closeBrace = CharacterFunctions::find (openBrace, (wchar) '}');
 
-                if (closeBrace.isEmpty())
+                if (closeBrace.empty())
                     break;
 
                 auto value = getAttributeFromStyleList (String (openBrace + 1, closeBrace),
                                                         attributeName, defaultValue);
-                if (value.isNotEmpty())
+                if (value.!empty())
                     return value;
 
                 i = closeBrace + 1;
@@ -1381,7 +1381,7 @@ private:
 
     static int parsePlacementFlags (const String& align) noexcept
     {
-        if (align.isEmpty())
+        if (align.empty())
             return 0;
 
         if (isNone (align))
@@ -1426,7 +1426,7 @@ private:
                 if (end < 0)
                     end = 0x7ffff;
 
-                return list.substring (i + 1, end).trim();
+                return list.substr (i + 1, end).trim();
             }
 
             ++i;
@@ -1441,7 +1441,7 @@ private:
         return CharacterFunctions::isDigit (c) || c == '-' || c == '+';
     }
 
-    static bool parseNextNumber (String::CharPointerType& text, String& value, const bool allowUnits)
+    static bool parseNextNumber (char*& text, String& value, const bool allowUnits)
     {
         auto s = text;
 
@@ -1500,7 +1500,7 @@ private:
         {
             uint32 hex[6] = { 0 };
             int numChars = 0;
-            auto s = text.getCharPointer();
+            auto s = text.c_str();
 
             while (numChars < 6)
             {
@@ -1530,7 +1530,7 @@ private:
             if (openBracket >= 3 && closeBracket > openBracket)
             {
                 StringArray tokens;
-                tokens.addTokens (text.substring (openBracket + 1, closeBracket), ",", "");
+                tokens.addTokens (text.substr (openBracket + 1, closeBracket), ",", "");
                 tokens.trim();
                 tokens.removeEmptyStrings();
 
@@ -1548,7 +1548,7 @@ private:
         if (text == "inherit")
         {
             for (const XmlPath* p = xml.parent; p != nullptr; p = p->parent)
-                if (getStyleAttribute (*p, attributeName).isNotEmpty())
+                if (getStyleAttribute (*p, attributeName).!empty())
                     return parseColour (*p, attributeName, defaultColour);
         }
 
@@ -1559,7 +1559,7 @@ private:
     {
         AffineTransform result;
 
-        while (t.isNotEmpty())
+        while (t.!empty())
         {
             StringArray tokens;
             tokens.addTokens (t.fromFirstOccurrenceOf ("(", false, false)

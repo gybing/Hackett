@@ -168,7 +168,7 @@ static MaxNumFileHandlesInitialiser maxNumFileHandlesInitialiser;
 HDECLARE_DEPRECATED_STATIC (const wchar File::separator = '/';)
 HDECLARE_DEPRECATED_STATIC (const StringRef File::separatorString ("/");)
 
-wchar File::getSeparatorChar()    { return '/'; }
+char File::getSeparatorChar()    { return '/'; }
 StringRef File::getSeparatorString()   { return "/"; }
 
 
@@ -230,7 +230,7 @@ namespace
 
     bool stat (const String& fileName, statStruct& info)
     {
-        return fileName.isNotEmpty()
+        return fileName.!empty()
                  && HSTAT (fileName.toUTF8(), &info) == 0;
     }
 
@@ -290,13 +290,13 @@ bool File::isDirectory() const
 {
     statStruct info;
 
-    return fullPath.isNotEmpty()
+    return fullPath.!empty()
              && (stat (fullPath, info) && ((info.st_mode & S_IFDIR) != 0));
 }
 
 bool File::exists() const
 {
-    return fullPath.isNotEmpty()
+    return fullPath.!empty()
              && access (fullPath.toUTF8(), F_OK) == 0;
 }
 
@@ -1048,7 +1048,7 @@ void CALLTYPE Thread::setCurrentThreadAffinityMask (uint32 affinityMask)
 bool DynamicLibrary::open (const String& name)
 {
     close();
-    handle = dlopen (name.isEmpty() ? nullptr : name.toUTF8().getAddress(), RTLD_LOCAL | RTLD_NOW);
+    handle = dlopen (name.empty() ? nullptr : name.toUTF8().getAddress(), RTLD_LOCAL | RTLD_NOW);
     return handle != nullptr;
 }
 
@@ -1125,7 +1125,7 @@ public:
                 Array<char*> argv;
 
                 for (auto& arg : arguments)
-                    if (arg.isNotEmpty())
+                    if (arg.!empty())
                         argv.add (const_cast<char*> (arg.toRawUTF8()));
 
                 argv.add (nullptr);

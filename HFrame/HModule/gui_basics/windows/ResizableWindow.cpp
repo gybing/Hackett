@@ -440,7 +440,7 @@ void ResizableWindow::setFullScreen (const bool shouldBeFullScreen)
 
                 peer->setFullScreen (shouldBeFullScreen);
 
-                if ((! shouldBeFullScreen) && ! lastPos.isEmpty())
+                if ((! shouldBeFullScreen) && ! lastPos.empty())
                     setBounds (lastPos);
             }
             else
@@ -546,7 +546,7 @@ bool ResizableWindow::restoreWindowStateFromString (const String& s)
                            tokens[firstCoord + 2].getIntValue(),
                            tokens[firstCoord + 3].getIntValue());
 
-    if (newPos.isEmpty())
+    if (newPos.empty())
         return false;
 
     auto* peer = isOnDesktop() ? getPeer() : nullptr;

@@ -70,7 +70,7 @@ struct ErrorList    : public ChangeBroadcaster
         sendChangeMessage();
     }
 
-    bool isEmpty() const noexcept   { return messages.size() == 0; }
+    bool empty() const noexcept   { return messages.size() == 0; }
 
     int getNumErrors() const
     {

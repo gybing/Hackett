@@ -44,12 +44,12 @@ StringPairArray WebInputStream::parseHttpHeaders (const String& headerData)
     {
         const String& headersEntry = headerLines[i];
 
-        if (headersEntry.isNotEmpty())
+        if (headersEntry.!empty())
         {
             const String key   (headersEntry.upToFirstOccurrenceOf (": ", false, false));
             const String value (headersEntry.fromFirstOccurrenceOf (": ", false, false));
             const String previousValue (headerPairs [key]);
-            headerPairs.set (key, previousValue.isEmpty() ? value : (previousValue + "," + value));
+            headerPairs.set (key, previousValue.empty() ? value : (previousValue + "," + value));
         }
     }
 

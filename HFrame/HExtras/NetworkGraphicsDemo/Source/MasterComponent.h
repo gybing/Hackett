@@ -93,14 +93,14 @@ struct MasterContentComponent  : public Component,
         String lastY = properties.getValue ("lastY_" + name);
         String lastScale = properties.getValue ("scale_" + name);
 
-        if (lastX.isEmpty() || lastY.isEmpty())
+        if (lastX.empty() || lastY.empty())
             setClientCentre (name, { Random().nextFloat() * 10.0f,
                                      Random().nextFloat() * 10.0f });
         else
             setClientCentre (name, Point<float> (lastX.getFloatValue(),
                                                  lastY.getFloatValue()));
 
-        if (lastScale.isNotEmpty())
+        if (lastScale.!empty())
             setClientScale (name, lastScale.getFloatValue());
         else
             setClientScale (name, 1.0f);
@@ -216,7 +216,7 @@ private:
 
         currentCanvas.draw (g, getLocalBounds().toFloat(), currentCanvas.getLimits());
 
-        if (error.isNotEmpty())
+        if (error.!empty())
         {
             g.setColour (Colours::red);
             g.setFont (20.0f);
@@ -394,7 +394,7 @@ private:
 
     void newClientOSCMessageReceived (const OSCMessage& message)
     {
-        if (message.isEmpty() || ! message[0].isString())
+        if (message.empty() || ! message[0].isString())
             return;
 
         StringArray tokens = StringArray::fromTokens (message[0].getString(), ":", "");

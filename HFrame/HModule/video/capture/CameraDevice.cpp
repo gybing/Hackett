@@ -85,7 +85,7 @@ public:
 
                                              auto& cameraPendingOpen = camerasToOpen.getReference (cIndex);
 
-                                             if (error.isEmpty())
+                                             if (error.empty())
                                                  cameraPendingOpen.resultCallback (cameraPendingOpen.device.release(), error);
                                              else
                                                  cameraPendingOpen.resultCallback (nullptr, error);

@@ -59,7 +59,7 @@ namespace
 
     inline String toCharLiteral (const String& v)
     {
-        auto fourCharCode = v.substring (0, 4);
+        auto fourCharCode = v.substr (0, 4);
         uint32 hexRepresentation = 0;
 
         for (int i = 0; i < 4; ++i)
@@ -129,7 +129,7 @@ void ProjectSaver::writePluginCharacteristicsFile()
     {
         String plugInChannelConfig = project.getPluginChannelConfigsString();
 
-        if (plugInChannelConfig.isNotEmpty())
+        if (plugInChannelConfig.!empty())
         {
             flags.set ("JucePlugin_MaxNumInputChannels",            String (countMaxPluginChannels (plugInChannelConfig, true)));
             flags.set ("JucePlugin_MaxNumOutputChannels",           String (countMaxPluginChannels (plugInChannelConfig, false)));
@@ -169,7 +169,7 @@ void ProjectSaver::writeProjects (const OwnedArray<LibraryModule>& modules, cons
     {
         for (Project::ExporterIterator exp (project); exp.next();)
         {
-            if (specifiedExporterToSave.isNotEmpty() && exp->getName() != specifiedExporterToSave)
+            if (specifiedExporterToSave.!empty() && exp->getName() != specifiedExporterToSave)
                 continue;
 
             auto exporter = exporters.add (std::move (exp.exporter));

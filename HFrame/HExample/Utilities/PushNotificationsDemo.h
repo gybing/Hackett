@@ -190,7 +190,7 @@ public:
 
             DBG ("token = " + token);
 
-            if (token.isEmpty())
+            if (token.empty())
                 showRemoteInstructions();
             else
                 NativeMessageBox::showMessageBoxAsync (AlertWindow::InfoIcon, "Device token", token);

@@ -48,7 +48,7 @@ struct TextAtom
     String getTrimmedText (const wchar passwordCharacter) const
     {
         if (passwordCharacter == 0)
-            return atomText.substring (0, numChars);
+            return atomText.substr (0, numChars);
 
         if (isNewLine())
             return {};
@@ -84,11 +84,11 @@ public:
 
     void append (UniformTextSection& other, const wchar passwordChar)
     {
-        if (! other.atoms.isEmpty())
+        if (! other.atoms.empty())
         {
             int i = 0;
 
-            if (! atoms.isEmpty())
+            if (! atoms.empty())
             {
                 auto& lastAtom = atoms.getReference (atoms.size() - 1);
 
@@ -138,13 +138,13 @@ public:
             if (indexToBreakAt >= index && indexToBreakAt < nextIndex)
             {
                 TextAtom secondAtom;
-                secondAtom.atomText = atom.atomText.substring (indexToBreakAt - index);
+                secondAtom.atomText = atom.atomText.substr (indexToBreakAt - index);
                 secondAtom.width = font.getStringWidthFloat (secondAtom.getText (passwordChar));
                 secondAtom.numChars = (uint16) secondAtom.atomText.length();
 
                 section2->atoms.add (secondAtom);
 
-                atom.atomText = atom.atomText.substring (0, indexToBreakAt - index);
+                atom.atomText = atom.atomText.substr (0, indexToBreakAt - index);
                 atom.width = font.getStringWidthFloat (atom.getText (passwordChar));
                 atom.numChars = (uint16) (indexToBreakAt - index);
 
@@ -182,8 +182,8 @@ public:
 
                 auto r = (range - index).getIntersectionWith ({ 0, (int) atom.numChars });
 
-                if (! r.isEmpty())
-                    mo << atom.atomText.substring (r.getStart(), r.getEnd());
+                if (! r.empty())
+                    mo << atom.atomText.substr (r.getStart(), r.getEnd());
             }
 
             index = nextIndex;
@@ -219,9 +219,9 @@ public:
 private:
     void initialiseAtoms (const String& textToParse, const wchar passwordChar)
     {
-        auto text = textToParse.getCharPointer();
+        auto text = textToParse.c_str();
 
-        while (! text.isEmpty())
+        while (! text.empty())
         {
             size_t numChars = 0;
             auto start = text;
@@ -256,7 +256,7 @@ private:
                 }
                 else
                 {
-                    while (! (text.isEmpty() || text.isWhitespace()))
+                    while (! (text.empty() || text.isWhitespace()))
                     {
                         ++text;
                         ++numChars;
@@ -288,7 +288,7 @@ struct TextEditor::Iterator
     {
         HAssert (wordWrapWidth > 0);
 
-        if (! sections.isEmpty())
+        if (! sections.empty())
         {
             currentSection = sections.getUnchecked (sectionIndex);
 
@@ -309,7 +309,7 @@ struct TextEditor::Iterator
 
             if (numRemaining > 0)
             {
-                tempAtom.atomText = tempAtom.atomText.substring (tempAtom.numChars);
+                tempAtom.atomText = tempAtom.atomText.substr (tempAtom.numChars);
 
                 if (tempAtom.numChars > 0)
                     lineY += lineHeight * lineSpacing;
@@ -524,7 +524,7 @@ struct TextEditor::Iterator
                 g.setFont (currentSection->font);
             }
 
-            HAssert (atom->getTrimmedText (passwordCharacter).isNotEmpty());
+            HAssert (atom->getTrimmedText (passwordCharacter).!empty());
 
             GlyphArrangement ga;
             ga.addLineOfText (currentSection->font,
@@ -1106,11 +1106,11 @@ String TextEditor::LengthAndCharacterRestriction::filterNewText (TextEditor& ed,
 {
     String t (newInput);
 
-    if (allowedCharacters.isNotEmpty())
+    if (allowedCharacters.!empty())
         t = t.retainCharacters (allowedCharacters);
 
     if (maxLength > 0)
-        t = t.substring (0, maxLength - (ed.getTotalNumChars() - ed.getHighlightedRegion().getLength()));
+        t = t.substr (0, maxLength - (ed.getTotalNumChars() - ed.getHighlightedRegion().getLength()));
 
     return t;
 }
@@ -1260,7 +1260,7 @@ void TextEditor::checkFocus()
 
 void TextEditor::repaintText (Range<int> range)
 {
-    if (! range.isEmpty())
+    if (! range.empty())
     {
         auto lh = currentFont.getHeight();
         auto wordWrapWidth = getWordWrapWidth();
@@ -1526,7 +1526,7 @@ void TextEditor::insertTextAtCaret (const String& t)
     const int newCaretPos = insertIndex + newText.length();
 
     remove (selection, getUndoManager(),
-            newText.isNotEmpty() ? newCaretPos - 1 : newCaretPos);
+            newText.!empty() ? newCaretPos - 1 : newCaretPos);
 
     insert (newText, insertIndex, currentFont, findColour (textColourId),
             getUndoManager(), newCaretPos);
@@ -1547,7 +1547,7 @@ void TextEditor::copy()
     {
         auto selectedText = getHighlightedText();
 
-        if (selectedText.isNotEmpty())
+        if (selectedText.!empty())
             SystemClipboard::copyTextToClipboard (selectedText);
     }
 }
@@ -1558,7 +1558,7 @@ void TextEditor::paste()
     {
         auto clip = SystemClipboard::getTextFromClipboard();
 
-        if (clip.isNotEmpty())
+        if (clip.!empty())
             insertTextAtCaret (clip);
     }
 }
@@ -1582,7 +1582,7 @@ void TextEditor::drawContent (Graphics& g)
         Colour selectedTextColour;
         Iterator i (*this);
 
-        if (! selection.isEmpty())
+        if (! selection.empty())
         {
             Iterator i2 (i);
             RectangleList<float> selectionArea;
@@ -1643,7 +1643,7 @@ void TextEditor::paint (Graphics& g)
 
 void TextEditor::paintOverChildren (Graphics& g)
 {
-    if (textToShowWhenEmpty.isNotEmpty()
+    if (textToShowWhenEmpty.!empty()
          && (! hasKeyboardFocus (false))
          && getTotalNumChars() == 0)
     {
@@ -1670,7 +1670,7 @@ void TextEditor::addPopupMenuItems (PopupMenu& m, const MouseEvent*)
     if (passwordCharacter == 0)
     {
         m.addItem (StandardApplicationCommandIDs::cut,   TRANS("Cut"), writable);
-        m.addItem (StandardApplicationCommandIDs::copy,  TRANS("Copy"), ! selection.isEmpty());
+        m.addItem (StandardApplicationCommandIDs::copy,  TRANS("Copy"), ! selection.empty());
     }
 
     m.addItem (StandardApplicationCommandIDs::paste,     TRANS("Paste"), writable);
@@ -1941,7 +1941,7 @@ bool TextEditor::deleteBackwards (bool moveInWholeWordSteps)
 {
     if (moveInWholeWordSteps)
         moveCaretTo (findWordBreakBefore (getCaretPosition()), true);
-    else if (selection.isEmpty() && selection.getStart() > 0)
+    else if (selection.empty() && selection.getStart() > 0)
         selection = { selection.getEnd() - 1, selection.getEnd() };
 
     cut();
@@ -1950,7 +1950,7 @@ bool TextEditor::deleteBackwards (bool moveInWholeWordSteps)
 
 bool TextEditor::deleteForwards (bool /*moveInWholeWordSteps*/)
 {
-    if (selection.isEmpty() && selection.getStart() < getTotalNumChars())
+    if (selection.empty() && selection.getStart() < getTotalNumChars())
         selection = { selection.getStart(), selection.getStart() + 1 };
 
     cut();
@@ -2171,7 +2171,7 @@ void TextEditor::clearInternal (UndoManager* const um)
 void TextEditor::insert (const String& text, int insertIndex, const Font& font,
                          Colour colour, UndoManager* um, int caretPositionToMoveTo)
 {
-    if (text.isNotEmpty())
+    if (text.!empty())
     {
         if (um != nullptr)
         {
@@ -2265,7 +2265,7 @@ void TextEditor::reinsert (int insertIndex, const OwnedArray<UniformTextSection>
 
 void TextEditor::remove (Range<int> range, UndoManager* const um, const int caretPositionToMoveTo)
 {
-    if (! range.isEmpty())
+    if (! range.empty())
     {
         int index = 0;
 
@@ -2331,7 +2331,7 @@ void TextEditor::remove (Range<int> range, UndoManager* const um, const int care
                     sections.remove (i);
                     remainingRange.setEnd (remainingRange.getEnd() - (nextIndex - index));
 
-                    if (remainingRange.isEmpty())
+                    if (remainingRange.empty())
                         break;
 
                     --i;
@@ -2367,7 +2367,7 @@ String TextEditor::getText() const
 
 String TextEditor::getTextInRange (const Range<int>& range) const
 {
-    if (range.isEmpty())
+    if (range.empty())
         return {};
 
     MemoryOutputStream mo;
@@ -2411,7 +2411,7 @@ int TextEditor::getTotalNumChars() const
     return totalNumChars;
 }
 
-bool TextEditor::isEmpty() const
+bool TextEditor::empty() const
 {
     return getTotalNumChars() == 0;
 }
@@ -2427,7 +2427,7 @@ void TextEditor::getCharPosition (int index, Point<float>& anchor, float& lineHe
     {
         Iterator i (*this);
 
-        if (sections.isEmpty())
+        if (sections.empty())
         {
             anchor = { i.getJustificationOffset (0), 0 };
             lineHeight = currentFont.getHeight();

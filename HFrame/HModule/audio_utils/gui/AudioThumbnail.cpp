@@ -386,7 +386,7 @@ public:
         {
             auto clip = g.getClipBounds().getIntersection (area.withWidth (jmin (numSamplesCached, area.getWidth())));
 
-            if (! clip.isEmpty())
+            if (! clip.empty())
             {
                 auto topY = (float) area.getY();
                 auto bottomY = (float) area.getBottom();

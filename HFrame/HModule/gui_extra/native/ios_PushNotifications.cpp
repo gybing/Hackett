@@ -131,7 +131,7 @@ namespace PushNotificationsDelegateDetails
 
         if (soundToPlayString == "default_os_sound")
             notification.soundName = UILocalNotificationDefaultSoundName;
-        else if (soundToPlayString.isNotEmpty())
+        else if (!soundToPlayString.empty())
             notification.soundName = HStringToNS (soundToPlayString);
 
         return notification;
@@ -154,7 +154,7 @@ namespace PushNotificationsDelegateDetails
 
         if (soundToPlayString == "default_os_sound")
             content.sound = [UNNotificationSound defaultSound];
-        else if (soundToPlayString.isNotEmpty())
+        else if (!soundToPlayString.empty())
             content.sound = [UNNotificationSound soundNamed: HStringToNS (soundToPlayString)];
 
         auto* propsDict = (NSMutableDictionary*) varObjectToNSDictionary (n.properties);
@@ -172,7 +172,7 @@ namespace PushNotificationsDelegateDetails
 
         // request
         // each notification on iOS 10 needs to have an identifer, otherwise it will not show up
-        HAssert (n.identifier.isNotEmpty());
+        HAssert (!n.identifier.empty());
         UNNotificationRequest* request = [UNNotificationRequest requestWithIdentifier: HStringToNS (n.identifier)
                                                                               content: content
                                                                               trigger: trigger];
@@ -565,9 +565,9 @@ bool PushNotifications::Notification::isValid() const noexcept
     const bool iOSEarlierThan10 = std::floor (NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_9_x_Max;
 
     if (iOSEarlierThan10)
-        return title.isNotEmpty() && body.isNotEmpty() && category.isNotEmpty();
+        return !title.empty() && !body.empty() && !category.empty();
 
-    return title.isNotEmpty() && body.isNotEmpty() && identifier.isNotEmpty() && category.isNotEmpty();
+    return !title.empty() && !body.empty() && !identifier.empty() && !category.empty();
 }
 
 //==============================================================================

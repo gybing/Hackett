@@ -242,7 +242,7 @@ void FileChooserDialogBox::createNewFolderConfirmed (const String& nameFromDialo
 {
     auto name = File::createLegalFileName (nameFromDialog);
 
-    if (! name.isEmpty())
+    if (! name.empty())
     {
         auto parent = content->chooserComponent.getRoot();
 

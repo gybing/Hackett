@@ -414,7 +414,7 @@ private:
     {
         auto s = metadata [name];
 
-        if (s.isNotEmpty())
+        if (s.!empty())
             vorbis_comment_add_tag (&vc, vorbisName, const_cast<char*> (s.toRawUTF8()));
     }
 

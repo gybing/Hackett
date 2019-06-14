@@ -212,7 +212,7 @@ private:
         {
             getParameter().beginChangeGesture();
 
-            if (getParameter().getAllValueStrings().isEmpty())
+            if (getParameter().getAllValueStrings().empty())
             {
                 getParameter().setValueNotifyingHost (buttonState ? 1.0f : 0.0f);
             }
@@ -233,7 +233,7 @@ private:
 
     bool getParameterState()
     {
-        if (getParameter().getAllValueStrings().isEmpty())
+        if (getParameter().getAllValueStrings().empty())
             return getParameter().getValue() > 0.5f;
 
         auto index = getParameter().getAllValueStrings()
@@ -436,7 +436,7 @@ public:
             // Most hosts display any parameter with just two steps as a switch.
             parameterComp = std::make_unique<SwitchParameterComponent> (processor, param);
         }
-        else if (! param.getAllValueStrings().isEmpty())
+        else if (! param.getAllValueStrings().empty())
         {
             // If we have a list of strings to represent the different states a
             // parameter can be in then we should present a dropdown allowing a

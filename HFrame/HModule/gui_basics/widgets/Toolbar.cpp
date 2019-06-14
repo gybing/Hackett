@@ -398,7 +398,7 @@ bool Toolbar::restoreFromString (ToolbarItemFactory& factoryToUse,
         return false;
 
     StringArray tokens;
-    tokens.addTokens (savedVersion.substring (3), false);
+    tokens.addTokens (savedVersion.substr (3), false);
 
     clear();
 

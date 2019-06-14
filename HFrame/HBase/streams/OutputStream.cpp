@@ -185,12 +185,12 @@ bool OutputStream::writeText (const String& text, bool asUTF16, bool writeUTF16B
         if (writeUTF16ByteOrderMark)
             write ("\x0ff\x0fe", 2);
 
-        auto src = text.getCharPointer();
+        auto src = text.c_str();
         bool lastCharWasReturn = false;
 
         for (;;)
         {
-            auto c = src.getAndAdvance();
+            auto c = *src++;
 
             if (c == 0)
                 break;

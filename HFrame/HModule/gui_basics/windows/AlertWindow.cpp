@@ -44,7 +44,7 @@ AlertWindow::AlertWindow (const String& title,
 {
     setAlwaysOnTop (areThereAnyAlwaysOnTopWindows());
 
-    if (message.isEmpty())
+    if (message.empty())
         text = " "; // to force an update if the message is empty
 
     setMessage (message);
@@ -77,7 +77,7 @@ void AlertWindow::userTriedToCloseWindow()
 //==============================================================================
 void AlertWindow::setMessage (const String& message)
 {
-    auto newMessage = message.substring (0, 2048);
+    auto newMessage = message.substr (0, 2048);
 
     if (text != newMessage)
     {
@@ -362,7 +362,7 @@ void AlertWindow::updateLayout (const bool onlyIncreaseSize)
     AttributedString attributedText;
     attributedText.append (getName(), lf.getAlertWindowTitleFont());
 
-    if (text.isNotEmpty())
+    if (text.!empty())
         attributedText.append ("\n\n" + text, messageFont);
 
     attributedText.setColour (findColour (textColourId));
@@ -403,7 +403,7 @@ void AlertWindow::updateLayout (const bool onlyIncreaseSize)
         w = jmax (w, (c->getWidth() * 100) / 80);
         h += 10 + c->getHeight();
 
-        if (c->getName().isNotEmpty())
+        if (c->getName().!empty())
             h += labelHeight;
     }
 
@@ -462,16 +462,16 @@ void AlertWindow::updateLayout (const bool onlyIncreaseSize)
         h = 22;
 
         const int comboIndex = comboBoxes.indexOf (dynamic_cast<ComboBox*> (c));
-        if (comboIndex >= 0 && comboBoxNames [comboIndex].isNotEmpty())
+        if (comboIndex >= 0 && comboBoxNames [comboIndex].!empty())
             y += labelHeight;
 
         const int tbIndex = textBoxes.indexOf (dynamic_cast<TextEditor*> (c));
-        if (tbIndex >= 0 && textboxNames[tbIndex].isNotEmpty())
+        if (tbIndex >= 0 && textboxNames[tbIndex].!empty())
             y += labelHeight;
 
         if (customComps.contains (c))
         {
-            if (c->getName().isNotEmpty())
+            if (c->getName().!empty())
                 y += labelHeight;
 
             c->setTopLeftPosition (proportionOfWidth (0.1f), y);
@@ -624,7 +624,7 @@ void AlertWindow::showMessageBox (AlertIconType iconType,
     else
     {
         AlertWindowInfo info (title, message, associatedComponent, iconType, 1, nullptr, true);
-        info.button1 = buttonText.isEmpty() ? TRANS("OK") : buttonText;
+        info.button1 = buttonText.empty() ? TRANS("OK") : buttonText;
 
         info.invoke();
     }
@@ -645,7 +645,7 @@ void AlertWindow::showMessageBoxAsync (AlertIconType iconType,
     else
     {
         AlertWindowInfo info (title, message, associatedComponent, iconType, 1, callback, false);
-        info.button1 = buttonText.isEmpty() ? TRANS("OK") : buttonText;
+        info.button1 = buttonText.empty() ? TRANS("OK") : buttonText;
 
         info.invoke();
     }
@@ -663,8 +663,8 @@ bool AlertWindow::showOkCancelBox (AlertIconType iconType,
         return NativeMessageBox::showOkCancelBox (iconType, title, message, associatedComponent, callback);
 
     AlertWindowInfo info (title, message, associatedComponent, iconType, 2, callback, callback == nullptr);
-    info.button1 = button1Text.isEmpty() ? TRANS("OK")     : button1Text;
-    info.button2 = button2Text.isEmpty() ? TRANS("Cancel") : button2Text;
+    info.button1 = button1Text.empty() ? TRANS("OK")     : button1Text;
+    info.button2 = button2Text.empty() ? TRANS("Cancel") : button2Text;
 
     return info.invoke() != 0;
 }
@@ -682,9 +682,9 @@ int AlertWindow::showYesNoCancelBox (AlertIconType iconType,
         return NativeMessageBox::showYesNoCancelBox (iconType, title, message, associatedComponent, callback);
 
     AlertWindowInfo info (title, message, associatedComponent, iconType, 3, callback, callback == nullptr);
-    info.button1 = button1Text.isEmpty() ? TRANS("Yes")     : button1Text;
-    info.button2 = button2Text.isEmpty() ? TRANS("No")      : button2Text;
-    info.button3 = button3Text.isEmpty() ? TRANS("Cancel")  : button3Text;
+    info.button1 = button1Text.empty() ? TRANS("Yes")     : button1Text;
+    info.button2 = button2Text.empty() ? TRANS("No")      : button2Text;
+    info.button3 = button3Text.empty() ? TRANS("Cancel")  : button3Text;
 
     return info.invoke();
 }

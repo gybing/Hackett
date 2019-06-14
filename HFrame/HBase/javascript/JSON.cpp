@@ -2,11 +2,11 @@
 
 struct JSONParser
 {
-    static Result parseObjectOrArray (String::CharPointerType t, var& result)
+    static Result parseObjectOrArray (char* t, var& result)
     {
         t = t.findEndOfWhitespace();
 
-        switch (t.getAndAdvance())
+        switch (*t++)
         {
             case 0:      result = var(); return Result::ok();
             case '{':    return parseObject (t, result);
@@ -16,20 +16,20 @@ struct JSONParser
         return createFail ("Expected '{' or '['", &t);
     }
 
-    static Result parseString (const wchar quoteChar, String::CharPointerType& t, var& result)
+    static Result parseString (const wchar quoteChar, char*& t, var& result)
     {
         MemoryOutputStream buffer (256);
 
         for (;;)
         {
-            auto c = t.getAndAdvance();
+            auto c = *t++;
 
             if (c == quoteChar)
                 break;
 
             if (c == '\\')
             {
-                c = t.getAndAdvance();
+                c = *t++;
 
                 switch (c)
                 {
@@ -51,7 +51,7 @@ struct JSONParser
 
                         for (int i = 4; --i >= 0;)
                         {
-                            auto digitValue = CharacterFunctions::getHexDigitValue (t.getAndAdvance());
+                            auto digitValue = CharacterFunctions::getHexDigitValue (*t++);
 
                             if (digitValue < 0)
                                 return createFail ("Syntax error in unicode escape sequence");
@@ -74,12 +74,12 @@ struct JSONParser
         return Result::ok();
     }
 
-    static Result parseAny (String::CharPointerType& t, var& result)
+    static Result parseAny (char*& t, var& result)
     {
         t = t.findEndOfWhitespace();
         auto t2 = t;
 
-        switch (t2.getAndAdvance())
+        switch (*t2++)
         {
             case '{':    t = t2; return parseObject (t, result);
             case '[':    t = t2; return parseArray  (t, result);
@@ -99,7 +99,7 @@ struct JSONParser
                 return parseNumber (t, result, false);
 
             case 't':   // "true"
-                if (t2.getAndAdvance() == 'r' && t2.getAndAdvance() == 'u' && t2.getAndAdvance() == 'e')
+                if (*t2++ == 'r' && *t2++ == 'u' && *t2++ == 'e')
                 {
                     t = t2;
                     result = var (true);
@@ -108,8 +108,8 @@ struct JSONParser
                 break;
 
             case 'f':   // "false"
-                if (t2.getAndAdvance() == 'a' && t2.getAndAdvance() == 'l'
-                      && t2.getAndAdvance() == 's' && t2.getAndAdvance() == 'e')
+                if (*t2++ == 'a' && *t2++ == 'l'
+                      && *t2++ == 's' && *t2++ == 'e')
                 {
                     t = t2;
                     result = var (false);
@@ -118,7 +118,7 @@ struct JSONParser
                 break;
 
             case 'n':   // "null"
-                if (t2.getAndAdvance() == 'u' && t2.getAndAdvance() == 'l' && t2.getAndAdvance() == 'l')
+                if (*t2++ == 'u' && *t2++ == 'l' && *t2++ == 'l')
                 {
                     t = t2;
                     result = var();
@@ -134,7 +134,7 @@ struct JSONParser
     }
 
 private:
-    static Result createFail (const char* const message, const String::CharPointerType* location = nullptr)
+    static Result createFail (const char* const message, const char** location = nullptr)
     {
         String m (message);
         if (location != nullptr)
@@ -143,17 +143,17 @@ private:
         return Result::fail (m);
     }
 
-    static Result parseNumber (String::CharPointerType& t, var& result, const bool isNegative)
+    static Result parseNumber (char*& t, var& result, const bool isNegative)
     {
         auto oldT = t;
 
-        int64 intValue = t.getAndAdvance() - '0';
+        int64 intValue = *t++ - '0';
         HAssert (intValue >= 0 && intValue < 10);
 
         for (;;)
         {
             auto previousChar = t;
-            auto c = t.getAndAdvance();
+            auto c = *t++;
             auto digit = ((int) c) - '0';
 
             if (isPositiveAndBelow (digit, 10))
@@ -190,7 +190,7 @@ private:
         return Result::ok();
     }
 
-    static Result parseObject (String::CharPointerType& t, var& result)
+    static Result parseObject (char*& t, var& result)
     {
         auto resultObject = new DynamicObject();
         result = resultObject;
@@ -201,7 +201,7 @@ private:
             t = t.findEndOfWhitespace();
 
             auto oldT = t;
-            auto c = t.getAndAdvance();
+            auto c = *t++;
 
             if (c == '}')
                 break;
@@ -224,7 +224,7 @@ private:
                     t = t.findEndOfWhitespace();
                     oldT = t;
 
-                    auto c2 = t.getAndAdvance();
+                    auto c2 = *t++;
 
                     if (c2 != ':')
                         return createFail ("Expected ':', but found", &oldT);
@@ -240,7 +240,7 @@ private:
                     t = t.findEndOfWhitespace();
                     oldT = t;
 
-                    auto nextChar = t.getAndAdvance();
+                    auto nextChar = *t++;
 
                     if (nextChar == ',')
                         continue;
@@ -256,7 +256,7 @@ private:
         return Result::ok();
     }
 
-    static Result parseArray (String::CharPointerType& t, var& result)
+    static Result parseArray (char*& t, var& result)
     {
         result = var (Array<var>());
         auto* destArray = result.getArray();
@@ -266,7 +266,7 @@ private:
             t = t.findEndOfWhitespace();
 
             auto oldT = t;
-            auto c = t.getAndAdvance();
+            auto c = *t++;
 
             if (c == ']')
                 break;
@@ -284,7 +284,7 @@ private:
             t = t.findEndOfWhitespace();
             oldT = t;
 
-            auto nextChar = t.getAndAdvance();
+            auto nextChar = *t++;
 
             if (nextChar == ',')
                 continue;
@@ -308,7 +308,7 @@ struct JSONFormatter
         if (v.isString())
         {
             out << '"';
-            writeString (out, v.toString().getCharPointer());
+            writeString (out, v.toString().c_str());
             out << '"';
         }
         else if (v.isVoid())
@@ -361,11 +361,11 @@ struct JSONFormatter
         out << "\\u" << String::toHexString ((int) value).paddedLeft ('0', 4);
     }
 
-    static void writeString (OutputStream& out, String::CharPointerType t)
+    static void writeString (OutputStream& out, char* t)
     {
         for (;;)
         {
-            auto c = t.getAndAdvance();
+            auto c = *t++;
 
             switch (c)
             {
@@ -417,7 +417,7 @@ struct JSONFormatter
     {
         out << '[';
 
-        if (! array.isEmpty())
+        if (! array.empty())
         {
             if (! allOnOneLine)
                 out << newLine;
@@ -483,7 +483,7 @@ var JSON::parse (const File& file)
 
 Result JSON::parse (const String& text, var& result)
 {
-    return JSONParser::parseObjectOrArray (text.getCharPointer(), result);
+    return JSONParser::parseObjectOrArray (text.c_str(), result);
 }
 
 String JSON::toString (const var& data, const bool allOnOneLine, int maximumDecimalPlaces)
@@ -505,9 +505,9 @@ String JSON::escapeString (StringRef s)
     return mo.toString();
 }
 
-Result JSON::parseQuotedString (String::CharPointerType& t, var& result)
+Result JSON::parseQuotedString (char*& t, var& result)
 {
-    auto quote = t.getAndAdvance();
+    auto quote = *t++;
 
     if (quote == '"' || quote == '\'')
         return JSONParser::parseString (quote, t, result);
@@ -632,7 +632,7 @@ public:
                 String asString (JSON::toString (v, oneLine));
                 var parsed = JSON::parse ("[" + asString + "]")[0];
                 String parsedString (JSON::toString (parsed, oneLine));
-                expect (asString.isNotEmpty() && parsedString == asString);
+                expect (!asString.empty() && parsedString == asString);
             }
         }
 

@@ -79,7 +79,7 @@ public:
 
     //==============================================================================
     /** Returns true if the region is empty. */
-    bool isEmpty() const noexcept                               { return rects.isEmpty(); }
+    bool empty() const noexcept                               { return rects.empty(); }
 
     /** Returns the number of rectangles in the list. */
     int getNumRectangles() const noexcept                       { return rects.size(); }
@@ -109,9 +109,9 @@ public:
     {
         HAssert (rect.isFinite()); // You must provide a valid rectangle to this method!
 
-        if (! rect.isEmpty())
+        if (! rect.empty())
         {
-            if (isEmpty())
+            if (empty())
             {
                 rects.add (rect);
             }
@@ -132,7 +132,7 @@ public:
                     }
                 }
 
-                if (anyOverlaps && ! isEmpty())
+                if (anyOverlaps && ! empty())
                 {
                     RectangleList r (rect);
 
@@ -142,7 +142,7 @@ public:
                         {
                             r.subtract (ourRect);
 
-                            if (r.isEmpty())
+                            if (r.empty())
                                 return;
                         }
                     }
@@ -179,7 +179,7 @@ public:
     {
         HAssert (rect.isFinite()); // You must provide a valid rectangle to this method!
 
-        if (! rect.isEmpty())
+        if (! rect.empty())
             rects.add (rect);
     }
 
@@ -291,13 +291,13 @@ public:
     {
         for (auto& r : otherList)
         {
-            if (isEmpty())
+            if (empty())
                 return false;
 
             subtract (r);
         }
 
-        return ! isEmpty();
+        return ! empty();
     }
 
     /** Removes any areas of the region that lie outside a given rectangle.
@@ -315,7 +315,7 @@ public:
 
         bool notEmpty = false;
 
-        if (rect.isEmpty())
+        if (rect.empty())
         {
             clear();
         }
@@ -347,7 +347,7 @@ public:
     template <typename OtherValueType>
     bool clipTo (const RectangleList<OtherValueType>& other)
     {
-        if (isEmpty())
+        if (empty())
             return false;
 
         RectangleList result;
@@ -364,7 +364,7 @@ public:
         }
 
         swapWith (result);
-        return ! isEmpty();
+        return ! empty();
     }
 
     /** Creates a region which is the result of clipping this one to a given rectangle.
@@ -382,12 +382,12 @@ public:
 
         destRegion.clear();
 
-        if (! rect.isEmpty())
+        if (! rect.empty())
             for (auto& r : rects)
                 if (rect.intersectRectangle (r))
                     destRegion.rects.add (r);
 
-        return ! destRegion.isEmpty();
+        return ! destRegion.empty();
     }
 
     /** Swaps the contents of this and another list.
@@ -437,11 +437,11 @@ public:
             {
                 r.subtract (rect);
 
-                if (r.isEmpty())
+                if (r.empty())
                     return true;
             }
         }
-        else if (! isEmpty())
+        else if (! empty())
         {
             return rects.getReference (0).contains (rectangleToCheck);
         }
@@ -480,7 +480,7 @@ public:
     /** Returns the smallest rectangle that can enclose the whole of this region. */
     RectangleType getBounds() const noexcept
     {
-        if (isEmpty())
+        if (empty())
             return {};
 
         auto& r = rects.getReference (0);

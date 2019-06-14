@@ -126,7 +126,7 @@ public:
 
 	// access -----------------------------------------------------------------
 	virtual int32 length () const {return static_cast<int32> (len);}	///< Return length of string
-	inline bool isEmpty () const {return buffer == 0 || len == 0;}		///< Return true if string is empty
+	inline bool empty () const {return buffer == 0 || len == 0;}		///< Return true if string is empty
 
 	operator const char8* () const {return text8 ();} 							///< Returns pointer to string of type char8 (no modification allowed)
 	operator const char16* () const {return text16 ();}							///< Returns pointer to string of type char16(no modification allowed)
@@ -152,7 +152,7 @@ public:
 	inline bool testChar (uint32 index, char8 c) const {return testChar8 (index, c);}
 	inline bool testChar (uint32 index, char16 c) const {return testChar16 (index, c);}
 
-	bool extract (String& result, uint32 idx, int32 n = -1) const;		///< Get n characters long substring starting at index (n=-1: until end)
+	bool extract (String& result, uint32 idx, int32 n = -1) const;		///< Get n characters long substr starting at index (n=-1: until end)
 	int32 copyTo8 (char8* str, uint32 idx = 0, int32 n = -1) const;
 	int32 copyTo16 (char16* str, uint32 idx = 0, int32 n = -1) const;
 	int32 copyTo (tchar* str, uint32 idx = 0, int32 n = -1) const;
@@ -619,7 +619,7 @@ inline bool ConstString::scanUInt32 (const tchar* text, uint32& value, bool scan
 //-----------------------------------------------------------------------------
 inline const char8* String::text8 () const
 {
-	if (isWide && !isEmpty ())
+	if (isWide && !empty ())
 		checkToMultiByte (); // this should be avoided, since it can lead to information loss
 
 	return ConstString::text8 ();
@@ -628,7 +628,7 @@ inline const char8* String::text8 () const
 //-----------------------------------------------------------------------------
 inline const char16* String::text16 () const
 {
-	if (!isWide && !isEmpty ())
+	if (!isWide && !empty ())
 	{
 		const_cast<String&> (*this).toWideString ();
 	}
@@ -638,7 +638,7 @@ inline const char16* String::text16 () const
 //-----------------------------------------------------------------------------
 inline char8 String::getChar8 (uint32 index) const
 {
-	if (isWide && !isEmpty ())
+	if (isWide && !empty ())
 		checkToMultiByte (); // this should be avoided, since it can lead to information loss
 
 	return ConstString::getChar8 (index);
@@ -647,7 +647,7 @@ inline char8 String::getChar8 (uint32 index) const
 //-----------------------------------------------------------------------------
 inline char16 String::getChar16 (uint32 index) const
 {
-	if (!isWide && !isEmpty ())
+	if (!isWide && !empty ())
 	{
 		const_cast<String&> (*this).toWideString ();
 	}

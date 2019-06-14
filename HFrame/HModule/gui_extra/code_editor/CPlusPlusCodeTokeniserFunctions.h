@@ -43,7 +43,7 @@ struct CppTokeniserFunctions
                 || c == '_' || c == '@';
     }
 
-    static bool isReservedKeyword (String::CharPointerType token, const int tokenLength) noexcept
+    static bool isReservedKeyword (char* token, const int tokenLength) noexcept
     {
         static const char* const keywords2Char[] =
             { "do", "if", "or", nullptr };
@@ -109,8 +109,8 @@ struct CppTokeniserFunctions
     static int parseIdentifier (Iterator& source) noexcept
     {
         int tokenLength = 0;
-        String::CharPointerType::CharType possibleIdentifier[100];
-        String::CharPointerType possible (possibleIdentifier);
+        char*::CharType possibleIdentifier[100];
+        char* possible (possibleIdentifier);
 
         while (isIdentifierBody (source.peekNextChar()))
         {
@@ -126,7 +126,7 @@ struct CppTokeniserFunctions
         {
             possible.writeNull();
 
-            if (isReservedKeyword (String::CharPointerType (possibleIdentifier), tokenLength))
+            if (isReservedKeyword (char* (possibleIdentifier), tokenLength))
                 return CPlusPlusCodeTokeniser::tokenType_keyword;
         }
 
@@ -530,17 +530,17 @@ struct CppTokeniserFunctions
     */
     struct StringIterator
     {
-        StringIterator (const String& s) noexcept            : t (s.getCharPointer()) {}
-        StringIterator (String::CharPointerType s) noexcept  : t (s) {}
+        StringIterator (const String& s) noexcept            : t (s.c_str()) {}
+        StringIterator (char* s) noexcept  : t (s) {}
 
-        wchar nextChar() noexcept      { if (isEOF()) return 0; ++numChars; return t.getAndAdvance(); }
+        wchar nextChar() noexcept      { if (isEOF()) return 0; ++numChars; return *t++; }
         wchar peekNextChar()noexcept   { return *t; }
         void skip() noexcept                { if (! isEOF()) { ++t; ++numChars; } }
         void skipWhitespace() noexcept      { while (t.isWhitespace()) skip(); }
         void skipToEndOfLine() noexcept     { while (*t != '\r' && *t != '\n' && *t != 0) skip(); }
-        bool isEOF() const noexcept         { return t.isEmpty(); }
+        bool isEOF() const noexcept         { return t.empty(); }
 
-        String::CharPointerType t;
+        char* t;
         int numChars = 0;
     };
 

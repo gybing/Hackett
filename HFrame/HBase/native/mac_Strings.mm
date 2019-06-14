@@ -54,7 +54,7 @@ String String::convertToPrecomposedUnicode() const
 
     if (CreateUnicodeToTextInfo (&map, &conversionInfo) == noErr)
     {
-        const size_t bytesNeeded = CharPointer_UTF16::getBytesRequiredFor (getCharPointer());
+        const size_t bytesNeeded = CharPointer_UTF16::getBytesRequiredFor (c_str());
 
         HeapBlock<char> tempOut;
         tempOut.calloc (bytesNeeded + 4);

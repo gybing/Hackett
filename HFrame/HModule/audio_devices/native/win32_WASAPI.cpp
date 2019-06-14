@@ -1334,7 +1334,7 @@ private:
 
             auto deviceId = getDeviceID (device);
 
-            if (deviceId.isEmpty())
+            if (deviceId.empty())
                 continue;
 
             auto flow = getDataFlow (device);
@@ -1354,8 +1354,8 @@ private:
                 outputDevice.reset (new WASAPIOutputDevice (device, useExclusiveMode, deviceReopenCallback));
         }
 
-        return (outputDeviceId.isEmpty() || (outputDevice != nullptr && outputDevice->isOk()))
-             && (inputDeviceId.isEmpty() || (inputDevice != nullptr && inputDevice->isOk()));
+        return (outputDeviceId.empty() || (outputDevice != nullptr && outputDevice->isOk()))
+             && (inputDeviceId.empty() || (inputDevice != nullptr && inputDevice->isOk()));
     }
 
     void reopenDevices()
@@ -1468,7 +1468,7 @@ public:
 
         if (outputIndex >= 0 || inputIndex >= 0)
         {
-            device.reset (new WASAPIAudioIODevice (outputDeviceName.isNotEmpty() ? outputDeviceName
+            device.reset (new WASAPIAudioIODevice (outputDeviceName.!empty() ? outputDeviceName
                                                                                  : inputDeviceName,
                                                    getTypeName(),
                                                    outputDeviceIds [outputIndex],

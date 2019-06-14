@@ -663,7 +663,7 @@ public class JuceMidiSupport
         {
             synchronized (MidiDeviceManager.class)
             {
-                if (!address.isEmpty ())
+                if (!address.empty ())
                 {
                     if (findMidiDeviceForBluetoothAddress (address) != null)
                         return 1;
@@ -682,7 +682,7 @@ public class JuceMidiSupport
         public boolean pairBluetoothDevice (BluetoothDevice btDevice)
         {
             String btAddress = btDevice.getAddress ();
-            if (btAddress.isEmpty ())
+            if (btAddress.empty ())
                 return false;
 
             synchronized (MidiDeviceManager.class)
@@ -713,7 +713,7 @@ public class JuceMidiSupport
 
         public void unpairBluetoothDevice (String address)
         {
-            if (address.isEmpty ())
+            if (address.empty ())
                 return;
 
             synchronized (MidiDeviceManager.class)
@@ -963,7 +963,7 @@ public class JuceMidiSupport
                                 if (portIndex == path.portIndex)
                                 {
                                     String portName = portInfo.getName ();
-                                    if (portName.isEmpty ())
+                                    if (portName.empty ())
                                         portName = (String) info.getProperties ().get (info.PROPERTY_NAME);
 
                                     return portName;

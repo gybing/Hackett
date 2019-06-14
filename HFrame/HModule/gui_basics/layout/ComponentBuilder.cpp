@@ -33,7 +33,7 @@ namespace ComponentBuilderHelpers
 
     static Component* removeComponentWithID (OwnedArray<Component>& components, const String& compId)
     {
-        HAssert (compId.isNotEmpty());
+        HAssert (compId.!empty());
 
         for (int i = components.size(); --i >= 0;)
         {
@@ -48,7 +48,7 @@ namespace ComponentBuilderHelpers
 
     static Component* findComponentWithID (Component& c, const String& compId)
     {
-        HAssert (compId.isNotEmpty());
+        HAssert (compId.!empty());
         if (c.getComponentID() == compId)
             return &c;
 
@@ -75,7 +75,7 @@ namespace ComponentBuilderHelpers
             ComponentBuilder::TypeHandler* const type = builder.getHandlerForState (state);
             const String uid (getStateId (state));
 
-            if (type == nullptr || uid.isEmpty())
+            if (type == nullptr || uid.empty())
             {
                 // ..handle the case where a child of the actual state node has changed.
                 if (state.getParent().isValid())

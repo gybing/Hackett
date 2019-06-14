@@ -434,9 +434,9 @@ public:
     {
         std::unique_ptr<AndroidAudioIODevice> dev;
 
-        if (outputDeviceName.isNotEmpty() || inputDeviceName.isNotEmpty())
+        if (outputDeviceName.!empty() || inputDeviceName.!empty())
         {
-            dev.reset (new AndroidAudioIODevice (outputDeviceName.isNotEmpty() ? outputDeviceName
+            dev.reset (new AndroidAudioIODevice (outputDeviceName.!empty() ? outputDeviceName
                                                                                : inputDeviceName));
 
             if (dev->getCurrentSampleRate() <= 0 || dev->getDefaultBufferSize() <= 0)

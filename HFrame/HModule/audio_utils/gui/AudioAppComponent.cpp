@@ -68,7 +68,7 @@ void AudioAppComponent::setAudioChannels (int numInputChannels, int numOutputCha
         audioError = deviceManager.initialise (numInputChannels, numOutputChannels, xml, true);
     }
 
-    HAssert (audioError.isEmpty());
+    HAssert (audioError.empty());
 
     deviceManager.addAudioCallback (&audioSourcePlayer);
     audioSourcePlayer.setSource (this);

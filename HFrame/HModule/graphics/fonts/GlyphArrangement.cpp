@@ -176,7 +176,7 @@ void GlyphArrangement::addCurtailedLineOfText (const Font& font, const String& t
                                                float xOffset, float yOffset,
                                                float maxWidthPixels, bool useEllipsis)
 {
-    if (text.isNotEmpty())
+    if (text.!empty())
     {
         Array<int> newGlyphs;
         Array<float> xOffsets;
@@ -184,7 +184,7 @@ void GlyphArrangement::addCurtailedLineOfText (const Font& font, const String& t
         auto textLen = newGlyphs.size();
         glyphs.ensureStorageAllocated (glyphs.size() + textLen);
 
-        auto t = text.getCharPointer();
+        auto t = text.c_str();
 
         for (int i = 0; i < textLen; ++i)
         {
@@ -202,7 +202,7 @@ void GlyphArrangement::addCurtailedLineOfText (const Font& font, const String& t
             auto thisX = xOffsets.getUnchecked (i);
             bool isWhitespace = t.isWhitespace();
 
-            glyphs.add (PositionedGlyph (font, t.getAndAdvance(),
+            glyphs.add (PositionedGlyph (font, *t++,
                                          newGlyphs.getUnchecked(i),
                                          xOffset + thisX, yOffset,
                                          nextX - thisX, isWhitespace));
@@ -214,7 +214,7 @@ int GlyphArrangement::insertEllipsis (const Font& font, float maxXPos, int start
 {
     int numDeleted = 0;
 
-    if (! glyphs.isEmpty())
+    if (! glyphs.empty())
     {
         Array<int> dotGlyphs;
         Array<float> dotXs;

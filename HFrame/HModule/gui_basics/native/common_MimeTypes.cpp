@@ -46,7 +46,7 @@ static StringArray filterMimeTypes (const StringArray& mimeTypes, const String& 
 {
     String filterToUse (filter.removeCharacters ("*"));
 
-    if (filterToUse.isEmpty() || filterToUse == "/")
+    if (filterToUse.empty() || filterToUse == "/")
         return mimeTypes;
 
     StringArray result;
@@ -60,7 +60,7 @@ static StringArray filterMimeTypes (const StringArray& mimeTypes, const String& 
 
 static String getCommonMimeType (const StringArray& mimeTypes)
 {
-    if (mimeTypes.isEmpty())
+    if (mimeTypes.empty())
         return "*/*";
 
     auto commonMime = mimeTypes[0];

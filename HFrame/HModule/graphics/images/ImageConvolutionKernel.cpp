@@ -121,7 +121,7 @@ void ImageConvolutionKernel::applyToImage (Image& destImage,
 
     auto area = destinationArea.getIntersection (destImage.getBounds());
 
-    if (area.isEmpty())
+    if (area.empty())
         return;
 
     auto right = area.getRight();

@@ -139,7 +139,7 @@ void DrumPadGridProgram::resumeAnimations()
 //==============================================================================
 String DrumPadGridProgram::getLittleFootProgram()
 {
-    if (block.versionNumber.isEmpty() || block.versionNumber.compare ("0.2.5") < 0)
+    if (block.versionNumber.empty() || block.versionNumber.compare ("0.2.5") < 0)
         return getLittleFootProgramPre25();
 
     return getLittleFootProgramPost25();

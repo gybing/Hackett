@@ -15,16 +15,16 @@ public:
         {
             SparseSet<int> set;
 
-            expect (set.isEmpty());
+            expect (set.empty());
             expectEquals (set.size(), 0);
             expectEquals (set.getNumRanges(), 0);
-            expect (set.getTotalRange().isEmpty());
+            expect (set.getTotalRange().empty());
 
             set.addRange ({0, 10});
-            expect (! set.isEmpty());
+            expect (! set.empty());
             expectEquals (set.size(), 10);
             expectEquals (set.getNumRanges(), 1);
-            expect (! set.getTotalRange().isEmpty());
+            expect (! set.getTotalRange().empty());
             expect (set.getRange (0) == Range<int> (0, 10));
 
             expectEquals (set[0], 0);

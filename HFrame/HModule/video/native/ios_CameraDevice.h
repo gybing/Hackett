@@ -409,7 +409,7 @@ private:
                                 // This will add just video...
                                 auto error = addInputToDevice (cameraDevice);
 
-                                if (error.isNotEmpty())
+                                if (error.!empty())
                                 {
                                     WeakReference<CaptureSession> weakRef (this);
 
@@ -425,7 +425,7 @@ private:
                                 // ... so add audio explicitly here
                                 error = addInputToDevice (audioDevice);
 
-                                if (error.isNotEmpty())
+                                if (error.!empty())
                                 {
                                     WeakReference<CaptureSession> weakRef (this);
 

@@ -229,7 +229,7 @@ FileBasedDocument::SaveResult FileBasedDocument::saveAsInteractive (const bool w
 
     String legalFilename (File::createLegalFileName (getDocumentTitle()));
 
-    if (legalFilename.isEmpty())
+    if (legalFilename.empty())
         legalFilename = "unnamed";
 
     if (f.existsAsFile() || f.getParentDirectory().isDirectory())
@@ -244,7 +244,7 @@ FileBasedDocument::SaveResult FileBasedDocument::saveAsInteractive (const bool w
     if (fc.browseForFileToSave (warnAboutOverwritingExistingFiles))
     {
         File chosen (fc.getResult());
-        if (chosen.getFileExtension().isEmpty())
+        if (chosen.getFileExtension().empty())
         {
             chosen = chosen.withFileExtension (fileExtension);
 

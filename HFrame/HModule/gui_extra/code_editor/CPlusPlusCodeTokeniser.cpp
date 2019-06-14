@@ -66,7 +66,7 @@ CodeEditorComponent::ColourScheme CPlusPlusCodeTokeniser::getDefaultColourScheme
 
 bool CPlusPlusCodeTokeniser::isReservedKeyword (const String& token) noexcept
 {
-    return CppTokeniserFunctions::isReservedKeyword (token.getCharPointer(), token.length());
+    return CppTokeniserFunctions::isReservedKeyword (token.c_str(), token.length());
 }
 
 

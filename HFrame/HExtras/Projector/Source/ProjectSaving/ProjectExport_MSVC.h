@@ -418,7 +418,7 @@ public:
 
                 auto charSet = config.getCharacterSetString();
 
-                if (charSet.isNotEmpty())
+                if (charSet.!empty())
                     e->createNewChildElement ("CharacterSet")->addTextElement (charSet);
 
                 if (config.shouldLinkIncremental())
@@ -430,7 +430,7 @@ public:
 
                 auto ippLibrary = owner.getIPPLibrary();
 
-                if (ippLibrary.isNotEmpty())
+                if (ippLibrary.!empty())
                     e->createNewChildElement ("UseIntelIPP")->addTextElement (ippLibrary);
             }
 
@@ -462,7 +462,7 @@ public:
                 {
                     auto& config = dynamic_cast<const MSVCBuildConfiguration&> (*i);
 
-                    if (getConfigTargetPath (config).isNotEmpty())
+                    if (getConfigTargetPath (config).!empty())
                     {
                         auto* outdir = props->createNewChildElement ("OutDir");
                         setConditionAttribute (*outdir, config);
@@ -560,7 +560,7 @@ public:
                         cl->createNewChildElement ("FloatingPointModel")->addTextElement ("Fast");
 
                     auto extraFlags = getOwner().replacePreprocessorTokens (config, getOwner().getExtraCompilerFlagsString()).trim();
-                    if (extraFlags.isNotEmpty())
+                    if (extraFlags.!empty())
                         cl->createNewChildElement ("AdditionalOptions")->addTextElement (extraFlags + " %(AdditionalOptions)");
 
                     if (config.areWarningsTreatedAsErrors())
@@ -583,7 +583,7 @@ public:
                 }
 
                 auto externalLibraries = getExternalLibraries (config, getOwner().getExternalLibrariesString());
-                auto additionalDependencies = type != SharedCodeTarget && externalLibraries.isNotEmpty()
+                auto additionalDependencies = type != SharedCodeTarget && externalLibraries.!empty()
                                                         ? getOwner().replacePreprocessorTokens (config, externalLibraries).trim() + ";%(AdditionalDependencies)"
                                                         : String();
 
@@ -614,25 +614,25 @@ public:
                         link->createNewChildElement ("EnableCOMDATFolding")->addTextElement ("true");
                     }
 
-                    if (additionalLibraryDirs.isNotEmpty())
+                    if (additionalLibraryDirs.!empty())
                         link->createNewChildElement ("AdditionalLibraryDirectories")->addTextElement (additionalLibraryDirs);
 
                     link->createNewChildElement ("LargeAddressAware")->addTextElement ("true");
 
-                    if (additionalDependencies.isNotEmpty())
+                    if (additionalDependencies.!empty())
                         link->createNewChildElement ("AdditionalDependencies")->addTextElement (additionalDependencies);
 
                     auto extraLinkerOptions = getOwner().getExtraLinkerFlagsString();
-                    if (extraLinkerOptions.isNotEmpty())
+                    if (extraLinkerOptions.!empty())
                         link->createNewChildElement ("AdditionalOptions")->addTextElement (getOwner().replacePreprocessorTokens (config, extraLinkerOptions).trim()
                                                                                            + " %(AdditionalOptions)");
 
                     auto delayLoadedDLLs = getDelayLoadedDLLs();
-                    if (delayLoadedDLLs.isNotEmpty())
+                    if (delayLoadedDLLs.!empty())
                         link->createNewChildElement ("DelayLoadDLLs")->addTextElement (delayLoadedDLLs);
 
                     auto moduleDefinitionsFile = getModuleDefinitions (config);
-                    if (moduleDefinitionsFile.isNotEmpty())
+                    if (moduleDefinitionsFile.!empty())
                         link->createNewChildElement ("ModuleDefinitionFile")
                             ->addTextElement (moduleDefinitionsFile);
                 }
@@ -647,10 +647,10 @@ public:
                 {
                     auto* lib = group->createNewChildElement ("Lib");
 
-                    if (additionalDependencies.isNotEmpty())
+                    if (additionalDependencies.!empty())
                         lib->createNewChildElement ("AdditionalDependencies")->addTextElement (additionalDependencies);
 
-                    if (additionalLibraryDirs.isNotEmpty())
+                    if (additionalLibraryDirs.!empty())
                         lib->createNewChildElement ("AdditionalLibraryDirectories")->addTextElement (additionalLibraryDirs);
                 }
 
@@ -671,13 +671,13 @@ public:
                 }
 
                 auto preBuild = getPreBuildSteps (config);
-                if (preBuild.isNotEmpty())
+                if (preBuild.!empty())
                     group->createNewChildElement ("PreBuildEvent")
                          ->createNewChildElement ("Command")
                          ->addTextElement (preBuild);
 
                 auto postBuild = getPostBuildSteps (config);
-                if (postBuild.isNotEmpty())
+                if (postBuild.!empty())
                     group->createNewChildElement ("PostBuildEvent")
                          ->createNewChildElement ("Command")
                          ->addTextElement (postBuild);
@@ -771,7 +771,7 @@ public:
                         {
                             auto extraCompilerFlags = owner.compilerFlagSchemesMap[projectItem.getCompilerFlagSchemeString()].get().toString();
 
-                            if (extraCompilerFlags.isNotEmpty())
+                            if (extraCompilerFlags.!empty())
                                 e->createNewChildElement ("AdditionalOptions")->addTextElement (extraCompilerFlags + " %(AdditionalOptions)");
                         }
                         else
@@ -833,7 +833,7 @@ public:
 
                 for (int i = 0; i < projectItem.getNumChildren(); ++i)
                     if (addFilesToFilter (projectItem.getChild(i),
-                                          (path.isEmpty() ? String() : (path + "\\")) + projectItem.getChild(i).getName(),
+                                          (path.empty() ? String() : (path + "\\")) + projectItem.getChild(i).getName(),
                                           cpps, headers, otherFiles, groups))
                         filesWereAdded = true;
 
@@ -934,7 +934,7 @@ public:
         String getSolutionTargetPath (const BuildConfiguration& config) const
         {
             auto binaryPath = config.getTargetBinaryRelativePathString().trim();
-            if (binaryPath.isEmpty())
+            if (binaryPath.empty())
                 return "$(SolutionDir)$(Platform)\\$(Configuration)";
 
             RelativePath binaryRelPath (binaryPath, RelativePath::projectFolder);
@@ -954,7 +954,7 @@ public:
 
         String getIntermediatesPath (const MSVCBuildConfiguration& config) const
         {
-            auto intDir = (config.getIntermediatesPathString().isNotEmpty() ? config.getIntermediatesPathString()
+            auto intDir = (config.getIntermediatesPathString().!empty() ? config.getIntermediatesPathString()
                                                                             : "$(Platform)\\$(Configuration)");
 
             if (! intDir.endsWithChar (L'\\'))
@@ -1037,7 +1037,7 @@ public:
             {
                 auto def = defines.getAllKeys()[i];
                 auto value = defines.getAllValues()[i];
-                if (value.isNotEmpty())
+                if (value.!empty())
                     def << "=" << value;
 
                 result.add (def);
@@ -1138,7 +1138,7 @@ public:
             auto postBuild = config.getPostbuildCommandString();
             auto extraPostBuild = getExtraPostBuildSteps (config);
 
-            return postBuild + String (postBuild.isNotEmpty() && extraPostBuild.isNotEmpty() ? "\r\n" : "") + extraPostBuild;
+            return postBuild + String (postBuild.!empty() && extraPostBuild.!empty() ? "\r\n" : "") + extraPostBuild;
         }
 
         String getPreBuildSteps (const MSVCBuildConfiguration& config) const
@@ -1146,7 +1146,7 @@ public:
             auto preBuild = config.getPrebuildCommandString();
             auto extraPreBuild = getExtraPreBuildSteps (config);
 
-            return preBuild + String (preBuild.isNotEmpty() && extraPreBuild.isNotEmpty() ? "\r\n" : "") + extraPreBuild;
+            return preBuild + String (preBuild.!empty() && extraPreBuild.!empty() ? "\r\n" : "") + extraPreBuild;
         }
 
         void addExtraPreprocessorDefines (StringPairArray& defines) const
@@ -1244,11 +1244,11 @@ public:
         {
             StringArray libraries;
 
-            if (otherLibs.isNotEmpty())
+            if (otherLibs.!empty())
                 libraries.add (otherLibs);
 
             auto moduleLibs = getOwner().getModuleLibs();
-            if (! moduleLibs.isEmpty())
+            if (! moduleLibs.empty())
                 libraries.addArray (moduleLibs);
 
             if (type != SharedCodeTarget)
@@ -1273,7 +1273,7 @@ public:
         {
             auto moduleDefinitions = config.config [Ids::msvcModuleDefinitionFile].toString();
 
-            if (moduleDefinitions.isNotEmpty())
+            if (moduleDefinitions.!empty())
                 return moduleDefinitions;
 
             if (type == RTASPlugIn)
@@ -1366,7 +1366,7 @@ public:
     {
         auto path = manifestFileValue.get().toString();
 
-        return path.isEmpty() ? RelativePath()
+        return path.empty() ? RelativePath()
                               : RelativePath (path, RelativePath::projectFolder);
     }
 
@@ -1466,7 +1466,7 @@ public:
 
     static void writeRCValue (MemoryOutputStream& mo, const String& name, const String& value)
     {
-        if (value.isNotEmpty())
+        if (value.!empty())
             mo << "      VALUE \"" << name << "\",  \""
             << CppTokeniserFunctions::addEscapeChars (value) << "\\0\"" << newLine;
     }
@@ -1553,7 +1553,7 @@ protected:
     {
         auto filename = project.getProjectFilenameRootString();
 
-        if (target.isNotEmpty())
+        if (target.!empty())
             filename += String ("_") + target.removeCharacters (" ");
 
         return getTargetFolder().getChildFile (filename).withFileExtension (extension);
@@ -1578,7 +1578,7 @@ protected:
             auto oldStylePrebuildCommand = getSettingString (Ids::prebuildCommand);
             settings.removeProperty (Ids::prebuildCommand, nullptr);
 
-            if (oldStylePrebuildCommand.isNotEmpty())
+            if (oldStylePrebuildCommand.!empty())
                 for (ConfigIterator config (*this); config.next();)
                     dynamic_cast<MSVCBuildConfiguration&> (*config).getValue (Ids::prebuildCommand) = oldStylePrebuildCommand;
         }
@@ -1587,7 +1587,7 @@ protected:
             auto oldStyleLibName = getSettingString ("libraryName_Debug");
             settings.removeProperty ("libraryName_Debug", nullptr);
 
-            if (oldStyleLibName.isNotEmpty())
+            if (oldStyleLibName.!empty())
                 for (ConfigIterator config (*this); config.next();)
                     if (config->isDebug())
                         config->getValue (Ids::targetName) = oldStyleLibName;
@@ -1597,7 +1597,7 @@ protected:
             auto oldStyleLibName = getSettingString ("libraryName_Release");
             settings.removeProperty ("libraryName_Release", nullptr);
 
-            if (oldStyleLibName.isNotEmpty())
+            if (oldStyleLibName.!empty())
                 for (ConfigIterator config (*this); config.next();)
                     if (! config->isDebug())
                         config->getValue (Ids::targetName) = oldStyleLibName;
@@ -1633,19 +1633,19 @@ protected:
     {
         auto sharedCodeGuid = getSharedCodeGuid();
 
-        for (int addingOtherTargets = 0; addingOtherTargets < (sharedCodeGuid.isNotEmpty() ? 2 : 1); ++addingOtherTargets)
+        for (int addingOtherTargets = 0; addingOtherTargets < (sharedCodeGuid.!empty() ? 2 : 1); ++addingOtherTargets)
         {
             for (int i = 0; i < targets.size(); ++i)
             {
                 if (auto* target = targets[i])
                 {
-                    if (sharedCodeGuid.isEmpty() || (addingOtherTargets != 0) == (target->type != ProjectType::Target::StandalonePlugIn))
+                    if (sharedCodeGuid.empty() || (addingOtherTargets != 0) == (target->type != ProjectType::Target::StandalonePlugIn))
                     {
                         out << "Project(\"{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}\") = \"" << projectName << " - "
                             << target->getName() << "\", \""
                             << target->getVCProjFile().getFileName() << "\", \"" << target->getProjectGuid() << '"' << newLine;
 
-                        if (sharedCodeGuid.isNotEmpty() && target->type != ProjectType::Target::SharedCodeTarget)
+                        if (sharedCodeGuid.!empty() && target->type != ProjectType::Target::SharedCodeTarget)
                             out << "\tProjectSection(ProjectDependencies) = postProject" << newLine
                                 << "\t\t" << sharedCodeGuid << " = " << sharedCodeGuid << newLine
                                 << "\tEndProjectSection" << newLine;
@@ -1659,7 +1659,7 @@ protected:
 
     void writeSolutionFile (OutputStream& out, const String& versionString, String commentString) const
     {
-        if (commentString.isNotEmpty())
+        if (commentString.!empty())
             commentString += newLine;
 
         out << "Microsoft Visual Studio Solution File, Format Version " << versionString << newLine

@@ -126,7 +126,7 @@ void PaintElementImage::fillInGeneratedCode (GeneratedCode& code, String& paintM
         }
         else
         {
-            if (resourceName.isNotEmpty())
+            if (resourceName.!empty())
             {
                 const String imageVariable ("drawable" + String (code.getUniqueSuffix()));
 
@@ -166,7 +166,7 @@ void PaintElementImage::applyCustomPaintSnippets (StringArray& snippets)
 {
     customPaintCode.clear();
 
-    if (! snippets.isEmpty() && opacity > 0)
+    if (! snippets.empty() && opacity > 0)
     {
         customPaintCode = snippets[0];
         snippets.remove (0);

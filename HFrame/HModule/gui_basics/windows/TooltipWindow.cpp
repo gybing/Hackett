@@ -70,7 +70,7 @@ static Array<TooltipWindow*> activeTooltipWindows;
 
 void TooltipWindow::displayTip (Point<int> screenPos, const String& tip)
 {
-    HAssert (tip.isNotEmpty());
+    HAssert (tip.!empty());
 
     if (! reentrant)
     {
@@ -177,7 +177,7 @@ void TooltipWindow::timerCallback()
         {
             // if a tip is currently visible (or has just disappeared), update to a new one
             // immediately if needed..
-            if (newComp == nullptr || mouseWasClicked || newTip.isEmpty())
+            if (newComp == nullptr || mouseWasClicked || newTip.empty())
             {
                 if (isVisible())
                 {
@@ -194,7 +194,7 @@ void TooltipWindow::timerCallback()
         {
             // if there isn't currently a tip, but one is needed, only let it
             // appear after a timeout..
-            if (newTip.isNotEmpty()
+            if (newTip.!empty()
                  && newTip != tipShowing
                  && now > lastCompChangeTime + (uint32) millisecondsBeforeTipAppears)
             {

@@ -56,7 +56,7 @@ struct KeyFileUtils
         String comment;
         comment << "Keyfile for " << appName << newLine;
 
-        if (userName.isNotEmpty())
+        if (userName.!empty())
             comment << "User: " << userName << newLine;
 
         comment << "Email: " << userEmail << newLine
@@ -93,8 +93,8 @@ struct KeyFileUtils
         const int charsPerLine = 70;
         while (asHex.length() > 0)
         {
-            lines.add (asHex.substring (0, charsPerLine));
-            asHex = asHex.substring (charsPerLine);
+            lines.add (asHex.substr (0, charsPerLine));
+            asHex = asHex.substr (charsPerLine);
         }
 
         lines.add (String());
@@ -193,7 +193,7 @@ static var machineNumberAllowed (StringArray numbersFromKeyFile,
     {
         auto localNumber = localMachineNumbers[i].trim();
 
-        if (localNumber.isNotEmpty())
+        if (localNumber.!empty())
         {
             for (int j = numbersFromKeyFile.size(); --j >= 0;)
             {
@@ -289,7 +289,7 @@ String OnlineUnlockStatus::MachineIDUtilities::getEncodedIDString (const String&
     auto platform = String::charToString (static_cast<wchar> (getPlatformPrefix()));
 
     return platform + MD5 ((input + "salt_1" + platform).toUTF8())
-                        .toHexString().substring (0, 9).toUpperCase();
+                        .toHexString().substr (0, 9).toUpperCase();
 }
 
 bool OnlineUnlockStatus::MachineIDUtilities::addFileIDToList (StringArray& ids, const File& f)
@@ -343,7 +343,7 @@ bool OnlineUnlockStatus::applyKeyFile (String keyFileContent)
     KeyFileUtils::KeyFileData data;
     data = KeyFileUtils::getDataFromKeyFile (KeyFileUtils::getXmlFromKeyFile (keyFileContent, getPublicKey()));
 
-    if (data.licensee.isNotEmpty() && data.email.isNotEmpty() && doesProductIDMatch (data.appID))
+    if (data.licensee.!empty() && data.email.!empty() && doesProductIDMatch (data.appID))
     {
         setUserEmail (data.email);
         status.setProperty (keyfileDataProp, keyFileContent, nullptr);
@@ -411,10 +411,10 @@ OnlineUnlockStatus::UnlockResult OnlineUnlockStatus::handleXmlReply (XmlElement 
     if (xml.hasTagName ("ERROR"))
         r.errorMessage = xml.getStringAttribute ("error").trim();
 
-    if (xml.getStringAttribute ("url").isNotEmpty())
+    if (xml.getStringAttribute ("url").!empty())
         r.urlToLaunch = xml.getStringAttribute ("url").trim();
 
-    if (r.errorMessage.isEmpty() && r.informativeMessage.isEmpty() && r.urlToLaunch.isEmpty() && ! r.succeeded)
+    if (r.errorMessage.empty() && r.informativeMessage.empty() && r.urlToLaunch.empty() && ! r.succeeded)
         r.errorMessage = getMessageForUnexpectedReply();
 
     return r;

@@ -121,7 +121,7 @@ struct InAppPurchases::Pimpl    : private AsyncUpdater,
                           const StringArray& subscriptionIdentifiers, bool creditForUnusedSubscription)
     {
         // Upgrading/downgrading only makes sense for subscriptions!
-        HAssert (subscriptionIdentifiers.isEmpty() || isSubscription);
+        HAssert (subscriptionIdentifiers.empty() || isSubscription);
 
         auto buyIntentBundle = getBuyIntentBundle (productIdentifier, isSubscription,
                                                    subscriptionIdentifiers, creditForUnusedSubscription);
@@ -217,7 +217,7 @@ struct InAppPurchases::Pimpl    : private AsyncUpdater,
         auto productTypeString = javaString (isSubscription ? "subs" : "inapp");
         auto devString         = javaString ("");
 
-        if (subscriptionIdentifiers.isEmpty())
+        if (subscriptionIdentifiers.empty())
             return LocalRef<jobject> (inAppBillingService.callObjectMethod (IInAppBillingService.getBuyIntent, 3,
                                                                             getPackageName().get(), skuString.get(),
                                                                             productTypeString.get(), devString.get()));
@@ -641,9 +641,9 @@ struct InAppPurchases::Pimpl    : private AsyncUpdater,
 
             if (owner.checkIsReady())
             {
-                auto token = (! purchaseToken.isEmpty() ? purchaseToken : getPurchaseTokenForProductId (productIdentifier, false, 0));
+                auto token = (! purchaseToken.empty() ? purchaseToken : getPurchaseTokenForProductId (productIdentifier, false, 0));
 
-                if (token.isEmpty())
+                if (token.empty())
                 {
                     if (callback)
                         callback ({ false, productIdentifier, NEEDS_TRANS ("Item not owned") });

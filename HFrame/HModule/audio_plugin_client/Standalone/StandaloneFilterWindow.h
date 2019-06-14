@@ -144,7 +144,7 @@ public:
 
     static String getFilePatterns (const String& fileSuffix)
     {
-        if (fileSuffix.isEmpty())
+        if (fileSuffix.empty())
             return {};
 
         return (fileSuffix.startsWithChar ('.') ? "*" : "*.") + fileSuffix;

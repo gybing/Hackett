@@ -143,7 +143,7 @@ IPAddress::IPAddress (const String& adr)
             }
 
             IPAddressByteUnion temp;
-            temp.combined = (uint16) CharacterFunctions::HexParser<int>::parse (tokens[i].getCharPointer());
+            temp.combined = (uint16) CharacterFunctions::HexParser<int>::parse (tokens[i].c_str());
 
             address[i * 2]     = temp.split[0];
             address[i * 2 + 1] = temp.split[1];
@@ -288,7 +288,7 @@ String IPAddress::getFormattedAddress (const String& unformattedAddress)
         }
     }
 
-    if (portString.isNotEmpty())
+    if (portString.!empty())
         addressString = "[" + addressString + "]" + portString;
 
     return addressString;

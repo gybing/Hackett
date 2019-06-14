@@ -1471,7 +1471,7 @@ public:
                 if (hasTitleBar())
                     ShowWindow (hwnd, SW_SHOWNORMAL);
 
-                if (! boundsCopy.isEmpty())
+                if (! boundsCopy.empty())
                     setBounds (ScalingHelpers::scaledScreenPosToUnscaled (component, boundsCopy), false);
             }
             else
@@ -2143,7 +2143,7 @@ private:
             {
                 auto bounds = component.getBounds();
 
-                if (bounds.isEmpty())
+                if (bounds.empty())
                     scaleFactor = Desktop::getInstance().getDisplays().getMainDisplay().scale;
                 else
                     scaleFactor = Desktop::getInstance().getDisplays().findDisplayForRect (bounds).scale;
@@ -2434,7 +2434,7 @@ private:
             ChildWindowClippingInfo childClipInfo = { dc, this, &contextClip, Point<int> (x, y), 0 };
             EnumChildWindows (hwnd, clipChildWindowCallback, (LPARAM) &childClipInfo);
 
-            if (! contextClip.isEmpty())
+            if (! contextClip.empty())
             {
                 if (transparent)
                     for (auto& i : contextClip)
@@ -4397,7 +4397,7 @@ void SystemClipboard::copyTextToClipboard (const String& text)
     {
         if (EmptyClipboard() != 0)
         {
-            auto bytesNeeded = CharPointer_UTF16::getBytesRequiredFor (text.getCharPointer()) + 4;
+            auto bytesNeeded = CharPointer_UTF16::getBytesRequiredFor (text.c_str()) + 4;
 
             if (bytesNeeded > 0)
             {

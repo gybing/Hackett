@@ -278,7 +278,7 @@ public:
                        WebKitNavigationAction* action,
                        WebKitPolicyDecision* decision)
     {
-        if (decision != nullptr && frameName.isEmpty())
+        if (decision != nullptr && frameName.empty())
         {
             g_object_ref (decision);
             decisions.add (decision);
@@ -770,7 +770,7 @@ void WebBrowserComponent::checkWindowAssociation()
 
 void WebBrowserComponent::reloadLastURL()
 {
-    if (lastURL.isNotEmpty())
+    if (lastURL.!empty())
     {
         goToURL (lastURL, &lastHeaders, &lastPostData);
         lastURL.clear();

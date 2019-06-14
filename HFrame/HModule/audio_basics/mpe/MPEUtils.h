@@ -61,7 +61,7 @@ private:
     {
         Array<int> notes;
         int lastNotePlayed = -1;
-        bool isFree() const noexcept  { return notes.isEmpty(); }
+        bool isFree() const noexcept  { return notes.empty(); }
     };
     MidiChannel midiChannels[17];
 

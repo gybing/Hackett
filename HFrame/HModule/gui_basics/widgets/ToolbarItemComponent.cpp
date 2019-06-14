@@ -184,7 +184,7 @@ void ToolbarItemComponent::paintButton (Graphics& g, const bool over, const bool
                                                   getButtonText(), *this);
     }
 
-    if (! contentArea.isEmpty())
+    if (! contentArea.empty())
     {
         Graphics::ScopedSaveState ss (g);
 

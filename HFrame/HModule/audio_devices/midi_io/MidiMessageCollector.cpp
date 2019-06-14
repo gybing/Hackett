@@ -59,7 +59,7 @@ void MidiMessageCollector::removeNextBlockOfMessages (MidiBuffer& destBuffer,
     const ScopedLock sl (midiCallbackLock);
     lastCallbackTime = timeNow;
 
-    if (! incomingMessages.isEmpty())
+    if (! incomingMessages.empty())
     {
         int numSourceSamples = jmax (1, roundToInt (msElapsed * 0.001 * sampleRate));
         int startSample = 0;

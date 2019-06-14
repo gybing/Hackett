@@ -351,14 +351,14 @@ private:
                                  [fileToSave] (const FileChooser& chooser)
                                  {
                                      auto result = chooser.getURLResult();
-                                     auto name = result.isEmpty() ? String()
+                                     auto name = result.empty() ? String()
                                                                   : (result.isLocalFile() ? result.getLocalFile().getFullPathName()
                                                                                           : result.toString (true));
 
                                      // Android and iOS file choosers will create placeholder files for chosen
                                      // paths, so we may as well write into those files.
                                    #if HANDROID || HIOS
-                                     if (! result.isEmpty())
+                                     if (! result.empty())
                                      {
                                          std::unique_ptr<InputStream>  wi (fileToSave.createInputStream());
                                          std::unique_ptr<OutputStream> wo (result.createOutputStream());

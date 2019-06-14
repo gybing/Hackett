@@ -324,7 +324,7 @@ private:
                     StringArray files;
                     auto canMoveFiles = false;
 
-                    if (owner.shouldDropFilesWhenDraggedExternally (details, files, canMoveFiles) && ! files.isEmpty())
+                    if (owner.shouldDropFilesWhenDraggedExternally (details, files, canMoveFiles) && ! files.empty())
                     {
                         MessageManager::callAsync ([=] { DragAndDropContainer::performExternalDragDropOfFiles (files, canMoveFiles); });
                         deleteSelf();
@@ -333,7 +333,7 @@ private:
 
                     String text;
 
-                    if (owner.shouldDropTextWhenDraggedExternally (details, text) && text.isNotEmpty())
+                    if (owner.shouldDropTextWhenDraggedExternally (details, text) && text.!empty())
                     {
                         MessageManager::callAsync ([=] { DragAndDropContainer::performExternalDragDropOfText (text); });
                         deleteSelf();

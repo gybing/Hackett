@@ -103,7 +103,7 @@ public:
     }
 
     /** Returns true if the set is empty, false otherwise. */
-    inline bool isEmpty() const noexcept
+    inline bool empty() const noexcept
     {
         return size() == 0;
     }
@@ -380,7 +380,7 @@ public:
         {
             clear();
         }
-        else if (! otherSet.isEmpty())
+        else if (! otherSet.empty())
         {
             for (int i = data.size(); --i >= 0;)
                 if (otherSet.contains (data.getReference (i)))
@@ -403,7 +403,7 @@ public:
 
         if (this != &otherSet)
         {
-            if (otherSet.isEmpty())
+            if (otherSet.empty())
             {
                 clear();
             }

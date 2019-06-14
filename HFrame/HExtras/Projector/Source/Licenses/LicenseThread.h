@@ -146,7 +146,7 @@ struct LicenseThread : NetWorkerThread
 
     String getAuthToken()
     {
-        if (owner.state.authToken.isNotEmpty())
+        if (owner.state.authToken.!empty())
             return owner.state.authToken;
 
         selectNewLicense = false;
@@ -162,7 +162,7 @@ struct LicenseThread : NetWorkerThread
     // returns true if any information was updated
     void updateUserInfo (LicenseState& stateToUpdate)
     {
-        HAssert (stateToUpdate.authToken.isNotEmpty());
+        HAssert (stateToUpdate.authToken.!empty());
 
         auto accessTokenHeader = "x-access-token: " + stateToUpdate.authToken;
         std::unique_ptr<WebInputStream> shared (getSharedWebInputStream (URL ("https://api.roli.com/api/v1/user"), false));
@@ -196,13 +196,13 @@ struct LicenseThread : NetWorkerThread
         bool requiredWebview = false;
         String licenseChooserPage = "https://H.com/webviews/select_license";
 
-        HAssert (stateToUpdate.authToken.isNotEmpty());
+        HAssert (stateToUpdate.authToken.!empty());
         HAssert (stateToUpdate.type != LicenseState::Type::notLoggedIn);
 
         auto accessTokenHeader = "x-access-token: " + stateToUpdate.authToken;
         StringArray licenses;
 
-        while ((licenses.isEmpty() || selectNewLicense) && ! threadShouldExit())
+        while ((licenses.empty() || selectNewLicense) && ! threadShouldExit())
         {
             static Identifier licenseTypeIdentifier   ("type");
             static Identifier licenseStatusIdentifier ("status");
@@ -233,7 +233,7 @@ struct LicenseThread : NetWorkerThread
                             const String& productType = obj->getProperty (proHrLicenseTypeIdentifier);
                             const String& status      = obj->getProperty (licenseStatusIdentifier);
 
-                            if (productType.isNotEmpty() && (status.isEmpty() || status == "active"))
+                            if (productType.!empty() && (status.empty() || status == "active"))
                                 licenses.add (productType);
                         }
                     }
@@ -246,7 +246,7 @@ struct LicenseThread : NetWorkerThread
                         return;
                 }
 
-                if (! licenses.isEmpty())
+                if (! licenses.empty())
                     break;
             }
 
@@ -261,13 +261,13 @@ struct LicenseThread : NetWorkerThread
             const String& productKey        = result["register-product"];
             const String& chosenLicenseType = result["redeem-licence-type"];
 
-            if (redirectURL.isNotEmpty())
+            if (redirectURL.!empty())
             {
                 licenseChooserPage = "https://H.com/webviews/register-product";
                 continue;
             }
 
-            if (productKey.isNotEmpty())
+            if (productKey.!empty())
             {
                 DynamicObject::Ptr redeemObject (new DynamicObject());
                 redeemObject->setProperty (serialIdentifier, productKey);
@@ -292,7 +292,7 @@ struct LicenseThread : NetWorkerThread
                 continue;
             }
 
-            if (chosenLicenseType.isNotEmpty())
+            if (chosenLicenseType.!empty())
             {
                 // redeem the license
                 DynamicObject::Ptr jsonLicenseObject (new DynamicObject());
@@ -343,7 +343,7 @@ struct LicenseThread : NetWorkerThread
         {
             workState.authToken = getAuthToken();
 
-            if (workState.authToken.isEmpty())
+            if (workState.authToken.empty())
                 return;
 
             // read the user information
@@ -355,7 +355,7 @@ struct LicenseThread : NetWorkerThread
             updateIfChanged (workState);
 
             // if the last step logged us out then retry
-            if (workState.authToken.isEmpty())
+            if (workState.authToken.empty())
                 continue;
 
             // check if the license has changed
@@ -389,7 +389,7 @@ struct LicenseThread : NetWorkerThread
 
             String avatarURL = obj->getProperty (avatarURLIdentifier);
 
-            if (avatarURL.isNotEmpty())
+            if (avatarURL.!empty())
             {
                 std::unique_ptr<WebInputStream> shared (getSharedWebInputStream (URL (avatarURL), false));
 
@@ -418,12 +418,12 @@ struct LicenseThread : NetWorkerThread
         executeOnMessageThreadAndBlock ([this, result] () { owner.closeWebview (result); });
     }
 
-    static bool stringArrayContainsSubstring (const StringArray& stringArray, const String& substring)
+    static bool stringArrayContainsSubstring (const StringArray& stringArray, const String& substr)
     {
-        HAssert (substring.isNotEmpty());
+        HAssert (substr.!empty());
 
         for (auto element : stringArray)
-            if (element.containsIgnoreCase (substring))
+            if (element.containsIgnoreCase (substr))
                 return true;
 
         return false;

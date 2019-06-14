@@ -48,7 +48,7 @@ static String removeEllipsis (const String& path)
     // This will quickly find both /../ and /./ at the expense of a minor
     // false-positive performance hit when path elements end in a dot.
    #if HWINDOWS
-    if (path.contains (".\\"))
+    if (std::string::npos != path.find (".\\"))
    #else
     if (path.contains ("./"))
    #endif
@@ -83,19 +83,27 @@ static String removeEllipsis (const String& path)
 
 bool File::isRoot() const
 {
-    return fullPath.isNotEmpty() && *this == getParentDirectory();
+    return !fullPath.empty() && *this == getParentDirectory();
 }
 
 String File::parseAbsolutePath (const String& p)
 {
-    if (p.isEmpty())
+    if (p.empty())
         return {};
 
 #if HWINDOWS
-    // Windows..
-    auto path = removeEllipsis (p.replaceCharacter ('/', '\\'));
+	auto path = p;
 
-    if (path.startsWithChar (getSeparatorChar()))
+	while (true) {
+		std::string::size_type   pos(0);
+		if ((pos = path.find('/')) != std::string::npos)
+			path.replace(pos, 1, "\\");
+		else   break;
+	}
+
+    path = removeEllipsis (path);
+
+    if (path[0] == getSeparatorChar())
     {
         if (path[1] != getSeparatorChar())
         {
@@ -108,10 +116,10 @@ String File::parseAbsolutePath (const String& p)
             */
             HAssertfalse;
 
-            path = File::getCurrentWorkingDirectory().getFullPathName().substring (0, 2) + path;
+            path = File::getCurrentWorkingDirectory().getFullPathName().substr (0, 2) + path;
         }
     }
-    else if (! path.containsChar (':'))
+    else if (std::string::npos == path.find (':'))
     {
         /*  When you supply a raw string to the File object constructor, it must be an absolute path.
             If you're trying to parse a string that may be either a relative path or an absolute path,
@@ -140,12 +148,12 @@ String File::parseAbsolutePath (const String& p)
         {
             // expand a name of the form "~/abc"
             path = File::getSpecialLocation (File::userHomeDirectory).getFullPathName()
-                    + path.substring (1);
+                    + path.substr (1);
         }
         else
         {
             // expand a name of type "~dave/abc"
-            auto userName = path.substring (1).upToFirstOccurrenceOf ("/", false, false);
+            auto userName = path.substr (1).upToFirstOccurrenceOf ("/", false, false);
 
             if (auto* pw = getpwnam (userName.toUTF8()))
                 path = addTrailingSeparator (pw->pw_dir) + path.fromFirstOccurrenceOf ("/", false, false);
@@ -175,15 +183,15 @@ String File::parseAbsolutePath (const String& p)
     }
 #endif
 
-    while (path.endsWithChar (getSeparatorChar()) && path != getSeparatorString()) // careful not to turn a single "/" into an empty string.
-        path = path.dropLastCharacters (1);
+    while (path.back() == getSeparatorChar() && path != getSeparatorString()) // careful not to turn a single "/" into an empty string.
+        path = path.substr (0, path.length() - 1);
 
     return path;
 }
 
 String File::addTrailingSeparator (const String& path)
 {
-    return path.endsWithChar (getSeparatorChar()) ? path
+    return path.back() == getSeparatorChar() ? path
                                                   : path + getSeparatorChar();
 }
 
@@ -206,7 +214,7 @@ static int compareFilenames (const String& name1, const String& name2) noexcept
    #if NAMES_ARE_CASE_SENSITIVE
     return name1.compare (name2);
    #else
-    return name1.compareIgnoreCase (name2);
+    return CharacterFunctions::compareIgnoreCase(name1, name2);
    #endif
 }
 
@@ -303,12 +311,12 @@ bool File::copyDirectoryTo (const File& newDirectory) const
 //==============================================================================
 String File::getPathUpToLastSlash() const
 {
-    auto lastSlash = fullPath.lastIndexOfChar (getSeparatorChar());
+    auto lastSlash = fullPath.find_last_of (getSeparatorChar());
 
     if (lastSlash > 0)
-        return fullPath.substring (0, lastSlash);
+        return fullPath.substr (0, lastSlash);
 
-    if (lastSlash == 0)
+    if (lastSlash == std::string::npos)
         return getSeparatorString();
 
     return fullPath;
@@ -322,23 +330,23 @@ File File::getParentDirectory() const
 //==============================================================================
 String File::getFileName() const
 {
-    return fullPath.substring (fullPath.lastIndexOfChar (getSeparatorChar()) + 1);
+    return fullPath.substr (fullPath.find_last_of (getSeparatorChar()) + 1);
 }
 
 String File::getFileNameWithoutExtension() const
 {
-    auto lastSlash = fullPath.lastIndexOfChar (getSeparatorChar()) + 1;
-    auto lastDot   = fullPath.lastIndexOfChar ('.');
+    auto lastSlash = fullPath.find_last_of (getSeparatorChar()) + 1;
+    auto lastDot   = fullPath.find_last_of ('.');
 
     if (lastDot > lastSlash)
-        return fullPath.substring (lastSlash, lastDot);
+        return fullPath.substr (lastSlash, lastDot);
 
-    return fullPath.substring (lastSlash);
+    return fullPath.substr (lastSlash);
 }
 
 bool File::isAChildOf (const File& potentialParent) const
 {
-    if (potentialParent.fullPath.isEmpty())
+    if (potentialParent.fullPath.empty())
         return false;
 
     auto ourPath = getPathUpToLastSlash();
@@ -352,8 +360,8 @@ bool File::isAChildOf (const File& potentialParent) const
     return getParentDirectory().isAChildOf (potentialParent);
 }
 
-int   File::hashCode() const    { return fullPath.hashCode(); }
-int64 File::hashCode64() const  { return fullPath.hashCode64(); }
+int   File::hashCode() const { return std::hash<std::string>{}(fullPath); }
+int64 File::hashCode64() const  { return std::hash<std::string>{}(fullPath); }
 
 //==============================================================================
 bool File::isAbsolutePath (StringRef path)
@@ -397,7 +405,7 @@ File File::getChildFile (StringRef relativePath) const
                 auto lastSlash = path.lastIndexOfChar (separatorChar);
 
                 if (lastSlash >= 0)
-                    path = path.substring (0, lastSlash);
+                    path = path.substr (0, lastSlash);
 
                 while (*r == separatorChar) // ignore duplicate slashes
                     ++r;
@@ -581,10 +589,10 @@ File File::getNonexistentChildFile (const String& suggestedPrefix,
 
             if (openBracks > 0
                  && closeBracks > openBracks
-                 && prefix.substring (openBracks + 1, closeBracks).containsOnly ("0123456789"))
+                 && prefix.substr (openBracks + 1, closeBracks).containsOnly ("0123456789"))
             {
-                number = prefix.substring (openBracks + 1, closeBracks).getIntValue();
-                prefix = prefix.substring (0, openBracks);
+                number = prefix.substr (openBracks + 1, closeBracks).getIntValue();
+                prefix = prefix.substr (0, openBracks);
             }
         }
 
@@ -628,20 +636,20 @@ String File::getFileExtension() const
     auto indexOfDot = fullPath.lastIndexOfChar ('.');
 
     if (indexOfDot > fullPath.lastIndexOfChar (getSeparatorChar()))
-        return fullPath.substring (indexOfDot);
+        return fullPath.substr (indexOfDot);
 
     return {};
 }
 
 bool File::hasFileExtension (StringRef possibleSuffix) const
 {
-    if (possibleSuffix.isEmpty())
+    if (possibleSuffix.empty())
         return fullPath.lastIndexOfChar ('.') <= fullPath.lastIndexOfChar (getSeparatorChar());
 
     auto semicolon = possibleSuffix.text.indexOf ((wchar) ';');
 
     if (semicolon >= 0)
-        return hasFileExtension (String (possibleSuffix.text).substring (0, semicolon).trimEnd())
+        return hasFileExtension (String (possibleSuffix.text).substr (0, semicolon).trimEnd())
                 || hasFileExtension ((possibleSuffix.text + (semicolon + 1)).findEndOfWhitespace());
 
     if (fullPath.endsWithIgnoreCase (possibleSuffix))
@@ -660,7 +668,7 @@ bool File::hasFileExtension (StringRef possibleSuffix) const
 
 File File::withFileExtension (StringRef newExtension) const
 {
-    if (fullPath.isEmpty())
+    if (fullPath.empty())
         return {};
 
     auto filePart = getFileName();
@@ -668,9 +676,9 @@ File File::withFileExtension (StringRef newExtension) const
     auto lastDot = filePart.lastIndexOfChar ('.');
 
     if (lastDot >= 0)
-        filePart = filePart.substring (0, lastDot);
+        filePart = filePart.substr (0, lastDot);
 
-    if (newExtension.isNotEmpty() && newExtension.text[0] != '.')
+    if (!newExtension.empty() && newExtension.text[0] != '.')
         filePart << '.';
 
     return getSiblingFile (filePart + newExtension);
@@ -782,14 +790,14 @@ String File::createLegalPathName (const String& original)
     auto s = original;
     String start;
 
-    if (s.isNotEmpty() && s[1] == ':')
+    if (!s.empty() && s[1] == ':')
     {
-        start = s.substring (0, 2);
-        s = s.substring (2);
+        start = s.substr (0, 2);
+        s = s.substr (2);
     }
 
     return start + s.removeCharacters ("\"#@,;:<>*^|?")
-                    .substring (0, 1024);
+                    .substr (0, 1024);
 }
 
 String File::createLegalFileName (const String& original)
@@ -805,12 +813,12 @@ String File::createLegalFileName (const String& original)
 
         if (lastDot > jmax (0, len - 12))
         {
-            s = s.substring (0, maxLength - (len - lastDot))
-                 + s.substring (lastDot);
+            s = s.substr (0, maxLength - (len - lastDot))
+                 + s.substr (lastDot);
         }
         else
         {
-            s = s.substring (0, maxLength);
+            s = s.substr (0, maxLength);
         }
     }
 
@@ -818,13 +826,13 @@ String File::createLegalFileName (const String& original)
 }
 
 //==============================================================================
-static int countNumberOfSeparators (String::CharPointerType s)
+static int countNumberOfSeparators (char* s)
 {
     int num = 0;
 
     for (;;)
     {
-        auto c = s.getAndAdvance();
+        auto c = *s++;
 
         if (c == 0)
             break;
@@ -850,17 +858,17 @@ String File::getRelativePathFrom (const File& dir) const
                                                             : dir.fullPath);
 
     int commonBitLength = 0;
-    auto thisPathAfterCommon = thisPath.getCharPointer();
-    auto dirPathAfterCommon  = dirPath.getCharPointer();
+    auto thisPathAfterCommon = thisPath.c_str();
+    auto dirPathAfterCommon  = dirPath.c_str();
 
     {
-        auto thisPathIter = thisPath.getCharPointer();
-        auto dirPathIter = dirPath.getCharPointer();
+        auto thisPathIter = thisPath.c_str();
+        auto dirPathIter = dirPath.c_str();
 
         for (int i = 0;;)
         {
-            auto c1 = thisPathIter.getAndAdvance();
-            auto c2 = dirPathIter.getAndAdvance();
+            auto c1 = *thisPathIter++;
+            auto c2 = *dirPathIter++;
 
            #if NAMES_ARE_CASE_SENSITIVE
             if (c1 != c2

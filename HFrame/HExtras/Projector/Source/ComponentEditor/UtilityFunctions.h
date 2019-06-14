@@ -34,28 +34,28 @@ inline String quotedString (const String& s, bool wrapInTransMacro)
 
     if (embeddedIndex >= 0)
     {
-        String s1 (s.substring (0, embeddedIndex));
-        String s2 (s.substring (embeddedIndex + 2));
+        String s1 (s.substr (0, embeddedIndex));
+        String s2 (s.substr (embeddedIndex + 2));
         String code;
 
         const int closeIndex = s2.indexOf ("%%");
 
         if (closeIndex > 0)
         {
-            code = s2.substring (0, closeIndex).trim();
-            s2 = s2.substring (closeIndex + 2);
+            code = s2.substr (0, closeIndex).trim();
+            s2 = s2.substr (closeIndex + 2);
         }
 
-        if (code.isNotEmpty())
+        if (code.!empty())
         {
             String result;
 
-            if (s1.isNotEmpty())
+            if (s1.!empty())
                 result << quotedString (s1, wrapInTransMacro) << " + ";
 
             result << code;
 
-            if (s2.isNotEmpty())
+            if (s2.!empty())
                 result << " + " << quotedString (s2, wrapInTransMacro);
 
             return result;

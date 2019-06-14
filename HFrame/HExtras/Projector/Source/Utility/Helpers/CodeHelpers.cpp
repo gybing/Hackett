@@ -46,7 +46,7 @@ namespace CodeHelpers
                 continue;
             }
 
-            if (line.trimEnd().isNotEmpty())
+            if (line.trimEnd().!empty())
                 line = space + line;
         }
 
@@ -63,14 +63,14 @@ namespace CodeHelpers
 
         for (auto& line : lines)
             if (line.startsWith (space))
-                line = line.substring (numSpaces);
+                line = line.substr (numSpaces);
 
         return lines.joinIntoString (newLine);
     }
 
     String makeValidIdentifier (String s, bool capitalise, bool removeColons, bool allowTemplates, bool allowAsterisks)
     {
-        if (s.isEmpty())
+        if (s.empty())
             return "unknown";
 
         if (removeColons)
@@ -83,7 +83,7 @@ namespace CodeHelpers
                  && CharacterFunctions::isLetter (s[i - 1])
                  && CharacterFunctions::isUpperCase (s[i])
                  && ! CharacterFunctions::isUpperCase (s[i - 1]))
-                s = s.substring (0, i) + " " + s.substring (i);
+                s = s.substr (0, i) + " " + s.substr (i);
 
         String allowedChars ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_ 0123456789");
         if (allowTemplates)
@@ -107,8 +107,8 @@ namespace CodeHelpers
         for (int i = 1; i < words.size(); ++i)
         {
             if (capitalise && words[i].length() > 1)
-                n << words[i].substring (0, 1).toUpperCase()
-                  << words[i].substring (1).toLowerCase();
+                n << words[i].substr (0, 1).toUpperCase()
+                  << words[i].substr (1).toLowerCase();
             else
                 n << words[i];
         }
@@ -145,20 +145,20 @@ namespace CodeHelpers
 
     String stringLiteral (const String& text, int maxLineLength)
     {
-        if (text.isEmpty())
+        if (text.empty())
             return "String()";
 
         StringArray lines;
 
         {
-            auto t = text.getCharPointer();
-            bool finished = t.isEmpty();
+            auto t = text.c_str();
+            bool finished = t.empty();
 
             while (! finished)
             {
                 for (auto startOfLine = t;;)
                 {
-                    switch (t.getAndAdvance())
+                    switch (*t++)
                     {
                         case 0:     finished = true; break;
                         case '\n':  break;
@@ -180,8 +180,8 @@ namespace CodeHelpers
 
                 if (line.length() > maxLineLength)
                 {
-                    const String start (line.substring (0, maxLineLength));
-                    const String end (line.substring (maxLineLength));
+                    const String start (line.substr (0, maxLineLength));
+                    const String end (line.substr (maxLineLength));
                     line = start;
                     lines.insert (i + 1, end);
                 }
@@ -434,23 +434,23 @@ namespace CodeHelpers
     String getLeadingWhitespace (String line)
     {
         line = line.removeCharacters (line.endsWith ("\r\n") ? "\r\n" : "\n");
-        auto endOfLeadingWS = line.getCharPointer().findEndOfWhitespace();
-        return String (line.getCharPointer(), endOfLeadingWS);
+        auto endOfLeadingWS = line.c_str().findEndOfWhitespace();
+        return String (line.c_str(), endOfLeadingWS);
     }
 
-    int getBraceCount (String::CharPointerType line)
+    int getBraceCount (char* line)
     {
         int braces = 0;
 
         for (;;)
         {
-            const wchar c = line.getAndAdvance();
+            const wchar c = *line++;
 
             if (c == 0)                         break;
             else if (c == '{')                  ++braces;
             else if (c == '}')                  --braces;
             else if (c == '/')                  { if (*line == '/') break; }
-            else if (c == '"' || c == '\'')     { while (! (line.isEmpty() || line.getAndAdvance() == c)) {} }
+            else if (c == '"' || c == '\'')     { while (! (line.empty() || *line++ == c)) {} }
         }
 
         return braces;
@@ -469,7 +469,7 @@ namespace CodeHelpers
             auto line = pos.getLineText();
             auto trimmedLine = line.trimStart();
 
-            braceCount += getBraceCount (trimmedLine.getCharPointer());
+            braceCount += getBraceCount (trimmedLine.c_str());
 
             if (braceCount > 0)
             {
@@ -480,7 +480,7 @@ namespace CodeHelpers
                 return true;
             }
 
-            if ((! indentFound) && trimmedLine.isNotEmpty())
+            if ((! indentFound) && trimmedLine.!empty())
             {
                 indentFound = true;
                 lastLineIndent = getLeadingWhitespace (line);

@@ -151,10 +151,10 @@ AudioDeviceManager& getSharedAudioDeviceManager (int numInputChannels, int numOu
                 setup.inputChannels.setRange (0, numInputs, true);
                 setup.outputChannels.setRange (0, numOutputs, true);
 
-                if (oldInputs == 0 && numInputs > 0 && setup.inputDeviceName.isEmpty())
+                if (oldInputs == 0 && numInputs > 0 && setup.inputDeviceName.empty())
                     setup.inputDeviceName = getCurrentDefaultAudioDeviceName (*sharedAudioDeviceManager, true);
 
-                if (oldOutputs == 0 && numOutputs > 0 && setup.outputDeviceName.isEmpty())
+                if (oldOutputs == 0 && numOutputs > 0 && setup.outputDeviceName.empty())
                     setup.outputDeviceName = getCurrentDefaultAudioDeviceName (*sharedAudioDeviceManager, false);
 
                 sharedAudioDeviceManager->setAudioDeviceSetup (setup, false);

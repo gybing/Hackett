@@ -66,7 +66,7 @@ public:
 
     //==============================================================================
     /** Returns true if the parallelogram has a width or height of more than zero. */
-    bool isEmpty() const noexcept                                   { return topLeft != topRight || topLeft != bottomLeft; }
+    bool empty() const noexcept                                   { return topLeft != topRight || topLeft != bottomLeft; }
 
     /** Returns true if the parallelogram's coordinates are all finite numbers, i.e. not NaN or infinity. */
     inline bool isFinite() const noexcept                           { return topLeft.isFinite() && topRight.isFinite() && bottomLeft.isFinite(); }

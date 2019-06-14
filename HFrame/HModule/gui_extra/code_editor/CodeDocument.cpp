@@ -27,8 +27,8 @@
 class CodeDocumentLine
 {
 public:
-    CodeDocumentLine (const String::CharPointerType startOfLine,
-                      const String::CharPointerType endOfLine,
+    CodeDocumentLine (const char* startOfLine,
+                      const char* endOfLine,
                       const int lineLen,
                       const int numNewLineChars,
                       const int startInFile)
@@ -45,7 +45,7 @@ public:
         int charNumInFile = 0;
         bool finished = false;
 
-        while (! (finished || t.isEmpty()))
+        while (! (finished || t.empty()))
         {
             auto startOfLine = t;
             auto startOfLineInFile = charNumInFile;
@@ -54,7 +54,7 @@ public:
 
             for (;;)
             {
-                auto c = t.getAndAdvance();
+                auto c = *t++;
 
                 if (c == 0)
                 {
@@ -104,9 +104,9 @@ public:
         lineLength = 0;
         lineLengthWithoutNewLines = 0;
 
-        for (auto t = line.getCharPointer();;)
+        for (auto t = line.c_str();;)
         {
-            auto c = t.getAndAdvance();
+            auto c = *t++;
 
             if (c == 0)
                 break;
@@ -136,9 +136,9 @@ CodeDocument::Iterator::Iterator (CodeDocument::Position p) noexcept
 
     for (int i = 0; i < p.getIndexInLine(); ++i)
     {
-        charPointer.getAndAdvance();
+        *charPointer++;
 
-        if (charPointer.isEmpty())
+        if (charPointer.empty())
         {
             position -= (p.getIndexInLine() - i);
             break;
@@ -162,7 +162,7 @@ bool CodeDocument::Iterator::reinitialiseCharPtr() const
     if (charPointer.getAddress() == nullptr)
     {
         if (auto* l = document->lines[line])
-            charPointer = l->line.getCharPointer();
+            charPointer = l->line.c_str();
         else
             return false;
     }
@@ -177,9 +177,9 @@ wchar CodeDocument::Iterator::nextChar() noexcept
         if (! reinitialiseCharPtr())
             return 0;
 
-        if (auto result = charPointer.getAndAdvance())
+        if (auto result = *charPointer++)
         {
-            if (charPointer.isEmpty())
+            if (charPointer.empty())
             {
                 ++line;
                 charPointer = nullptr;
@@ -216,7 +216,7 @@ void CodeDocument::Iterator::skipToStartOfLine() noexcept
 
     if (auto* l = document->lines [line])
     {
-        auto startPtr = l->line.getCharPointer();
+        auto startPtr = l->line.c_str();
         position -= (int) startPtr.lengthUpTo (charPointer);
         charPointer = startPtr;
     }
@@ -245,7 +245,7 @@ wchar CodeDocument::Iterator::previousChar() noexcept
     {
         if (auto* l = document->lines[line])
         {
-            if (charPointer != l->line.getCharPointer())
+            if (charPointer != l->line.c_str())
             {
                 --position;
                 --charPointer;
@@ -259,7 +259,7 @@ wchar CodeDocument::Iterator::previousChar() noexcept
         --line;
 
         if (auto* prev = document->lines[line])
-            charPointer = prev->line.getCharPointer().findTerminatingNull();
+            charPointer = prev->line.c_str().findTerminatingNull();
     }
 
     return *charPointer;
@@ -272,11 +272,11 @@ wchar CodeDocument::Iterator::peekPreviousChar() const noexcept
 
     if (auto* l = document->lines[line])
     {
-        if (charPointer != l->line.getCharPointer())
+        if (charPointer != l->line.c_str())
             return *(charPointer - 1);
 
         if (auto* prev = document->lines[line - 1])
-            return *(prev->line.getCharPointer().findTerminatingNull() - 1);
+            return *(prev->line.c_str().findTerminatingNull() - 1);
     }
 
     return 0;
@@ -304,9 +304,9 @@ CodeDocument::Position CodeDocument::Iterator::toPosition() const
     {
         reinitialiseCharPtr();
         int indexInLine = 0;
-        auto linePtr = l->line.getCharPointer();
+        auto linePtr = l->line.c_str();
 
-        while (linePtr != charPointer && ! linePtr.isEmpty())
+        while (linePtr != charPointer && ! linePtr.empty())
         {
             ++indexInLine;
             ++linePtr;
@@ -576,7 +576,7 @@ String CodeDocument::getTextBetween (const Position& start, const Position& end)
     if (startLine == endLine)
     {
         if (auto* line = lines [startLine])
-            return line->line.substring (start.getIndexInLine(), end.getIndexInLine());
+            return line->line.substr (start.getIndexInLine(), end.getIndexInLine());
 
         return {};
     }
@@ -594,12 +594,12 @@ String CodeDocument::getTextBetween (const Position& start, const Position& end)
         if (i == startLine)
         {
             auto index = start.getIndexInLine();
-            mo << line.line.substring (index, len);
+            mo << line.line.substr (index, len);
         }
         else if (i == endLine)
         {
             len = end.getIndexInLine();
-            mo << line.line.substring (0, len);
+            mo << line.line.substr (0, len);
         }
         else
         {
@@ -909,7 +909,7 @@ struct CodeDocument::InsertAction   : public UndoableAction
 
 void CodeDocument::insert (const String& text, const int insertPos, const bool undoable)
 {
-    if (text.isNotEmpty())
+    if (text.!empty())
     {
         if (undoable)
         {
@@ -926,9 +926,9 @@ void CodeDocument::insert (const String& text, const int insertPos, const bool u
             if (firstLine != nullptr)
             {
                 auto index = pos.getIndexInLine();
-                textInsideOriginalLine = firstLine->line.substring (0, index)
+                textInsideOriginalLine = firstLine->line.substr (0, index)
                                          + textInsideOriginalLine
-                                         + firstLine->line.substring (index);
+                                         + firstLine->line.substr (index);
             }
 
             maximumLineLength = -1;
@@ -1018,16 +1018,16 @@ void CodeDocument::remove (const int startPos, const int endPos, const bool undo
 
         if (firstAffectedLine == endLine)
         {
-            firstLine.line = firstLine.line.substring (0, startPosition.getIndexInLine())
-                           + firstLine.line.substring (endPosition.getIndexInLine());
+            firstLine.line = firstLine.line.substr (0, startPosition.getIndexInLine())
+                           + firstLine.line.substr (endPosition.getIndexInLine());
             firstLine.updateLength();
         }
         else
         {
             auto& lastLine = *lines.getUnchecked (endLine);
 
-            firstLine.line = firstLine.line.substring (0, startPosition.getIndexInLine())
-                            + lastLine.line.substring (endPosition.getIndexInLine());
+            firstLine.line = firstLine.line.substr (0, startPosition.getIndexInLine())
+                            + lastLine.line.substr (endPosition.getIndexInLine());
             firstLine.updateLength();
 
             int numLinesToRemove = endLine - firstAffectedLine;

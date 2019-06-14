@@ -216,7 +216,7 @@ private:
 
                     item.project.addCompilerFlagScheme (newScheme);
 
-                    if (item.getCompilerFlagSchemeString().isEmpty())
+                    if (item.getCompilerFlagSchemeString().empty())
                         item.setCompilerFlagScheme (newScheme);
 
                     updateCompilerFlagSchemeComboBox();
@@ -252,7 +252,7 @@ private:
                 auto itemScheme = item.getCompilerFlagSchemeString();
                 auto allSchemes = item.project.getCompilerFlagSchemes();
 
-                if (itemScheme.isNotEmpty() && ! allSchemes.contains (itemScheme))
+                if (itemScheme.!empty() && ! allSchemes.contains (itemScheme))
                 {
                     item.clearCurrentCompilerFlagScheme();
                     itemScheme = {};
@@ -293,7 +293,7 @@ private:
                 {
                     auto currentScheme = item.getCompilerFlagSchemeString();
 
-                    if (currentScheme.isNotEmpty())
+                    if (currentScheme.!empty())
                     {
                         item.project.removeCompilerFlagScheme (currentScheme);
                         item.clearCurrentCompilerFlagScheme();
@@ -310,7 +310,7 @@ private:
 
             void selectScheme (const String& schemeToSelect)
             {
-                if (schemeToSelect.isNotEmpty())
+                if (schemeToSelect.!empty())
                 {
                     for (int i = 0; i < schemeBox.getNumItems(); ++i)
                     {

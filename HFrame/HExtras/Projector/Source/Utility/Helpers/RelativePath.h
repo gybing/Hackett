@@ -116,7 +116,7 @@ private:
             // This is a hack to convert unix-style absolute paths into valid absolute Windows paths to avoid hitting
             // an assertion in File::parseAbsolutePath().
             if (path.startsWithChar (L'/') || path.startsWithChar (L'$') || path.startsWithChar (L'~'))
-                return File (String ("C:\\") + FileHelpers::windowsStylePath (path.substring (1)));
+                return File (String ("C:\\") + FileHelpers::windowsStylePath (path.substr (1)));
 
             return File (path);
         }

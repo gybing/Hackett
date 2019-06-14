@@ -89,7 +89,7 @@ public:
 
     //==============================================================================
     /** Returns true if the path doesn't contain any lines or curves. */
-    bool isEmpty() const noexcept;
+    bool empty() const noexcept;
 
     /** Returns the smallest rectangle that contains all points within the path. */
     Rectangle<float> getBounds() const noexcept;

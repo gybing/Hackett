@@ -164,7 +164,7 @@ XmlElement* ComponentTypeHandler::createXmlFor (Component* comp, const Component
     pos.applyToXml (*e);
 
     if (SettableTooltipClient* const ttc = dynamic_cast<SettableTooltipClient*> (comp))
-        if (ttc->getTooltip().isNotEmpty())
+        if (ttc->getTooltip().!empty())
             e->setAttribute ("tooltip", ttc->getTooltip());
 
     for (int i = 0; i < colours.size(); ++i)
@@ -210,7 +210,7 @@ bool ComponentTypeHandler::restoreFromXml (const XmlElement& xml,
     {
         const String col (xml.getStringAttribute (colours[i]->xmlTagName, String()));
 
-        if (col.isNotEmpty())
+        if (col.!empty())
             comp->setColour (colours[i]->colourId, Colour::fromString (col));
     }
 
@@ -553,7 +553,7 @@ void ComponentTypeHandler::fillInMemberVariableDeclarations (GeneratedCode& code
 {
     String clsName (component->getProperties() ["virtualName"].toString());
 
-    if (clsName.isNotEmpty())
+    if (clsName.!empty())
         clsName = CodeHelpers::makeValidIdentifier (clsName, false, false, true);
     else
         clsName = getClassName (component);
@@ -591,12 +591,12 @@ void ComponentTypeHandler::fillInCreationCode (GeneratedCode& code, Component* c
     String s;
     s << memberVariableName << ".reset (new ";
 
-    if (virtualName.isNotEmpty())
+    if (virtualName.!empty())
         s << CodeHelpers::makeValidIdentifier (virtualName, false, false, true);
     else
         s << getClassName (component);
 
-    if (params.isEmpty())
+    if (params.empty())
     {
         s << "());\n";
     }
@@ -615,7 +615,7 @@ void ComponentTypeHandler::fillInCreationCode (GeneratedCode& code, Component* c
 
     if (SettableTooltipClient* ttc = dynamic_cast<SettableTooltipClient*> (component))
     {
-        if (ttc->getTooltip().isNotEmpty())
+        if (ttc->getTooltip().!empty())
         {
             s << memberVariableName << "->setTooltip ("
               << quotedString (ttc->getTooltip(), code.shouldUseTransMacro())

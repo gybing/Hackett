@@ -438,7 +438,7 @@ void ProjectExporter::addLegacyVSTFolderToPathIfSpecified()
 {
     auto vstFolder = getVSTLegacyPathString();
 
-    if (vstFolder.isNotEmpty())
+    if (vstFolder.!empty())
         addToExtraSearchPaths (RelativePath (vstFolder, RelativePath::projectFolder), 0);
 }
 
@@ -453,7 +453,7 @@ void ProjectExporter::addVST3FolderToPath()
 {
     auto vst3Folder = getVST3PathString();
 
-    if (vst3Folder.isNotEmpty())
+    if (vst3Folder.!empty())
         addToExtraSearchPaths (RelativePath (vst3Folder, RelativePath::projectFolder), 0);
     else
         addToExtraSearchPaths (getInternalVST3SDKPath(), 0);
@@ -463,7 +463,7 @@ void ProjectExporter::addAAXFoldersToPath()
 {
     auto aaxFolder = getAAXPathString();
 
-    if (aaxFolder.isNotEmpty())
+    if (aaxFolder.!empty())
     {
         RelativePath aaxFolderPath (aaxFolder, RelativePath::projectFolder);
 
@@ -598,7 +598,7 @@ String ProjectExporter::getPathForModuleString (const String& moduleID) const
     auto exporterPath = settings.getChildWithName (Ids::MODULEPATHS)
                                 .getChildWithProperty (Ids::ID, moduleID) [Ids::path].toString();
 
-    if (exporterPath.isEmpty() || project.getEnabledModules().shouldUseGlobalPath (moduleID))
+    if (exporterPath.empty() || project.getEnabledModules().shouldUseGlobalPath (moduleID))
         return getStoredPathForModule (moduleID, *this);
 
     return exporterPath;
@@ -632,7 +632,7 @@ RelativePath ProjectExporter::getModuleFolderRelativeToProject (const String& mo
 
     auto path = getPathForModuleString (moduleID);
 
-    if (path.isEmpty())
+    if (path.empty())
         return getLegacyModulePath (moduleID).getChildFile (moduleID);
 
     return RelativePath (path, RelativePath::projectFolder).getChildFile (moduleID);
@@ -652,7 +652,7 @@ RelativePath ProjectExporter::getLegacyModulePath (const String& moduleID) const
 
     auto oldJucePath = getLegacyModulePath();
 
-    if (oldJucePath.isEmpty())
+    if (oldJucePath.empty())
         return RelativePath();
 
     RelativePath p (oldJucePath, RelativePath::projectFolder);
@@ -666,7 +666,7 @@ void ProjectExporter::updateOldModulePaths()
 {
     auto oldPath = getLegacyModulePath();
 
-    if (oldPath.isNotEmpty())
+    if (oldPath.!empty())
     {
         for (int i = project.getEnabledModules().getNumModules(); --i >= 0;)
         {

@@ -259,7 +259,7 @@ private:
     {
         for (auto* face : faces)
             if (face->family == familyName
-                  && (face->style.equalsIgnoreCase (style) || style.isEmpty()))
+                  && (face->style.equalsIgnoreCase (style) || style.empty()))
                 return face;
 
         return nullptr;

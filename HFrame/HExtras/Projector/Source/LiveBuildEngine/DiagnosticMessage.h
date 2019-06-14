@@ -148,7 +148,7 @@ struct DiagnosticList
     {
         if (m.isNote())
         {
-            if (lastMessage.message.isEmpty())
+            if (lastMessage.message.empty())
                 return; // seems to happen sometimes, but with seemingly duplicated messages (?)
 
             m.associatedDiagnostic.reset (new DiagnosticMessage (lastMessage));

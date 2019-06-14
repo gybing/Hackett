@@ -406,7 +406,7 @@ struct VideoComponent::Pimpl
         close();
         wasOpen = false;
 
-        if (url.isEmpty())
+        if (url.empty())
         {
             HAssertfalse;
             return;
@@ -1211,7 +1211,7 @@ private:
                 auto errorMessage = errorCodeToString (what);
                 auto extraMessage = errorCodeToString (extra);
 
-                if (extraMessage.isNotEmpty())
+                if (extraMessage.!empty())
                     errorMessage << ", " << extraMessage;
 
                 HVIDEO_LOG ("MediaPlayer::onError(), errorCode: " + String (what) + " (" + errorMessage + ")"

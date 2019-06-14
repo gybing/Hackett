@@ -53,7 +53,7 @@ void Drawable::applyDrawableClipPath (Graphics& g)
     {
         auto clipPath = drawableClipPath->getOutlineAsPath();
 
-        if (! clipPath.isEmpty())
+        if (! clipPath.empty())
             g.getInternalContext().clipToPath (clipPath, {});
     }
 }
@@ -158,7 +158,7 @@ void Drawable::setOriginWithOriginalSize (Point<float> originWithinParent)
 
 void Drawable::setTransformToFit (const Rectangle<float>& area, RectanglePlacement placement)
 {
-    if (! area.isEmpty())
+    if (! area.empty())
         setTransform (placement.getTransformToFit (getDrawableBounds(), area));
 }
 

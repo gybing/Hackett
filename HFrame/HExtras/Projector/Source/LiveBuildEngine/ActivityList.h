@@ -38,11 +38,11 @@ struct ActivityList   : public ChangeBroadcaster
 
         if (activities != newList)
         {
-            const bool wasEmpty = isEmpty();
+            const bool wasEmpty = empty();
             activities = newList;
             sendChangeMessage();
 
-            if (wasEmpty != isEmpty())
+            if (wasEmpty != empty())
                 ProjectorApplication::getCommandManager().commandStatusChanged();
         }
     }
@@ -64,7 +64,7 @@ struct ActivityList   : public ChangeBroadcaster
         return s;
     }
 
-    bool isEmpty() const noexcept
+    bool empty() const noexcept
     {
         return activities.size() == 0;
     }

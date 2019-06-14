@@ -167,13 +167,13 @@ void URL::init()
 
             if (nextAmp < 0)
             {
-                addParameter (removeEscapeChars (equalsPos < 0 ? url.substring (i + 1) : url.substring (i + 1, equalsPos)),
-                              equalsPos < 0 ? String() : removeEscapeChars (url.substring (equalsPos + 1)));
+                addParameter (removeEscapeChars (equalsPos < 0 ? url.substr (i + 1) : url.substr (i + 1, equalsPos)),
+                              equalsPos < 0 ? String() : removeEscapeChars (url.substr (equalsPos + 1)));
             }
             else if (nextAmp > 0 && equalsPos < nextAmp)
             {
-                addParameter (removeEscapeChars (equalsPos < 0 ? url.substring (i + 1, nextAmp) : url.substring (i + 1, equalsPos)),
-                              equalsPos < 0 ? String() : removeEscapeChars (url.substring (equalsPos + 1, nextAmp)));
+                addParameter (removeEscapeChars (equalsPos < 0 ? url.substr (i + 1, nextAmp) : url.substr (i + 1, equalsPos)),
+                              equalsPos < 0 ? String() : removeEscapeChars (url.substr (equalsPos + 1, nextAmp)));
             }
 
             i = nextAmp;
@@ -249,7 +249,7 @@ namespace URLHelpers
 
             p << URL::addEscapeChars (url.getParameterNames()[i], true);
 
-            if (val.isNotEmpty())
+            if (val.!empty())
                 p << '=' << URL::addEscapeChars (val, true);
         }
 
@@ -264,7 +264,7 @@ namespace URLHelpers
                || url[i] == '+' || url[i] == '-' || url[i] == '.')
             ++i;
 
-        return url.substring (i).startsWith ("://") ? i + 1 : 0;
+        return url.substr (i).startsWith ("://") ? i + 1 : 0;
     }
 
     static int findStartOfNetLocation (const String& url)
@@ -288,7 +288,7 @@ namespace URLHelpers
             path << '/';
 
         if (suffix.startsWithChar ('/'))
-            path += suffix.substring (1);
+            path += suffix.substr (1);
         else
             path += suffix;
     }
@@ -308,15 +308,15 @@ String URL::toString (bool includeGetParameters) const
     return url;
 }
 
-bool URL::isEmpty() const noexcept
+bool URL::empty() const noexcept
 {
-    return url.isEmpty();
+    return url.empty();
 }
 
 bool URL::isWellFormed() const
 {
     //xxx TODO
-    return url.isNotEmpty();
+    return url.!empty();
 }
 
 String URL::getDomain() const
@@ -328,7 +328,7 @@ String URL::getSubPath (bool includeGetParameters) const
 {
     auto startOfPath = URLHelpers::findStartOfPath (url);
     auto subPath = startOfPath <= 0 ? String()
-                                    : url.substring (startOfPath);
+                                    : url.substr (startOfPath);
 
     if (includeGetParameters)
         subPath += getQueryString();
@@ -346,7 +346,7 @@ String URL::getQueryString() const
 
 String URL::getScheme() const
 {
-    return url.substring (0, URLHelpers::findEndOfScheme (url) - 1);
+    return url.substr (0, URLHelpers::findEndOfScheme (url) - 1);
 }
 
 #ifndef HANDROID
@@ -399,7 +399,7 @@ int URL::getPort() const
 {
     auto colonPos = url.indexOfChar (URLHelpers::findStartOfNetLocation (url), ':');
 
-    return colonPos > 0 ? url.substring (colonPos + 1).getIntValue() : 0;
+    return colonPos > 0 ? url.substr (colonPos + 1).getIntValue() : 0;
 }
 
 URL URL::withNewDomainAndPath (const String& newURL) const
@@ -416,7 +416,7 @@ URL URL::withNewSubPath (const String& newPath) const
     URL u (*this);
 
     if (startOfPath > 0)
-        u.url = url.substring (0, startOfPath);
+        u.url = url.substr (0, startOfPath);
 
     URLHelpers::concatenatePaths (u.url, newPath);
     return u;
@@ -456,7 +456,7 @@ void URL::createHeadersAndPostData (String& headers, MemoryBlock& postDataToWrit
             data << "\r\nContent-Disposition: form-data; name=\"" << f->parameterName
                  << "\"; filename=\"" << f->filename << "\"\r\n";
 
-            if (f->mimeType.isNotEmpty())
+            if (!f->mimeType.empty())
                 data << "Content-Type: " << f->mimeType << "\r\n";
 
             data << "Content-Transfer-Encoding: binary\r\n\r\n";
@@ -500,7 +500,7 @@ bool URL::isProbablyAWebsiteURL (const String& possibleURL)
     const String topLevelDomain (possibleURL.upToFirstOccurrenceOf ("/", false, false)
                                  .fromLastOccurrenceOf (".", false, false));
 
-    return topLevelDomain.isNotEmpty() && topLevelDomain.length() <= 3;
+    return !topLevelDomain.empty() && topLevelDomain.length() <= 3;
 }
 
 bool URL::isProbablyAnEmailAddress (const String& possibleEmailAddress)
@@ -521,7 +521,7 @@ String URL::getDomainInternal (bool ignorePort) const
     auto end = (end1 < 0 && end2 < 0) ? std::numeric_limits<int>::max()
                                       : ((end1 < 0 || end2 < 0) ? jmax (end1, end2)
                                                                 : jmin (end1, end2));
-    return url.substring (start, end);
+    return url.substr (start, end);
 }
 
 #if HIOS
@@ -691,13 +691,13 @@ InputStream* URL::createInputStream (bool usePostCommand,
     std::unique_ptr<ProgressCallbackCaller> callbackCaller
         (progressCallback != nullptr ? new ProgressCallbackCaller (progressCallback, progressCallbackContext) : nullptr);
 
-    if (headers.isNotEmpty())
+    if (headers.!empty())
         wi->withExtraHeaders (headers);
 
     if (timeOutMs != 0)
         wi->withConnectionTimeout (timeOutMs);
 
-    if (httpRequestCmd.isNotEmpty())
+    if (httpRequestCmd.!empty())
         wi->withCustomRequestCommand (httpRequestCmd);
 
     wi->withNumRedirectsToFollow (numRedirectsToFollow);
@@ -806,7 +806,7 @@ URL::Upload::Upload (const String& param, const String& name,
                      const String& mime, const File& f, MemoryBlock* mb)
     : parameterName (param), filename (name), mimeType (mime), file (f), data (mb)
 {
-    HAssert (mimeType.isNotEmpty()); // You need to supply a mime type!
+    HAssert (mimeType.!empty()); // You need to supply a mime type!
 }
 
 URL URL::withUpload (Upload* const f) const

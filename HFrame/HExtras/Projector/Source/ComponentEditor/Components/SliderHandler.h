@@ -164,7 +164,7 @@ struct SliderHandler  : public ComponentTypeHandler
                                                      "sliderValueChanged (Slider* sliderThatWasMoved)",
                                                      true);
 
-            if (callback.isNotEmpty())
+            if (callback.!empty())
                 callback << "else ";
 
             const String memberVariableName (code.document->getComponentLayout()->getComponentMemberVariableName (component));

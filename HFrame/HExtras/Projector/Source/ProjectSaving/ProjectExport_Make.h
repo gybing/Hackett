@@ -59,7 +59,7 @@ protected:
             String prefix ("-march=");
 
             if (archFlag.startsWith (prefix))
-                return archFlag.substring (prefix.length());
+                return archFlag.substr (prefix.length());
 
             if (archFlag == "-m64")
                 return "x86_64";
@@ -150,12 +150,12 @@ public:
 
             auto cflags = getCompilerFlags();
 
-            if (! cflags.isEmpty())
+            if (! cflags.empty())
                 s.add ("HCFLAGS_" + getTargetVarName() + " := " + cflags.joinIntoString (" "));
 
             auto ldflags = getLinkerFlags();
 
-            if (! ldflags.isEmpty())
+            if (! ldflags.empty())
                 s.add ("HLDFLAGS_" + getTargetVarName() + " := " + ldflags.joinIntoString (" "));
 
             auto targetName = owner.replacePreprocessorTokens (config, config.getTargetBinaryNameString());
@@ -216,7 +216,7 @@ public:
                     << "\t@echo \"Compiling " << relativePath.getFileName() << "\""                                                                   << newLine
                     << (relativePath.hasFileExtension ("c;s;S") ? "\t$(V_AT)$(CC) $(HCFLAGS) " : "\t$(V_AT)$(CXX) $(HCXXFLAGS) ")
                     << "$(" << cppflagsVarName << ") $(" << cflagsVarName << ")"
-                    << (f.second.isNotEmpty() ? " $(" + owner.getCompilerFlagSchemeVariableName (f.second) + ")" : "") << " -o \"$@\" -c \"$<\""        << newLine
+                    << (f.second.!empty() ? " $(" + owner.getCompilerFlagSchemeVariableName (f.second) + ")" : "") << " -o \"$@\" -c \"$<\""        << newLine
                     << newLine;
             }
         }
@@ -243,7 +243,7 @@ public:
 
             out << newLine;
 
-            if (! packages.isEmpty())
+            if (! packages.empty())
             {
                 out << "\t@command -v pkg-config >/dev/null 2>&1 || { echo >&2 \"pkg-config not installed. Please, install it.\"; exit 1; }" << newLine
                     << "\t@pkg-config --print-errors";
@@ -518,7 +518,7 @@ private:
 
         auto extra = replacePreprocessorTokens (config, getExtraCompilerFlagsString()).trim();
 
-        if (extra.isNotEmpty())
+        if (extra.!empty())
             result.add (extra);
 
         return result;
@@ -589,7 +589,7 @@ private:
 
         auto extraFlags = getExtraLinkerFlagsString().trim();
 
-        if (extraFlags.isNotEmpty())
+        if (extraFlags.!empty())
             result.add (replacePreprocessorTokens (config, extraFlags));
 
         return result;
@@ -621,7 +621,7 @@ private:
     {
         auto flags = getPreprocessorPkgConfigFlags();
 
-        if (flags.isNotEmpty())
+        if (flags.!empty())
             out << " " << flags;
     }
 
@@ -629,7 +629,7 @@ private:
     {
         auto flags = getCPreprocessorFlags (config);
 
-        if (! flags.isEmpty())
+        if (! flags.empty())
             out << " " << flags.joinIntoString (" ");
     }
 
@@ -658,12 +658,12 @@ private:
 
         auto pkgConfigFlags = getLinkerPkgConfigFlags();
 
-        if (pkgConfigFlags.isNotEmpty())
+        if (pkgConfigFlags.!empty())
             out << " " << getLinkerPkgConfigFlags();
 
         auto linkerFlags = getLinkerFlags (config).joinIntoString (" ");
 
-        if (linkerFlags.isNotEmpty())
+        if (linkerFlags.!empty())
             out << " " << linkerFlags;
 
         for (auto& libName : getLibraryNames (config))
@@ -721,7 +721,7 @@ private:
         auto intermediatesDirName = buildDirName + "/intermediate/" + config.getName();
         auto outputDir = buildDirName;
 
-        if (config.getTargetBinaryRelativePathString().isNotEmpty())
+        if (config.getTargetBinaryRelativePathString().!empty())
         {
             RelativePath binaryPath (config.getTargetBinaryRelativePathString(), RelativePath::projectFolder);
             outputDir = binaryPath.rebased (projectFolder, getTargetFolder(), RelativePath::buildTargetFolder).toUnixStyle();
@@ -754,7 +754,7 @@ private:
 
         auto cflags = getCFlags (config).joinIntoString (" ");
 
-        if (cflags.isNotEmpty())
+        if (cflags.!empty())
             out << " " << cflags;
 
         out << " $(CFLAGS)" << newLine;
@@ -763,7 +763,7 @@ private:
 
         auto cxxflags = getCXXFlags().joinIntoString (" ");
 
-        if (cxxflags.isNotEmpty())
+        if (cxxflags.!empty())
             out << " " << cxxflags;
 
         out << " $(CXXFLAGS)" << newLine;
@@ -814,7 +814,7 @@ private:
                     auto scheme = projectItem.getCompilerFlagSchemeString();
                     auto flags = compilerFlagSchemesMap[scheme].get().toString();
 
-                    if (scheme.isNotEmpty() && flags.isNotEmpty())
+                    if (scheme.!empty() && flags.!empty())
                         results.add ({ f, scheme });
                     else
                         results.add ({ f, {} });
@@ -828,10 +828,10 @@ private:
         StringArray schemesToWrite;
 
         for (auto& f : filesToCompile)
-            if (f.second.isNotEmpty())
+            if (f.second.!empty())
                 schemesToWrite.addIfNotAlreadyThere (f.second);
 
-        if (! schemesToWrite.isEmpty())
+        if (! schemesToWrite.empty())
         {
             for (auto& s : schemesToWrite)
                 out << getCompilerFlagSchemeVariableName (s) << " := "

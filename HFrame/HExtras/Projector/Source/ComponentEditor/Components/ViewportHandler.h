@@ -145,7 +145,7 @@ public:
 
                 const String filename (getViewportJucerComponentFile (v));
 
-                if (filename.isNotEmpty())
+                if (filename.!empty())
                     file = code.document->getCppFile().getSiblingFile (filename);
 
                 std::unique_ptr<JucerDocument> doc (JucerDocument::createForCppFile (nullptr, file));
@@ -163,13 +163,13 @@ public:
                 }
             }
 
-            if (classNm.isNotEmpty())
+            if (classNm.!empty())
             {
                 code.constructorCode
                     << memberVariableName << "->setViewedComponent (new "
                     << classNm;
 
-                if (getViewportConstructorParams (v).trim().isNotEmpty())
+                if (getViewportConstructorParams (v).trim().!empty())
                 {
                     code.constructorCode << " (" << getViewportConstructorParams (v).trim() << "));\n";
                 }
@@ -513,7 +513,7 @@ private:
         {
             auto filename = getViewportJucerComponentFile (component);
 
-            if (filename.isEmpty())
+            if (filename.empty())
                 return {};
 
             return document.getCppFile().getSiblingFile (filename);

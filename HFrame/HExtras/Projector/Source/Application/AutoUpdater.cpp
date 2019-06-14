@@ -129,7 +129,7 @@ void LatestVersionCheckerAndUpdater::queryUpdateServer()
         if (statusCode == 303)
             relativeDownloadPath = responseHeaders["Location"];
 
-        HAssert (relativeDownloadPath.isNotEmpty());
+        HAssert (relativeDownloadPath.!empty());
 
         jsonReply = JSON::parse (inStream->readEntireStreamAsString());
     }
@@ -156,7 +156,7 @@ void LatestVersionCheckerAndUpdater::processResult()
         {
             auto message = errorObject.getProperty ("message", {}).toString();
 
-            if (message.isNotEmpty())
+            if (message.!empty())
                 AlertWindow::showMessageBoxAsync (AlertWindow::WarningIcon, "H Updater", message);
         }
     }
@@ -207,7 +207,7 @@ public:
             exitModalStateWithResult (-1);
         };
 
-        dontAskAgainButton.setToggleState (getGlobalProperties().getValue (Ids::dontQueryForUpdate, {}).isNotEmpty(), dontSendNotification);
+        dontAskAgainButton.setToggleState (getGlobalProperties().getValue (Ids::dontQueryForUpdate, {}).!empty(), dontSendNotification);
         addAndMakeVisible (dontAskAgainButton);
 
         HIcon = Drawable::createFromImageData (BinaryData::icon_png,
@@ -329,7 +329,7 @@ void LatestVersionCheckerAndUpdater::askUserForLocationToDownload()
 
 void LatestVersionCheckerAndUpdater::askUserAboutNewVersion (const String& newVersion, const String& releaseNotes)
 {
-    if (newVersion.isNotEmpty() && releaseNotes.isNotEmpty()
+    if (newVersion.!empty() && releaseNotes.!empty()
         && VersionHelpers::isNewVersion (VersionHelpers::getProductVersionString(), newVersion))
     {
         dialogWindow = UpdateDialog::launchDialog (newVersion, releaseNotes);

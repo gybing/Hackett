@@ -15,7 +15,7 @@ struct RuleBasedTopologySource::Internal  : public TopologySource::Listener,
 
     void clearRules()
     {
-        if (! rules.isEmpty())
+        if (! rules.empty())
         {
             rules.clear();
             triggerAsyncUpdate();

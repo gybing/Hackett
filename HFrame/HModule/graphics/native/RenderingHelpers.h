@@ -1623,7 +1623,7 @@ struct ClipRegions
         Ptr clipToRectangle (Rectangle<int> r) override
         {
             edgeTable.clipToRectangle (r);
-            return edgeTable.isEmpty() ? Ptr() : Ptr (*this);
+            return edgeTable.empty() ? Ptr() : Ptr (*this);
         }
 
         Ptr clipToRectangleList (const RectangleList<int>& r) override
@@ -1634,26 +1634,26 @@ struct ClipRegions
                 for (auto& i : inverse)
                     edgeTable.excludeRectangle (i);
 
-            return edgeTable.isEmpty() ? Ptr() : Ptr (*this);
+            return edgeTable.empty() ? Ptr() : Ptr (*this);
         }
 
         Ptr excludeClipRectangle (Rectangle<int> r) override
         {
             edgeTable.excludeRectangle (r);
-            return edgeTable.isEmpty() ? Ptr() : Ptr (*this);
+            return edgeTable.empty() ? Ptr() : Ptr (*this);
         }
 
         Ptr clipToPath (const Path& p, const AffineTransform& transform) override
         {
             EdgeTable et (edgeTable.getMaximumBounds(), p, transform);
             edgeTable.clipToEdgeTable (et);
-            return edgeTable.isEmpty() ? Ptr() : Ptr (*this);
+            return edgeTable.empty() ? Ptr() : Ptr (*this);
         }
 
         Ptr clipToEdgeTable (const EdgeTable& et) override
         {
             edgeTable.clipToEdgeTable (et);
-            return edgeTable.isEmpty() ? Ptr() : Ptr (*this);
+            return edgeTable.empty() ? Ptr() : Ptr (*this);
         }
 
         Ptr clipToImageAlpha (const Image& image, const AffineTransform& transform, Graphics::ResamplingQuality quality) override
@@ -1676,7 +1676,7 @@ struct ClipRegions
                     else
                         straightClipImage (srcData, imageX, imageY, (PixelAlpha*) nullptr);
 
-                    return edgeTable.isEmpty() ? Ptr() : Ptr (*this);
+                    return edgeTable.empty() ? Ptr() : Ptr (*this);
                 }
             }
 
@@ -1690,7 +1690,7 @@ struct ClipRegions
                 edgeTable.clipToEdgeTable (et2);
             }
 
-            if (! edgeTable.isEmpty())
+            if (! edgeTable.empty())
             {
                 if (image.getFormat() == Image::ARGB)
                     transformedClipImage (srcData, transform, quality, (PixelARGB*) nullptr);
@@ -1698,7 +1698,7 @@ struct ClipRegions
                     transformedClipImage (srcData, transform, quality, (PixelAlpha*) nullptr);
             }
 
-            return edgeTable.isEmpty() ? Ptr() : Ptr (*this);
+            return edgeTable.empty() ? Ptr() : Ptr (*this);
         }
 
         void translate (Point<int> delta) override
@@ -1721,7 +1721,7 @@ struct ClipRegions
             auto totalClip = edgeTable.getMaximumBounds();
             auto clipped = totalClip.getIntersection (area);
 
-            if (! clipped.isEmpty())
+            if (! clipped.empty())
             {
                 EdgeTableRegion et (clipped);
                 et.edgeTable.clipToEdgeTable (edgeTable);
@@ -1734,7 +1734,7 @@ struct ClipRegions
             auto totalClip = edgeTable.getMaximumBounds().toFloat();
             auto clipped = totalClip.getIntersection (area);
 
-            if (! clipped.isEmpty())
+            if (! clipped.empty())
             {
                 EdgeTableRegion et (clipped);
                 et.edgeTable.clipToEdgeTable (edgeTable);
@@ -1804,19 +1804,19 @@ struct ClipRegions
         Ptr clipToRectangle (Rectangle<int> r) override
         {
             clip.clipTo (r);
-            return clip.isEmpty() ? Ptr() : Ptr (*this);
+            return clip.empty() ? Ptr() : Ptr (*this);
         }
 
         Ptr clipToRectangleList (const RectangleList<int>& r) override
         {
             clip.clipTo (r);
-            return clip.isEmpty() ? Ptr() : Ptr (*this);
+            return clip.empty() ? Ptr() : Ptr (*this);
         }
 
         Ptr excludeClipRectangle (Rectangle<int> r) override
         {
             clip.subtract (r);
-            return clip.isEmpty() ? Ptr() : Ptr (*this);
+            return clip.empty() ? Ptr() : Ptr (*this);
         }
 
         Ptr clipToPath (const Path& p, const AffineTransform& transform) override  { return toEdgeTable()->clipToPath (p, transform); }
@@ -1900,7 +1900,7 @@ struct ClipRegions
                 {
                     auto rect = i.getIntersection (area);
 
-                    if (! rect.isEmpty())
+                    if (! rect.empty())
                         r.handleEdgeTableRectangleFull (rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
                 }
             }
@@ -2213,7 +2213,7 @@ public:
         {
             auto clipped = clip->getClipBounds().getIntersection (r);
 
-            if (! clipped.isEmpty())
+            if (! clipped.empty())
                 fillShape (*new RectangleListRegionType (clipped), false);
         }
     }
@@ -2228,7 +2228,7 @@ public:
         {
             auto clipped = clip->getClipBounds().toFloat().getIntersection (r);
 
-            if (! clipped.isEmpty())
+            if (! clipped.empty())
                 fillShape (*new EdgeTableRegionType (clipped), false);
         }
     }
@@ -2380,7 +2380,7 @@ public:
                     Rectangle<int> area (tx, ty, sourceImage.getWidth(), sourceImage.getHeight());
                     area = area.getIntersection (getThis().getMaximumBounds());
 
-                    if (! area.isEmpty())
+                    if (! area.empty())
                         if (auto c = clip->applyClipTo (*new EdgeTableRegionType (area)))
                             c->renderImageUntransformed (getThis(), sourceImage, alpha, tx, ty, false);
                 }

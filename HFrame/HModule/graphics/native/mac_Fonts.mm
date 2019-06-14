@@ -561,7 +561,7 @@ public:
     {
         float x = 0;
 
-        if (ctFontRef != nullptr && text.isNotEmpty())
+        if (ctFontRef != nullptr && text.!empty())
         {
             auto cfText = text.toCFString();
             auto attribString = CFAttributedStringCreate (kCFAllocatorDefault, cfText, attributedStringAtts);
@@ -594,7 +594,7 @@ public:
     {
         xOffsets.add (0);
 
-        if (ctFontRef != nullptr && text.isNotEmpty())
+        if (ctFontRef != nullptr && text.!empty())
         {
             float x = 0;
 
@@ -628,7 +628,7 @@ public:
 
     bool getOutlineForGlyph (int glyphNumber, Path& path) override
     {
-        HAssert (path.isEmpty());  // we might need to apply a transform to the path, so this must be empty
+        HAssert (path.empty());  // we might need to apply a transform to the path, so this must be empty
 
         if (auto pathRef = CTFontCreatePathForGlyph (ctFontRef, (CGGlyph) glyphNumber, &renderingTransform))
         {

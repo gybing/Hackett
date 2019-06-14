@@ -91,7 +91,7 @@ public:
 
     void paintOverChildren (Graphics& g) override
     {
-        if (getText().isEmpty() && ! isBeingEdited())
+        if (getText().empty() && ! isBeingEdited())
         {
             auto& lf = owner.getLookAndFeel();
             auto textArea = lf.getLabelBorderSize (*this).subtractedFrom (getLocalBounds());
@@ -139,7 +139,7 @@ public:
         if (valueWithDefault == nullptr)
             return;
 
-        if (newValue.toString().isEmpty())
+        if (newValue.toString().empty())
             valueWithDefault->resetToDefault();
         else
             *valueWithDefault = newValue;

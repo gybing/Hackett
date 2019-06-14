@@ -9,23 +9,23 @@ StringPool::~StringPool() {}
 
 struct StartEndString
 {
-    StartEndString (String::CharPointerType s, String::CharPointerType e) noexcept : start (s), end (e) {}
+    StartEndString (char* s, char* e) noexcept : start (s), end (e) {}
     operator String() const   { return String (start, end); }
 
-    String::CharPointerType start, end;
+    char* start, end;
 };
 
 static int compareStrings (const String& s1, const String& s2) noexcept     { return s1.compare (s2); }
-static int compareStrings (CharPointer_UTF8 s1, const String& s2) noexcept  { return s1.compare (s2.getCharPointer()); }
+static int compareStrings (CharPointer_UTF8 s1, const String& s2) noexcept  { return s1.compare (s2.c_str()); }
 
 static int compareStrings (const StartEndString& string1, const String& string2) noexcept
 {
-    String::CharPointerType s1 (string1.start), s2 (string2.getCharPointer());
+    char* s1 (string1.start), s2 (string2.c_str());
 
     for (;;)
     {
-        const int c1 = s1 < string1.end ? (int) s1.getAndAdvance() : 0;
-        const int c2 = (int) s2.getAndAdvance();
+        const int c1 = s1 < string1.end ? (int) *s1++ : 0;
+        const int c2 = (int) *s2++;
         const int diff = c1 - c2;
 
         if (diff != 0)  return diff < 0 ? -1 : 1;
@@ -85,9 +85,9 @@ String StringPool::getPooledString (const char* const newString)
     return addPooledString (strings, CharPointer_UTF8 (newString));
 }
 
-String StringPool::getPooledString (String::CharPointerType start, String::CharPointerType end)
+String StringPool::getPooledString (char* start, char* end)
 {
-    if (start.isEmpty() || start == end)
+    if (start.empty() || start == end)
         return {};
 
     const ScopedLock sl (lock);
@@ -97,7 +97,7 @@ String StringPool::getPooledString (String::CharPointerType start, String::CharP
 
 String StringPool::getPooledString (StringRef newString)
 {
-    if (newString.isEmpty())
+    if (newString.empty())
         return {};
 
     const ScopedLock sl (lock);
@@ -107,7 +107,7 @@ String StringPool::getPooledString (StringRef newString)
 
 String StringPool::getPooledString (const String& newString)
 {
-    if (newString.isEmpty())
+    if (newString.empty())
         return {};
 
     const ScopedLock sl (lock);

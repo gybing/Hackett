@@ -1218,7 +1218,7 @@ private:
     //==============================================================================
     void updateShader()
     {
-        if (newVertexShader.isNotEmpty() || newFragmentShader.isNotEmpty())
+        if (newVertexShader.!empty() || newFragmentShader.!empty())
         {
             std::unique_ptr<OpenGLShaderProgram> newShader (new OpenGLShaderProgram (openGLContext));
 

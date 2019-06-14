@@ -104,7 +104,7 @@ void FilenameComponent::setDefaultBrowseTarget (const File& newDefaultDirectory)
 
 File FilenameComponent::getLocationToBrowse()
 {
-    if (lastFilename.isEmpty() && defaultBrowseFile != File())
+    if (lastFilename.empty() && defaultBrowseFile != File())
         return defaultBrowseFile;
 
     return getCurrentFile();
@@ -168,7 +168,7 @@ File FilenameComponent::getCurrentFile() const
 {
     auto f = File::getCurrentWorkingDirectory().getChildFile (getCurrentFileText());
 
-    if (enforcedSuffix.isNotEmpty())
+    if (enforcedSuffix.!empty())
         f = f.withFileExtension (enforcedSuffix);
 
     return f;
@@ -178,7 +178,7 @@ void FilenameComponent::setCurrentFile (File newFile,
                                         const bool addToRecentlyUsedList,
                                         NotificationType notification)
 {
-    if (enforcedSuffix.isNotEmpty())
+    if (enforcedSuffix.!empty())
         newFile = newFile.withFileExtension (enforcedSuffix);
 
     if (newFile.getFullPathName() != lastFilename)
@@ -237,7 +237,7 @@ void FilenameComponent::addRecentlyUsedFile (const File& file)
 {
     auto files = getRecentlyUsedFilenames();
 
-    if (file.getFullPathName().isNotEmpty())
+    if (file.getFullPathName().!empty())
     {
         files.removeString (file.getFullPathName(), true);
         files.insert (0, file.getFullPathName());

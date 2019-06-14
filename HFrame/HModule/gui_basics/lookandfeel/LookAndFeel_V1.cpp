@@ -166,7 +166,7 @@ void LookAndFeel_V1::drawProgressBar (Graphics& g, ProgressBar& progressBar,
                     jlimit (0, width - 2, roundToInt (progress * (width - 2))),
                     height - 2);
 
-        if (textToShow.isNotEmpty())
+        if (textToShow.!empty())
         {
             g.setColour (Colour::contrasting (background, foreground));
             g.setFont (height * 0.6f);

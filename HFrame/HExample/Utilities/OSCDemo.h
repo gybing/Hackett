@@ -91,7 +91,7 @@ public:
                         + String (message.size())
                         + " argument(s)");
 
-        if (! message.isEmpty())
+        if (! message.empty())
         {
             for (auto& arg : message)
                 addOSCMessageArgument (arg, level + 1);

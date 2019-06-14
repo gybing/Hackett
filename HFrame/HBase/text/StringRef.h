@@ -49,7 +49,7 @@ public:
         The StringRef object does NOT take ownership or copy this data, so you must
         ensure that the data does not change during the lifetime of the StringRef.
     */
-    StringRef (String::CharPointerType stringLiteral) noexcept;
+    StringRef (char* stringLiteral) noexcept;
 
     /** Creates a StringRef from a String.
         The StringRef object does NOT take ownership or copy the data from the String,
@@ -58,44 +58,33 @@ public:
     */
     StringRef (const String& string) noexcept;
 
-    /** Creates a StringRef from a String.
-        The StringRef object does NOT take ownership or copy the data from the std::string,
-        so you must ensure that the source string object is not modified or deleted during
-        the lifetime of the StringRef.
-    */
-    StringRef (const std::string& string);
-
     /** Creates a StringRef pointer to an empty string. */
     StringRef() noexcept;
 
     //==============================================================================
-    /** Returns a raw pointer to the underlying string data. */
-    operator const String::CharPointerType::CharType*() const noexcept  { return text.getAddress(); }
     /** Returns a pointer to the underlying string data as a char pointer object. */
-    operator String::CharPointerType() const noexcept                   { return text; }
+    operator char*() const noexcept                   { return (char*)text.c_str(); }
 
     /** Returns true if the string is empty. */
-    bool isEmpty() const noexcept                                       { return text.isEmpty(); }
-    /** Returns true if the string is not empty. */
-    bool isNotEmpty() const noexcept                                    { return ! text.isEmpty(); }
+    bool empty() const noexcept                                       { return text.empty(); }
     /** Returns the number of characters in the string. */
-    int length() const noexcept                                         { return (int) text.length(); }
+    int length() const noexcept                                         { return (int) text.size(); }
 
     /** Retrieves a character by index. */
     wchar operator[] (int index) const noexcept                    { return text[index]; }
 
     /** Compares this StringRef with a String. */
-    bool operator== (const String& s) const noexcept                    { return text.compare (s.getCharPointer()) == 0; }
+    bool operator== (const String& s) const noexcept                    { return text.compare (s.c_str()) == 0; }
     /** Compares this StringRef with a String. */
-    bool operator!= (const String& s) const noexcept                    { return text.compare (s.getCharPointer()) != 0; }
+    bool operator!= (const String& s) const noexcept                    { return text.compare (s.c_str()) != 0; }
     /** Compares this StringRef with a String. */
-    bool operator<  (const String& s) const noexcept                    { return text.compare (s.getCharPointer()) < 0; }
+    bool operator<  (const String& s) const noexcept                    { return text.compare (s.c_str()) < 0; }
     /** Compares this StringRef with a String. */
-    bool operator<= (const String& s) const noexcept                    { return text.compare (s.getCharPointer()) <= 0; }
+    bool operator<= (const String& s) const noexcept                    { return text.compare (s.c_str()) <= 0; }
     /** Compares this StringRef with a String. */
-    bool operator>  (const String& s) const noexcept                    { return text.compare (s.getCharPointer()) > 0; }
+    bool operator>  (const String& s) const noexcept                    { return text.compare (s.c_str()) > 0; }
     /** Compares this StringRef with a String. */
-    bool operator>= (const String& s) const noexcept                    { return text.compare (s.getCharPointer()) >= 0; }
+    bool operator>= (const String& s) const noexcept                    { return text.compare (s.c_str()) >= 0; }
 
     /** Case-sensitive comparison of two StringRefs. */
     bool operator== (StringRef s) const noexcept                        { return text.compare (s.text) == 0; }
@@ -104,7 +93,7 @@ public:
 
     //==============================================================================
     /** The text that is referenced. */
-    String::CharPointerType text;
+    String text;
 
     #if HSTRING_UTF_TYPE != 8 && ! defined (DOXYGEN)
      // Sorry, non-UTF8 people, you're unable to take advantage of StringRef, because

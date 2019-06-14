@@ -597,7 +597,7 @@ void LookAndFeel_V2::drawProgressBar (Graphics& g, ProgressBar& progressBar,
         g.fillPath (p);
     }
 
-    if (textToShow.isNotEmpty())
+    if (textToShow.!empty())
     {
         g.setColour (Colour::contrasting (background, foreground));
         g.setFont (height * 0.6f);
@@ -1006,7 +1006,7 @@ void LookAndFeel_V2::drawPopupMenuItem (Graphics& g, const Rectangle<int>& area,
         r.removeFromRight (3);
         g.drawFittedText (text, r, Justification::centredLeft, 1);
 
-        if (shortcutKeyText.isNotEmpty())
+        if (shortcutKeyText.!empty())
         {
             Font f2 (font);
             f2.setHeight (f2.getHeight() * 0.75f);
@@ -1727,7 +1727,7 @@ void LookAndFeel_V2::drawCornerResizer (Graphics& g, int w, int h, bool /*isMous
 
 void LookAndFeel_V2::drawResizableFrame (Graphics& g, int w, int h, const BorderSize<int>& border)
 {
-    if (! border.isEmpty())
+    if (! border.empty())
     {
         const Rectangle<int> fullSize (0, 0, w, h);
         auto centreArea = border.subtractedFrom (fullSize);
@@ -2001,7 +2001,7 @@ void LookAndFeel_V2::drawGroupComponentOutline (Graphics& g, int width, int heig
     cs = jmin (cs, w * 0.5f, h * 0.5f);
     auto cs2 = 2.0f * cs;
 
-    auto textW = text.isEmpty() ? 0 : jlimit (0.0f, jmax (0.0f, w - cs2 - textEdgeGap * 2), f.getStringWidth (text) + textEdgeGap * 2.0f);
+    auto textW = text.empty() ? 0 : jlimit (0.0f, jmax (0.0f, w - cs2 - textEdgeGap * 2), f.getStringWidth (text) + textEdgeGap * 2.0f);
     auto textX = cs + textEdgeGap;
 
     if (position.testFlags (Justification::horizontallyCentred))
@@ -2480,7 +2480,7 @@ Rectangle<int> LookAndFeel_V2::getPropertyComponentContentPosition (PropertyComp
 
 int LookAndFeel_V2::getPropertyPanelSectionHeaderHeight (const String& sectionTitle)
 {
-    return sectionTitle.isEmpty() ? 0 : 22;
+    return sectionTitle.empty() ? 0 : 22;
 }
 
 //==============================================================================
@@ -2761,7 +2761,7 @@ void LookAndFeel_V2::drawKeymapChangeButton (Graphics& g, int width, int height,
 {
     auto textColour = button.findColour (0x100ad01 /*KeyMappingEditorComponent::textColourId*/, true);
 
-    if (keyDescription.isNotEmpty())
+    if (keyDescription.!empty())
     {
         if (button.isEnabled())
         {

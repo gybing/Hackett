@@ -68,7 +68,7 @@ public:
     {
         String type (choices [newIndex]);
 
-        if (type.isEmpty())
+        if (type.empty())
             type = getDefaultFont();
 
         if (getTypefaceName() != type)

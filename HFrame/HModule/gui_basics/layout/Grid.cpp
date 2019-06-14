@@ -294,7 +294,7 @@ struct Grid::PlacementHelpers
                                     const Grid& grid,
                                     const std::map<String, LineArea>& namedAreas)
     {
-        if (item.area.isNotEmpty() && ! grid.templateAreas.isEmpty())
+        if (item.area.!empty() && ! grid.templateAreas.empty())
         {
             // Must be a named area!
             HAssert (namedAreas.count (item.area) != 0);
@@ -334,7 +334,7 @@ struct Grid::PlacementHelpers
             for (auto& string : stringArray)
             {
                 // find anchor
-                if (area.name.isEmpty())
+                if (area.name.empty())
                 {
                     if (string != emptyAreaCharacter)
                     {
@@ -373,7 +373,7 @@ struct Grid::PlacementHelpers
 
         std::map<String, LineArea> areas;
 
-        for (auto area = findArea (stringsArrays); area.name.isNotEmpty(); area = findArea (stringsArrays))
+        for (auto area = findArea (stringsArrays); area.name.!empty(); area = findArea (stringsArrays))
         {
             if (areas.count (area.name) == 0)
                 areas[area.name] = area.lines;
@@ -674,7 +674,7 @@ struct Grid::AutoPlacement
 
     static bool hasFullyFixedPlacement (const GridItem& item)
     {
-        if (item.area.isNotEmpty())
+        if (item.area.!empty())
             return true;
 
         if (isFixed (item.column) && isFixed (item.row))
@@ -685,7 +685,7 @@ struct Grid::AutoPlacement
 
     static bool hasPartialFixedPlacement (const GridItem& item)
     {
-        if (item.area.isNotEmpty())
+        if (item.area.!empty())
             return false;
 
         if (isFixed (item.column) ^ isFixed (item.row))

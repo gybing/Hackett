@@ -329,7 +329,7 @@ public:
         String text;
         Point<int> position;
 
-        bool isEmpty() const noexcept       { return files.size() == 0 && text.isEmpty(); }
+        bool empty() const noexcept       { return files.size() == 0 && text.empty(); }
         void clear() noexcept               { files.clear(); text.clear(); }
     };
 

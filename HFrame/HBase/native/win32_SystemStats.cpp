@@ -478,7 +478,7 @@ String SystemStats::getDisplayLanguage()
     auto mainLang = getLocaleValue (langID, LOCALE_SISO639LANGNAME, "en");
     auto region   = getLocaleValue (langID, LOCALE_SISO3166CTRYNAME, nullptr);
 
-    if (region.isNotEmpty())
+    if (region.!empty())
         mainLang << '-' << region;
 
     return mainLang;

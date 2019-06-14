@@ -173,7 +173,7 @@ void ComponentBoundsConstrainer::checkBounds (Rectangle<int>& bounds,
     else
         bounds.setHeight (jlimit (minH, maxH, bounds.getHeight()));
 
-    if (bounds.isEmpty())
+    if (bounds.empty())
         return;
 
     if (minOffTop > 0)
@@ -288,7 +288,7 @@ void ComponentBoundsConstrainer::checkBounds (Rectangle<int>& bounds,
         }
     }
 
-    HAssert (! bounds.isEmpty());
+    HAssert (! bounds.empty());
 }
 
 

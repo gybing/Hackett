@@ -74,7 +74,7 @@ public:
 
         windows.removeFirstMatchingValue (w);
 
-        if (windows.isEmpty())
+        if (windows.empty())
             deleteInstance();
     }
 
@@ -283,7 +283,7 @@ void TopLevelWindow::centreAroundComponent (Component* c, const int width, const
     if (c == nullptr)
         c = TopLevelWindow::getActiveTopLevelWindow();
 
-    if (c == nullptr || c->getBounds().isEmpty())
+    if (c == nullptr || c->getBounds().empty())
     {
         centreWithSize (width, height);
     }

@@ -575,7 +575,7 @@ void ProjectContentComponent::showCurrentExporterSettings()
 
 void ProjectContentComponent::showExporterSettings (const String& exporterName)
 {
-    if (exporterName.isEmpty())
+    if (exporterName.empty())
         return;
 
     showExportersPanel();
@@ -685,7 +685,7 @@ static void newExporterMenuCallback (int result, ProjectContentComponent* comp)
         {
             auto exporterName= ProjectExporter::getExporterNames() [result - 1];
 
-            if (exporterName.isNotEmpty())
+            if (exporterName.!empty())
             {
                 p->addNewExporter (exporterName);
 
@@ -830,7 +830,7 @@ void ProjectContentComponent::getCommandInfo (const CommandID commandID, Applica
 {
     String documentName;
     if (currentDocument != nullptr)
-        documentName = " '" + currentDocument->getName().substring (0, 32) + "'";
+        documentName = " '" + currentDocument->getName().substr (0, 32) + "'";
 
    #if HMAC
     auto cmdCtrl = (ModifierKeys::ctrlModifier | ModifierKeys::commandModifier);
@@ -1066,7 +1066,7 @@ void ProjectContentComponent::getCommandInfo (const CommandID commandID, Applica
                         "Jumps to the next error or warning",
                         CommandCategories::general, 0);
         result.defaultKeypresses.add ({ '\'', ModifierKeys::commandModifier, 0 });
-        result.setActive (childProcess != nullptr && ! childProcess->errorList.isEmpty());
+        result.setActive (childProcess != nullptr && ! childProcess->errorList.empty());
         break;
 
     case CommandIDs::prevError:
@@ -1074,7 +1074,7 @@ void ProjectContentComponent::getCommandInfo (const CommandID commandID, Applica
                         "Jumps to the last error or warning",
                         CommandCategories::general, 0);
         result.defaultKeypresses.add ({ '\"', ModifierKeys::commandModifier, 0 });
-        result.setActive (childProcess != nullptr && ! childProcess->errorList.isEmpty());
+        result.setActive (childProcess != nullptr && ! childProcess->errorList.empty());
         break;
 
     default:
@@ -1212,7 +1212,7 @@ void ProjectContentComponent::cleanAll()
 
 void ProjectContentComponent::handleCrash (const String& message)
 {
-    lastCrashMessage = message.isEmpty() ? TRANS("JIT process stopped responding!")
+    lastCrashMessage = message.empty() ? TRANS("JIT process stopped responding!")
                                          : (TRANS("JIT process crashed!") + ":\n\n" + message);
 
     if (project != nullptr)

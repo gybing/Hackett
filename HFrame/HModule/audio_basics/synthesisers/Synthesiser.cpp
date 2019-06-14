@@ -486,7 +486,7 @@ SynthesiserVoice* Synthesiser::findVoiceToSteal (SynthesiserSound* soundToPlay,
     // - Protect the lowest & topmost notes, even if sustained, but not if they've been released.
 
     // apparently you are trying to render audio without having any voices...
-    HAssert (! voices.isEmpty());
+    HAssert (! voices.empty());
 
     // These are the voices we want to protect (ie: only steal if unavoidable)
     SynthesiserVoice* low = nullptr; // Lowest sounding note, might be sustained, but NOT in release phase

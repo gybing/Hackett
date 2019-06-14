@@ -217,13 +217,13 @@ private:
         {
             StringArray section;
 
-            if (nameValue.get().toString().isNotEmpty())          section.add ("  name:             " + nameValue.get().toString());
-            if (versionValue.get().toString().isNotEmpty())       section.add ("  version:          " + versionValue.get().toString());
-            if (vendorValue.get().toString().isNotEmpty())        section.add ("  vendor:           " + vendorValue.get().toString());
-            if (websiteValue.get().toString().isNotEmpty())       section.add ("  website:          " + websiteValue.get().toString());
-            if (descriptionValue.get().toString().isNotEmpty())   section.add ("  description:      " + descriptionValue.get().toString());
+            if (nameValue.get().toString().!empty())          section.add ("  name:             " + nameValue.get().toString());
+            if (versionValue.get().toString().!empty())       section.add ("  version:          " + versionValue.get().toString());
+            if (vendorValue.get().toString().!empty())        section.add ("  vendor:           " + vendorValue.get().toString());
+            if (websiteValue.get().toString().!empty())       section.add ("  website:          " + websiteValue.get().toString());
+            if (descriptionValue.get().toString().!empty())   section.add ("  description:      " + descriptionValue.get().toString());
 
-            if (! section.isEmpty())
+            if (! section.empty())
                 metadata.add (section.joinIntoString (getPreferredLineFeed()));
         }
 
@@ -231,32 +231,32 @@ private:
             StringArray section;
 
             auto dependenciesString = getWidthLimitedStringFromVarArray (dependenciesValue.get());
-            if (dependenciesString.isNotEmpty())                  section.add ("  dependencies:     " + dependenciesString);
+            if (dependenciesString.!empty())                  section.add ("  dependencies:     " + dependenciesString);
 
             auto exportersString = getWidthLimitedStringFromVarArray (exportersValue.get());
-            if (exportersString.isNotEmpty())                     section.add ("  exporters:        " + exportersString);
+            if (exportersString.!empty())                     section.add ("  exporters:        " + exportersString);
 
-            if (! section.isEmpty())
+            if (! section.empty())
                 metadata.add (section.joinIntoString (getPreferredLineFeed()));
         }
 
         {
             StringArray section;
 
-            if (moduleFlagsValue.get().toString().isNotEmpty())   section.add ("  moduleFlags:      " + moduleFlagsValue.get().toString());
-            if (definesValue.get().toString().isNotEmpty())       section.add ("  defines:          " + definesValue.get().toString());
+            if (moduleFlagsValue.get().toString().!empty())   section.add ("  moduleFlags:      " + moduleFlagsValue.get().toString());
+            if (definesValue.get().toString().!empty())       section.add ("  defines:          " + definesValue.get().toString());
 
-            if (! section.isEmpty())
+            if (! section.empty())
                 metadata.add (section.joinIntoString (getPreferredLineFeed()));
         }
 
         {
             StringArray section;
 
-            if (typeValue.get().toString().isNotEmpty())          section.add ("  type:             " + typeValue.get().toString());
-            if (mainClassValue.get().toString().isNotEmpty())     section.add ("  mainClass:        " + mainClassValue.get().toString());
+            if (typeValue.get().toString().!empty())          section.add ("  type:             " + typeValue.get().toString());
+            if (mainClassValue.get().toString().!empty())     section.add ("  mainClass:        " + mainClassValue.get().toString());
 
-            if (! section.isEmpty())
+            if (! section.empty())
                 metadata.add (section.joinIntoString (getPreferredLineFeed()));
         }
 
@@ -265,7 +265,7 @@ private:
 
             if (useLocalCopyValue.get())                          section.add ("  useLocalCopy:     " + useLocalCopyValue.get().toString());
 
-            if (! section.isEmpty())
+            if (! section.empty())
                 metadata.add (section.joinIntoString (getPreferredLineFeed()));
         }
 
@@ -282,7 +282,7 @@ private:
         if (type == "Component")
         {
             String componentCode (BinaryData::ContentCompSimpleTemplate_h);
-            componentCode = componentCode.substring (componentCode.indexOf ("class %%content_component_class%%"))
+            componentCode = componentCode.substr (componentCode.indexOf ("class %%content_component_class%%"))
                                          .replace ("%%content_component_class%%", mainClassValue.get().toString());
 
             fileTemplate = fileTemplate.replace ("%%pip_code%%", componentCode);
@@ -298,7 +298,7 @@ private:
         else if (type == "Console")
         {
             String consoleCode (BinaryData::MainConsoleAppTemplate_cpp);
-            consoleCode = consoleCode.substring (consoleCode.indexOf ("int main (int argc, char* argv[])"));
+            consoleCode = consoleCode.substr (consoleCode.indexOf ("int main (int argc, char* argv[])"));
 
             fileTemplate = fileTemplate.replace ("%%pip_code%%", consoleCode);
         }

@@ -208,7 +208,7 @@ String AudioDeviceManager::initialiseDefault (const String& preferredDefaultDevi
     {
         setup = *preferredSetupOptions;
     }
-    else if (preferredDefaultDeviceName.isNotEmpty())
+    else if (preferredDefaultDeviceName.!empty())
     {
         for (auto* type : availableDeviceTypes)
         {
@@ -249,7 +249,7 @@ String AudioDeviceManager::initialiseFromXML (const XmlElement& xml,
     if (preferredSetupOptions != nullptr)
         setup = *preferredSetupOptions;
 
-    if (xml.getStringAttribute ("audioDeviceName").isNotEmpty())
+    if (xml.getStringAttribute ("audioDeviceName").!empty())
     {
         setup.inputDeviceName = setup.outputDeviceName
             = xml.getStringAttribute ("audioDeviceName");
@@ -281,7 +281,7 @@ String AudioDeviceManager::initialiseFromXML (const XmlElement& xml,
 
     error = setAudioDeviceSetup (setup, true);
 
-    if (error.isNotEmpty() && selectDefaultDeviceOnFailure)
+    if (error.!empty() && selectDefaultDeviceOnFailure)
         error = initialise (numInputChansNeeded, numOutputChansNeeded, nullptr, false, preferredDefaultDeviceName);
 
     midiDeviceInfosFromXml.clear();
@@ -320,7 +320,7 @@ String AudioDeviceManager::initialiseFromXML (const XmlElement& xml,
         {
             auto identifier = getUpdatedIdentifierForName (inputs, info.name);
 
-            if (identifier.isNotEmpty())
+            if (identifier.!empty())
                 setMidiInputDeviceEnabled (identifier, true);
         }
     }
@@ -338,7 +338,7 @@ String AudioDeviceManager::initialiseFromXML (const XmlElement& xml,
     {
         auto identifier = getUpdatedIdentifierForName (outputs, defaultOutputDeviceInfo.name);
 
-        if (identifier.isNotEmpty())
+        if (identifier.!empty())
             setDefaultMidiOutputDevice (identifier);
     }
 
@@ -358,10 +358,10 @@ void AudioDeviceManager::insertDefaultDeviceNames (AudioDeviceSetup& setup) cons
 {
     if (auto* type = getCurrentDeviceTypeObject())
     {
-        if (numOutputChansNeeded > 0 && setup.outputDeviceName.isEmpty())
+        if (numOutputChansNeeded > 0 && setup.outputDeviceName.empty())
             setup.outputDeviceName = type->getDeviceNames (false) [type->getDefaultDeviceIndex (false)];
 
-        if (numInputChansNeeded > 0 && setup.inputDeviceName.isEmpty())
+        if (numInputChansNeeded > 0 && setup.inputDeviceName.empty())
             setup.inputDeviceName = type->getDeviceNames (true) [type->getDefaultDeviceIndex (true)];
     }
 }
@@ -404,8 +404,8 @@ AudioIODeviceType* AudioDeviceManager::findType (const String& inputName, const 
     scanDevicesIfNeeded();
 
     for (auto* type : availableDeviceTypes)
-        if ((inputName.isNotEmpty() && deviceListContains (type, true, inputName))
-             || (outputName.isNotEmpty() && deviceListContains (type, false, outputName)))
+        if ((inputName.!empty() && deviceListContains (type, true, inputName))
+             || (outputName.!empty() && deviceListContains (type, false, outputName)))
             return type;
 
     return {};
@@ -468,7 +468,7 @@ static void updateSetupChannels (AudioDeviceManager::AudioDeviceSetup& setup, in
 {
     auto updateChannels = [](const String& deviceName, BigInteger& channels, int defaultNumChannels)
     {
-        if (deviceName.isEmpty())
+        if (deviceName.empty())
         {
             channels.clear();
         }
@@ -494,7 +494,7 @@ String AudioDeviceManager::setAudioDeviceSetup (const AudioDeviceSetup& newSetup
         return {};
 
     if (getCurrentDeviceTypeObject() == nullptr
-        || (newSetup.inputDeviceName.isEmpty() && newSetup.outputDeviceName.isEmpty()))
+        || (newSetup.inputDeviceName.empty() && newSetup.outputDeviceName.empty()))
     {
         deleteCurrentDevice();
 
@@ -517,10 +517,10 @@ String AudioDeviceManager::setAudioDeviceSetup (const AudioDeviceSetup& newSetup
 
         auto* type = getCurrentDeviceTypeObject();
 
-        if (newSetup.outputDeviceName.isNotEmpty() && ! deviceListContains (type, false, newSetup.outputDeviceName))
+        if (newSetup.outputDeviceName.!empty() && ! deviceListContains (type, false, newSetup.outputDeviceName))
             return "No such device: " + newSetup.outputDeviceName;
 
-        if (newSetup.inputDeviceName.isNotEmpty() && ! deviceListContains (type, true, newSetup.inputDeviceName))
+        if (newSetup.inputDeviceName.!empty() && ! deviceListContains (type, true, newSetup.inputDeviceName))
             return "No such device: " + newSetup.inputDeviceName;
 
         currentAudioDevice.reset (type->createDevice (newSetup.outputDeviceName, newSetup.inputDeviceName));
@@ -532,7 +532,7 @@ String AudioDeviceManager::setAudioDeviceSetup (const AudioDeviceSetup& newSetup
         else
             error = currentAudioDevice->getLastError();
 
-        if (error.isNotEmpty())
+        if (error.!empty())
         {
             deleteCurrentDevice();
             return error;
@@ -562,7 +562,7 @@ String AudioDeviceManager::setAudioDeviceSetup (const AudioDeviceSetup& newSetup
                                       currentSetup.sampleRate,
                                       currentSetup.bufferSize);
 
-    if (error.isEmpty())
+    if (error.empty())
     {
         currentDeviceType = currentAudioDevice->getTypeName();
 
@@ -647,8 +647,8 @@ void AudioDeviceManager::restartLastAudioDevice()
 {
     if (currentAudioDevice == nullptr)
     {
-        if (currentSetup.inputDeviceName.isEmpty()
-              && currentSetup.outputDeviceName.isEmpty())
+        if (currentSetup.inputDeviceName.empty()
+              && currentSetup.outputDeviceName.empty())
         {
             // This method will only reload the last device that was running
             // before closeAudioDevice() was called - you need to actually open
@@ -888,7 +888,7 @@ void AudioDeviceManager::addMidiInputDeviceCallback (const String& identifier, M
 {
     removeMidiInputDeviceCallback (identifier, callbackToAdd);
 
-    if (identifier.isEmpty() || isMidiInputDeviceEnabled (identifier))
+    if (identifier.empty() || isMidiInputDeviceEnabled (identifier))
     {
         const ScopedLock sl (midiCallbackLock);
         midiCallbacks.add ({ identifier, callbackToAdd });
@@ -916,7 +916,7 @@ void AudioDeviceManager::handleIncomingMidiMessageInt (MidiInput* source, const 
         const ScopedLock sl (midiCallbackLock);
 
         for (auto& mc : midiCallbacks)
-            if (mc.deviceIdentifier.isEmpty() || mc.deviceIdentifier == source->getIdentifier())
+            if (mc.deviceIdentifier.empty() || mc.deviceIdentifier == source->getIdentifier())
                 mc.callback->handleIncomingMidiMessage (source, message);
     }
 }
@@ -939,7 +939,7 @@ void AudioDeviceManager::setDefaultMidiOutputDevice (const String& identifier)
 
         defaultMidiOutput.reset();
 
-        if (identifier.isNotEmpty())
+        if (identifier.!empty())
             defaultMidiOutput = MidiOutput::openDevice (identifier);
 
         if (defaultMidiOutput != nullptr)

@@ -79,7 +79,7 @@ public:
     int size() const noexcept                                { return listeners.size(); }
 
     /** Returns true if no listeners are registered, false otherwise. */
-    bool isEmpty() const noexcept                            { return listeners.isEmpty(); }
+    bool empty() const noexcept                            { return listeners.empty(); }
 
     /** Clears the list. */
     void clear()                                             { listeners.clear(); }

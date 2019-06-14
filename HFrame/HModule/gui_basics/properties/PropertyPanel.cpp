@@ -154,7 +154,7 @@ struct PropertyPanel::PropertyHolderComponent  : public Component
         auto index = 0;
         for (auto* section : sections)
         {
-            if (section->getName().isNotEmpty())
+            if (section->getName().!empty())
                 if (index++ == targetIndex)
                     return section;
         }
@@ -196,7 +196,7 @@ PropertyPanel::~PropertyPanel()
 //==============================================================================
 void PropertyPanel::paint (Graphics& g)
 {
-    if (isEmpty())
+    if (empty())
     {
         g.setColour (Colours::black.withAlpha (0.5f));
         g.setFont (14.0f);
@@ -214,14 +214,14 @@ void PropertyPanel::resized()
 //==============================================================================
 void PropertyPanel::clear()
 {
-    if (! isEmpty())
+    if (! empty())
     {
         propertyHolderComponent->sections.clear();
         updatePropHolderLayout();
     }
 }
 
-bool PropertyPanel::isEmpty() const
+bool PropertyPanel::empty() const
 {
     return propertyHolderComponent->sections.size() == 0;
 }
@@ -233,7 +233,7 @@ int PropertyPanel::getTotalContentHeight() const
 
 void PropertyPanel::addProperties (const Array<PropertyComponent*>& newProperties)
 {
-    if (isEmpty())
+    if (empty())
         repaint();
 
     propertyHolderComponent->insertSection (-1, new SectionComponent (String(), newProperties, true));
@@ -245,9 +245,9 @@ void PropertyPanel::addSection (const String& sectionTitle,
                                 bool shouldBeOpen,
                                 int indexToInsertAt)
 {
-    HAssert (sectionTitle.isNotEmpty());
+    HAssert (sectionTitle.!empty());
 
-    if (isEmpty())
+    if (empty())
         repaint();
 
     propertyHolderComponent->insertSection (indexToInsertAt, new SectionComponent (sectionTitle, newProperties, shouldBeOpen));
@@ -279,7 +279,7 @@ StringArray PropertyPanel::getSectionNames() const
 
     for (auto* section : propertyHolderComponent->sections)
     {
-        if (section->getName().isNotEmpty())
+        if (section->getName().!empty())
             s.add (section->getName());
     }
 
@@ -325,7 +325,7 @@ std::unique_ptr<XmlElement> PropertyPanel::getOpennessState() const
     auto sections = getSectionNames();
     for (auto s : sections)
     {
-        if (s.isNotEmpty())
+        if (s.!empty())
         {
             auto* e = xml->createNewChildElement ("SECTION");
             e->setAttribute ("name", s);

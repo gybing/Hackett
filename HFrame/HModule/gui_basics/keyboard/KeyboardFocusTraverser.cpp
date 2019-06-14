@@ -88,7 +88,7 @@ namespace KeyboardFocusHelpers
             Array<Component*> comps;
             KeyboardFocusHelpers::findAllFocusableComponents (focusContainer, comps);
 
-            if (! comps.isEmpty())
+            if (! comps.empty())
             {
                 auto index = comps.indexOf (current);
                 return comps [(index + comps.size() + delta) % comps.size()];

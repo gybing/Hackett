@@ -135,7 +135,7 @@ public:
           totalNumberOfInputChannels (0),
           totalNumberOfOutputChannels (0)
     {
-        HAssert (deviceName.isNotEmpty());
+        HAssert (deviceName.!empty());
 
         jack_status_t status;
         client = jack_client_open (HJACK_CLIENT_NAME, JackNoStartServer, &status);

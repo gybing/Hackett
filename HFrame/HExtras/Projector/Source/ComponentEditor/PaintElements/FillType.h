@@ -241,7 +241,7 @@ public:
     {
         reset();
 
-        if (s.isNotEmpty())
+        if (s.!empty())
         {
             StringArray toks;
             toks.addTokens (s, ",:", StringRef());

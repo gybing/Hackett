@@ -214,7 +214,7 @@ String AudioChannelSet::getSpeakerArrangementAsString() const
     {
         auto name = getAbbreviatedChannelTypeName (speaker);
 
-        if (name.isNotEmpty())
+        if (name.!empty())
             speakerTypes.add (name);
     }
 

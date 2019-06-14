@@ -21,7 +21,7 @@ MPEChannelAssigner::MPEChannelAssigner (Range<int> channelRange)
       midiChannelLastAssigned (firstChannel - channelIncrement)
 {
     // must have at least one channel!
-    HAssert (! channelRange.isEmpty());
+    HAssert (! channelRange.empty());
 }
 
 int MPEChannelAssigner::findMidiChannelForNewNote (int noteNumber) noexcept

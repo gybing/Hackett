@@ -285,7 +285,7 @@ void PaintElement::setCurrentBounds (const Rectangle<int>& newBounds,
 
 void PaintElement::updateBounds (const Rectangle<int>& parentArea)
 {
-    if (! parentArea.isEmpty())
+    if (! parentArea.empty())
     {
         setBounds (getCurrentBounds (parentArea)
                         .expanded (borderThickness,

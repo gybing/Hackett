@@ -253,11 +253,11 @@ DECLARE_JNI_CLASS_WITH_MIN_SDK (RemoteInputBuilder, "android/app/RemoteInput$Bui
 //==============================================================================
 bool PushNotifications::Notification::isValid() const noexcept
 {
-    bool isValidForPreApi26 = title.isNotEmpty() && body.isNotEmpty() && identifier.isNotEmpty() && icon.isNotEmpty();
+    bool isValidForPreApi26 = title.!empty() && body.!empty() && identifier.!empty() && icon.!empty();
     bool apiAtLeast26 = (getAndroidSDKVersion() >= 26);
 
     if (apiAtLeast26)
-        return isValidForPreApi26 && channelId.isNotEmpty();
+        return isValidForPreApi26 && channelId.!empty();
 
     return isValidForPreApi26;
 }
@@ -767,7 +767,7 @@ struct PushNotifications::Pimpl
     {
         auto* env = getEnv();
 
-        if (n.subtitle.isNotEmpty())
+        if (n.subtitle.!empty())
             env->CallObjectMethod (notificationBuilder, NotificationBuilderBase.setContentInfo, javaString (n.subtitle).get());
 
         auto soundName = n.soundToPlay.toString (true);
@@ -777,7 +777,7 @@ struct PushNotifications::Pimpl
             const int playDefaultSound = 1;
             env->CallObjectMethod (notificationBuilder, NotificationBuilderBase.setDefaults, playDefaultSound);
         }
-        else if (! soundName.isEmpty())
+        else if (! soundName.empty())
         {
             env->CallObjectMethod (notificationBuilder, NotificationBuilderBase.setSound, HUrlToAndroidUri (n.soundToPlay).get());
         }
@@ -785,7 +785,7 @@ struct PushNotifications::Pimpl
         if (n.largeIcon.isValid())
             env->CallObjectMethod (notificationBuilder, NotificationBuilderBase.setLargeIcon, imagetoJavaBitmap (n.largeIcon).get());
 
-        if (n.tickerText.isNotEmpty())
+        if (n.tickerText.!empty())
             env->CallObjectMethod (notificationBuilder, NotificationBuilderBase.setTicker, javaString (n.tickerText).get());
 
         if (n.ledColour != Colour())
@@ -797,7 +797,7 @@ struct PushNotifications::Pimpl
                                    n.ledBlinkPattern.msToBeOff);
         }
 
-        if (! n.vibrationPattern.isEmpty())
+        if (! n.vibrationPattern.empty())
         {
             const int size = n.vibrationPattern.size();
 
@@ -823,7 +823,7 @@ struct PushNotifications::Pimpl
 
         if (getAndroidSDKVersion() >= 16)
         {
-            if (n.subtitle.isNotEmpty())
+            if (n.subtitle.!empty())
                 env->CallObjectMethod (notificationBuilder, NotificationBuilderApi16.setSubText, javaString (n.subtitle).get());
 
             env->CallObjectMethod (notificationBuilder, NotificationBuilderApi16.setPriority, n.priority);
@@ -843,13 +843,13 @@ struct PushNotifications::Pimpl
 
         if (getAndroidSDKVersion() >= 20)
         {
-            if (n.groupId.isNotEmpty())
+            if (n.groupId.!empty())
             {
                 env->CallObjectMethod (notificationBuilder, NotificationBuilderApi20.setGroup, javaString (n.groupId).get());
                 env->CallObjectMethod (notificationBuilder, NotificationBuilderApi20.setGroupSummary, n.groupSummary);
             }
 
-            if (n.groupSortKey.isNotEmpty())
+            if (n.groupSortKey.!empty())
                 env->CallObjectMethod (notificationBuilder, NotificationBuilderApi20.setSortKey, javaString (n.groupSortKey).get());
 
             env->CallObjectMethod (notificationBuilder, NotificationBuilderApi20.setLocalOnly, n.localOnly);
@@ -864,11 +864,11 @@ struct PushNotifications::Pimpl
 
         if (getAndroidSDKVersion() >= 21)
         {
-            if (n.person.isNotEmpty())
+            if (n.person.!empty())
                 env->CallObjectMethod (notificationBuilder, NotificationBuilderApi21.addPerson, javaString (n.person).get());
 
             auto categoryString = typeToCategory (n.type);
-            if (categoryString.isNotEmpty())
+            if (categoryString.!empty())
                 env->CallObjectMethod (notificationBuilder, NotificationBuilderApi21.setCategory, javaString (categoryString).get());
 
             if (n.accentColour != Colour())
@@ -981,10 +981,10 @@ struct PushNotifications::Pimpl
                                                                                  RemoteInputBuilder.constructor,
                                                                                  resultKey.get()));
 
-                    if (! action.textInputPlaceholder.isEmpty())
+                    if (! action.textInputPlaceholder.empty())
                         env->CallObjectMethod (remoteInputBuilder, RemoteInputBuilder.setLabel, javaString (action.textInputPlaceholder).get());
 
-                    if (! action.allowedResponses.isEmpty())
+                    if (! action.allowedResponses.empty())
                     {
                         env->CallObjectMethod (remoteInputBuilder, RemoteInputBuilder.setAllowFreeFormInput, false);
 
@@ -1384,10 +1384,10 @@ struct PushNotifications::Pimpl
             n.body       = HString (body.get());
             n.soundToPlay = URL (HString (sound.get()));
 
-            auto colourString = HString (color.get()).substring (1);
-            const uint8 r = (uint8) colourString.substring (0, 2).getIntValue();
-            const uint8 g = (uint8) colourString.substring (2, 4).getIntValue();
-            const uint8 b = (uint8) colourString.substring (4, 6).getIntValue();
+            auto colourString = HString (color.get()).substr (1);
+            const uint8 r = (uint8) colourString.substr (0, 2).getIntValue();
+            const uint8 g = (uint8) colourString.substr (2, 4).getIntValue();
+            const uint8 b = (uint8) colourString.substr (4, 6).getIntValue();
             n.accentColour = Colour (r, g, b);
 
             // Note: Ignoring the icon, because Firebase passes it as a string.
@@ -1423,9 +1423,9 @@ struct PushNotifications::Pimpl
         for (const auto& g : groups)
         {
             // Channel group identifier and name have to be set.
-            HAssert (g.identifier.isNotEmpty() && g.name.isNotEmpty());
+            HAssert (g.identifier.!empty() && g.name.!empty());
 
-            if (g.identifier.isNotEmpty() && g.name.isNotEmpty())
+            if (g.identifier.!empty() && g.name.!empty())
             {
                 auto group = LocalRef<jobject> (env->NewObject (NotificationChannelGroup, NotificationChannelGroup.constructor,
                                                                 javaString (g.identifier).get(), javaString (g.name).get()));
@@ -1436,9 +1436,9 @@ struct PushNotifications::Pimpl
         for (const auto& c : channels)
         {
             // Channel identifier, name and group have to be set.
-            HAssert (c.identifier.isNotEmpty() && c.name.isNotEmpty() && c.groupId.isNotEmpty());
+            HAssert (c.identifier.!empty() && c.name.!empty() && c.groupId.!empty());
 
-            if (c.identifier.isEmpty() || c.name.isEmpty() || c.groupId.isEmpty())
+            if (c.identifier.empty() || c.name.empty() || c.groupId.empty())
                 continue;
 
             auto channel = LocalRef<jobject> (env->NewObject (NotificationChannel, NotificationChannel.constructor,

@@ -146,7 +146,6 @@
 
 #include "system/StandardHeader.h"
 
-class StringRef;
 class MemoryBlock;
 class File;
 class InputStream;
@@ -170,17 +169,15 @@ extern API void CALLTYPE logAssertion(const char *file, int line) noexcept;
 #pragma warning(disable : 4514 4996)
 #endif
 
-#include "text/CharPointer_UTF8.h"
-#include "text/CharPointer_UTF16.h"
-#include "text/CharPointer_UTF32.h"
-#include "text/CharPointer_ASCII.h"
 
 #if HMSVC
 #pragma warning(pop)
 #endif
 
-#include "text/String.h"
-#include "text/StringRef.h"
+using String = std::string;
+using StringRef = const std::string &;
+using CharPointer_UTF8 = char*;
+
 #include "logging/Logger.h"
 #include "memory/LeakedObjectDetector.h"
 #include "memory/ContainerDeletePolicy.h"
@@ -298,28 +295,6 @@ extern API void CALLTYPE logAssertion(const char *file, int line) noexcept;
 
 #if HUNIT_TESTS
 #include "test/UnitTestCategories.h"
-#endif
-
-/*
-    As the very long class names here try to explain, the purpose of this code is to cause
-    a linker error if not all of your compile units are consistent in the options that they
-    enable before including H headers. The reason this is important is that if you have
-    two cpp files, and one includes the H headers with debug enabled, and another does so
-    without that, then each will be generating code with different class layouts, and you'll
-    get subtle and hard-to-track-down memory corruption!
- */
-#if HDEBUG
-struct API this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_debug_mode
-{
-    this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_debug_mode() noexcept;
-};
-static this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_debug_mode compileUnitMismatchSentinel;
-#else
-struct API this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_release_mode
-{
-    this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_release_mode() noexcept;
-};
-static this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_release_mode compileUnitMismatchSentinel;
 #endif
 
 #if HMSVC

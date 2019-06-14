@@ -75,7 +75,7 @@ namespace XmlIdentifierChars
         DBG (s);
     }*/
 
-    static String::CharPointerType findEndOfToken (String::CharPointerType p) noexcept
+    static char* findEndOfToken (char* p) noexcept
     {
         while (isIdentifierChar (*p))
             ++p;
@@ -86,7 +86,7 @@ namespace XmlIdentifierChars
 
 std::unique_ptr<XmlElement> XmlDocument::getDocumentElement (const bool onlyReadOuterDocumentElement)
 {
-    if (originalText.isEmpty() && inputSource != nullptr)
+    if (originalText.empty() && inputSource != nullptr)
     {
         std::unique_ptr<InputStream> in (inputSource->createInputStream());
 
@@ -112,7 +112,7 @@ std::unique_ptr<XmlElement> XmlDocument::getDocumentElement (const bool onlyRead
                         text += 3;
 
                     // parse the input buffer directly to avoid copying it all to a string..
-                    return parseDocumentElement (String::CharPointerType (text), onlyReadOuterDocumentElement);
+                    return parseDocumentElement (char* (text), onlyReadOuterDocumentElement);
                 }
             }
            #else
@@ -121,7 +121,7 @@ std::unique_ptr<XmlElement> XmlDocument::getDocumentElement (const bool onlyRead
         }
     }
 
-    return parseDocumentElement (originalText.getCharPointer(), onlyReadOuterDocumentElement);
+    return parseDocumentElement (originalText.c_str(), onlyReadOuterDocumentElement);
 }
 
 std::unique_ptr<XmlElement> XmlDocument::getDocumentElementIfTagMatches (StringRef requiredTag)
@@ -159,7 +159,7 @@ String XmlDocument::getFileContents (const String& filename) const
 
 wchar XmlDocument::readNextChar() noexcept
 {
-    auto c = input.getAndAdvance();
+    auto c = *input++;
 
     if (c == 0)
     {
@@ -170,7 +170,7 @@ wchar XmlDocument::readNextChar() noexcept
     return c;
 }
 
-std::unique_ptr<XmlElement> XmlDocument::parseDocumentElement (String::CharPointerType textToParse,
+std::unique_ptr<XmlElement> XmlDocument::parseDocumentElement (char* textToParse,
                                                                bool onlyReadOuterDocumentElement)
 {
     input = textToParse;
@@ -178,7 +178,7 @@ std::unique_ptr<XmlElement> XmlDocument::parseDocumentElement (String::CharPoint
     outOfData = false;
     needToLoadDTD = true;
 
-    if (textToParse.isEmpty())
+    if (textToParse.empty())
     {
         lastError = "not enough input";
     }
@@ -210,7 +210,7 @@ bool XmlDocument::parseHeader()
     {
         auto headerEnd = CharacterFunctions::find (input, CharPointer_ASCII ("?>"));
 
-        if (headerEnd.isEmpty())
+        if (headerEnd.empty())
             return false;
 
        #if HDEBUG
@@ -228,7 +228,7 @@ bool XmlDocument::parseHeader()
            read, use your own code to convert them to a unicode String, and pass that to the
            XML parser.
         */
-        HAssert (encoding.isEmpty() || encoding.startsWithIgnoreCase ("utf-"));
+        HAssert (encoding.empty() || encoding.startsWithIgnoreCase ("utf-"));
        #endif
 
         input = headerEnd + 2;
@@ -270,7 +270,7 @@ void XmlDocument::skipNextWhiteSpace()
     {
         input = input.findEndOfWhitespace();
 
-        if (input.isEmpty())
+        if (input.empty())
         {
             outOfData = true;
             break;
@@ -578,7 +578,7 @@ void XmlDocument::readChildElements (XmlElement& parent)
                         auto oldInput = input;
                         auto oldOutOfData = outOfData;
 
-                        input = entity.getCharPointer();
+                        input = entity.c_str();
                         outOfData = false;
 
                         while (auto* n = readNextElement (true))
@@ -743,10 +743,10 @@ String XmlDocument::expandEntity (const String& ent)
         auto char1 = ent[1];
 
         if (char1 == 'x' || char1 == 'X')
-            return String::charToString (static_cast<wchar> (ent.substring (2).getHexValue32()));
+            return String::charToString (static_cast<wchar> (ent.substr (2).getHexValue32()));
 
         if (char1 >= '0' && char1 <= '9')
-            return String::charToString (static_cast<wchar> (ent.substring (1).getIntValue()));
+            return String::charToString (static_cast<wchar> (ent.substr (1).getIntValue()));
 
         setLastError ("illegal escape sequence", false);
         return String::charToString ('&');
@@ -759,7 +759,7 @@ String XmlDocument::expandExternalEntity (const String& entity)
 {
     if (needToLoadDTD)
     {
-        if (dtdText.isNotEmpty())
+        if (dtdText.!empty())
         {
             dtdText = dtdText.trimCharactersAtEnd (">");
             tokenisedDTD.addTokens (dtdText, true);
@@ -782,7 +782,7 @@ String XmlDocument::expandExternalEntity (const String& entity)
                     auto closeBracket = dtdText.lastIndexOfChar (']');
 
                     if (closeBracket > openBracket)
-                        tokenisedDTD.addTokens (dtdText.substring (openBracket + 1,
+                        tokenisedDTD.addTokens (dtdText.substr (openBracket + 1,
                                                                    closeBracket), true);
                 }
             }
@@ -792,7 +792,7 @@ String XmlDocument::expandExternalEntity (const String& entity)
                 if (tokenisedDTD[i].startsWithChar ('%')
                      && tokenisedDTD[i].endsWithChar (';'))
                 {
-                    auto parsed = getParameterEntity (tokenisedDTD[i].substring (1, tokenisedDTD[i].length() - 1));
+                    auto parsed = getParameterEntity (tokenisedDTD[i].substr (1, tokenisedDTD[i].length() - 1));
                     StringArray newToks;
                     newToks.addTokens (parsed, true);
 
@@ -828,11 +828,11 @@ String XmlDocument::expandExternalEntity (const String& entity)
                         break;
                     }
 
-                    auto resolved = expandEntity (ent.substring (i + 1, semiColon));
+                    auto resolved = expandEntity (ent.substr (i + 1, semiColon));
 
-                    ent = ent.substring (0, ampersand)
+                    ent = ent.substr (0, ampersand)
                            + resolved
-                           + ent.substring (semiColon + 1);
+                           + ent.substr (semiColon + 1);
 
                     ampersand = ent.indexOfChar (semiColon + 1, '&');
                 }

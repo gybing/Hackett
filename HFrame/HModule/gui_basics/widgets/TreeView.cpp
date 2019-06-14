@@ -112,7 +112,7 @@ public:
                 {
                     auto dragDescription = item->getDragSourceDescription();
 
-                    if (! (dragDescription.isVoid() || (dragDescription.isString() && dragDescription.toString().isEmpty())))
+                    if (! (dragDescription.isVoid() || (dragDescription.isString() && dragDescription.toString().empty())))
                     {
                         if (auto* dragContainer = DragAndDropContainer::findParentDragContainerFor (this))
                         {
@@ -1166,7 +1166,7 @@ void TreeViewItem::clearSubItems()
     {
         const ScopedLock sl (ownerView->nodeAlterationLock);
 
-        if (! subItems.isEmpty())
+        if (! subItems.empty())
         {
             removeAllSubItemsFromList();
             treeHasChanged();
@@ -1764,7 +1764,7 @@ void TreeViewItem::setLinesDrawnForSubItems (const bool drawLines) noexcept
 
 TreeViewItem* TreeViewItem::getNextVisibleItem (const bool recurse) const noexcept
 {
-    if (recurse && isOpen() && ! subItems.isEmpty())
+    if (recurse && isOpen() && ! subItems.empty())
         return subItems.getFirst();
 
     if (parentItem != nullptr)
@@ -1804,7 +1804,7 @@ TreeViewItem* TreeViewItem::findItemFromIdentifierString (const String& identifi
 
     if (identifierString.startsWith (thisId + "/"))
     {
-        auto remainingPath = identifierString.substring (thisId.length());
+        auto remainingPath = identifierString.substr (thisId.length());
 
         const bool wasOpen = isOpen();
         setOpen (true);
@@ -1864,7 +1864,7 @@ XmlElement* TreeViewItem::getOpennessState (bool canReturnNull) const
 {
     auto name = getUniqueName();
 
-    if (name.isNotEmpty())
+    if (name.!empty())
     {
         XmlElement* e;
 

@@ -68,7 +68,7 @@ void SourceCodeDocument::reloadInternal()
 
     auto lineFeed = getLineFeedForFile (fileContent);
 
-    if (lineFeed.isEmpty())
+    if (lineFeed.empty())
     {
         if (project != nullptr)
             lineFeed = project->getProjectLineFeed();
@@ -479,7 +479,7 @@ void GenericCodeEditorComponent::findSelection()
 {
     auto selected = getTextInRange (getHighlightedRegion());
 
-    if (selected.isNotEmpty())
+    if (selected.!empty())
     {
         setSearchString (selected);
         findNext (true, true);
@@ -511,7 +511,7 @@ void GenericCodeEditorComponent::findNext (bool forwards, bool skipCurrentSelect
         else
         {
             if (linePos >= 0)
-                line = line.substring (0, linePos);
+                line = line.substr (0, linePos);
 
             index = caseSensitive ? line.lastIndexOf (searchText)
                                   : line.lastIndexOfIgnoreCase (searchText);
@@ -598,13 +598,13 @@ void CppCodeEditorComponent::handleReturnKey()
 
 void CppCodeEditorComponent::insertTextAtCaret (const String& newText)
 {
-    if (getHighlightedRegion().isEmpty())
+    if (getHighlightedRegion().empty())
     {
         auto pos = getCaretPos();
 
         if ((newText == "{" || newText == "}")
              && pos.getLineNumber() > 0
-             && pos.getLineText().trim().isEmpty())
+             && pos.getLineText().trim().empty())
         {
             moveCaretToStartOfLine (true);
 

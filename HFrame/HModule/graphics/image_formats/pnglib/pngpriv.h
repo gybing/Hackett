@@ -1711,7 +1711,7 @@ PNG_INTERNAL_FUNCTION(void,png_ascii_from_fixed,(png_const_structrp png_ptr,
 
 /* These three values don't affect the parser.  They are set but not used.
  */
-#define PNG_FP_WAS_VALID 64  /* Preceding substring is a valid fp number */
+#define PNG_FP_WAS_VALID 64  /* Preceding substr is a valid fp number */
 #define PNG_FP_NEGATIVE 128  /* A negative number, including "-0" */
 #define PNG_FP_NONZERO  256  /* A non-zero value */
 #define PNG_FP_STICKY   448  /* The above three flags */
@@ -1750,7 +1750,7 @@ PNG_INTERNAL_FUNCTION(void,png_ascii_from_fixed,(png_const_structrp png_ptr,
  *
  * Note that the pointer will consume an E or even an E+ and then leave
  * a 'maybe' state even though a preceding integer.fraction is valid.
- * The PNG_FP_WAS_VALID flag indicates that a preceding substring was
+ * The PNG_FP_WAS_VALID flag indicates that a preceding substr was
  * a valid number.  It's possible to recover from this by calling
  * the parser again (from the start, with state 0) but with a string
  * that omits the last character (i.e. set the size to the index of

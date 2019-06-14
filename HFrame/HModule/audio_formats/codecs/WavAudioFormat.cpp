@@ -699,7 +699,7 @@ namespace WavFileHelpers
         {
             auto value = values.getValue (paramName, {});
 
-            if (value.isEmpty())
+            if (value.empty())
                 return false;
 
             auto valueLength = (int) value.getNumBytesAsUTF8() + 1;
@@ -829,7 +829,7 @@ namespace WavFileHelpers
             MemoryOutputStream out;
             auto s = values[WavAudioFormat::tracktionLoopInfo];
 
-            if (s.isNotEmpty())
+            if (s.!empty())
             {
                 out.writeString (s);
 
@@ -858,7 +858,7 @@ namespace WavFileHelpers
                             {
                                 auto ISRCCode = xml4->getAllSubText().fromFirstOccurrenceOf ("ISRC:", false, true);
 
-                                if (ISRCCode.isNotEmpty())
+                                if (ISRCCode.!empty())
                                     destValues.set (WavAudioFormat::ISRC, ISRCCode);
                             }
                         }
@@ -872,7 +872,7 @@ namespace WavFileHelpers
             auto ISRC = values.getValue (WavAudioFormat::ISRC, {});
             MemoryOutputStream xml;
 
-            if (ISRC.isNotEmpty())
+            if (ISRC.!empty())
             {
                 xml << "<ebucore:ebuCoreMain xmlns:dc=\" http://purl.org/dc/elements/1.1/\" "
                                             "xmlns:ebucore=\"urn:ebu:metadata-schema:ebuCore_2012\">"

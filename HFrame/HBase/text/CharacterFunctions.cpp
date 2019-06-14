@@ -247,7 +247,7 @@ public:
 
         for (auto trial : testValues)
         {
-            auto charPtr = trial.first.getCharPointer();
+            auto charPtr = trial.first.c_str();
             expectEquals (CharacterFunctions::readDoubleValue (charPtr), trial.second);
         }
 
@@ -256,7 +256,7 @@ public:
 
             for (auto nan : nans)
             {
-                auto charPtr = nan.getCharPointer();
+                auto charPtr = nan.c_str();
                 expect (std::isnan (CharacterFunctions::readDoubleValue (charPtr)));
             }
         }
@@ -266,7 +266,7 @@ public:
 
             for (auto inf : infs)
             {
-                auto charPtr = inf.getCharPointer();
+                auto charPtr = inf.c_str();
                 expect (std::isinf (CharacterFunctions::readDoubleValue (charPtr)));
             }
         }

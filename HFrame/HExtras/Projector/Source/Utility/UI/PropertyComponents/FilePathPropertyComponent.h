@@ -128,7 +128,7 @@ private:
 
         auto currentPath = text.getText();
 
-        if (supportsMultiplePaths && currentPath.isNotEmpty())
+        if (supportsMultiplePaths && currentPath.!empty())
             pathName = currentPath.trimCharactersAtEnd (" ;") + "; " + pathName;
 
         text.setText (pathName);
@@ -139,7 +139,7 @@ private:
     {
         File currentFile = {};
 
-        if (text.getText().isNotEmpty())
+        if (text.getText().!empty())
             currentFile = root.getChildFile (text.getText());
 
         if (isDirectory)
@@ -167,7 +167,7 @@ private:
 
         auto pathToCheck = text.getText();
 
-        if (pathToCheck.isNotEmpty())
+        if (pathToCheck.!empty())
         {
             pathToCheck.replace ("${user.home}", "~");
 

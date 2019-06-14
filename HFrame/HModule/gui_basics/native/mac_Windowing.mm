@@ -249,7 +249,7 @@ static NSDraggingSourceHelper draggingSourceHelper;
 bool DragAndDropContainer::performExternalDragDropOfText (const String& text, Component* sourceComponent,
                                                           std::function<void()> callback)
 {
-    if (text.isEmpty())
+    if (text.empty())
         return false;
 
     if (auto* view = getNSViewForDragEvent (sourceComponent))
@@ -293,7 +293,7 @@ bool DragAndDropContainer::performExternalDragDropOfText (const String& text, Co
 bool DragAndDropContainer::performExternalDragDropOfFiles (const StringArray& files, bool canMoveFiles,
                                                            Component* sourceComponent, std::function<void()> callback)
 {
-    if (files.isEmpty())
+    if (files.empty())
         return false;
 
     if (auto* view = getNSViewForDragEvent (sourceComponent))

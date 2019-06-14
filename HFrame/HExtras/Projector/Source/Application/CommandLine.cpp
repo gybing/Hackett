@@ -203,7 +203,7 @@ namespace
 
         String version (proj.project->getVersionString());
 
-        if (version.trim().isEmpty())
+        if (version.trim().empty())
             ConsoleApplication::fail ("Cannot read version number from project!");
 
         StringArray command;
@@ -380,13 +380,13 @@ namespace
 
                 if (afterIndent.startsWith ("//") && afterIndent.length() > 20)
                 {
-                    afterIndent = afterIndent.substring (2);
+                    afterIndent = afterIndent.substr (2);
 
                     if (afterIndent.containsOnly ("=")
                           || afterIndent.containsOnly ("/")
                           || afterIndent.containsOnly ("-"))
                     {
-                        line = line.substring (0, line.indexOfChar ('/'))
+                        line = line.substr (0, line.indexOfChar ('/'))
                                   + "//" + String::repeatedString ("=", 78);
                     }
                 }
@@ -560,12 +560,12 @@ namespace
         String text = originalText;
         Random rng;
 
-        while (text.isNotEmpty())
+        while (text.!empty())
         {
             int pos = jmax (0, text.length() - (1 + rng.nextInt (6)));
-            Section s = { text.substring (pos), pos, 0 };
+            Section s = { text.substr (pos), pos, 0 };
             sections.insert (0, s);
-            text = text.substring (0, pos);
+            text = text.substr (0, pos);
         }
 
         for (int i = 0; i < sections.size(); ++i)

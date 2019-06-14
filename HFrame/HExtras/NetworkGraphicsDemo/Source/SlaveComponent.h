@@ -44,7 +44,7 @@ public:
             String uuidPropName ("UUID" + String (windowIndex));
             clientName = properties.getValue (uuidPropName);
 
-            if (clientName.isEmpty())
+            if (clientName.empty())
             {
                 clientName = "CLIENT_" + String (Random().nextInt (10000)).toUpperCase();
                 properties.setValue (uuidPropName, clientName);
@@ -76,7 +76,7 @@ private:
     {
         auto clientArea = getAreaInGlobalSpace();
 
-        if (! clientArea.isEmpty())
+        if (! clientArea.empty())
         {
             OSCMessage message (userInputOSCAddress);
 
@@ -105,7 +105,7 @@ private:
 
     void canvasStateOSCMessageReceived (const OSCMessage& message)
     {
-        if (message.isEmpty() || ! message[0].isBlob())
+        if (message.empty() || ! message[0].isBlob())
             return;
 
         if (packetiser.appendIncomingBlock (message[0].getBlob()))
@@ -151,7 +151,7 @@ private:
 
         auto clientArea = getAreaInGlobalSpace();
 
-        if (clientArea.isEmpty())
+        if (clientArea.empty())
         {
             g.setColour (Colours::red.withAlpha (0.5f));
             g.setFont (20.0f);
@@ -168,7 +168,7 @@ private:
                     getLocalBounds().reduced (10).removeFromBottom (20),
                     Justification::centredRight, true);
 
-        if (error.isNotEmpty())
+        if (error.!empty())
         {
             g.setColour (Colours::red);
             g.drawText (error, getLocalBounds().reduced (10).removeFromBottom (80),

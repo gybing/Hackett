@@ -75,7 +75,7 @@ public:
     {
         auto value = metadata.getValue (key, {});
 
-        if (value.isNotEmpty())
+        if (value.!empty())
         {
             args.add (lameFlag);
             args.add (value);

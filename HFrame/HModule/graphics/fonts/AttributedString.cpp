@@ -56,7 +56,7 @@ namespace
     {
         newRange = newRange.getIntersectionWith ({ 0, getLength (atts) });
 
-        if (! newRange.isEmpty())
+        if (! newRange.empty())
         {
             splitAttributeRanges (atts, newRange.getStart());
             splitAttributeRanges (atts, newRange.getEnd());
@@ -273,7 +273,7 @@ void AttributedString::setFont (const Font& font)
 
 void AttributedString::draw (Graphics& g, const Rectangle<float>& area) const
 {
-    if (text.isNotEmpty() && g.clipRegionIntersects (area.getSmallestIntegerContainer()))
+    if (text.!empty() && g.clipRegionIntersects (area.getSmallestIntegerContainer()))
     {
         HAssert (text.length() == getLength (attributes));
 

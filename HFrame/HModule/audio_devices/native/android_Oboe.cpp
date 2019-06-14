@@ -340,7 +340,7 @@ private:
             ? supportedInputSampleRates
             : supportedOutputSampleRates;
 
-        if (! supportedSampleRates.isEmpty())
+        if (! supportedSampleRates.empty())
             return supportedSampleRates;
 
         // device claims that it supports "any" sample rate, use
@@ -1037,7 +1037,7 @@ public:
 
     StringArray getDeviceNames (bool wantInputNames) const override
     {
-        if (inputDevices.isEmpty() && outputDevices.isEmpty())
+        if (inputDevices.empty() && outputDevices.empty())
             return StringArray (OboeAudioIODevice::oboeTypeName);
 
         StringArray names;
@@ -1106,14 +1106,14 @@ public:
         auto outputDeviceInfo = getDeviceInfoForName (outputDeviceName, false);
         auto inputDeviceInfo  = getDeviceInfoForName (inputDeviceName, true);
 
-        if (outputDeviceInfo.name.isEmpty() && inputDeviceInfo.name.isEmpty())
+        if (outputDeviceInfo.name.empty() && inputDeviceInfo.name.empty())
         {
             // Invalid device name passed. It must be one of the names returned by getDeviceNames().
             HAssertfalse;
             return nullptr;
         }
 
-        auto& name = outputDeviceInfo.name.isNotEmpty() ? outputDeviceInfo.name
+        auto& name = outputDeviceInfo.name.!empty() ? outputDeviceInfo.name
                                                         : inputDeviceInfo.name;
 
         return new OboeAudioIODevice (name,
@@ -1224,7 +1224,7 @@ public:
 
         auto jChannelCounts = LocalRef<jintArray> ((jintArray) env->CallObjectMethod (device, getChannelCountsMethod));
         auto channelCounts = jintArrayToJuceArray (jChannelCounts);
-        int numChannels = channelCounts.isEmpty() ? -1 : channelCounts.getLast();
+        int numChannels = channelCounts.empty() ? -1 : channelCounts.getLast();
 
         bool isInput  = env->CallBooleanMethod (device, isSourceMethod);
         auto& devices = isInput ? inputDevices : outputDevices;
@@ -1289,7 +1289,7 @@ public:
 
     DeviceInfo getDeviceInfoForName (const String& name, bool isInput)
     {
-        if (name.isEmpty())
+        if (name.empty())
             return {};
 
         for (auto& device : isInput ? inputDevices : outputDevices)

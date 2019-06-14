@@ -94,7 +94,7 @@ private:
         bool isMissing() const override             { return false; }
         Icon getIcon() const override               { return Icon (getIcons().graph, getContentColour (true)); }
         bool canBeSelected() const override         { return true; }
-        bool mightContainSubItems() override        { return namespaceToShow != nullptr && ! namespaceToShow->isEmpty(); }
+        bool mightContainSubItems() override        { return namespaceToShow != nullptr && ! namespaceToShow->empty(); }
         String getUniqueName() const override       { return uniqueID; }
 
         void addSubItems() override
@@ -146,7 +146,7 @@ private:
     {
         ClassItem (const ClassDatabase::Class& c, const ClassDatabase::Namespace& parentNS)
             : comp (c),
-              displayName (comp.getName().substring (parentNS.fullName.length()))
+              displayName (comp.getName().substr (parentNS.fullName.length()))
         {
         }
 

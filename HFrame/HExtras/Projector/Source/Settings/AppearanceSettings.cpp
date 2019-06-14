@@ -187,7 +187,7 @@ Font AppearanceSettings::getCodeFont() const
 {
     const String fontString (settings [Ids::font].toString());
 
-    if (fontString.isEmpty())
+    if (fontString.empty())
         return getDefaultCodeFont();
 
     return Font::fromString (fontString);

@@ -188,7 +188,7 @@ private:
             LocalRef<jobject> appContext (getAppContext());
             auto mainActivityPath = getMainActivityClassPath();
 
-            if (mainActivityPath.isNotEmpty())
+            if (!mainActivityPath.empty())
             {
                 auto clasz = env->GetObjectClass (context);
                 auto activityPath = HString (LocalRef<jstring> ((jstring) env->CallObjectMethod (clasz, JavaClass.getName)));
@@ -205,7 +205,7 @@ private:
     {
         static String mainActivityClassPath;
 
-        if (mainActivityClassPath.isEmpty())
+        if (mainActivityClassPath.empty())
         {
             LocalRef<jobject> appContext (getAppContext());
 

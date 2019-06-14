@@ -137,7 +137,7 @@ namespace AudioUnitFormatHelpers
             name         = name.fromFirstOccurrenceOf (":", false, false).trim();
         }
 
-        if (name.isEmpty())
+        if (name.empty())
             name = "<Unknown>";
     }
 
@@ -146,7 +146,7 @@ namespace AudioUnitFormatHelpers
     {
         if (fileOrIdentifier.startsWithIgnoreCase (auIdentifierPrefix))
         {
-            String s (fileOrIdentifier.substring (jmax (fileOrIdentifier.lastIndexOfChar (':'),
+            String s (fileOrIdentifier.substr (jmax (fileOrIdentifier.lastIndexOfChar (':'),
                                                         fileOrIdentifier.lastIndexOfChar ('/')) + 1));
 
             StringArray tokens;
@@ -164,10 +164,10 @@ namespace AudioUnitFormatHelpers
                 {
                     getNameAndManufacturer (comp, name, manufacturer);
 
-                    if (manufacturer.isEmpty())
+                    if (manufacturer.empty())
                         manufacturer = tokens[2];
 
-                    if (version.isEmpty())
+                    if (version.empty())
                     {
                         UInt32 versionNum;
 
@@ -216,7 +216,7 @@ namespace AudioUnitFormatHelpers
                 if (bundleName != nullptr && CFGetTypeID (bundleName) == CFStringGetTypeID())
                     name = String::fromCFString ((CFStringRef) bundleName);
 
-                if (name.isEmpty())
+                if (name.empty())
                     name = file.getFileNameWithoutExtension();
 
                 CFTypeRef versionString = CFBundleGetValueForInfoDictionaryKey (bundleRef, CFSTR("CFBundleVersion"));
@@ -375,7 +375,7 @@ public:
 
         String getText (float value, int maximumLength) const override
         {
-            if (! auValueStrings.isEmpty())
+            if (! auValueStrings.empty())
             {
                 auto index = roundToInt (jlimit (0.0f, 1.0f, value) * (auValueStrings.size() - 1));
                 return auValueStrings[index];
@@ -402,7 +402,7 @@ public:
                                                      &propertySize);
 
                     if (! err && stringValue.outString != nullptr)
-                        return String::fromCFString (stringValue.outString).substring (0, maximumLength);
+                        return String::fromCFString (stringValue.outString).substr (0, maximumLength);
                 }
             }
 
@@ -411,7 +411,7 @@ public:
 
         float getValueForText (const String& text) const override
         {
-            if (! auValueStrings.isEmpty())
+            if (! auValueStrings.empty())
             {
                 auto index = auValueStrings.indexOf (text);
 
@@ -1276,7 +1276,7 @@ public:
     //==============================================================================
     void updateTrackProperties (const TrackProperties& properties) override
     {
-        if (properties.name.isNotEmpty())
+        if (properties.name.!empty())
         {
             CFStringRef contextName = properties.name.toCFString();
             AudioUnitSetProperty (audioUnit, kAudioUnitProperty_ContextName, kAudioUnitScope_Global,
@@ -2836,7 +2836,7 @@ String AudioUnitPluginFormat::getNameOfPluginFromIdentifier (const String& fileO
     String name, version, manufacturer;
     AudioUnitFormatHelpers::getComponentDescFromIdentifier (fileOrIdentifier, desc, name, version, manufacturer);
 
-    if (name.isEmpty())
+    if (name.empty())
         name = fileOrIdentifier;
 
     return name;

@@ -69,7 +69,7 @@ static StringArray recursiveFiles;
 
 File TestComponent::findFile() const
 {
-    if (filename.isEmpty())
+    if (filename.empty())
         return {};
 
     if (ownerDocument != nullptr)
@@ -82,7 +82,7 @@ void TestComponent::setFilename (const String& newName)
 {
     File newFile;
 
-    if (newName.isNotEmpty())
+    if (newName.!empty())
     {
         if (ownerDocument != nullptr)
             newFile = ownerDocument->getCppFile().getSiblingFile (newName);

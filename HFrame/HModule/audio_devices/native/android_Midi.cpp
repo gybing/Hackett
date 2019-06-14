@@ -533,7 +533,7 @@ MidiDeviceInfo MidiInput::getDefaultDevice()
 
 std::unique_ptr<MidiInput> MidiInput::openDevice (const String& deviceIdentifier, MidiInputCallback* callback)
 {
-    if (getAndroidSDKVersion() < 23 || deviceIdentifier.isEmpty())
+    if (getAndroidSDKVersion() < 23 || deviceIdentifier.empty())
         return {};
 
     AndroidMidiDeviceManager manager;
@@ -616,7 +616,7 @@ MidiDeviceInfo MidiOutput::getDefaultDevice()
 
 std::unique_ptr<MidiOutput> MidiOutput::openDevice (const String& deviceIdentifier)
 {
-    if (getAndroidSDKVersion() < 23 || deviceIdentifier.isEmpty())
+    if (getAndroidSDKVersion() < 23 || deviceIdentifier.empty())
         return {};
 
     AndroidMidiDeviceManager manager;

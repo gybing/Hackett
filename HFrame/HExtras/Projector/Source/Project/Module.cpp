@@ -268,7 +268,7 @@ void LibraryModule::addSettingsForModuleToExporter (ProjectExporter& exporter, P
 
     auto extraInternalSearchPaths = moduleInfo.getExtraSearchPaths().trim();
 
-    if (extraInternalSearchPaths.isNotEmpty())
+    if (extraInternalSearchPaths.!empty())
     {
         auto paths = StringArray::fromTokens (extraInternalSearchPaths, true);
 
@@ -279,7 +279,7 @@ void LibraryModule::addSettingsForModuleToExporter (ProjectExporter& exporter, P
     {
         auto extraDefs = moduleInfo.getPreprocessorDefs().trim();
 
-        if (extraDefs.isNotEmpty())
+        if (extraDefs.!empty())
             exporter.getExporterPreprocessorDefsValue() = exporter.getExporterPreprocessorDefsString() + "\n" + extraDefs;
     }
 
@@ -351,7 +351,7 @@ void LibraryModule::getConfigFlags (Project& project, OwnedArray<Project::Config
 
                 while (! (lines[i].contains ("*/") || lines[i].contains ("@see")))
                 {
-                    if (lines[i].trim().isNotEmpty())
+                    if (lines[i].trim().!empty())
                         config->description = config->description.trim() + " " + lines[i].trim();
 
                     ++i;
@@ -487,8 +487,8 @@ static void addFileWithGroups (Project::Item& group, const RelativePath& file, c
 
     if (slash >= 0)
     {
-        auto topLevelGroup = path.substring (0, slash);
-        auto remainingPath = path.substring (slash + 1);
+        auto topLevelGroup = path.substr (0, slash);
+        auto remainingPath = path.substr (slash + 1);
 
         auto newGroup = group.getOrCreateSubGroup (topLevelGroup);
         addFileWithGroups (newGroup, file, remainingPath);
@@ -517,7 +517,7 @@ void LibraryModule::findBrowseableFiles (const File& folder, Array<File>& filesF
 
 void LibraryModule::addBrowseableCode (ProjectExporter& exporter, const Array<File>& compiled, const File& localModuleFolder) const
 {
-    if (sourceFiles.isEmpty())
+    if (sourceFiles.empty())
         findBrowseableFiles (localModuleFolder, sourceFiles);
 
     auto sourceGroup = Project::Item::createGroup (exporter.getProject(), getID(), "__mainsourcegroup" + getID(), false);

@@ -68,7 +68,7 @@ public:
 
     String getType() const override
     {
-        if (file.getFileExtension().isNotEmpty())
+        if (file.getFileExtension().!empty())
             return file.getFileExtension() + " file";
 
         HAssertfalse;

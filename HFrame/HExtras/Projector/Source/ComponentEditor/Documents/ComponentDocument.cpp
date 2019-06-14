@@ -124,7 +124,7 @@ public:
 
     void resized() override
     {
-        if (! getBounds().isEmpty())
+        if (! getBounds().empty())
         {
             int numTimesToTry = 10;
 

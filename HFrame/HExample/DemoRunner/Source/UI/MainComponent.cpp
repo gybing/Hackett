@@ -167,7 +167,7 @@ public:
 
         g.setColour (textColour);
 
-        if (selectedCategory.isEmpty())
+        if (selectedCategory.empty())
         {
             if (isPositiveAndBelow (rowNumber, HDemos::getCategories().size()))
                 g.drawFittedText (HDemos::getCategories()[(size_t) rowNumber].name,
@@ -185,7 +185,7 @@ public:
 
     int getNumRows() override
     {
-        return (int) (selectedCategory.isEmpty() ? HDemos::getCategories().size()
+        return (int) (selectedCategory.empty() ? HDemos::getCategories().size()
                                                  : HDemos::getCategory (selectedCategory).demos.size());
     }
 
@@ -194,7 +194,7 @@ public:
         if (row < 0)
             return;
 
-        if (selectedCategory.isEmpty())
+        if (selectedCategory.empty())
             showCategory (HDemos::getCategories()[(size_t) row].name);
         else
             demoHolder.setDemo (selectedCategory, row);
@@ -206,7 +206,7 @@ public:
         selectedCategory = categoryName;
 
         demos.deselectAllRows();
-        demos.setHeaderComponent (categoryName.isEmpty() ? nullptr
+        demos.setHeaderComponent (categoryName.empty() ? nullptr
                                                          : new Header (*this));
         demos.updateContent();
     }

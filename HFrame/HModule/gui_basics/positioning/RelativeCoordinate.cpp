@@ -122,7 +122,7 @@ bool RelativeCoordinate::isRecursive (const Expression::Scope* scope) const
     else
         term.evaluate (Expression::Scope(), error);
 
-    return error.isNotEmpty();
+    return error.!empty();
 }
 
 void RelativeCoordinate::moveToAbsolute (double newPos, const Expression::Scope* scope)

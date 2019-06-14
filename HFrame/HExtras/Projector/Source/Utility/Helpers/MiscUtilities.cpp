@@ -33,7 +33,7 @@
 //==============================================================================
 String joinLinesIntoSourceFile (StringArray& lines)
 {
-    while (lines.size() > 10 && lines [lines.size() - 1].isEmpty())
+    while (lines.size() > 10 && lines [lines.size() - 1].empty())
         lines.remove (lines.size() - 1);
 
     return lines.joinIntoString (getPreferredLineFeed()) + getPreferredLineFeed();
@@ -49,11 +49,11 @@ String replaceLineFeeds (const String& content, const String& lineFeed)
 
 String getLineFeedForFile (const String& fileContent)
 {
-    auto t = fileContent.getCharPointer();
+    auto t = fileContent.c_str();
 
-    while (! t.isEmpty())
+    while (! t.empty())
     {
-        switch (t.getAndAdvance())
+        switch (*t++)
         {
             case 0:     break;
             case '\n':  return "\n";
@@ -96,11 +96,11 @@ String createGUID (const String& seed)
 {
     auto hex = MD5 ((seed + "_guidsalt").toUTF8()).toHexString().toUpperCase();
 
-    return "{" + hex.substring (0, 8)
-         + "-" + hex.substring (8, 12)
-         + "-" + hex.substring (12, 16)
-         + "-" + hex.substring (16, 20)
-         + "-" + hex.substring (20, 32)
+    return "{" + hex.substr (0, 8)
+         + "-" + hex.substr (8, 12)
+         + "-" + hex.substr (12, 16)
+         + "-" + hex.substr (16, 20)
+         + "-" + hex.substr (20, 32)
          + "}";
 }
 
@@ -124,15 +124,15 @@ void setValueIfVoid (Value value, const var& defaultValue)
 StringPairArray parsePreprocessorDefs (const String& text)
 {
     StringPairArray result;
-    auto s = text.getCharPointer();
+    auto s = text.c_str();
 
-    while (! s.isEmpty())
+    while (! s.empty())
     {
         String token, value;
         s = s.findEndOfWhitespace();
 
-        while ((! s.isEmpty()) && *s != '=' && ! s.isWhitespace())
-            token << s.getAndAdvance();
+        while ((! s.empty()) && *s != '=' && ! s.isWhitespace())
+            token << *s++;
 
         s = s.findEndOfWhitespace();
 
@@ -140,10 +140,10 @@ StringPairArray parsePreprocessorDefs (const String& text)
         {
             ++s;
 
-            while ((! s.isEmpty()) && *s == ' ')
+            while ((! s.empty()) && *s == ' ')
                 ++s;
 
-            while ((! s.isEmpty()) && ! s.isWhitespace())
+            while ((! s.empty()) && ! s.isWhitespace())
             {
                 if (*s == ',')
                 {
@@ -154,11 +154,11 @@ StringPairArray parsePreprocessorDefs (const String& text)
                 if (*s == '\\' && (s[1] == ' ' || s[1] == ','))
                     ++s;
 
-                value << s.getAndAdvance();
+                value << *s++;
             }
         }
 
-        if (token.isNotEmpty())
+        if (token.!empty())
             result.set (token, value);
     }
 
@@ -182,7 +182,7 @@ String createGCCPreprocessorFlags (const StringPairArray& defs)
         auto def = defs.getAllKeys()[i];
         auto value = defs.getAllValues()[i];
 
-        if (value.isNotEmpty())
+        if (value.!empty())
             def << "=" << value;
 
         s += " -D" + def;
@@ -294,8 +294,8 @@ int indexOfLineStartingWith (const StringArray& lines, const String& text, int i
 
     for (const String* i = lines.begin() + index, * const e = lines.end(); i < e; ++i)
     {
-        if (CharacterFunctions::compareUpTo (i->getCharPointer().findEndOfWhitespace(),
-                                             text.getCharPointer(), len) == 0)
+        if (CharacterFunctions::compareUpTo (i->c_str().findEndOfWhitespace(),
+                                             text.c_str(), len) == 0)
             return index;
 
         ++index;
@@ -425,8 +425,8 @@ static var parseHHeaderMetadata (const StringArray& lines)
 
         if (colon >= 0)
         {
-            auto key = trimmedLine.substring (0, colon).trim();
-            auto value = trimmedLine.substring (colon + 1).trim();
+            auto key = trimmedLine.substr (0, colon).trim();
+            auto value = trimmedLine.substr (colon + 1).trim();
 
             o->setProperty (key, value);
         }
@@ -443,7 +443,7 @@ static String parseMetadataItem (const StringArray& lines, int& index)
     {
         auto continuationLine = trimCommentCharsFromStartOfLine (lines[index]);
 
-        if (continuationLine.isEmpty() || continuationLine.indexOfChar (':') != -1
+        if (continuationLine.empty() || continuationLine.indexOfChar (':') != -1
             || continuationLine.startsWith ("END_H"))
             break;
 

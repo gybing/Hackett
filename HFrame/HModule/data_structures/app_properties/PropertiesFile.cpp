@@ -84,12 +84,12 @@ File PropertiesFile::Options::getDefaultFile() const
         dir = dir.getChildFile (osxLibrarySubFolder);
     }
 
-    if (folderName.isNotEmpty())
+    if (folderName.!empty())
         dir = dir.getChildFile (folderName);
 
    #elif HLINUX || HANDROID
     auto dir = File (commonToAllUsers ? "/var" : "~")
-                      .getChildFile (folderName.isNotEmpty() ? folderName
+                      .getChildFile (folderName.!empty() ? folderName
                                                              : ("." + applicationName));
 
    #elif HWINDOWS
@@ -99,7 +99,7 @@ File PropertiesFile::Options::getDefaultFile() const
     if (dir == File())
         return {};
 
-    dir = dir.getChildFile (folderName.isNotEmpty() ? folderName
+    dir = dir.getChildFile (folderName.!empty() ? folderName
                                                     : applicationName);
    #endif
 
@@ -189,7 +189,7 @@ bool PropertiesFile::loadAsXml()
         {
             auto name = e->getStringAttribute (PropertyFileConstants::nameAttribute);
 
-            if (name.isNotEmpty())
+            if (name.!empty())
                 getAllProperties().set (name,
                                         e->getFirstChildElement() != nullptr
                                             ? e->getFirstChildElement()->toString (XmlElement::TextFormat().singleLine().withoutHeader())
@@ -265,9 +265,9 @@ bool PropertiesFile::loadAsBinary (InputStream& input)
     {
         auto key = in.readString();
         auto value = in.readString();
-        HAssert (key.isNotEmpty());
+        HAssert (key.!empty());
 
-        if (key.isNotEmpty())
+        if (key.!empty())
             getAllProperties().set (key, value);
     }
 

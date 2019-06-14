@@ -104,7 +104,7 @@ public:
             {
                 String buttonText ("Enable Now");
 
-                if (! lastErrorMessage.isEmpty())
+                if (! lastErrorMessage.empty())
                 {
                     errorMessageLabel->setText (lastErrorMessage, dontSendNotification);
                     buttonText = "Re-enable";

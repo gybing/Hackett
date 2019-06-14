@@ -88,7 +88,7 @@ public:
 
     //==============================================================================
     /** Returns true if the rectangle's width or height are zero or less */
-    bool isEmpty() const noexcept                                   { return w <= ValueType() || h <= ValueType(); }
+    bool empty() const noexcept                                   { return w <= ValueType() || h <= ValueType(); }
 
     /** Returns true if the rectangle's values are all finite numbers, i.e. not NaN or infinity. */
     inline bool isFinite() const noexcept                           { return pos.isFinite() && isfinite (w) && isfinite (h); }
@@ -688,8 +688,8 @@ public:
     */
     Rectangle getUnion (Rectangle other) const noexcept
     {
-        if (other.isEmpty())  return *this;
-        if (isEmpty())        return other;
+        if (other.empty())  return *this;
+        if (empty())        return other;
 
         auto newX = jmin (pos.x, other.pos.x);
         auto newY = jmin (pos.y, other.pos.y);

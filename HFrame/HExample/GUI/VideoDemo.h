@@ -574,7 +574,7 @@ private:
         {
             auto url = aw->getTextEditorContents ("videoUrlTextEditor");
 
-            if (url.isNotEmpty())
+            if (url.!empty())
                 owner->loadVideo (url);
         }
     }

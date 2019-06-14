@@ -81,7 +81,7 @@ public:
                                          File(),
                                          String()));
 
-            if (resource.isNotEmpty())
+            if (resource.!empty())
                 setResource (resource);
         }
         else
@@ -95,7 +95,7 @@ public:
 
     int getIndex() const
     {
-        if (getResource().isEmpty())
+        if (getResource().empty())
             return -1;
 
         return choices.indexOf (getResource());

@@ -896,7 +896,7 @@ static double getDisplayDPI (::Display* display, int index)
 
 static double getScaleForDisplay (const String& name, double dpi)
 {
-    if (name.isNotEmpty())
+    if (name.!empty())
     {
         // Ubuntu and derived distributions now save a per-display scale factor as a configuration
         // variable. This can be changed in the Monitor system settings panel.
@@ -909,7 +909,7 @@ static double getScaleForDisplay (const String& name, double dpi)
             {
                 auto jsonOutput = dconf.readAllProcessOutput().replaceCharacter ('\'', '"');
 
-                if (dconf.getExitCode() == 0 && jsonOutput.isNotEmpty())
+                if (dconf.getExitCode() == 0 && jsonOutput.!empty())
                 {
                     auto jsonVar = JSON::parse (jsonOutput);
 
@@ -1306,7 +1306,7 @@ public:
             if (shouldBeFullScreen)
                 r = Desktop::getInstance().getDisplays().getMainDisplay().userArea;
 
-            if (! r.isEmpty())
+            if (! r.empty())
                 setBounds (ScalingHelpers::scaledScreenPosToUnscaled (component, r), shouldBeFullScreen);
 
             component.repaint();
@@ -1659,7 +1659,7 @@ public:
             ::setlocale (LC_ALL, "");
             XLookupString (&keyEvent, utf8, sizeof (utf8), &sym, 0);
 
-            if (oldLocale.isNotEmpty())
+            if (oldLocale.!empty())
                 ::setlocale (LC_ALL, oldLocale.toRawUTF8());
 
             unicodeChar = *CharPointer_UTF8 (utf8);
@@ -2238,7 +2238,7 @@ private:
                 return;
            #endif
 
-            if (! regionsNeedingRepaint.isEmpty())
+            if (! regionsNeedingRepaint.empty())
             {
                 stopTimer();
                 performAnyPendingRepaintsNow();
@@ -2272,7 +2272,7 @@ private:
             regionsNeedingRepaint.clear();
             auto totalArea = originalRepaintRegion.getBounds();
 
-            if (! totalArea.isEmpty())
+            if (! totalArea.empty())
             {
                 if (image.isNull() || image.getWidth() < totalArea.getWidth()
                      || image.getHeight() < totalArea.getHeight())
@@ -3071,17 +3071,17 @@ private:
         {
             dragInfo.position = dropPos;
 
-            if (dragInfo.isEmpty())
+            if (dragInfo.empty())
                 updateDraggedFileList (clientMsg);
 
-            if (! dragInfo.isEmpty())
+            if (! dragInfo.empty())
                 handleDragMove (dragInfo);
         }
     }
 
     void handleDragAndDropDrop (const XClientMessageEvent& clientMsg)
     {
-        if (dragInfo.isEmpty())
+        if (dragInfo.empty())
         {
             // no data, transaction finished in handleDragAndDropSelection()
             finishAfterDropDataReceived = true;
@@ -3100,7 +3100,7 @@ private:
         sendDragAndDropFinish();
         resetDragAndDrop();
 
-        if (! dragInfoCopy.isEmpty())
+        if (! dragInfoCopy.empty())
             handleDragDrop (dragInfoCopy);
     }
 
@@ -3138,13 +3138,13 @@ private:
             }
         }
 
-        if (srcMimeTypeAtomList.isEmpty())
+        if (srcMimeTypeAtomList.empty())
         {
             for (int i = 2; i < 5; ++i)
                 if (clientMsg.data.l[i] != None)
                     srcMimeTypeAtomList.add ((unsigned long) clientMsg.data.l[i]);
 
-            if (srcMimeTypeAtomList.isEmpty())
+            if (srcMimeTypeAtomList.empty())
             {
                 dragAndDropSourceWindow = 0;
                 return;
@@ -3207,7 +3207,7 @@ private:
 
     void updateDraggedFileList (const XClientMessageEvent& clientMsg)
     {
-        HAssert (dragInfo.isEmpty());
+        HAssert (dragInfo.empty());
 
         if (dragAndDropSourceWindow != None
              && dragAndDropCurrentMimeType != None)
@@ -3513,12 +3513,12 @@ void Displays::findDisplays (float masterScale)
                     }
                 }
 
-                if (! displays.isEmpty() && ! displays.getReference (0).isMain)
+                if (! displays.empty() && ! displays.getReference (0).isMain)
                     displays.getReference (0).isMain = true;
             }
         }
 
-        if (displays.isEmpty())
+        if (displays.empty())
        #endif
        #if HUSE_XINERAMA
         {
@@ -3546,7 +3546,7 @@ void Displays::findDisplays (float masterScale)
             }
         }
 
-        if (displays.isEmpty())
+        if (displays.empty())
        #endif
         {
             if (hints != None)
@@ -3560,7 +3560,7 @@ void Displays::findDisplays (float masterScale)
                         Display d;
                         d.totalArea = Rectangle<int> ((int) position[0], (int) position[1],
                                                       (int) position[2], (int) position[3]);
-                        d.isMain = displays.isEmpty();
+                        d.isMain = displays.empty();
                         d.scale = masterScale;
                         d.dpi = getDisplayDPI (display, i);
 
@@ -3569,7 +3569,7 @@ void Displays::findDisplays (float masterScale)
                 }
             }
 
-            if (displays.isEmpty())
+            if (displays.empty())
             {
                 Display d;
                 d.totalArea = Rectangle<int> (DisplayWidth  (display, DefaultScreen (display)),
@@ -3592,7 +3592,7 @@ void Displays::findDisplays (float masterScale)
 //==============================================================================
 bool MouseInputSource::SourceList::addSource()
 {
-    if (sources.isEmpty())
+    if (sources.empty())
     {
         addSource (0, MouseInputSource::InputSourceType::mouse);
         return true;
@@ -4043,7 +4043,7 @@ static LinuxComponentPeer* getPeerForDragEvent (Component* sourceComp)
 bool DragAndDropContainer::performExternalDragDropOfFiles (const StringArray& files, bool canMoveFiles,
                                                            Component* sourceComp, std::function<void()> callback)
 {
-    if (files.isEmpty())
+    if (files.empty())
         return false;
 
     if (auto* lp = getPeerForDragEvent (sourceComp))
@@ -4057,7 +4057,7 @@ bool DragAndDropContainer::performExternalDragDropOfFiles (const StringArray& fi
 bool DragAndDropContainer::performExternalDragDropOfText (const String& text, Component* sourceComp,
                                                           std::function<void()> callback)
 {
-    if (text.isEmpty())
+    if (text.empty())
         return false;
 
     if (auto* lp = getPeerForDragEvent (sourceComp))

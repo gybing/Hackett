@@ -146,12 +146,12 @@ public:
     // WebInputStream methods
     void withExtraHeaders (const String& extraHeaders)
     {
-        if (! requestHeaders.endsWithChar ('\n') && requestHeaders.isNotEmpty())
+        if (! requestHeaders.endsWithChar ('\n') && !requestHeaders.empty())
             requestHeaders << "\r\n";
 
         requestHeaders << extraHeaders;
 
-        if (! requestHeaders.endsWithChar ('\n') && requestHeaders.isNotEmpty())
+        if (! requestHeaders.endsWithChar ('\n') && !requestHeaders.empty())
             requestHeaders << "\r\n";
     }
 
@@ -273,7 +273,7 @@ public:
                 return false;
             }
 
-            if (requestHeaders.isNotEmpty())
+            if (!requestHeaders.empty())
             {
                 const StringArray headerLines = StringArray::fromLines (requestHeaders);
 

@@ -8,18 +8,18 @@ struct TextDiffHelpers
     struct StringRegion
     {
         StringRegion (const String& s) noexcept
-            : text (s.getCharPointer()), start (0), length (s.length()) {}
+            : text (s.c_str()), start (0), length (s.length()) {}
 
-        StringRegion (String::CharPointerType t, int s, int len) noexcept
+        StringRegion (char* t, int s, int len) noexcept
             : text (t), start (s), length (len) {}
 
         void incrementStart() noexcept  { ++text; ++start; --length; }
 
-        String::CharPointerType text;
+        char* text;
         int start, length;
     };
 
-    static void addInsertion (TextDiff& td, String::CharPointerType text, int index, int length)
+    static void addInsertion (TextDiff& td, char* text, int index, int length)
     {
         TextDiff::Change c;
         c.insertedText = String (text, (size_t) length);
@@ -79,8 +79,8 @@ struct TextDiffHelpers
         }
     }
 
-    static int findLongestCommonSubstring (String::CharPointerType a, const int lenA, int& indexInA,
-                                           String::CharPointerType b, const int lenB, int& indexInB) noexcept
+    static int findLongestCommonSubstring (char* a, const int lenA, int& indexInA,
+                                           char* b, const int lenB, int& indexInB) noexcept
     {
         if (lenA == 0 || lenB == 0)
             return 0;
@@ -101,8 +101,8 @@ struct TextDiffHelpers
         return findLongestCommonSubstring (a, lenA, indexInA, b, lenB, indexInB, scratchSpace, scratch);
     }
 
-    static int findLongestCommonSubstring (String::CharPointerType a, const int lenA, int& indexInA,
-                                           String::CharPointerType b, const int lenB, int& indexInB,
+    static int findLongestCommonSubstring (char* a, const int lenA, int& indexInA,
+                                           char* b, const int lenB, int& indexInB,
                                            const size_t scratchSpace, int* const lines) noexcept
     {
         zeromem (lines, scratchSpace);
@@ -115,12 +115,12 @@ struct TextDiffHelpers
 
         for (int i = 0; i < lenA; ++i)
         {
-            auto ca = a.getAndAdvance();
+            auto ca = *a++;
             auto b2 = b;
 
             for (int j = 0; j < lenB; ++j)
             {
-                if (ca != b2.getAndAdvance())
+                if (ca != *b2++)
                 {
                     l1[j + 1] = 0;
                 }
@@ -150,8 +150,8 @@ struct TextDiffHelpers
         return bestLength;
     }
 
-    static int findCommonSuffix (String::CharPointerType a, int lenA, int& indexInA,
-                                 String::CharPointerType b, int lenB, int& indexInB) noexcept
+    static int findCommonSuffix (char* a, int lenA, int& indexInA,
+                                 char* b, int lenB, int& indexInB) noexcept
     {
         int length = 0;
         a += lenA - 1;
@@ -185,7 +185,7 @@ String TextDiff::appliedTo (String text) const
 
 bool TextDiff::Change::isDeletion() const noexcept
 {
-    return insertedText.isEmpty();
+    return insertedText.empty();
 }
 
 String TextDiff::Change::appliedTo (const String& text) const noexcept

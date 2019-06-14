@@ -56,7 +56,7 @@ public:
 
     String getUniqueName() const override
     {
-        if (xml.getTagName().isEmpty())
+        if (xml.getTagName().empty())
             return "unknown";
 
         return xml.getTagName();
@@ -214,7 +214,7 @@ private:
 
         if (! json.isVoid())
         {
-            if (text.isNotEmpty() && (! json.isArray()))
+            if (text.!empty() && (! json.isArray()))
                 text << ": ";
 
             if (json.isObject() && (! identifier.isValid()))
@@ -340,7 +340,7 @@ private:
         if (rootItem.get() != nullptr)
             errorMessage.clear();
 
-        errorMessage.setVisible (! errorMessage.isEmpty());
+        errorMessage.setVisible (! errorMessage.empty());
 
         resultsTree.setRootItem (rootItem.get());
     }
@@ -357,7 +357,7 @@ private:
         {
             auto error = doc.getLastParseError();
 
-            if (error.isEmpty())
+            if (error.empty())
                 error = "Unknown error";
 
             errorMessage.setText ("Error parsing XML: " + error, dontSendNotification);

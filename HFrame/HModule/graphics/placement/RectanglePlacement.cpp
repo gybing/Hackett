@@ -79,7 +79,7 @@ void RectanglePlacement::applyTo (double& x, double& y, double& w, double& h,
 
 AffineTransform RectanglePlacement::getTransformToFit (const Rectangle<float>& source, const Rectangle<float>& destination) const noexcept
 {
-    if (source.isEmpty())
+    if (source.empty())
         return AffineTransform();
 
     float newX = destination.getX();

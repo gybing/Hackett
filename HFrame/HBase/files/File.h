@@ -947,7 +947,7 @@ public:
     /** The system-specific file separator character.
         On Windows, this will be '\', on Mac/Linux, it'll be '/'
     */
-    static wchar getSeparatorChar();
+    static char getSeparatorChar();
 
     /** The system-specific file separator character, as a string.
         On Windows, this will be '\', on Mac/Linux, it'll be '/'
@@ -1053,11 +1053,13 @@ public:
             if (foldersFirst && (firstFile.isDirectory() != secondFile.isDirectory()))
                 return firstFile.isDirectory() ? -1 : 1;
 
-           #if NAMES_ARE_CASE_SENSITIVE
-            return firstFile.getFullPathName().compareNatural (secondFile.getFullPathName(), true);
-           #else
-            return firstFile.getFullPathName().compareNatural (secondFile.getFullPathName(), false);
-           #endif
+			std::string firstName = firstFile.getFullPathName();
+			std::string secondName = secondFile.getFullPathName();
+
+			std::transform(firstName.begin(), firstName.end(), firstName.begin(), std::tolower);
+			std::transform(secondName.begin(), secondName.end(), secondName.begin(), std::tolower);
+
+			return firstFile == secondFile;
         }
 
         bool foldersFirst;

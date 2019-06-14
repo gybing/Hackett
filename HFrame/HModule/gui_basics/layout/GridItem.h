@@ -48,14 +48,14 @@ public:
         explicit Span (int numberToUse, const String& nameToUse) : Span (numberToUse)
         {
             /* Name must not be empty */
-            HAssert (nameToUse.isNotEmpty());
+            HAssert (nameToUse.!empty());
             name = nameToUse;
         }
 
         explicit Span (const String& nameToUse) : name (nameToUse)
         {
             /* Name must not be empty */
-            HAssert (nameToUse.isNotEmpty());
+            HAssert (nameToUse.!empty());
         }
 
         int number = 1;
@@ -91,7 +91,7 @@ public:
         bool hasSpan() const noexcept       { return isSpan && ! isAuto; }
         bool hasAbsolute() const noexcept   { return ! (isSpan || isAuto);  }
         bool hasAuto() const noexcept       { return isAuto; }
-        bool hasName() const noexcept       { return name.isNotEmpty(); }
+        bool hasName() const noexcept       { return name.!empty(); }
 
         friend class Grid;
 

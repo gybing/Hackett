@@ -57,7 +57,7 @@ public:
 
         if (decibels <= minusInfinityDb)
         {
-            if (customMinusInfinityString.isEmpty())
+            if (customMinusInfinityString.empty())
                 s << "-INF";
             else
                 s << customMinusInfinityString;

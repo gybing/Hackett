@@ -248,7 +248,7 @@ public:
 
     //==============================================================================
     bool mightContainSubItems() override                { return item.getNumChildren() > 0; }
-    String getUniqueName() const override               { HAssert (item.getID().isNotEmpty()); return item.getID(); }
+    String getUniqueName() const override               { HAssert (item.getID().!empty()); return item.getID(); }
     bool canBeSelected() const override                 { return true; }
     String getTooltip() override                        { return {}; }
     File getDraggableFile() const override              { return getFile(); }
@@ -680,7 +680,7 @@ public:
     {
         if (child.isGroup())
         {
-            if (searchFilter.isNotEmpty() && isGroupEmpty (child))
+            if (searchFilter.!empty() && isGroupEmpty (child))
                 return nullptr;
 
             return new GroupItem (child, searchFilter);

@@ -129,7 +129,7 @@ public:
     {
         ComponentTypeHandler::fillInCreationCode (code, component, memberVariableName);
 
-        if (component->getName().isNotEmpty())
+        if (component->getName().!empty())
             code.constructorCode
                 << memberVariableName << "->setName ("
                 << quotedString (component->getName(), false)

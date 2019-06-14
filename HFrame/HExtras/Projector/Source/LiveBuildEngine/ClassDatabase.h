@@ -85,7 +85,7 @@ struct ClassDatabase
         void mergeWith (const MemberInfo& other)
         {
             HAssert (name == other.name);
-            if (other.type.isNotEmpty())
+            if (other.type.!empty())
                 type = other.type;
 
             for (int i = 0; i < numCodeLocationTypes; ++i)
@@ -461,10 +461,10 @@ struct ClassDatabase
         Namespace()  : name ("Global Namespace") {}
         Namespace (const String& n, const String& full)  : name (n), fullName (full) {}
 
-        bool isEmpty() const noexcept
+        bool empty() const noexcept
         {
             for (const auto& n : namespaces)
-                if (! n.isEmpty())
+                if (! n.empty())
                     return false;
 
             return components.size() == 0;
@@ -480,11 +480,11 @@ struct ClassDatabase
             return total;
         }
 
-        void add (const Class& c, const String::CharPointerType& localName)
+        void add (const Class& c, const char*& localName)
         {
             auto nextDoubleColon = CharacterFunctions::find (localName, CharPointer_ASCII ("::"));
 
-            if (nextDoubleColon.isEmpty())
+            if (nextDoubleColon.empty())
                 merge (c);
             else
                 getOrCreateNamespace (String (localName, nextDoubleColon))->add (c, nextDoubleColon + 2);
@@ -701,7 +701,7 @@ struct ClassDatabase
 
         void registerComp (const Class& comp)
         {
-            globalNamespace.add (comp, comp.getName().getCharPointer());
+            globalNamespace.add (comp, comp.getName().c_str());
         }
 
         void merge (const ClassList& other)

@@ -319,7 +319,7 @@ String MidiMessage::getDescription() const
     {
         String name (MidiMessage::getControllerName (getControllerNumber()));
 
-        if (name.isEmpty())
+        if (name.empty())
             name = String (getControllerNumber());
 
         return "Controller " + name + ": " + String (getControllerValue()) + " Channel " + String (getChannel());

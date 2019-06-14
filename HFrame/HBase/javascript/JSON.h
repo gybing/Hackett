@@ -103,7 +103,7 @@ public:
         result parameter, and an error message in case the content was illegal.
         This advances the text parameter, leaving it positioned after the closing quote.
     */
-    static Result parseQuotedString (String::CharPointerType& text, var& result);
+    static Result parseQuotedString (char*& text, var& result);
 
 private:
     //==============================================================================

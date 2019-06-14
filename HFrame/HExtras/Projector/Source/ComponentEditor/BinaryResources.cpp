@@ -142,7 +142,7 @@ String BinaryResources::browseForResource (const String& title,
     {
         String name (resourceToReplace);
 
-        if (name.isEmpty())
+        if (name.empty())
             name = findUniqueName (fc.getResult().getFileName());
 
         if (! add (name, fc.getResult()))
@@ -226,9 +226,9 @@ void BinaryResources::loadFromCpp (const File& cppFileLocation, const String& cp
             auto resourceSize = tokens[1].getIntValue();
             auto originalFileName = cppFileLocation.getSiblingFile (tokens[2].unquoted()).getFullPathName();
 
-            HAssert (resourceName.isNotEmpty() && resourceSize > 0);
+            HAssert (resourceName.!empty() && resourceSize > 0);
 
-            if (resourceName.isNotEmpty() && resourceSize > 0)
+            if (resourceName.!empty() && resourceSize > 0)
             {
                 auto firstLine = i;
 
@@ -240,12 +240,12 @@ void BinaryResources::loadFromCpp (const File& cppFileLocation, const String& cp
                                      .fromFirstOccurrenceOf ("{", false, false);
 
                 MemoryOutputStream out;
-                String::CharPointerType t (dataString.getCharPointer());
+                char* t (dataString.c_str());
                 int n = 0;
 
-                while (! t.isEmpty())
+                while (! t.empty())
                 {
-                    auto c = t.getAndAdvance();
+                    auto c = *t++;
 
                     if (c >= '0' && c <= '9')
                     {

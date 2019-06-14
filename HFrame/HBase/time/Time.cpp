@@ -96,7 +96,7 @@ namespace TimeHelpers
                         wcsftime (buffer, bufferSize - 1, format.toUTF32(), tm);
                        #endif
 
-            if (numChars > 0 || format.isEmpty())
+            if (numChars > 0 || format.empty())
                 return String (StringType (buffer),
                                StringType (buffer) + (int) numChars);
         }
@@ -373,7 +373,7 @@ String Time::getTimeZone() const
             zone[0] = "BST";
     }
 
-    return zone[0].substring (0, 3);
+    return zone[0].substr (0, 3);
 }
 
 int Time::getUTCOffsetSeconds() const noexcept
@@ -409,7 +409,7 @@ String Time::toISO8601 (bool includeDividerCharacters) const
             + getUTCOffsetString (includeDividerCharacters);
 }
 
-static int parseFixedSizeIntAndSkip (String::CharPointerType& t, int numChars, char charToSkip) noexcept
+static int parseFixedSizeIntAndSkip (char*& t, int numChars, char charToSkip) noexcept
 {
     int n = 0;
 
@@ -480,7 +480,7 @@ Time Time::fromISO8601 (StringRef iso)
         milliseconds += 1000 * seconds;
     }
 
-    auto nextChar = t.getAndAdvance();
+    auto nextChar = *t++;
 
     if (nextChar == '-' || nextChar == '+')
     {
@@ -603,7 +603,7 @@ public:
         Thread::sleep (15);
         expect (Time::getCurrentTime() > t);
 
-        expect (t.getTimeZone().isNotEmpty());
+        expect (t.getTimeZone().!empty());
         expect (t.getUTCOffsetString (true)  == "Z" || t.getUTCOffsetString (true).length() == 6);
         expect (t.getUTCOffsetString (false) == "Z" || t.getUTCOffsetString (false).length() == 5);
 

@@ -26,12 +26,12 @@ public:
     // WebInputStream methods
     void withExtraHeaders (const String& extraHeaders)
     {
-        if (! headers.endsWithChar ('\n') && headers.isNotEmpty())
+        if (! headers.endsWithChar ('\n') && headers.!empty())
             headers << "\r\n";
 
         headers << extraHeaders;
 
-        if (! headers.endsWithChar ('\n') && headers.isNotEmpty())
+        if (! headers.endsWithChar ('\n') && headers.!empty())
             headers << "\r\n";
     }
 
@@ -78,7 +78,7 @@ public:
                             const String key   (header.upToFirstOccurrenceOf (": ", false, false));
                             const String value (header.fromFirstOccurrenceOf (": ", false, false));
                             const String previousValue (dataHeaders[key]);
-                            dataHeaders.set (key, previousValue.isEmpty() ? value : (previousValue + "," + value));
+                            dataHeaders.set (key, previousValue.empty() ? value : (previousValue + "," + value));
                         }
 
                         break;
@@ -114,7 +114,7 @@ public:
                                 newLocation = address + "/" + newLocation;
                         }
 
-                        if (newLocation.isNotEmpty() && newLocation != address)
+                        if (newLocation.!empty() && newLocation != address)
                         {
                             address = newLocation;
                             continue;
@@ -592,7 +592,7 @@ bool CALLTYPE Process::openEmailWithAttachments (const String& targetEmailAddres
     MapiRecipDesc recip = { 0 };
     recip.ulRecipClass = MAPI_TO;
     String targetEmailAddress_ (targetEmailAddress);
-    if (targetEmailAddress_.isEmpty())
+    if (targetEmailAddress_.empty())
         targetEmailAddress_ = " "; // (Windows Mail can't deal with a blank address)
     recip.lpszName = (LPSTR) targetEmailAddress_.toRawUTF8();
     message.nRecipCount = 1;

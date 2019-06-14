@@ -117,7 +117,7 @@ public:
     {
         customPaintCode.clear();
 
-        if (! snippets.isEmpty() && (! fillType.isInvisible() || (isStrokePresent && ! strokeType.isInvisible())))
+        if (! snippets.empty() && (! fillType.isInvisible() || (isStrokePresent && ! strokeType.isInvisible())))
         {
             customPaintCode = snippets[0];
             snippets.remove (0);

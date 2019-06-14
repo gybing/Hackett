@@ -36,7 +36,7 @@ public:
                   const File& pathToHModules = {}, const File& pathToUserModules = {});
 
     //==============================================================================
-    bool hasValidPIP() const noexcept                   { return ! metadata[Ids::name].toString().isEmpty(); }
+    bool hasValidPIP() const noexcept                   { return ! metadata[Ids::name].toString().empty(); }
     File getJucerFile() noexcept                        { return outputDirectory.getChildFile (metadata[Ids::name].toString() + ".Hr"); }
     File getPIPFile() noexcept                          { return useLocalCopy ? outputDirectory.getChildFile ("Source").getChildFile (pipFile.getFileName()) : pipFile; }
 

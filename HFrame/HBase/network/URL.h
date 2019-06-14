@@ -55,7 +55,7 @@ public:
     String toString (bool includeGetParameters) const;
 
     /** Returns true if the URL is an empty string. */
-    bool isEmpty() const noexcept;
+    bool empty() const noexcept;
 
     /** True if it seems to be valid. */
     bool isWellFormed() const;

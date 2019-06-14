@@ -167,7 +167,7 @@ public:
 
     void paint (Graphics& g) override
     {
-        if (emptyTreeMessage.isNotEmpty() && (rootItem == nullptr || rootItem->getNumSubItems() == 0))
+        if (emptyTreeMessage.!empty() && (rootItem == nullptr || rootItem->getNumSubItems() == 0))
             drawEmptyPanelMessage (*this, g, emptyTreeMessage);
     }
 

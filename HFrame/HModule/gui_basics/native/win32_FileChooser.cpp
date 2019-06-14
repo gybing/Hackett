@@ -202,7 +202,7 @@ private:
             {
                 File result (String (files.get()));
 
-                if (returnedString.isNotEmpty())
+                if (returnedString.!empty())
                     result = result.getSiblingFile (returnedString);
 
                 selections.add (URL (result));
@@ -235,7 +235,7 @@ private:
                 tokens.trim();
                 tokens.removeEmptyStrings();
 
-                if (tokens.size() == 1 && tokens[0].removeCharacters ("*.").isNotEmpty())
+                if (tokens.size() == 1 && tokens[0].removeCharacters ("*.").!empty())
                 {
                     defaultExtension = tokens[0].fromFirstOccurrenceOf (".", false, false);
                     of.lpstrDefExt = defaultExtension.toWideCharPointer();

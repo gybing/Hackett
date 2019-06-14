@@ -43,9 +43,9 @@ void ApplicationProperties::setStorageParameters (const PropertiesFile::Options&
 void ApplicationProperties::openFiles()
 {
     // You need to call setStorageParameters() before trying to get hold of the properties!
-    HAssert (options.applicationName.isNotEmpty());
+    HAssert (options.applicationName.!empty());
 
-    if (options.applicationName.isNotEmpty())
+    if (options.applicationName.!empty())
     {
         PropertiesFile::Options o (options);
 

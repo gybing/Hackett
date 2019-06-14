@@ -37,7 +37,7 @@ public:
     {
         auto pbxprojs = projectFile.findChildFiles (File::TypesOfFileToFind::findFiles, false, "*.pbxproj");
 
-        if (pbxprojs.isEmpty())
+        if (pbxprojs.empty())
         {
             HAssertfalse;
             return nullptr;
@@ -131,7 +131,7 @@ public:
         HAssert (! mainObject.first.empty());
 
         auto targetRefs = parseObjectItemList (mainObject.second, "targets");
-        HAssert (! targetRefs.isEmpty());
+        HAssert (! targetRefs.empty());
 
         std::vector<std::pair<String, String>> results;
 

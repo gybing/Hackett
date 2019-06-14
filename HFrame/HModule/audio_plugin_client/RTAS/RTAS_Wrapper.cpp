@@ -603,7 +603,7 @@ public:
             }
         }
 
-        if (! midiEvents.isEmpty())
+        if (! midiEvents.empty())
         {
            #if JucePlugin_ProducesMidiOutput
             const uint8* midiEventData;
@@ -868,7 +868,7 @@ private:
         void GetNameOfLength (char* name, int maxLength, OSType inControllerType) const
         {
             // Pro-tools expects all your parameters to have valid names!
-            HAssert (processor.getParameterName (index, maxLength).isNotEmpty());
+            HAssert (processor.getParameterName (index, maxLength).!empty());
 
             processor.getParameterName (index, maxLength).copyToUTF8 (name, (size_t) maxLength + 1);
         }

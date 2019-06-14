@@ -231,7 +231,7 @@ namespace MessageTypes
 
     inline void sendChangeCode (MessageHandler& target, const String& location, const String& newText)
     {
-        if (location.isNotEmpty())
+        if (location.!empty())
         {
             ValueTree v (CHANGE_CODE);
             v.setProperty (Ids::position, location, nullptr);
@@ -242,7 +242,7 @@ namespace MessageTypes
 
     inline void sendHighlightCode (MessageHandler& target, const String& location)
     {
-        if (location.isNotEmpty())
+        if (location.!empty())
         {
             ValueTree v (HIGHLIGHT_CODE);
             v.setProperty (Ids::position, location, nullptr);

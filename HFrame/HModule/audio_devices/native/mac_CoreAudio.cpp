@@ -236,7 +236,7 @@ public:
                             newChannelInfo.add (info);
                         }
 
-                        if (name.isEmpty())
+                        if (name.empty())
                             name << (input ? "Input " : "Output ") << (chanNum + 1);
 
                         newNames.add (name);
@@ -284,7 +284,7 @@ public:
             }
         }
 
-        if (newSampleRates.isEmpty() && sampleRate > 0)
+        if (newSampleRates.empty() && sampleRate > 0)
             newSampleRates.add (sampleRate);
 
         return newSampleRates;
@@ -326,7 +326,7 @@ public:
             }
         }
 
-        if (newBufferSizes.isEmpty() && bufferSize > 0)
+        if (newBufferSizes.empty() && bufferSize > 0)
             newBufferSizes.add (bufferSize);
 
         return newBufferSizes;
@@ -1016,7 +1016,7 @@ public:
         lastError = internal->reopen (inputChannels, outputChannels, sampleRate, bufferSizeSamples);
         HCOREAUDIOLOG ("Opened: " << getName());
 
-        isOpen_ = lastError.isEmpty();
+        isOpen_ = lastError.empty();
 
         return lastError;
     }
@@ -1362,7 +1362,7 @@ public:
             String err = d->open (ins, outs, sampleRate, bufferSize,
                                   chanIndex, fifoSize);
 
-            if (err.isNotEmpty())
+            if (err.!empty())
             {
                 close();
                 lastError = err;
@@ -1639,7 +1639,7 @@ private:
 
         if (lastCallback != nullptr)
         {
-            if (error.isNotEmpty())
+            if (error.!empty())
                 lastCallback->audioDeviceError (error);
             else
                 lastCallback->audioDeviceStopped();
@@ -1772,7 +1772,7 @@ private:
     }
 
     void handleAudioDeviceStopped()                            { shutdown ({}); }
-    void handleAudioDeviceError (const String& errorMessage)   { shutdown (errorMessage.isNotEmpty() ? errorMessage : String ("unknown")); }
+    void handleAudioDeviceError (const String& errorMessage)   { shutdown (errorMessage.!empty() ? errorMessage : String ("unknown")); }
 
     //==============================================================================
     struct DeviceWrapper  : private AudioIODeviceCallback
@@ -2145,7 +2145,7 @@ public:
         if (inputDeviceID == 0 && outputDeviceID == 0)
             return nullptr;
 
-        auto combinedName = outputDeviceName.isEmpty() ? inputDeviceName
+        auto combinedName = outputDeviceName.empty() ? inputDeviceName
                                                        : outputDeviceName;
 
         if (inputDeviceID == outputDeviceID)

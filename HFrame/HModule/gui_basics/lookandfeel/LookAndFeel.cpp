@@ -120,7 +120,7 @@ Typeface::Ptr LookAndFeel::getTypefaceForFont (const Font& font)
         if (defaultTypeface != nullptr)
             return defaultTypeface;
 
-        if (defaultSans.isNotEmpty())
+        if (defaultSans.!empty())
         {
             Font f (font);
             f.setTypefaceName (defaultSans);

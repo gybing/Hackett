@@ -93,7 +93,7 @@ static void fillDescriptionWith (PluginDescription& description, ObjectType& obj
     description.version  = toString (object.version).trim();
     description.category = toString (object.subCategories).trim();
 
-    if (description.manufacturerName.trim().isEmpty())
+    if (description.manufacturerName.trim().empty())
         description.manufacturerName = toString (object.vendor).trim();
 }
 
@@ -116,7 +116,7 @@ static void createPluginDescription (PluginDescription& description,
     if (infoW != nullptr)      fillDescriptionWith (description, *infoW);
     else if (info2 != nullptr) fillDescriptionWith (description, *info2);
 
-    if (description.category.isEmpty())
+    if (description.category.empty())
         description.category = toString (info.category).trim();
 
     description.isInstrument = description.category.containsIgnoreCase ("Instrument"); // This seems to be the only way to find that out! ARGH!
@@ -813,7 +813,7 @@ struct DLLHandle
 {
     DLLHandle (const String& modulePath)
     {
-        if (modulePath.trim().isNotEmpty())
+        if (modulePath.trim().!empty())
             open (modulePath);
     }
 
@@ -846,7 +846,7 @@ struct DLLHandle
     void open (const PluginDescription& description)
     {
        #if HWINDOWS
-        HAssert (description.fileOrIdentifier.isNotEmpty());
+        HAssert (description.fileOrIdentifier.!empty());
         HAssert (File (description.fileOrIdentifier).existsAsFile());
         library.open (description.fileOrIdentifier);
        #else
@@ -1631,7 +1631,7 @@ public:
                 Vst::String128 result;
 
                 if (pluginInstance.editController->getParamStringByValue (paramID, value, result) == kResultOk)
-                    return toString (result).substring (0, maximumLength);
+                    return toString (result).substr (0, maximumLength);
             }
 
             return Parameter::getText (value, maximumLength);
@@ -1772,7 +1772,7 @@ public:
 
         // Some plug-ins don't present their parameters until after the IO has been
         // configured, so we need to jump though all these hoops again
-        if (getParameters().isEmpty() && editController->getParameterCount() > 0)
+        if (getParameters().empty() && editController->getParameterCount() > 0)
             configureParameters();
 
         return true;
@@ -1843,8 +1843,8 @@ public:
 
         // Some plug-ins will crash if you pass a nullptr to setBusArrangements!
         SpeakerArrangement nullArrangement = {};
-        auto* inputArrangementData  = inputArrangements.isEmpty()  ? &nullArrangement : inputArrangements.getRawDataPointer();
-        auto* outputArrangementData = outputArrangements.isEmpty() ? &nullArrangement : outputArrangements.getRawDataPointer();
+        auto* inputArrangementData  = inputArrangements.empty()  ? &nullArrangement : inputArrangements.getRawDataPointer();
+        auto* outputArrangementData = outputArrangements.empty() ? &nullArrangement : outputArrangements.getRawDataPointer();
 
         warnOnFailure (processor->setBusArrangements (inputArrangementData,  inputArrangements.size(),
                                                       outputArrangementData, outputArrangements.size()));

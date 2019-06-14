@@ -529,7 +529,7 @@ public:
             }
         }
 
-        if (! midiEvents.isEmpty())
+        if (! midiEvents.empty())
         {
            #if JucePlugin_ProducesMidiOutput || JucePlugin_IsMidiEffect
             auto numEvents = midiEvents.getNumEvents();

@@ -159,7 +159,7 @@ public:
     String getCustomResourceFoldersString() const      { return customXcodeResourceFoldersValue.get().toString().replaceCharacters ("\r\n", "::"); }
     String getCustomXcassetsFolderString() const       { return customXcassetsFolderValue.get(); }
     String getCustomLaunchStoryboardString() const     { return customLaunchStoryboardValue.get(); }
-    bool shouldAddStoryboardToProject() const          { return getCustomLaunchStoryboardString().isNotEmpty() || getCustomXcassetsFolderString().isEmpty(); }
+    bool shouldAddStoryboardToProject() const          { return getCustomLaunchStoryboardString().!empty() || getCustomXcassetsFolderString().empty(); }
 
     bool isHardenedRuntimeEnabled() const              { return hardenedRuntimeValue.get(); }
     Array<var> getHardenedRuntimeOptions() const       { return *hardenedRuntimeOptionsValue.get().getArray(); }
@@ -1001,8 +1001,8 @@ public:
         //==============================================================================
         void addMainBuildProduct() const
         {
-            HAssert (xcodeFileType.isNotEmpty());
-            HAssert (xcodeBundleExtension.isEmpty() || xcodeBundleExtension.startsWithChar ('.'));
+            HAssert (xcodeFileType.!empty());
+            HAssert (xcodeBundleExtension.empty() || xcodeBundleExtension.startsWithChar ('.'));
 
             if (ProjectExporter::BuildConfiguration::Ptr config = owner.getConfiguration(0))
             {
@@ -1032,7 +1032,7 @@ public:
         //==============================================================================
         void addDependency()
         {
-            HAssert (dependencyID.isEmpty());
+            HAssert (dependencyID.empty());
 
             dependencyID = owner.createID (String ("__dependency") + getName());
             auto* v = new ValueTree (dependencyID);
@@ -1045,7 +1045,7 @@ public:
 
         String getDependencyID() const
         {
-            HAssert (dependencyID.isNotEmpty());
+            HAssert (dependencyID.!empty());
 
             return dependencyID;
         }
@@ -1071,7 +1071,7 @@ public:
 
             auto developmentTeamID = owner.getIosDevelopmentTeamIDString();
 
-            if (developmentTeamID.isNotEmpty())
+            if (developmentTeamID.!empty())
             {
                 attributes << "DevelopmentTeam = " << developmentTeamID << "; ";
                 attributes << "ProvisioningStyle = Automatic; ";
@@ -1106,7 +1106,7 @@ public:
         //==============================================================================
         ValueTree& addBuildPhase (const String& buildPhaseType, const StringArray& fileIds, const StringRef humanReadableName = StringRef())
         {
-            auto buildPhaseName = buildPhaseType + "_" + getName() + "_" + (humanReadableName.isNotEmpty() ? String (humanReadableName) : String ("resbuildphase"));
+            auto buildPhaseName = buildPhaseType + "_" + getName() + "_" + (humanReadableName.!empty() ? String (humanReadableName) : String ("resbuildphase"));
             auto buildPhaseId (owner.createID (buildPhaseName));
 
             int n = 0;
@@ -1121,7 +1121,7 @@ public:
             v->setProperty ("files", indentParenthesisedList (fileIds), nullptr);
             v->setProperty ("runOnlyForDeploymentPostprocessing", (int) 0, nullptr);
 
-            if (humanReadableName.isNotEmpty())
+            if (humanReadableName.!empty())
                 v->setProperty ("name", String (humanReadableName), nullptr);
 
             owner.misc.add (v);
@@ -1155,10 +1155,10 @@ public:
         String getBundleIdentifier() const
         {
             auto exporterBundleIdentifier = owner.exporterBundleIdentifierValue.get().toString();
-            auto bundleIdentifier = exporterBundleIdentifier.isNotEmpty() ? exporterBundleIdentifier
+            auto bundleIdentifier = exporterBundleIdentifier.!empty() ? exporterBundleIdentifier
                                                                           : owner.project.getBundleIdentifierString();
 
-            if (xcodeBundleIDSubPath.isNotEmpty())
+            if (xcodeBundleIDSubPath.!empty())
             {
                 auto bundleIdSegments = StringArray::fromTokens (bundleIdentifier, ".", StringRef());
 
@@ -1182,7 +1182,7 @@ public:
 
                 auto sdkRoot = getOSXSDKVersion (config.getOSXSDKVersionString());
 
-                if (sdkRoot.isNotEmpty())
+                if (sdkRoot.!empty())
                     s.set ("SDKROOT", sdkRoot);
 
                 return s;
@@ -1206,7 +1206,7 @@ public:
 
             auto frameworkSearchPaths = getFrameworkSearchPaths (config);
 
-            if (! frameworkSearchPaths.isEmpty())
+            if (! frameworkSearchPaths.empty())
                 s.set ("FRAMEWORK_SEARCH_PATHS", String ("(") + frameworkSearchPaths.joinIntoString (", ") + ", \"$(inherited)\")");
 
             s.set ("GCC_OPTIMIZATION_LEVEL", config.getGCCOptimisationFlag());
@@ -1215,7 +1215,7 @@ public:
             {
                 s.set ("INFOPLIST_FILE", infoPlistFile.getFileName());
 
-                if (owner.getPListPrefixHeaderString().isNotEmpty())
+                if (owner.getPListPrefixHeaderString().!empty())
                     s.set ("INFOPLIST_PREFIX_HEADER", owner.getPListPrefixHeaderString());
 
                 s.set ("INFOPLIST_PREPROCESS", (owner.isPListPreprocessEnabled() ? String ("YES") : String ("NO")));
@@ -1228,7 +1228,7 @@ public:
                     auto def = plistDefs.getAllKeys()[i];
                     auto value = plistDefs.getAllValues()[i];
 
-                    if (value.isNotEmpty())
+                    if (value.!empty())
                         def << "=" << value.replace ("\"", "\\\\\\\"");
 
                     defsList.add ("\"" + def + "\"");
@@ -1246,7 +1246,7 @@ public:
 
             auto extraFlags = owner.replacePreprocessorTokens (config, owner.getExtraCompilerFlagsString()).trim();
 
-            if (extraFlags.isNotEmpty())
+            if (extraFlags.!empty())
                 s.set ("OTHER_CPLUSPLUSFLAGS", extraFlags.quoted());
 
             auto installPath = getInstallPathForConfiguration (config);
@@ -1254,14 +1254,14 @@ public:
             if (installPath.startsWith ("~"))
                 installPath = installPath.replace ("~", "$(HOME)");
 
-            if (installPath.isNotEmpty())
+            if (installPath.!empty())
             {
                 s.set ("INSTALL_PATH", installPath.quoted());
 
                 if (type == Target::SharedCodeTarget)
                     s.set ("SKIP_INSTALL", "YES");
 
-                if (! owner.embeddedFrameworkIDs.isEmpty())
+                if (! owner.embeddedFrameworkIDs.empty())
                     s.set ("LD_RUNPATH_SEARCH_PATHS", "\"$(inherited) @executable_path/Frameworks @executable_path/../Frameworks\"");
 
                 if (xcodeCopyToProductInstallPathAfterBuild)
@@ -1274,16 +1274,16 @@ public:
             if (getTargetFileType() == pluginBundle)
             {
                 s.set ("LIBRARY_STYLE", "Bundle");
-                s.set ("WRAPPER_EXTENSION", xcodeBundleExtension.substring (1));
+                s.set ("WRAPPER_EXTENSION", xcodeBundleExtension.substr (1));
                 s.set ("GENERATE_PKGINFO_FILE", "YES");
             }
 
-            if (xcodeOtherRezFlags.isNotEmpty())
+            if (xcodeOtherRezFlags.!empty())
                 s.set ("OTHER_REZFLAGS", "\"" + xcodeOtherRezFlags + "\"");
 
             String configurationBuildDir ("$(PROJECT_DIR)/build/$(CONFIGURATION)");
 
-            if (config.getTargetBinaryRelativePathString().isNotEmpty())
+            if (config.getTargetBinaryRelativePathString().!empty())
             {
                 // a target's position can either be defined via installPath + xcodeCopyToProductInstallPathAfterBuild
                 // (= for audio plug-ins) or using a custom binary path (for everything else), but not both (= conflict!)
@@ -1312,7 +1312,7 @@ public:
 
                 auto sdkRoot = getOSXSDKVersion (config.getOSXSDKVersionString());
 
-                if (sdkRoot.isNotEmpty())
+                if (sdkRoot.!empty())
                     s.set ("SDKROOT", sdkRoot);
             }
 
@@ -1326,7 +1326,7 @@ public:
                 s.set ("PROVISIONING_PROFILE_SPECIFIER", "\"\"");
             }
 
-            if (owner.getIosDevelopmentTeamIDString().isNotEmpty())
+            if (owner.getIosDevelopmentTeamIDString().!empty())
                 s.set ("DEVELOPMENT_TEAM", owner.getIosDevelopmentTeamIDString());
 
             if (shouldAddEntitlements())
@@ -1409,7 +1409,7 @@ public:
             {
                 auto def = defines.getAllKeys()[i];
                 auto value = defines.getAllValues()[i];
-                if (value.isNotEmpty())
+                if (value.!empty())
                     def << "=" << value.replace ("\"", "\\\\\\\"");
 
                 defsList.add ("\"" + def + "\"");
@@ -1519,7 +1519,7 @@ public:
                 {
                     auto customStoryboard = owner.getCustomLaunchStoryboardString();
 
-                    addPlistDictionaryKey (dict, "UILaunchStoryboardName", customStoryboard.isNotEmpty() ? customStoryboard.fromLastOccurrenceOf ("/", false, false)
+                    addPlistDictionaryKey (dict, "UILaunchStoryboardName", customStoryboard.!empty() ? customStoryboard.fromLastOccurrenceOf ("/", false, false)
                                                                                                                            .upToLastOccurrenceOf (".storyboard", false, false)
                                                                                                          : owner.getDefaultLaunchStoryboardName());
                 }
@@ -1556,7 +1556,7 @@ public:
                 for (auto ex : documentExtensions)
                 {
                     if (ex.startsWithChar ('.'))
-                        ex = ex.substring (1);
+                        ex = ex.substr (1);
 
                     if (arrayTag == nullptr)
                     {
@@ -1605,9 +1605,9 @@ public:
                     auto* audioComponentsDict = audioComponentsPlistEntry.createNewChildElement ("dict");
 
                     addPlistDictionaryKey    (audioComponentsDict, "name",         owner.project.getIAAPluginName());
-                    addPlistDictionaryKey    (audioComponentsDict, "manufacturer", owner.project.getPluginManufacturerCodeString().substring (0, 4));
+                    addPlistDictionaryKey    (audioComponentsDict, "manufacturer", owner.project.getPluginManufacturerCodeString().substr (0, 4));
                     addPlistDictionaryKey    (audioComponentsDict, "type",         owner.project.getIAATypeCode());
-                    addPlistDictionaryKey    (audioComponentsDict, "subtype",      owner.project.getPluginCodeString().substring (0, 4));
+                    addPlistDictionaryKey    (audioComponentsDict, "subtype",      owner.project.getPluginCodeString().substr (0, 4));
                     addPlistDictionaryKeyInt (audioComponentsDict, "version",      owner.project.getVersionAsHexInteger());
 
                     dict->addChildElement (new XmlElement (audioComponentsPlistEntry));
@@ -1667,7 +1667,7 @@ public:
         //==============================================================================
         void addShellScriptBuildPhase (const String& phaseName, const String& script)
         {
-            if (script.trim().isNotEmpty())
+            if (script.trim().!empty())
             {
                 auto& v = addBuildPhase ("PBXShellScriptBuildPhase", {});
                 v.setProperty (Ids::name, phaseName, nullptr);
@@ -1744,8 +1744,8 @@ public:
             XmlElement plistEntry ("array");
             auto* dict = plistEntry.createNewChildElement ("dict");
 
-            auto pluginManufacturerCode = owner.project.getPluginManufacturerCodeString().substring (0, 4);
-            auto pluginSubType          = owner.project.getPluginCodeString().substring (0, 4);
+            auto pluginManufacturerCode = owner.project.getPluginManufacturerCodeString().substr (0, 4);
+            auto pluginSubType          = owner.project.getPluginCodeString().substr (0, 4);
 
             if (pluginManufacturerCode.toLowerCase() == pluginManufacturerCode)
             {
@@ -1807,9 +1807,9 @@ public:
                                                             + ": " + owner.project.getPluginNameString());
             addPlistDictionaryKey (componentDict, "description", owner.project.getPluginDescriptionString());
             addPlistDictionaryKey (componentDict, "factoryFunction",owner.project. getPluginAUExportPrefixString() + "FactoryAUv3");
-            addPlistDictionaryKey (componentDict, "manufacturer", owner.project.getPluginManufacturerCodeString().substring (0, 4));
+            addPlistDictionaryKey (componentDict, "manufacturer", owner.project.getPluginManufacturerCodeString().substr (0, 4));
             addPlistDictionaryKey (componentDict, "type", owner.project.getAUMainTypeString().removeCharacters ("'"));
-            addPlistDictionaryKey (componentDict, "subtype", owner.project.getPluginCodeString().substring (0, 4));
+            addPlistDictionaryKey (componentDict, "subtype", owner.project.getPluginCodeString().substr (0, 4));
             addPlistDictionaryKeyInt (componentDict, "version", owner.project.getVersionAsHexInteger());
             addPlistDictionaryKeyBool (componentDict, "sandboxSafe", true);
 
@@ -1914,7 +1914,7 @@ public:
         bool isUsingCodeSigning (const XcodeBuildConfiguration& config) const
         {
             return (! config.isUsingDefaultCodeSignIdentity())
-                     || owner.getIosDevelopmentTeamIDString().isNotEmpty();
+                     || owner.getIosDevelopmentTeamIDString().!empty();
         }
 
         //==============================================================================
@@ -1959,7 +1959,7 @@ private:
     static String sanitisePath (const String& path)
     {
         if (path.startsWithChar ('~'))
-            return "$(HOME)" + path.substring (1);
+            return "$(HOME)" + path.substr (1);
 
         return path;
     }
@@ -1995,7 +1995,7 @@ private:
             {
                 auto customLaunchStoryboard = getCustomLaunchStoryboardString();
 
-                if (customLaunchStoryboard.isEmpty())
+                if (customLaunchStoryboard.empty())
                     writeDefaultLaunchStoryboardFile();
                 else if (getProject().getProjectFolder().getChildFile (customLaunchStoryboard).existsAsFile())
                     addLaunchStoryboardFileReference (RelativePath (customLaunchStoryboard, RelativePath::projectFolder)
@@ -2118,7 +2118,7 @@ private:
             {
                 auto groupID = addProjectItem (group);
 
-                if (groupID.isNotEmpty())
+                if (groupID.!empty())
                     topLevelGroupIDs.add (groupID);
             }
         }
@@ -2144,7 +2144,7 @@ private:
             topLevelGroupIDs.add (productsGroupID);
         }
 
-        if (! subprojectFileIDs.isEmpty())
+        if (! subprojectFileIDs.empty())
         {
             auto subprojectLibrariesGroupID = createID ("__subprojects");
             addGroup (subprojectLibrariesGroupID, "Subprojects", subprojectFileIDs);
@@ -2303,7 +2303,7 @@ private:
         {
             v->setProperty ("productReference", createID (String ("__productFileID") + targetName), nullptr);
 
-            HAssert (target.xcodeProductType.isNotEmpty());
+            HAssert (target.xcodeProductType.!empty());
             v->setProperty ("productType", target.xcodeProductType, nullptr);
         }
 
@@ -2495,8 +2495,8 @@ private:
 
     static String getLinkerFlagForLib (String library)
     {
-        if (library.substring (0, 3) == "lib")
-            library = library.substring (3);
+        if (library.substr (0, 3) == "lib")
+            library = library.substr (3);
 
         return "-l" + library.replace (" ", "\\\\ ").upToLastOccurrenceOf (".", false, false);
     }
@@ -2584,7 +2584,7 @@ private:
         }
         else
         {
-            if (! config.isUsingDefaultCodeSignIdentity() || getIosDevelopmentTeamIDString().isNotEmpty())
+            if (! config.isUsingDefaultCodeSignIdentity() || getIosDevelopmentTeamIDString().!empty())
                 s.set ("CODE_SIGN_IDENTITY", config.getCodeSignIdentityString().quoted());
         }
 
@@ -2679,7 +2679,7 @@ private:
             }
         }
 
-        if (! embeddedFrameworkIDs.isEmpty())
+        if (! embeddedFrameworkIDs.empty())
             for (auto& target : targets)
                 target->addCopyFilesPhase ("Embed Frameworks", embeddedFrameworkIDs, kFrameworksFolder);
     }
@@ -2738,7 +2738,7 @@ private:
             auto availableBuildProducts = XcodeProjectParser::parseBuildProducts (subprojectFile);
 
             // If no build products have been specified then we'll take everything
-            if (! subprojectInfo.second.isEmpty())
+            if (! subprojectInfo.second.empty())
             {
                 auto newEnd = std::remove_if (availableBuildProducts.begin(), availableBuildProducts.end(),
                                               [&subprojectInfo](const std::pair<String, String> &item)
@@ -2798,7 +2798,7 @@ private:
     {
         auto customXcassetsPath = getCustomXcassetsFolderString();
 
-        if (customXcassetsPath.isEmpty())
+        if (customXcassetsPath.empty())
             createXcassetsFolderFromIcons();
         else
             addCustomResourceFolder (customXcassetsPath, "folder.assetcatalog");
@@ -2844,7 +2844,7 @@ private:
                 auto propertyName = o->getPropertyName(j);
                 auto val = o->getProperty (propertyName).toString();
 
-                if (val.isEmpty() || (val.containsAnyOf (" \t;<>()=,&+-_@~\r\n\\#%^`*")
+                if (val.empty() || (val.containsAnyOf (" \t;<>()=,&+-_@~\r\n\\#%^`*")
                                         && ! (val.trimStart().startsWithChar ('(')
                                                 || val.trimStart().startsWithChar ('{'))))
                     val = "\"" + val + "\"";
@@ -2878,7 +2878,7 @@ private:
         if (inhibitWarnings)
             compilerFlags += " -w";
 
-        if (compilerFlags.isNotEmpty())
+        if (compilerFlags.!empty())
             v->setProperty ("settings", "{ COMPILER_FLAGS = \"" + compilerFlags.trim() + "\"; }", nullptr);
 
         pbxBuildFiles.add (v);
@@ -2897,7 +2897,7 @@ private:
 
         if (pathString.startsWith ("${"))
         {
-            sourceTree = pathString.substring (2).upToFirstOccurrenceOf ("}", false, false);
+            sourceTree = pathString.substr (2).upToFirstOccurrenceOf ("}", false, false);
             pathString = pathString.fromFirstOccurrenceOf ("}/", false, false);
         }
         else if (path.isAbsolute())
@@ -2977,7 +2977,7 @@ private:
 public:
     static int compareElements (const ValueTree* first, const ValueTree* second)
     {
-        return first->getType().getCharPointer().compare (second->getType().getCharPointer());
+        return first->getType().c_str().compare (second->getType().c_str());
     }
 
 private:
@@ -3159,11 +3159,11 @@ private:
 
                 auto childID = addProjectItem (child);
 
-                if (childID.isNotEmpty() && ! child.shouldBeAddedToXcodeResources())
+                if (childID.!empty() && ! child.shouldBeAddedToXcodeResources())
                     childIDs.add (childID);
             }
 
-            if (childIDs.isEmpty())
+            if (childIDs.empty())
                 return {};
 
             return addGroup (projectItem, childIDs);
@@ -3320,7 +3320,7 @@ private:
         v->setProperty ("mainGroup", createID ("__mainsourcegroup"), nullptr);
         v->setProperty ("projectDirPath", "\"\"", nullptr);
 
-        if (! subprojectReferences.isEmpty())
+        if (! subprojectReferences.empty())
         {
             StringArray projectReferences;
 
@@ -3661,7 +3661,7 @@ private:
 
         rootString += project.getProjectUIDString();
 
-        return MD5 (rootString.toUTF8()).toHexString().substring (0, 24).toUpperCase();
+        return MD5 (rootString.toUTF8()).toHexString().substr (0, 24).toUpperCase();
     }
 
     String createFileRefID (const RelativePath& path) const     { return createFileRefID (path.toUnixStyle()); }

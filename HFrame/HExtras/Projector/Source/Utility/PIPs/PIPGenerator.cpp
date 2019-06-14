@@ -56,7 +56,7 @@ static void ensureSingleNewLineAfterIncludes (StringArray& lines)
         auto index = lastIncludeIndex;
         int numNewLines = 0;
 
-        while (++index < lines.size() && lines[index].isEmpty())
+        while (++index < lines.size() && lines[index].empty())
             ++numNewLines;
 
         if (numNewLines > 1)
@@ -300,7 +300,7 @@ ValueTree PIPGenerator::createModuleChild (const String& moduleID)
     module.setProperty (Ids::ID, moduleID, nullptr);
     module.setProperty (Ids::showAllCode, 1, nullptr);
     module.setProperty (Ids::useLocalCopy, 0, nullptr);
-    module.setProperty (Ids::useGlobalPath, (getPathForModule (moduleID).isEmpty() ? 1 : 0), nullptr);
+    module.setProperty (Ids::useGlobalPath, (getPathForModule (moduleID).empty() ? 1 : 0), nullptr);
 
     return module;
 }
@@ -360,7 +360,7 @@ Result PIPGenerator::setProjectSettings (ValueTree& HrTree)
 
         if (examplesDir != File())
         {
-             defines += ((defines.isEmpty() ? "" : " ") + String ("PIP_HEXAMPLES_DIRECTORY=")
+             defines += ((defines.empty() ? "" : " ") + String ("PIP_HEXAMPLES_DIRECTORY=")
                          + Base64::toBase64 (examplesDir.getFullPathName()));
         }
         else
@@ -395,7 +395,7 @@ Result PIPGenerator::setProjectSettings (ValueTree& HrTree)
 
         HrTree.setProperty (Ids::pluginFormats, pluginFormatsToBuild.joinIntoString (","), nullptr);
 
-        if (! getPluginCharacteristics().isEmpty())
+        if (! getPluginCharacteristics().empty())
             HrTree.setProperty (Ids::pluginCharacteristicsValue, getPluginCharacteristics().joinIntoString (","), nullptr);
     }
 

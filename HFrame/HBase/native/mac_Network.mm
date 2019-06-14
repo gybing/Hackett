@@ -416,7 +416,7 @@ struct BackgroundDownloadTask  : public URL::DownloadTask
             String key   = headerLines[i].upToFirstOccurrenceOf (":", false, false).trim();
             String value = headerLines[i].fromFirstOccurrenceOf (":", false, false).trim();
 
-            if (key.isNotEmpty() && value.isNotEmpty())
+            if (!key.empty() && !value.empty())
                 [request addValue: HStringToNS (value) forHTTPHeaderField: HStringToNS (key)];
         }
 
@@ -992,12 +992,12 @@ public:
     // WebInputStream methods
     void withExtraHeaders (const String& extraHeaders)
     {
-        if (! headers.endsWithChar ('\n') && headers.isNotEmpty())
+        if (! headers.endsWithChar ('\n') && !headers.empty())
             headers << "\r\n";
 
         headers << extraHeaders;
 
-        if (! headers.endsWithChar ('\n') && headers.isNotEmpty())
+        if (! headers.endsWithChar ('\n') && !headers.empty())
             headers << "\r\n";
     }
 
@@ -1104,7 +1104,7 @@ private:
                         auto key   = headerLines[i].upToFirstOccurrenceOf (":", false, false).trim();
                         auto value = headerLines[i].fromFirstOccurrenceOf (":", false, false).trim();
 
-                        if (key.isNotEmpty() && value.isNotEmpty())
+                        if (!key.empty() && !value.empty())
                             [req addValue: HStringToNS (value) forHTTPHeaderField: HStringToNS (key)];
                     }
 

@@ -122,7 +122,7 @@ EdgeTable* Typeface::getEdgeTableForGlyph (int glyphNumber, const AffineTransfor
 {
     Path path;
 
-    if (getOutlineForGlyph (glyphNumber, path) && ! path.isEmpty())
+    if (getOutlineForGlyph (glyphNumber, path) && ! path.empty())
     {
         applyVerticalHintingTransform (fontHeight, path);
 
@@ -221,7 +221,7 @@ private:
             glyph.createPath (p);
             auto bounds = p.getBounds();
 
-            if (! p.isEmpty())
+            if (! p.empty())
                 yValues.add (getTop ? bounds.getY() : bounds.getBottom());
         }
 

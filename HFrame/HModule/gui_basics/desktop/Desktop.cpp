@@ -233,7 +233,7 @@ void Desktop::timerCallback()
 
 void Desktop::sendMouseMove()
 {
-    if (! mouseListeners.isEmpty())
+    if (! mouseListeners.empty())
     {
         startTimer (20);
 

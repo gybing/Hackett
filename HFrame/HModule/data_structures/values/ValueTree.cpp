@@ -581,7 +581,7 @@ HDECLARE_DEPRECATED_STATIC (const ValueTree ValueTree::invalid;)
 
 ValueTree::ValueTree (const Identifier& type)  : object (new ValueTree::SharedObject (type))
 {
-    HAssert (type.toString().isNotEmpty()); // All objects must be given a sensible type name!
+    HAssert (type.toString().!empty()); // All objects must be given a sensible type name!
 }
 
 ValueTree::ValueTree (const Identifier& type,
@@ -606,7 +606,7 @@ ValueTree& ValueTree::operator= (const ValueTree& other)
 {
     if (object != other.object)
     {
-        if (listeners.isEmpty())
+        if (listeners.empty())
         {
             object = other.object;
         }
@@ -636,7 +636,7 @@ ValueTree::ValueTree (ValueTree&& other) noexcept
 
 ValueTree::~ValueTree()
 {
-    if (! listeners.isEmpty() && object != nullptr)
+    if (! listeners.empty() && object != nullptr)
         object->valueTreesWithListeners.removeValue (this);
 }
 
@@ -760,7 +760,7 @@ ValueTree& ValueTree::setProperty (const Identifier& name, const var& newValue, 
 ValueTree& ValueTree::setPropertyExcludingListener (Listener* listenerToExclude, const Identifier& name,
                                                     const var& newValue, UndoManager* undoManager)
 {
-    HAssert (name.toString().isNotEmpty()); // Must have a valid property name!
+    HAssert (name.toString().!empty()); // Must have a valid property name!
     HAssert (object != nullptr); // Trying to add a property to a null ValueTree will fail!
 
     if (object != nullptr)
@@ -967,7 +967,7 @@ void ValueTree::addListener (Listener* listener)
 {
     if (listener != nullptr)
     {
-        if (listeners.isEmpty() && object != nullptr)
+        if (listeners.empty() && object != nullptr)
             object->valueTreesWithListeners.add (this);
 
         listeners.add (listener);
@@ -978,7 +978,7 @@ void ValueTree::removeListener (Listener* listener)
 {
     listeners.remove (listener);
 
-    if (listeners.isEmpty() && object != nullptr)
+    if (listeners.empty() && object != nullptr)
         object->valueTreesWithListeners.removeValue (this);
 }
 
@@ -1038,7 +1038,7 @@ ValueTree ValueTree::readFromStream (InputStream& input)
 {
     auto type = input.readString();
 
-    if (type.isEmpty())
+    if (type.empty())
         return {};
 
     ValueTree v (type);
@@ -1055,7 +1055,7 @@ ValueTree ValueTree::readFromStream (InputStream& input)
     {
         auto name = input.readString();
 
-        if (name.isNotEmpty())
+        if (name.!empty())
             v.object->properties.set (name, var::readFromStream (input));
         else
             HAssertfalse;  // trying to read corrupted data!
