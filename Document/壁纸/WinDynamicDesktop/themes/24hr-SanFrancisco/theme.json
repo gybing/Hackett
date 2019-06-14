@@ -1,0 +1,30 @@
+{
+  "imagesZipUri": "24hr-SanFrancisco.ddw",
+  "imageFilename": "24hr-SanFrancisco_*.jpeg",
+  "imageCredits": "24 Hour Wallpaper",
+  "displayName": "24 Hour San Francisco",
+  "sunsetImageList": [
+    10,
+    11,
+    12,
+    13
+  ],
+  "sunriseImageList": [
+    2,
+    3,
+    4
+  ],
+  "dayImageList": [
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "nightImageList": [
+    14,
+    15,
+    16,
+    1
+  ]
+}
