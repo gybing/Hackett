@@ -1,0 +1,8 @@
+中文说明见此：
+http://tieba.baidu.com/p/3261080714
+或
+https://bbs.rainmeter.cn/thread-118932-1-1.html
+
+原址：http://rainmeter.net/forum/viewtopic.php?f=18&t=18802
+
+爆音bug 已在雨滴 3.2.1 r2386 正式版中修复，请自行下载更新
