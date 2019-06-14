@@ -29,8 +29,8 @@ Set-Theme PowerLine
 
 # 创建启动文件
 create file 
-C:\Users\andot\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
-C:\Users\andot\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1
+C:\Users\hanrj\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+C:\Users\hanrj\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1
 with content:
 Import-Module DirColors
 Update-DirColors ~/dircolors
