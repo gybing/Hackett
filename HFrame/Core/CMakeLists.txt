@@ -1,0 +1,15 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
+
+set(TARGET Core)
+project(${TARGET})
+
+# 静态库
+file(GLOB_RECURSE SRCS "*.cpp" "*.h")
+file(GLOB CURRENT_SRCS "*.cpp" "*.h")
+list(REMOVE_ITEM SRCS ${CURRENT_SRCS})
+set_source_files_properties(${SRCS} PROPERTIES HEADER_FILE_ONLY TRUE)
+
+ASSIGN_SOURCE_GROUP(${SRCS})
+add_library(${TARGET} STATIC ${SRCS} ${CURRENT_SRCS})
+set_target_properties(${TARGET} PROPERTIES FOLDER ${TARGET})
+FUNC_OUTPUT(${TARGET} ${PATH_BIN})
