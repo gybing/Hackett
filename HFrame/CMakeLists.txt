@@ -15,5 +15,8 @@ include_directories(${PROJECT_SOURCE_DIR})
 set(PATH_BIN ${PROJECT_SOURCE_DIR}/Bin)
 
 # 项目
-add_subdirectory(Core)
-add_subdirectory(Source)
+add_subdirectory(HBase)
+add_subdirectory(HModule)
+add_subdirectory(HExtras)
+add_subdirectory(HExample)
+add_subdirectory(HTest)
