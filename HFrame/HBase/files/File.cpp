@@ -366,11 +366,11 @@ int64 File::hashCode64() const  { return std::hash<std::string>{}(fullPath); }
 //==============================================================================
 bool File::isAbsolutePath (StringRef path)
 {
-    auto firstChar = *(path.text);
+    auto firstChar = *(path.c_str());
 
     return firstChar == getSeparatorChar()
            #if HWINDOWS
-            || (firstChar != 0 && path.text[1] == ':');
+            || (firstChar != 0 && path.at(1) == ':');
            #else
             || firstChar == '~';
            #endif
@@ -378,7 +378,7 @@ bool File::isAbsolutePath (StringRef path)
 
 File File::getChildFile (StringRef relativePath) const
 {
-    auto r = relativePath.text;
+    auto r = relativePath.c_str();
 
     if (isAbsolutePath (r))
         return File (String (r));
