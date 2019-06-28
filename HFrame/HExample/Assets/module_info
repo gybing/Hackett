@@ -1,0 +1,38 @@
+{
+  "id":             "core",
+  "name":           "H core classes",
+  "version":        "3.0.0",
+  "description":    "The essential set of basic H classes, as required by all the other H modules. Includes text, container, memory, threading and i/o functionality.",
+  "website":        "http://www.H.com/H",
+  "license":        "ISC Permissive",
+
+  "dependencies":   [],
+
+  "include":        "core.h",
+
+  "compile":        [ { "file": "core.cpp", "target": "! xcode" },
+                      { "file": "core.mm",  "target": "xcode" } ],
+
+  "browse":         [ "text/*",
+                      "maths/*",
+                      "memory/*",
+                      "containers/*",
+                      "threads/*",
+                      "time/*",
+                      "files/*",
+                      "network/*",
+                      "streams/*",
+                      "logging/*",
+                      "system/*",
+                      "xml/*",
+                      "json/*",
+                      "zip/*",
+                      "unit_tests/*",
+                      "misc/*",
+                      "native/*" ],
+
+  "OSXFrameworks":  "Cocoa IOKit",
+  "iOSFrameworks":  "Foundation",
+  "LinuxLibs":      "rt dl pthread",
+  "mingwLibs":      "uuid wsock32 wininet version ole32 ws2_32 oleaut32 imm32 comdlg32 shlwapi rpcrt4 winmm"
+}
