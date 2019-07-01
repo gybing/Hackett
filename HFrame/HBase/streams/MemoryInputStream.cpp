@@ -171,7 +171,7 @@ public:
 
     static String createRandomWideCharString (Random& r)
     {
-        wchar buffer [50] = { 0 };
+        char buffer [50] = { 0 };
 
         for (int i = 0; i < numElementsInArray (buffer) - 1; ++i)
         {
@@ -179,12 +179,12 @@ public:
             {
                 do
                 {
-                    buffer[i] = (wchar) (1 + r.nextInt (0x10ffff - 1));
+                    buffer[i] = (char) (1 + r.nextInt (0x10ffff - 1));
                 }
                 while (! CharPointer_UTF16::canRepresent (buffer[i]));
             }
             else
-                buffer[i] = (wchar) (1 + r.nextInt (0xff));
+                buffer[i] = (char) (1 + r.nextInt (0xff));
         }
 
         return CharPointer_UTF32 (buffer);

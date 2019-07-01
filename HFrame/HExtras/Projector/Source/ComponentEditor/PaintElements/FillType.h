@@ -163,7 +163,7 @@ public:
 
                     s << "g.setGradientFill (ColourGradient (";
 
-                    auto indent = String::repeatedString (" ", s.length());
+                    auto indent = CharacterFunctions::repeat (" ", s.length());
 
                     s << type << "Colour1,\n"
                       << indent << castToFloat (x1) << " - " << castToFloat (x0) << " + x,\n"
@@ -187,7 +187,7 @@ public:
 
                     s << "g.setTiledImageFill (";
 
-                    const String indent (String::repeatedString (" ", s.length()));
+                    const String indent (CharacterFunctions::repeat (" ", s.length()));
 
                     s << imageVariable << ",\n"
                       << indent << x1 << " - " << x0 << " + x,\n"
@@ -244,7 +244,7 @@ public:
         if (s.!empty())
         {
             StringArray toks;
-            toks.addTokens (s, ",:", StringRef());
+            toks.addTokens (s, ",:", const String&());
             toks.trim();
 
             if (toks[0] == "solid")

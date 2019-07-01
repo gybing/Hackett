@@ -80,7 +80,7 @@ public:
         then does a full parse if it matches.
         If the tag is different, or the XML parse fails, this will return nullptr.
     */
-    std::unique_ptr<XmlElement> getDocumentElementIfTagMatches (StringRef requiredTag);
+    std::unique_ptr<XmlElement> getDocumentElementIfTagMatches (const String& requiredTag);
 
     /** Returns the parsing error that occurred the last time getDocumentElement was called.
         @returns the error, or an empty string if there was no error.
@@ -140,7 +140,7 @@ private:
     bool parseHeader();
     bool parseDTD();
     void skipNextWhiteSpace();
-    wchar readNextChar() noexcept;
+    char readNextChar() noexcept;
     XmlElement* readNextElement (bool alsoParseSubElements);
     void readChildElements (XmlElement&);
     void readQuotedString (String&);
@@ -174,14 +174,14 @@ std::unique_ptr<XmlElement> parseXML (const File& fileToParse);
     If the outer tag doesn't match, or the XML has errors, this will return nullptr;
     @see parseXML
 */
-std::unique_ptr<XmlElement> parseXMLIfTagMatches (const String& textToParse, StringRef requiredTag);
+std::unique_ptr<XmlElement> parseXMLIfTagMatches (const String& textToParse, const String& requiredTag);
 
 /** Does an inexpensive check to see whether the top-level element has the given tag
     name, and if that's true, does a full parse and returns the result.
     If the outer tag doesn't match, or the XML has errors, this will return nullptr;
     @see parseXML
 */
-std::unique_ptr<XmlElement> parseXMLIfTagMatches (const File& fileToParse, StringRef requiredTag);
+std::unique_ptr<XmlElement> parseXMLIfTagMatches (const File& fileToParse, const String& requiredTag);
 
 
 

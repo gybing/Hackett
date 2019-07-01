@@ -25,12 +25,12 @@ std::unique_ptr<XmlElement> parseXML (const File& file)
     return XmlDocument (file).getDocumentElement();
 }
 
-std::unique_ptr<XmlElement> parseXMLIfTagMatches (const String& textToParse, StringRef requiredTag)
+std::unique_ptr<XmlElement> parseXMLIfTagMatches (const String& textToParse, const String& requiredTag)
 {
     return XmlDocument (textToParse).getDocumentElementIfTagMatches (requiredTag);
 }
 
-std::unique_ptr<XmlElement> parseXMLIfTagMatches (const File& file, StringRef requiredTag)
+std::unique_ptr<XmlElement> parseXMLIfTagMatches (const File& file, const String& requiredTag)
 {
     return XmlDocument (file).getDocumentElementIfTagMatches (requiredTag);
 }
@@ -47,13 +47,13 @@ void XmlDocument::setEmptyTextElementsIgnored (bool shouldBeIgnored) noexcept
 
 namespace XmlIdentifierChars
 {
-    static bool isIdentifierCharSlow (wchar c) noexcept
+    static bool isIdentifierCharSlow (char c) noexcept
     {
         return CharacterFunctions::isLetterOrDigit (c)
                  || c == '_' || c == '-' || c == ':' || c == '.';
     }
 
-    static bool isIdentifierChar (wchar c) noexcept
+    static bool isIdentifierChar (char c) noexcept
     {
         static const uint32 legalChars[] = { 0, 0x7ff6000, 0x87fffffe, 0x7fffffe, 0 };
 
@@ -70,7 +70,7 @@ namespace XmlIdentifierChars
 
         String s;
         for (int i = 0; i < 8; ++i)
-            s << "0x" << String::toHexString ((int) n[i]) << ", ";
+            s << "0x" << CharacterFunctions::hexToString ((int) n[i]) << ", ";
 
         DBG (s);
     }*/
@@ -108,7 +108,7 @@ std::unique_ptr<XmlElement> XmlDocument::getDocumentElement (const bool onlyRead
                 }
                 else
                 {
-                    if (CharPointer_UTF8::isByteOrderMark (text))
+                    if (char*::isByteOrderMark (text))
                         text += 3;
 
                     // parse the input buffer directly to avoid copying it all to a string..
@@ -124,7 +124,7 @@ std::unique_ptr<XmlElement> XmlDocument::getDocumentElement (const bool onlyRead
     return parseDocumentElement (originalText.c_str(), onlyReadOuterDocumentElement);
 }
 
-std::unique_ptr<XmlElement> XmlDocument::getDocumentElementIfTagMatches (StringRef requiredTag)
+std::unique_ptr<XmlElement> XmlDocument::getDocumentElementIfTagMatches (const String& requiredTag)
 {
     if (auto xml = getDocumentElement (true))
         if (xml->hasTagName (requiredTag))
@@ -157,7 +157,7 @@ String XmlDocument::getFileContents (const String& filename) const
     return {};
 }
 
-wchar XmlDocument::readNextChar() noexcept
+char XmlDocument::readNextChar() noexcept
 {
     auto c = *input++;
 
@@ -268,7 +268,7 @@ void XmlDocument::skipNextWhiteSpace()
 {
     for (;;)
     {
-        input = input.findEndOfWhitespace();
+        input = input.find_last_of(' ');
 
         if (input.empty())
         {
@@ -487,7 +487,7 @@ void XmlDocument::readChildElements (XmlElement& parent)
             if (c1 == '/')
             {
                 // our close tag..
-                auto closeTag = input.indexOf ((wchar) '>');
+                auto closeTag = input.indexOf ((char) '>');
 
                 if (closeTag >= 0)
                     input += closeTag + 1;
@@ -710,12 +710,12 @@ void XmlDocument::readEntity (String& result)
             return;
         }
 
-        result << (wchar) charCode;
+        result << (char) charCode;
     }
     else
     {
         auto entityNameStart = input;
-        auto closingSemiColon = input.indexOf ((wchar) ';');
+        auto closingSemiColon = input.indexOf ((char) ';');
 
         if (closingSemiColon < 0)
         {
@@ -743,10 +743,10 @@ String XmlDocument::expandEntity (const String& ent)
         auto char1 = ent[1];
 
         if (char1 == 'x' || char1 == 'X')
-            return String::charToString (static_cast<wchar> (ent.substr (2).getHexValue32()));
+            return String::charToString (static_cast<char> (ent.substr (2).getHexValue32()));
 
         if (char1 >= '0' && char1 <= '9')
-            return String::charToString (static_cast<wchar> (ent.substr (1).getIntValue()));
+            return String::charToString (static_cast<char> (ent.substr (1).getIntValue()));
 
         setLastError ("illegal escape sequence", false);
         return String::charToString ('&');
@@ -779,7 +779,7 @@ String XmlDocument::expandExternalEntity (const String& entity)
 
                 if (openBracket > 0)
                 {
-                    auto closeBracket = dtdText.lastIndexOfChar (']');
+                    auto closeBracket = dtdText.find_last_of (']');
 
                     if (closeBracket > openBracket)
                         tokenisedDTD.addTokens (dtdText.substr (openBracket + 1,

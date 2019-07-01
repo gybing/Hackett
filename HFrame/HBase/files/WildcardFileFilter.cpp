@@ -2,7 +2,7 @@
 
 static void parseWildcard (const String& pattern, StringArray& result)
 {
-    result.addTokens (pattern.toLowerCase(), ";,", "\"'");
+    result.addTokens (pattern.std::tolower(), ";,", "\"'");
     result.trim();
     result.removeEmptyStrings();
 

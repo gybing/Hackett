@@ -526,7 +526,7 @@ private:
             // build filter graph
             if (SUCCEEDED (hr))
             {
-                hr = graphBuilder->RenderFile (fileOrURLPath.toWideCharPointer(), nullptr);
+                hr = graphBuilder->RenderFile (fileOrURLPath.c_str(), nullptr);
 
                 if (FAILED (hr))
                 {
@@ -861,7 +861,7 @@ private:
                 wcex.cbSize         = sizeof (wcex);
                 wcex.style          = CS_OWNDC;
                 wcex.lpfnWndProc    = (WNDPROC) wndProc;
-                wcex.lpszClassName  = windowClassName.toWideCharPointer();
+                wcex.lpszClassName  = windowClassName.c_str();
                 wcex.hInstance      = moduleHandle;
 
                 atom = RegisterClassEx (&wcex);

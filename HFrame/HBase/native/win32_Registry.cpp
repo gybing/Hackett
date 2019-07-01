@@ -8,12 +8,12 @@ struct RegistryKeyWrapper
         {
             name = name.substr (name.indexOfChar ('\\') + 1);
 
-            auto lastSlash = name.lastIndexOfChar ('\\');
+            auto lastSlash = name.find_last_of ('\\');
             valueName = name.substr (lastSlash + 1);
-            wideCharValueName = valueName.toWideCharPointer();
+            wideCharValueName = valueName.c_str();
 
             name = name.substr (0, lastSlash);
-            auto wideCharName = name.toWideCharPointer();
+            auto wideCharName = name.c_str();
             DWORD result;
 
             if (createForWriting)
@@ -139,7 +139,7 @@ String CALLTYPE WindowsRegistry::getValue (const String& regValuePath, const Str
 
 bool CALLTYPE WindowsRegistry::setValue (const String& regValuePath, const String& value, WoW64Mode mode)
 {
-    return RegistryKeyWrapper::setValue (regValuePath, REG_SZ, value.toWideCharPointer(),
+    return RegistryKeyWrapper::setValue (regValuePath, REG_SZ, value.c_str(),
                                          CharPointer_UTF16::getBytesRequiredFor (value.c_str()), mode);
 }
 

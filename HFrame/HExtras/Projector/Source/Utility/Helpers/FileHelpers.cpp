@@ -134,7 +134,7 @@ namespace FileHelpers
 
         for (int i = 0; i < len; ++i)
         {
-            if (CharacterFunctions::toLowerCase (path1[i]) != CharacterFunctions::toLowerCase (path2[i]))
+            if (CharacterFunctions::std::tolower (path1[i]) != CharacterFunctions::std::tolower (path2[i]))
                 break;
 
             ++commonBitLength;
@@ -167,9 +167,9 @@ namespace FileHelpers
             StringArray toks;
 
            #if HWINDOWS
-            toks.addTokens (p, "\\/", StringRef());
+            toks.addTokens (p, "\\/", const String&());
            #else
-            toks.addTokens (p, "/", StringRef());
+            toks.addTokens (p, "/", const String&());
            #endif
 
             while (toks[0] == ".")

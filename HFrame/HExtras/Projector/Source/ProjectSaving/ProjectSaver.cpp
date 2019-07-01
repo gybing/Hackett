@@ -66,7 +66,7 @@ namespace
             hexRepresentation = (hexRepresentation << 8u)
                              |  (static_cast<unsigned int> (fourCharCode[i]) & 0xffu);
 
-        return "0x" + String::toHexString (static_cast<int> (hexRepresentation))
+        return "0x" + CharacterFunctions::hexToString (static_cast<int> (hexRepresentation))
                  + " // "
                  + CppTokeniserFunctions::addEscapeChars (fourCharCode).quoted ('\'');
     }

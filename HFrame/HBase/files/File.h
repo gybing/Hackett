@@ -179,7 +179,7 @@ public:
 
         @see getFileExtension, withFileExtension, getFileNameWithoutExtension
     */
-    bool hasFileExtension (StringRef extensionToTest) const;
+    bool hasFileExtension (const String& extensionToTest) const;
 
     /** Returns a version of this file with a different file extension.
 
@@ -191,7 +191,7 @@ public:
 
         @see getFileName, getFileExtension, hasFileExtension, getFileNameWithoutExtension
     */
-    File withFileExtension (StringRef newExtension) const;
+    File withFileExtension (const String& newExtension) const;
 
     /** Returns the last part of the filename, without its file extension.
 
@@ -207,7 +207,7 @@ public:
         This is based on the filename. Obviously it's possible, although unlikely, that
         two files will have the same hash-code.
     */
-    int hashCode() const;
+	size_t hashCode() const;
 
     /** Returns a 64-bit hash-code that identifies this file.
 
@@ -231,7 +231,7 @@ public:
 
         @see getSiblingFile, getParentDirectory, getRelativePathFrom, isAChildOf
     */
-    File getChildFile (StringRef relativeOrAbsolutePath) const;
+    File getChildFile (const String& relativeOrAbsolutePath) const;
 
     /** Returns a file which is in the same directory as this one.
 
@@ -239,7 +239,7 @@ public:
 
         @see getChildFile, getParentDirectory
     */
-    File getSiblingFile (StringRef siblingFileName) const;
+    File getSiblingFile (const String& siblingFileName) const;
 
     //==============================================================================
     /** Returns the directory that contains this file or directory.
@@ -926,7 +926,7 @@ public:
         This will try to return the name of a non-existent temp file.
         To get the temp folder, you can use getSpecialLocation (File::tempDirectory).
     */
-    static File createTempFile (StringRef fileNameEnding);
+    static File createTempFile (const String& fileNameEnding);
 
     //==============================================================================
     /** Returns the current working directory.
@@ -952,7 +952,7 @@ public:
     /** The system-specific file separator character, as a string.
         On Windows, this will be '\', on Mac/Linux, it'll be '/'
     */
-    static StringRef getSeparatorString();
+    static const char* getSeparatorChars();
 
     //==============================================================================
     /** Returns a version of a filename with any illegal characters removed.
@@ -981,7 +981,7 @@ public:
     static bool areFileNamesCaseSensitive();
 
     /** Returns true if the string seems to be a fully-specified absolute path. */
-    static bool isAbsolutePath (StringRef path);
+    static bool isAbsolutePath (const String& path);
 
     /** Creates a file that simply contains this string, without doing the sanity-checking
         that the normal constructors do.
@@ -1067,11 +1067,11 @@ public:
 
     /* These static objects are deprecated because it's too easy to accidentally use them indirectly
        during a static constructor, which leads to very obscure order-of-initialisation bugs.
-       Use File::getSeparatorChar() and File::getSeparatorString(), and instead of File::nonexistent,
+       Use File::getSeparatorChar() and File::getSeparatorChars(), and instead of File::nonexistent,
        just use File() or {}.
     */
-    HDEPRECATED_STATIC (static const wchar separator;)
-    HDEPRECATED_STATIC (static const StringRef separatorString;)
+    HDEPRECATED_STATIC (static const char separator;)
+    HDEPRECATED_STATIC (static const const String& separatorString;)
     HDEPRECATED_STATIC (static const File nonexistent;)
 
 private:

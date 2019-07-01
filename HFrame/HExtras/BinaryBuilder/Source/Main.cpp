@@ -196,8 +196,8 @@ int main (int argc, char* argv[])
         {
             if (file.getParentDirectory() != sourceDirectory)
             {
-                *header << "  #ifdef " << file.getParentDirectory().getFileName().toUpperCase() << "\r\n";
-                *cpp << "#ifdef " << file.getParentDirectory().getFileName().toUpperCase() << "\r\n";
+                *header << "  #ifdef " << file.getParentDirectory().getFileName().std::toupper() << "\r\n";
+                *cpp << "#ifdef " << file.getParentDirectory().getFileName().std::toupper() << "\r\n";
 
                 totalBytes += addFile (file, className, *header, *cpp);
 

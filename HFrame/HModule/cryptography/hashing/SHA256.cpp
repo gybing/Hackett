@@ -207,7 +207,7 @@ SHA256::SHA256 (const File& file)
     }
 }
 
-SHA256::SHA256 (CharPointer_UTF8 utf8) noexcept
+SHA256::SHA256 (char* utf8) noexcept
 {
     HAssert (utf8.getAddress() != nullptr);
     process (utf8.getAddress(), utf8.sizeInBytes() - 1);
@@ -227,7 +227,7 @@ MemoryBlock SHA256::getRawData() const
 
 String SHA256::toHexString() const
 {
-    return String::toHexString (result, sizeof (result), 0);
+    return CharacterFunctions::hexToString (result, sizeof (result), 0);
 }
 
 bool SHA256::operator== (const SHA256& other) const noexcept  { return memcmp (result, other.result, sizeof (result)) == 0; }
@@ -252,7 +252,7 @@ public:
         }
 
         {
-            CharPointer_UTF8 utf8 (input);
+            char* utf8 (input);
             SHA256 hash (utf8);
             expectEquals (hash.toHexString(), String (expected));
         }

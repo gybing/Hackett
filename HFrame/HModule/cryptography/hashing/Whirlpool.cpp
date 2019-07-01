@@ -593,7 +593,7 @@ Whirlpool::Whirlpool (const File& file)
     }
 }
 
-Whirlpool::Whirlpool (CharPointer_UTF8 utf8) noexcept
+Whirlpool::Whirlpool (char* utf8) noexcept
 {
     HAssert (utf8.getAddress() != nullptr);
     process (utf8.getAddress(), utf8.sizeInBytes() - 1);
@@ -613,7 +613,7 @@ MemoryBlock Whirlpool::getRawData() const
 
 String Whirlpool::toHexString() const
 {
-    return String::toHexString (result, sizeof (result), 0);
+    return CharacterFunctions::hexToString (result, sizeof (result), 0);
 }
 
 bool Whirlpool::operator== (const Whirlpool& other) const noexcept  { return memcmp (result, other.result, sizeof (result)) == 0; }
@@ -639,7 +639,7 @@ public:
         }
 
         {
-            CharPointer_UTF8 utf8 (input);
+            char* utf8 (input);
             Whirlpool hash (utf8);
             expectEquals (hash.toHexString(), String (expected));
         }

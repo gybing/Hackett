@@ -67,7 +67,7 @@ public:
 
     static NSString* getBroadcastEventName()
     {
-        return HStringToNS ("" + String::toHexString (File::getSpecialLocation (File::currentExecutableFile).hashCode64()));
+        return HStringToNS ("" + CharacterFunctions::hexToString (File::getSpecialLocation (File::currentExecutableFile).hashCode64()));
     }
 
     MessageQueue messageQueue;

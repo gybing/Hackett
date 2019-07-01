@@ -146,7 +146,7 @@ void JucerDocument::setParentClasses (const String& classes)
 {
     if (classes != parentClasses)
     {
-        StringArray parentClassLines (getCleanedStringArray (StringArray::fromTokens (classes, ",", StringRef())));
+        StringArray parentClassLines (getCleanedStringArray (StringArray::fromTokens (classes, ",", const String&())));
 
         for (int i = parentClassLines.size(); --i >= 0;)
         {

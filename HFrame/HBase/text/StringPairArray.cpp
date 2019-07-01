@@ -59,12 +59,12 @@ bool StringPairArray::operator!= (const StringPairArray& other) const
     return ! operator== (other);
 }
 
-const String& StringPairArray::operator[] (StringRef key) const
+const String& StringPairArray::operator[] (const String& key) const
 {
     return values[keys.indexOf (key, ignoreCase)];
 }
 
-String StringPairArray::getValue (StringRef key, const String& defaultReturnValue) const
+String StringPairArray::getValue (const String& key, const String& defaultReturnValue) const
 {
     auto i = keys.indexOf (key, ignoreCase);
 
@@ -74,7 +74,7 @@ String StringPairArray::getValue (StringRef key, const String& defaultReturnValu
     return defaultReturnValue;
 }
 
-bool StringPairArray::containsKey (StringRef key) const noexcept
+bool StringPairArray::containsKey (const String& key) const noexcept
 {
     return keys.contains (key, ignoreCase);
 }
@@ -106,7 +106,7 @@ void StringPairArray::clear()
     values.clear();
 }
 
-void StringPairArray::remove (StringRef key)
+void StringPairArray::remove (const String& key)
 {
     remove (keys.indexOf (key, ignoreCase));
 }

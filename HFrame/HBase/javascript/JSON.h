@@ -82,7 +82,7 @@ public:
         values and only accept array or object definitions, whereas this method will handle
         either.
     */
-    static var fromString (StringRef);
+    static var fromString (const String&);
 
     /** Writes a JSON-formatted representation of the var object to the given stream.
         If allOnOneLine is true, the result will be compacted into a single line of text
@@ -97,7 +97,7 @@ public:
                                int maximumDecimalPlaces = 15);
 
     /** Returns a version of a string with any extended characters escaped. */
-    static String escapeString (StringRef);
+    static String escapeString (const String&);
 
     /** Parses a quoted string-literal in JSON format, returning the un-escaped result in the
         result parameter, and an error message in case the content was illegal.

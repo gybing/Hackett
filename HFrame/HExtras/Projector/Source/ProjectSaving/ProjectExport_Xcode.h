@@ -1104,7 +1104,7 @@ public:
         }
 
         //==============================================================================
-        ValueTree& addBuildPhase (const String& buildPhaseType, const StringArray& fileIds, const StringRef humanReadableName = StringRef())
+        ValueTree& addBuildPhase (const String& buildPhaseType, const StringArray& fileIds, const const String& humanReadableName = const String&())
         {
             auto buildPhaseName = buildPhaseType + "_" + getName() + "_" + (humanReadableName.!empty() ? String (humanReadableName) : String ("resbuildphase"));
             auto buildPhaseId (owner.createID (buildPhaseName));
@@ -1160,7 +1160,7 @@ public:
 
             if (xcodeBundleIDSubPath.!empty())
             {
-                auto bundleIdSegments = StringArray::fromTokens (bundleIdentifier, ".", StringRef());
+                auto bundleIdSegments = StringArray::fromTokens (bundleIdentifier, ".", const String&());
 
                 HAssert (bundleIdSegments.size() > 0);
                 bundleIdentifier += String (".") + bundleIdSegments[bundleIdSegments.size() - 1] + xcodeBundleIDSubPath;
@@ -1747,7 +1747,7 @@ public:
             auto pluginManufacturerCode = owner.project.getPluginManufacturerCodeString().substr (0, 4);
             auto pluginSubType          = owner.project.getPluginCodeString().substr (0, 4);
 
-            if (pluginManufacturerCode.toLowerCase() == pluginManufacturerCode)
+            if (pluginManufacturerCode.std::tolower() == pluginManufacturerCode)
             {
                 throw SaveError ("AudioUnit plugin code identifiers invalid!\n\n"
                                  "You have used only lower case letters in your AU plugin manufacturer identifier. "
@@ -2485,7 +2485,7 @@ private:
 
             if (! entry.isSymbolicLink())
             {
-                if (entry.existsAsFile() && entry.getFileExtension().toLowerCase() == ".rsrc")
+                if (entry.existsAsFile() && entry.getFileExtension().std::tolower() == ".rsrc")
                     entry.deleteFile();
                 else if (entry.isDirectory())
                     deleteRsrcFiles (entry);
@@ -3645,13 +3645,13 @@ private:
         if (list.size() == 0)
             return openBracket + String (" ") + closeBracket;
 
-        auto tabs = "\n" + String::repeatedString ("\t", extraTabs + 4);
+        auto tabs = "\n" + CharacterFunctions::repeat ("\t", extraTabs + 4);
 
         if (shouldSort)
             list.sort (true);
 
         return openBracket + tabs + list.joinIntoString (separator + tabs) + separator
-                   + "\n" + String::repeatedString ("\t", extraTabs + 3) + closeBracket;
+                   + "\n" + CharacterFunctions::repeat ("\t", extraTabs + 3) + closeBracket;
     }
 
     String createID (String rootString) const
@@ -3661,7 +3661,7 @@ private:
 
         rootString += project.getProjectUIDString();
 
-        return MD5 (rootString.toUTF8()).toHexString().substr (0, 24).toUpperCase();
+        return MD5 (rootString.toUTF8()).toHexString().substr (0, 24).std::toupper();
     }
 
     String createFileRefID (const RelativePath& path) const     { return createFileRefID (path.toUnixStyle()); }

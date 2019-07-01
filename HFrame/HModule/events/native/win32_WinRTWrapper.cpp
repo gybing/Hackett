@@ -3,7 +3,7 @@
 WinRTWrapper::ScopedHString::ScopedHString (String str)
 {
     if (WinRTWrapper::getInstance()->isInitialised())
-        WinRTWrapper::getInstance()->createHString (str.toWideCharPointer(),
+        WinRTWrapper::getInstance()->createHString (str.c_str(),
                                                     static_cast<uint32_t> (str.length()),
                                                     &hstr);
 }

@@ -295,25 +295,25 @@ void AudioProcessorValueTreeState::addParameterAdapter (RangedAudioParameter& pa
     adapterTable.emplace (param.paramID, std::make_unique<ParameterAdapter> (param));
 }
 
-AudioProcessorValueTreeState::ParameterAdapter* AudioProcessorValueTreeState::getParameterAdapter (StringRef paramID) const
+AudioProcessorValueTreeState::ParameterAdapter* AudioProcessorValueTreeState::getParameterAdapter (const String& paramID) const
 {
     auto it = adapterTable.find (paramID);
     return it == adapterTable.end() ? nullptr : it->second.get();
 }
 
-void AudioProcessorValueTreeState::addParameterListener (StringRef paramID, Listener* listener)
+void AudioProcessorValueTreeState::addParameterListener (const String& paramID, Listener* listener)
 {
     if (auto* p = getParameterAdapter (paramID))
         p->addListener (listener);
 }
 
-void AudioProcessorValueTreeState::removeParameterListener (StringRef paramID, Listener* listener)
+void AudioProcessorValueTreeState::removeParameterListener (const String& paramID, Listener* listener)
 {
     if (auto* p = getParameterAdapter (paramID))
         p->removeListener (listener);
 }
 
-Value AudioProcessorValueTreeState::getParameterAsValue (StringRef paramID) const
+Value AudioProcessorValueTreeState::getParameterAsValue (const String& paramID) const
 {
     if (auto* adapter = getParameterAdapter (paramID))
         if (adapter->tree.isValid())
@@ -322,7 +322,7 @@ Value AudioProcessorValueTreeState::getParameterAsValue (StringRef paramID) cons
     return {};
 }
 
-NormalisableRange<float> AudioProcessorValueTreeState::getParameterRange (StringRef paramID) const noexcept
+NormalisableRange<float> AudioProcessorValueTreeState::getParameterRange (const String& paramID) const noexcept
 {
     if (auto* p = getParameterAdapter (paramID))
         return p->getRange();
@@ -330,7 +330,7 @@ NormalisableRange<float> AudioProcessorValueTreeState::getParameterRange (String
     return {};
 }
 
-RangedAudioParameter* AudioProcessorValueTreeState::getParameter (StringRef paramID) const noexcept
+RangedAudioParameter* AudioProcessorValueTreeState::getParameter (const String& paramID) const noexcept
 {
     if (auto adapter = getParameterAdapter (paramID))
         return &adapter->getParameter();
@@ -338,7 +338,7 @@ RangedAudioParameter* AudioProcessorValueTreeState::getParameter (StringRef para
     return nullptr;
 }
 
-float* AudioProcessorValueTreeState::getRawParameterValue (StringRef paramID) const noexcept
+float* AudioProcessorValueTreeState::getRawParameterValue (const String& paramID) const noexcept
 {
     if (auto* p = getParameterAdapter (paramID))
         return &p->getRawDenormalisedValue();

@@ -31,13 +31,13 @@
 */
 struct CppTokeniserFunctions
 {
-    static bool isIdentifierStart (const wchar c) noexcept
+    static bool isIdentifierStart (const char c) noexcept
     {
         return CharacterFunctions::isLetter (c)
                 || c == '_' || c == '@';
     }
 
-    static bool isIdentifierBody (const wchar c) noexcept
+    static bool isIdentifierBody (const char c) noexcept
     {
         return CharacterFunctions::isLetterOrDigit (c)
                 || c == '_' || c == '@';
@@ -147,7 +147,7 @@ struct CppTokeniserFunctions
         return true;
     }
 
-    static bool isHexDigit (const wchar c) noexcept
+    static bool isHexDigit (const char c) noexcept
     {
         return (c >= '0' && c <= '9')
                 || (c >= 'a' && c <= 'f')
@@ -182,7 +182,7 @@ struct CppTokeniserFunctions
         return skipNumberSuffix (source);
     }
 
-    static bool isOctalDigit (const wchar c) noexcept
+    static bool isOctalDigit (const char c) noexcept
     {
         return c >= '0' && c <= '7';
     }
@@ -205,7 +205,7 @@ struct CppTokeniserFunctions
         return skipNumberSuffix (source);
     }
 
-    static bool isDecimalDigit (const wchar c) noexcept
+    static bool isDecimalDigit (const char c) noexcept
     {
         return c >= '0' && c <= '9';
     }
@@ -389,14 +389,14 @@ struct CppTokeniserFunctions
     }
 
     template <typename Iterator>
-    static void skipIfNextCharMatches (Iterator& source, const wchar c) noexcept
+    static void skipIfNextCharMatches (Iterator& source, const char c) noexcept
     {
         if (source.peekNextChar() == c)
             source.skip();
     }
 
     template <typename Iterator>
-    static void skipIfNextCharMatches (Iterator& source, const wchar c1, const wchar c2) noexcept
+    static void skipIfNextCharMatches (Iterator& source, const char c1, const char c2) noexcept
     {
         auto c = source.peekNextChar();
 
@@ -533,8 +533,8 @@ struct CppTokeniserFunctions
         StringIterator (const String& s) noexcept            : t (s.c_str()) {}
         StringIterator (char* s) noexcept  : t (s) {}
 
-        wchar nextChar() noexcept      { if (isEOF()) return 0; ++numChars; return *t++; }
-        wchar peekNextChar()noexcept   { return *t; }
+        char nextChar() noexcept      { if (isEOF()) return 0; ++numChars; return *t++; }
+        char peekNextChar()noexcept   { return *t; }
         void skip() noexcept                { if (! isEOF()) { ++t; ++numChars; } }
         void skipWhitespace() noexcept      { while (t.isWhitespace()) skip(); }
         void skipToEndOfLine() noexcept     { while (*t != '\r' && *t != '\n' && *t != 0) skip(); }
@@ -634,7 +634,7 @@ struct CppTokeniserFunctions
                     }
                     else
                     {
-                        out << (c < 16 ? "\\x0" : "\\x") << String::toHexString ((int) c);
+                        out << (c < 16 ? "\\x0" : "\\x") << CharacterFunctions::hexToString ((int) c);
                         lastWasHexEscapeCode = true;
                         trigraphDetected = false;
                         charsOnLine += 4;

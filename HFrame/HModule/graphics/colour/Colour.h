@@ -353,7 +353,7 @@ public:
     String toString() const;
 
     /** Reads the colour from a string that was created with toString(). */
-    static Colour fromString (StringRef encodedColourString);
+    static Colour fromString (const String& encodedColourString);
 
     /** Returns the colour as a hex string in the form RRGGBB or AARRGGBB. */
     String toDisplayString (bool includeAlphaValue) const;

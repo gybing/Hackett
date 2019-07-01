@@ -1646,7 +1646,7 @@ public:
         auto oldMods = ModifierKeys::currentModifiers;
 
         char utf8 [64] = { 0 };
-        wchar unicodeChar = 0;
+        char unicodeChar = 0;
         int keyCode = 0;
         bool keyDownChange = false;
         KeySym sym;
@@ -1662,7 +1662,7 @@ public:
             if (oldLocale.!empty())
                 ::setlocale (LC_ALL, oldLocale.toRawUTF8());
 
-            unicodeChar = *CharPointer_UTF8 (utf8);
+            unicodeChar = *char* (utf8);
             keyCode = (int) unicodeChar;
 
             if (keyCode < 0x20)

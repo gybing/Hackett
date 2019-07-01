@@ -84,10 +84,10 @@ File File::getSpecialLocation (const SpecialLocationType type)
         case userHomeDirectory:
         {
             if (const char* homeDir = getenv ("HOME"))
-                return File (CharPointer_UTF8 (homeDir));
+                return File (char* (homeDir));
 
             if (auto* pw = getpwuid (getuid()))
-                return File (CharPointer_UTF8 (pw->pw_dir));
+                return File (char* (pw->pw_dir));
 
             return {};
         }
@@ -105,14 +105,14 @@ File File::getSpecialLocation (const SpecialLocationType type)
         case tempDirectory:
         {
             if (const char* tmpDir = getenv ("TMPDIR"))
-                return File (CharPointer_UTF8 (tmpDir));
+                return File (char* (tmpDir));
 
             return File ("/tmp");
         }
 
         case invokedExecutableFile:
             if (argv != nullptr && argc > 0)
-                return File (CharPointer_UTF8 (argv[0]));
+                return File (char* (argv[0]));
             // deliberate fall-through...
 
         case currentExecutableFile:

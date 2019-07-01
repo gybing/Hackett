@@ -189,7 +189,7 @@ void ProjectorApplication::handleAsyncUpdate()
 
 void ProjectorApplication::initialiseWindows (const String& commandLine)
 {
-    const String commandLineWithoutNSDebug (commandLine.replace ("-NSDocumentRevisionsDebugMode YES", StringRef()));
+    const String commandLineWithoutNSDebug (commandLine.replace ("-NSDocumentRevisionsDebugMode YES", const String&()));
 
     if (commandLineWithoutNSDebug.trim().!empty() && ! commandLineWithoutNSDebug.trim().startsWithChar ('-'))
         anotherInstanceStarted (commandLine);
@@ -1463,7 +1463,7 @@ void ProjectorApplication::setupAnalytics()
     Analytics::getInstance()->addDestination (new ProjectorAnalyticsDestination());
 
     auto deviceString = SystemStats::getDeviceIdentifiers().joinIntoString (":");
-    auto deviceIdentifier = String::toHexString (deviceString.hashCode64());
+    auto deviceIdentifier = CharacterFunctions::hexToString (deviceString.hashCode64());
 
     Analytics::getInstance()->setUserId (deviceIdentifier);
 

@@ -298,7 +298,7 @@ private:
 
     static String getTargetVarName (ProjectType::Target& target)
     {
-        return String (target.getName()).toUpperCase().replaceCharacter (L' ', L'_');
+        return String (target.getName()).std::toupper().replaceCharacter (L' ', L'_');
     }
 
     template <class Target, class Exporter>
@@ -450,7 +450,7 @@ private:
 
         for (auto& package : exporter.getPackages())
         {
-            cmakePkgconfigPackages.add (package.toUpperCase());
+            cmakePkgconfigPackages.add (package.std::toupper());
             out << "pkg_search_module (" << cmakePkgconfigPackages.strings.getLast() << " REQUIRED " << package << ")" << newLine;
         }
 
@@ -500,7 +500,7 @@ private:
 
             for (auto& library : exporter.getLibraryNames (config))
             {
-                String cmakeLibraryID (library.toUpperCase());
+                String cmakeLibraryID (library.std::toupper());
                 cmakeFoundLibraries.add (String ("${") + cmakeLibraryID + "}");
                 out << "find_library (" << cmakeLibraryID << " " << library << newLine;
 

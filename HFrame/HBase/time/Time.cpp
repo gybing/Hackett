@@ -71,7 +71,7 @@ namespace TimeHelpers
     static inline String formatString (const String& format, const std::tm* const tm)
     {
        #if HANDROID
-        using StringType = CharPointer_UTF8;
+        using StringType = char*;
        #elif HWINDOWS
         using StringType = CharPointer_UTF16;
        #else
@@ -91,7 +91,7 @@ namespace TimeHelpers
                        #if HANDROID
                         strftime (buffer, bufferSize - 1, format.toUTF8(), tm);
                        #elif HWINDOWS
-                        wcsftime (buffer, bufferSize - 1, format.toWideCharPointer(), tm);
+                        wcsftime (buffer, bufferSize - 1, format.c_str(), tm);
                        #else
                         wcsftime (buffer, bufferSize - 1, format.toUTF32(), tm);
                        #endif
@@ -424,13 +424,13 @@ static int parseFixedSizeIntAndSkip (char*& t, int numChars, char charToSkip) no
         n = n * 10 + digit;
     }
 
-    if (charToSkip != 0 && *t == (wchar) charToSkip)
+    if (charToSkip != 0 && *t == (char) charToSkip)
         ++t;
 
     return n;
 }
 
-Time Time::fromISO8601 (StringRef iso)
+Time Time::fromISO8601 (const String& iso)
 {
     auto t = iso.text;
     auto year = parseFixedSizeIntAndSkip (t, 4, '-');
@@ -572,7 +572,7 @@ Time Time::getCompilationDate()
     dateTokens.addTokens (__DATE__, true);
     dateTokens.removeEmptyStrings (true);
 
-    timeTokens.addTokens (__TIME__, ":", StringRef());
+    timeTokens.addTokens (__TIME__, ":", const String&());
 
     return Time (dateTokens[2].getIntValue(),
                  getMonthNumberForCompileDate (dateTokens[0]),

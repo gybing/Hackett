@@ -262,7 +262,7 @@ void HeaderComponent::timerCallback()
 }
 
 //======================================================================
-static void sendProjectButtonAnalyticsEvent (StringRef label)
+static void sendProjectButtonAnalyticsEvent (const String& label)
 {
     StringPairArray data;
     data.set ("label", label);

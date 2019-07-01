@@ -12,8 +12,8 @@ String String::fromCFString (CFStringRef cfString)
     HeapBlock<UInt8> utf8 (bytesNeeded + 1);
     CFStringGetBytes (cfString, range, kCFStringEncodingUTF8, 0, false, utf8, bytesNeeded + 1, nullptr);
 
-    return String (CharPointer_UTF8 ((const CharPointer_UTF8::CharType*) utf8.get()),
-                   CharPointer_UTF8 ((const CharPointer_UTF8::CharType*) utf8.get() + bytesNeeded));
+    return String (char* ((const char*::CharType*) utf8.get()),
+                   char* ((const char*::CharType*) utf8.get() + bytesNeeded));
 }
 
 CFStringRef String::toCFString() const

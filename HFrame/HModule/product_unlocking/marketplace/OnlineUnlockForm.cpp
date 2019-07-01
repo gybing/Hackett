@@ -147,7 +147,7 @@ struct OnlineUnlockForm::OverlayComp  : public Component,
     HLEAK_DETECTOR (OnlineUnlockForm::OverlayComp)
 };
 
-static wchar getDefaultPasswordChar() noexcept
+static char getDefaultPasswordChar() noexcept
 {
    #if HLINUX
     return 0x2022;

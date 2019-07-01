@@ -35,7 +35,7 @@ namespace CodeHelpers
         if (numSpaces == 0)
             return code;
 
-        auto space = String::repeatedString (" ", numSpaces);
+        auto space = CharacterFunctions::repeat (" ", numSpaces);
         auto lines = StringArray::fromLines (code);
 
         for (auto& line : lines)
@@ -58,7 +58,7 @@ namespace CodeHelpers
         if (numSpaces == 0)
             return code;
 
-        auto space = String::repeatedString (" ", numSpaces);
+        auto space = CharacterFunctions::repeat (" ", numSpaces);
         auto lines = StringArray::fromLines (code);
 
         for (auto& line : lines)
@@ -102,13 +102,13 @@ namespace CodeHelpers
         auto n = words[0];
 
         if (capitalise)
-            n = n.toLowerCase();
+            n = n.std::tolower();
 
         for (int i = 1; i < words.size(); ++i)
         {
             if (capitalise && words[i].length() > 1)
-                n << words[i].substr (0, 1).toUpperCase()
-                  << words[i].substr (1).toLowerCase();
+                n << words[i].substr (0, 1).std::toupper()
+                  << words[i].substr (1).std::tolower();
             else
                 n << words[i];
         }
@@ -199,7 +199,7 @@ namespace CodeHelpers
         String result (lines.joinIntoString (newLine));
 
         if (! CharPointer_ASCII::isValidString (text.toUTF8(), std::numeric_limits<int>::max()))
-            result = "CharPointer_UTF8 (" + result + ")";
+            result = "char* (" + result + ")";
 
         return result;
     }
@@ -213,7 +213,7 @@ namespace CodeHelpers
             if (currentLine.length() >= maxLineLength)
             {
                 result += currentLine.trimEnd() + newLine;
-                currentLine = String::repeatedString (" ", call.length()) + parameters[i];
+                currentLine = CharacterFunctions::repeat (" ", call.length()) + parameters[i];
             }
             else
             {
@@ -409,7 +409,7 @@ namespace CodeHelpers
                               const StringArray& strings, const StringArray& codeToExecute, const int indentLevel)
     {
         HAssert (strings.size() == codeToExecute.size());
-        auto indent = String::repeatedString (" ", indentLevel);
+        auto indent = CharacterFunctions::repeat (" ", indentLevel);
         auto hashMultiplier = findBestHashMultiplier (strings);
 
         out << indent << "unsigned int hash = 0;" << newLine
@@ -434,7 +434,7 @@ namespace CodeHelpers
     String getLeadingWhitespace (String line)
     {
         line = line.removeCharacters (line.endsWith ("\r\n") ? "\r\n" : "\n");
-        auto endOfLeadingWS = line.c_str().findEndOfWhitespace();
+        auto endOfLeadingWS = line.c_str().find_last_of(' ');
         return String (line.c_str(), endOfLeadingWS);
     }
 
@@ -444,7 +444,7 @@ namespace CodeHelpers
 
         for (;;)
         {
-            const wchar c = *line++;
+            const char c = *line++;
 
             if (c == 0)                         break;
             else if (c == '{')                  ++braces;

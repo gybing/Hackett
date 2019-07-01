@@ -1,97 +1,17 @@
 
 
-#if HMSVC
- #pragma warning (push)
- #pragma warning (disable: 4514 4996)
-#endif
-
-wchar CharacterFunctions::toUpperCase (const wchar character) noexcept
-{
-    return (wchar) towupper ((wint_t) character);
-}
-
-wchar CharacterFunctions::toLowerCase (const wchar character) noexcept
-{
-    return (wchar) towlower ((wint_t) character);
-}
-
-bool CharacterFunctions::isUpperCase (const wchar character) noexcept
-{
-   #if HWINDOWS
-    return iswupper ((wint_t) character) != 0;
-   #else
-    return toLowerCase (character) != character;
-   #endif
-}
-
-bool CharacterFunctions::isLowerCase (const wchar character) noexcept
-{
-   #if HWINDOWS
-    return iswlower ((wint_t) character) != 0;
-   #else
-    return toUpperCase (character) != character;
-   #endif
-}
-
-#if HMSVC
- #pragma warning (pop)
-#endif
-
 //==============================================================================
 bool CharacterFunctions::isWhitespace (const char character) noexcept
 {
     return character == ' ' || (character <= 13 && character >= 9);
 }
 
-bool CharacterFunctions::isWhitespace (const wchar character) noexcept
+bool CharacterFunctions::isWhitespace (const wchar_t character) noexcept
 {
     return iswspace ((wint_t) character) != 0;
 }
 
-bool CharacterFunctions::isDigit (const char character) noexcept
-{
-    return (character >= '0' && character <= '9');
-}
-
-bool CharacterFunctions::isDigit (const wchar character) noexcept
-{
-    return iswdigit ((wint_t) character) != 0;
-}
-
-bool CharacterFunctions::isLetter (const char character) noexcept
-{
-    return (character >= 'a' && character <= 'z')
-        || (character >= 'A' && character <= 'Z');
-}
-
-bool CharacterFunctions::isLetter (const wchar character) noexcept
-{
-    return iswalpha ((wint_t) character) != 0;
-}
-
-bool CharacterFunctions::isLetterOrDigit (const char character) noexcept
-{
-    return (character >= 'a' && character <= 'z')
-        || (character >= 'A' && character <= 'Z')
-        || (character >= '0' && character <= '9');
-}
-
-bool CharacterFunctions::isLetterOrDigit (const wchar character) noexcept
-{
-    return iswalnum ((wint_t) character) != 0;
-}
-
-bool CharacterFunctions::isPrintable (const char character) noexcept
-{
-    return (character >= ' ' && character <= '~');
-}
-
-bool CharacterFunctions::isPrintable (const wchar character) noexcept
-{
-    return iswprint ((wint_t) character) != 0;
-}
-
-int CharacterFunctions::getHexDigitValue (const wchar digit) noexcept
+int CharacterFunctions::getHexDigitValue (const char digit) noexcept
 {
     auto d = (unsigned int) (digit - '0');
 
@@ -111,170 +31,206 @@ int CharacterFunctions::getHexDigitValue (const wchar digit) noexcept
     return -1;
 }
 
-double CharacterFunctions::mulexp10 (const double value, int exponent) noexcept
+String CharacterFunctions::trim(const std::string& text) noexcept
 {
-    if (exponent == 0)
-        return value;
+	std::string::const_iterator it = text.begin();
+	while (it != text.end() && std::isspace(*it))
+		it++;
 
-    if (value == 0.0)
-        return 0;
+	std::string::const_reverse_iterator rit = text.rbegin();
+	while (rit.base() != it && std::isspace(*rit))
+		rit++;
 
-    const bool negative = (exponent < 0);
-
-    if (negative)
-        exponent = -exponent;
-
-    double result = 1.0, power = 10.0;
-
-    for (int bit = 1; exponent != 0; bit <<= 1)
-    {
-        if ((exponent & bit) != 0)
-        {
-            exponent ^= bit;
-            result *= power;
-
-            if (exponent == 0)
-                break;
-        }
-
-        power *= power;
-    }
-
-    return negative ? (value / result) : (value * result);
+	return std::string(it, rit.base());
 }
 
-wchar CharacterFunctions::getUnicodeCharFromWindows1252Codepage (const uint8 c) noexcept
+String CharacterFunctions::trim(const std::string& text, char c, bool isfront /*= true*/, bool isback /*= true*/) noexcept
 {
-    if (c < 0x80 || c >= 0xa0)
-        return (wchar) c;
+	std::string::const_iterator it = text.begin();
+	if (isfront)
+	{
+		while (it != text.end() && (*it == c))
+			it++;
+	}
 
-    static const uint16 lookup[] = { 0x20AC, 0x0007, 0x201A, 0x0192, 0x201E, 0x2026, 0x2020, 0x2021,
-                                     0x02C6, 0x2030, 0x0160, 0x2039, 0x0152, 0x0007, 0x017D, 0x0007,
-                                     0x0007, 0x2018, 0x2019, 0x201C, 0x201D, 0x2022, 0x2013, 0x2014,
-                                     0x02DC, 0x2122, 0x0161, 0x203A, 0x0153, 0x0007, 0x017E, 0x0178 };
+	std::string::const_reverse_iterator rit = text.rbegin();
+	if (isback)
+	{
+		while (rit.base() != it && (*rit == c))
+			rit++;
+	}
 
-    return (wchar) lookup[c - 0x80];
+	return std::string(it, rit.base());
 }
 
-
-//==============================================================================
-//==============================================================================
-#if HUNIT_TESTS
-
-#define QUOTE(x) #x
-#define STR(value) QUOTE(value)
-#define ASYM_STRING_DOUBLE_PAIR(str, value) std::pair<String, double> (STR(str), value)
-#define STRING_DOUBLE_PAIR(value) ASYM_STRING_DOUBLE_PAIR(value, value)
-#define STRING_DOUBLE_PAIR_COMBOS(value) \
-    STRING_DOUBLE_PAIR(value), \
-    STRING_DOUBLE_PAIR(-value), \
-    ASYM_STRING_DOUBLE_PAIR(+value, value), \
-    ASYM_STRING_DOUBLE_PAIR(000000 ## value, value), \
-    ASYM_STRING_DOUBLE_PAIR(+000 ## value, value), \
-    ASYM_STRING_DOUBLE_PAIR(-0 ## value, -value)
-
-class CharacterFunctionsTests  : public UnitTest
+String CharacterFunctions::trim(const std::string& text, bool isfront, bool isback /*= true*/) noexcept
 {
-public:
-    CharacterFunctionsTests()
-        : UnitTest ("CharacterFunctions", UnitTestCategories::text)
-    {}
+	std::string::const_iterator it = text.begin();
+	if (isfront)
+	{
+		while (it != text.end() && std::isspace(*it))
+			it++;
+	}
 
-    void runTest() override
-    {
-        beginTest ("readDoubleValue");
+	std::string::const_reverse_iterator rit = text.rbegin();
+	if (isback)
+	{
+		while (rit.base() != it && std::isspace(*rit))
+			rit++;
+	}
 
-        static const std::pair<String, double> testValues[] =
-        {
-            // Integers
-            STRING_DOUBLE_PAIR_COMBOS (0),
-            STRING_DOUBLE_PAIR_COMBOS (3),
-            STRING_DOUBLE_PAIR_COMBOS (4931),
-            STRING_DOUBLE_PAIR_COMBOS (5000),
-            STRING_DOUBLE_PAIR_COMBOS (9862097),
+	return std::string(it, rit.base());
+}
 
-            // Floating point numbers
-            STRING_DOUBLE_PAIR_COMBOS (7.000),
-            STRING_DOUBLE_PAIR_COMBOS (0.2),
-            STRING_DOUBLE_PAIR_COMBOS (.298630),
-            STRING_DOUBLE_PAIR_COMBOS (1.118),
-            STRING_DOUBLE_PAIR_COMBOS (0.9000),
-            STRING_DOUBLE_PAIR_COMBOS (0.0000001),
-            STRING_DOUBLE_PAIR_COMBOS (500.0000001),
-            STRING_DOUBLE_PAIR_COMBOS (9862098.2398604),
+String CharacterFunctions::replace(const String& text, const char* stringToReplace, const char* stringToInsert, const bool ignoreCase /*= false*/) noexcept
+{
+	if (text.empty() || stringToReplace == nullptr || stringToInsert == nullptr)
+	{
+		return text;
+	}
 
-            // Exponents
-            STRING_DOUBLE_PAIR_COMBOS (0e0),
-            STRING_DOUBLE_PAIR_COMBOS (0.e0),
-            STRING_DOUBLE_PAIR_COMBOS (0.00000e0),
-            STRING_DOUBLE_PAIR_COMBOS (.0e7),
-            STRING_DOUBLE_PAIR_COMBOS (0e-5),
-            STRING_DOUBLE_PAIR_COMBOS (2E0),
-            STRING_DOUBLE_PAIR_COMBOS (4.E0),
-            STRING_DOUBLE_PAIR_COMBOS (1.2000000E0),
-            STRING_DOUBLE_PAIR_COMBOS (1.2000000E6),
-            STRING_DOUBLE_PAIR_COMBOS (.398e3),
-            STRING_DOUBLE_PAIR_COMBOS (10e10),
-            STRING_DOUBLE_PAIR_COMBOS (1.4962e+2),
-            STRING_DOUBLE_PAIR_COMBOS (3198693.0973e4),
-            STRING_DOUBLE_PAIR_COMBOS (10973097.2087E-4),
-            STRING_DOUBLE_PAIR_COMBOS (1.3986e00006),
-            STRING_DOUBLE_PAIR_COMBOS (2087.3087e+00006),
-            STRING_DOUBLE_PAIR_COMBOS (6.0872e-00006),
+	std::size_t stringToReplaceSize = std::strlen(stringToReplace);
+	std::size_t stringToInsertSize = std::strlen(stringToInsert);
 
-            // Too many sig figs. The parsing routine on MinGW gets the last
-            // significant figure wrong.
-            STRING_DOUBLE_PAIR_COMBOS (17654321098765432.9),
-            STRING_DOUBLE_PAIR_COMBOS (183456789012345678.9),
-            STRING_DOUBLE_PAIR_COMBOS (1934567890123456789.9),
-            STRING_DOUBLE_PAIR_COMBOS (20345678901234567891.9),
-            STRING_DOUBLE_PAIR_COMBOS (10000000000000000303786028427003666890752.000000),
-            STRING_DOUBLE_PAIR_COMBOS (10000000000000000303786028427003666890752e3),
-            STRING_DOUBLE_PAIR_COMBOS (10000000000000000303786028427003666890752e100),
-            STRING_DOUBLE_PAIR_COMBOS (10000000000000000303786028427003666890752.000000e-5),
-            STRING_DOUBLE_PAIR_COMBOS (10000000000000000303786028427003666890752.000000e-40),
+	if (stringToInsertSize <= 0 || stringToInsert <= 0)
+	{
+		return text;
+	}
 
-            STRING_DOUBLE_PAIR_COMBOS (1.23456789012345678901234567890),
-            STRING_DOUBLE_PAIR_COMBOS (1.23456789012345678901234567890e-111)
+	std::string dest(text);
+	std::string from(stringToReplace);
 
-            // Limits. DBL_MAX may not exist on Linux.
-           #if ! HLINUX
-          , STRING_DOUBLE_PAIR (DBL_MAX),
-            STRING_DOUBLE_PAIR (-DBL_MAX),
-            STRING_DOUBLE_PAIR (DBL_MIN)
-           #endif
-        };
+	if (ignoreCase)
+	{
+		std::transform(dest.begin(), dest.end(), dest.begin(), std::tolower);
+		std::transform(from.begin(), from.end(), from.begin(), std::tolower);
+	}
 
-        for (auto trial : testValues)
-        {
-            auto charPtr = trial.first.c_str();
-            expectEquals (CharacterFunctions::readDoubleValue (charPtr), trial.second);
-        }
+	for (std::string::size_type pos = 0;
+		(pos = dest.find(from, pos)) != std::string::npos;
+		pos += stringToInsertSize)
+	{
+		dest.replace(pos, stringToReplaceSize, stringToInsert);
+	}
 
-        {
-            String nans[] = { "NaN", "-nan", "+NAN", "1.0E1024", "-1.0E-999", "1.23456789012345678901234567890e123456789"};
+	return dest;
+}
 
-            for (auto nan : nans)
-            {
-                auto charPtr = nan.c_str();
-                expect (std::isnan (CharacterFunctions::readDoubleValue (charPtr)));
-            }
-        }
+bool CharacterFunctions::startsWith(const String& text, const char* character, bool ignoreCase /*= false*/) noexcept
+{
+	return 0 == compare(text.c_str(), character, std::strlen(character));
+}
 
-        {
-            String infs[] = { "Inf", "-inf",  "INF"};
+bool CharacterFunctions::endsWith(const String& text, const char* character, bool ignoreCase /*= false*/) noexcept
+{
+	auto end = text.end();
+	auto otherEnd = character + std::strlen(character);
 
-            for (auto inf : infs)
-            {
-                auto charPtr = inf.c_str();
-                expect (std::isinf (CharacterFunctions::readDoubleValue (charPtr)));
-            }
-        }
-    }
-};
+	while (end != text.begin() && otherEnd != character)
+	{
+		--end;
+		--otherEnd;
 
-static CharacterFunctionsTests characterFunctionsTests;
+		if (ignoreCase ? (std::tolower(*end) != std::tolower(*otherEnd)) : ((*end != *otherEnd)))
+			return false;
+	}
 
-#endif
+	return otherEnd == character;
+}
 
+int CharacterFunctions::compare(char char1, char char2, bool ignoreCase /*= false*/) noexcept
+{
+	return char1 != char2 ? (ignoreCase && compare(std::toupper(char1), std::toupper(char2))) : 0;
+}
 
+int CharacterFunctions::compare(const char* s1, const char* s2, int maxChars /*= 0*/, bool ignoreCase /*= false*/) noexcept
+{
+	while (--maxChars >= 0)
+	{
+		auto c1 = *s1++;
+
+		if (auto diff = compare(c1, *s2++, ignoreCase))
+			return diff;
+
+		if (c1 == 0)
+			break;
+	}
+
+	return 0;
+}
+
+String CharacterFunctions::remove(const String& text, const String& charactersToRemove) noexcept
+{
+	if (text.empty())
+		return text;
+
+	String builder(text);
+
+	for (auto i = text.rbegin(); i != text.rend(); ++i)
+	{
+		if (charactersToRemove.find(*i) < 0)
+			builder += *i;
+	}
+
+	return std::move(builder);
+}
+
+String CharacterFunctions::repeat(const String& stringToRepeat, size_t numberOfTimesToRepeat) noexcept
+{
+	if (numberOfTimesToRepeat <= 0)
+		return {};
+
+	String result(stringToRepeat.size() * numberOfTimesToRepeat, 0);
+	auto n = (char*)result.data();
+
+	while (--numberOfTimesToRepeat >= 0)
+		std::strcpy(n, stringToRepeat.c_str());
+
+	return result;
+}
+
+bool CharacterFunctions::contains(const String& text, const String& chars, bool only /*= false*/) noexcept
+{
+	if (only)
+	{
+		for (auto t = text.begin(); t != text.end(); ++t)
+			if (chars.find(*t) < 0)
+				return false;
+	}
+	else
+	{
+		for (auto t = text.begin(); t != text.end(); ++t)
+			if (chars.find(*t) >= 0)
+				return true;
+	}
+
+	return only;
+}
+
+String CharacterFunctions::hexToString(const void* const d, const int size, const int groupSize) noexcept
+{
+	const char* hexDigits = "0123456789abcdef";
+
+	if (size <= 0)
+		return {};
+
+	int numChars = (size * 2) + 2;
+	if (groupSize > 0)
+		numChars += size / groupSize;
+
+	String s;
+
+	auto* data = static_cast<const unsigned char*> (d);
+
+	for (int i = 0; i < size; ++i)
+	{
+		const unsigned char nextByte = *data++;
+		dest += ((char)hexDigits[nextByte >> 4]);
+		dest += ((char)hexDigits[nextByte & 0xf]);
+
+		if (groupSize > 0 && (i % groupSize) == (groupSize - 1) && i < (size - 1))
+			dest += ' ';
+	}
+
+	return s;
+}

@@ -6,7 +6,7 @@
 //==============================================================================
 static inline String nsStringToJuce (NSString* s)
 {
-    return CharPointer_UTF8 ([s UTF8String]);
+    return char* ([s UTF8String]);
 }
 
 static inline NSString* HStringToNS (const String& s)
@@ -284,7 +284,7 @@ struct ObjCClass
 private:
     static String getRandomisedName (const char* root)
     {
-        return root + String::toHexString (Random::getSystemRandom().nextInt64());
+        return root + CharacterFunctions::hexToString (Random::getSystemRandom().nextInt64());
     }
 
     HDECLARE_NON_COPYABLE (ObjCClass)

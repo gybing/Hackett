@@ -154,7 +154,7 @@ XmlElement* ComponentTypeHandler::createXmlFor (Component* comp, const Component
     XmlElement* e = new XmlElement (getXmlTagName());
 
     e->setAttribute ("name", comp->getName());
-    e->setAttribute ("id", String::toHexString (getComponentId (comp)));
+    e->setAttribute ("id", CharacterFunctions::hexToString (getComponentId (comp)));
     e->setAttribute ("memberName", comp->getProperties() ["memberName"].toString());
     e->setAttribute ("virtualName", comp->getProperties() ["virtualName"].toString());
     e->setAttribute ("explicitFocusOrder", comp->getExplicitFocusOrder());
@@ -238,7 +238,7 @@ void ComponentTypeHandler::setComponentId (Component* comp, const int64 newID)
 {
     HAssert (comp != nullptr);
     if (newID != 0)
-        comp->getProperties().set ("HrCompId", String::toHexString (newID));
+        comp->getProperties().set ("HrCompId", CharacterFunctions::hexToString (newID));
 }
 
 RelativePositionedRectangle ComponentTypeHandler::getComponentPosition (Component* comp)
@@ -258,10 +258,10 @@ void ComponentTypeHandler::setComponentPosition (Component* comp,
                                                  const ComponentLayout* layout)
 {
     comp->getProperties().set ("pos", newPos.rect.toString());
-    comp->getProperties().set ("relativeToX", String::toHexString (newPos.relativeToX));
-    comp->getProperties().set ("relativeToY", String::toHexString (newPos.relativeToY));
-    comp->getProperties().set ("relativeToW", String::toHexString (newPos.relativeToW));
-    comp->getProperties().set ("relativeToH", String::toHexString (newPos.relativeToH));
+    comp->getProperties().set ("relativeToX", CharacterFunctions::hexToString (newPos.relativeToX));
+    comp->getProperties().set ("relativeToY", CharacterFunctions::hexToString (newPos.relativeToY));
+    comp->getProperties().set ("relativeToW", CharacterFunctions::hexToString (newPos.relativeToW));
+    comp->getProperties().set ("relativeToH", CharacterFunctions::hexToString (newPos.relativeToH));
 
     comp->setBounds (newPos.getRectangle (Rectangle<int> (0, 0, comp->getParentWidth(), comp->getParentHeight()),
                                           layout));
@@ -605,7 +605,7 @@ void ComponentTypeHandler::fillInCreationCode (GeneratedCode& code, Component* c
         StringArray lines;
         lines.addLines (params);
 
-        params = lines.joinIntoString ("\n" + String::repeatedString (" ", s.length() + 2));
+        params = lines.joinIntoString ("\n" + CharacterFunctions::repeat (" ", s.length() + 2));
 
         s << " (" << params << "));\n";
     }

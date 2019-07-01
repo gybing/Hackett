@@ -310,7 +310,7 @@ public:
                             L' ');
     }
 
-    bool loadGlyphIfPossible (const wchar character)
+    bool loadGlyphIfPossible (const char character)
     {
         if (faceWrapper != nullptr)
         {
@@ -441,7 +441,7 @@ private:
 
             if (FT_Get_Kerning (face, glyphIndex, rightGlyphIndex, ft_kerning_unscaled, &kerning) == 0
                    && kerning.x != 0)
-                addKerningPair ((wchar) character, (wchar) rightCharCode, kerning.x / height);
+                addKerningPair ((char) character, (char) rightCharCode, kerning.x / height);
 
             rightCharCode = FT_Get_Next_Char (face, rightCharCode, &rightGlyphIndex);
         }

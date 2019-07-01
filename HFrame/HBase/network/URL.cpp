@@ -379,13 +379,13 @@ File URL::fileFromFileSchemeURL (const URL& fileURL)
    #ifdef HWINDOWS
     bool isUncPath = (! fileURL.url.startsWith ("file:///"));
    #else
-    path = File::getSeparatorString() + path;
+    path = File::getSeparatorChars() + path;
    #endif
 
     auto urlElements = StringArray::fromTokens (fileURL.getSubPath(), "/", "");
 
     for (auto urlElement : urlElements)
-        path += File::getSeparatorString() + removeEscapeChars (urlElement.replace ("+", "%2B"));
+        path += File::getSeparatorChars() + removeEscapeChars (urlElement.replace ("+", "%2B"));
 
    #ifdef HWINDOWS
     if (isUncPath)
@@ -438,7 +438,7 @@ void URL::createHeadersAndPostData (String& headers, MemoryBlock& postDataToWrit
         // (this doesn't currently support mixing custom post-data with uploads..)
         HAssert (postData.getSize() == 0);
 
-        auto boundary = String::toHexString (Random::getSystemRandom().nextInt64());
+        auto boundary = CharacterFunctions::hexToString (Random::getSystemRandom().nextInt64());
 
         headers << "Content-Type: multipart/form-data; boundary=" << boundary << "\r\n";
 
@@ -508,7 +508,7 @@ bool URL::isProbablyAnEmailAddress (const String& possibleEmailAddress)
     auto atSign = possibleEmailAddress.indexOfChar ('@');
 
     return atSign > 0
-        && possibleEmailAddress.lastIndexOfChar ('.') > (atSign + 1)
+        && possibleEmailAddress.find_last_of ('.') > (atSign + 1)
         && ! possibleEmailAddress.endsWithChar ('.');
 }
 
@@ -851,8 +851,8 @@ String URL::removeEscapeChars (const String& s)
     {
         if (utf8.getUnchecked(i) == '%')
         {
-            auto hexDigit1 = CharacterFunctions::getHexDigitValue ((wchar) (uint8) utf8 [i + 1]);
-            auto hexDigit2 = CharacterFunctions::getHexDigitValue ((wchar) (uint8) utf8 [i + 2]);
+            auto hexDigit1 = CharacterFunctions::getHexDigitValue ((char) (uint8) utf8 [i + 1]);
+            auto hexDigit2 = CharacterFunctions::getHexDigitValue ((char) (uint8) utf8 [i + 2]);
 
             if (hexDigit1 >= 0 && hexDigit2 >= 0)
             {
@@ -880,7 +880,7 @@ String URL::addEscapeChars (const String& s, bool isParameter, bool roundBracket
         auto c = utf8.getUnchecked(i);
 
         if (! (CharacterFunctions::isLetterOrDigit (c)
-                 || legalChars.containsChar ((wchar) c)))
+                 || legalChars.containsChar ((char) c)))
         {
             utf8.set (i, '%');
             utf8.insert (++i, "0123456789ABCDEF" [((uint8) c) >> 4]);

@@ -561,7 +561,7 @@ public:
     String getTextFromTextMetaEvent() const;
 
     /** Creates a text meta-event. */
-    static MidiMessage textMetaEvent (int type, StringRef text);
+    static MidiMessage textMetaEvent (int type, const String& text);
 
     //==============================================================================
     /** Returns true if this is a 'tempo' meta-event.

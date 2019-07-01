@@ -87,7 +87,7 @@ public:
         @code Whirlpool checksum (myString.toUTF8());
         @endcode
     */
-    explicit Whirlpool (CharPointer_UTF8 utf8Text) noexcept;
+    explicit Whirlpool (char* utf8Text) noexcept;
 
     //==============================================================================
     /** Returns the hash as a 64-byte block of data. */

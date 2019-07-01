@@ -138,7 +138,7 @@ public:
         s << getColourIntialisationCode (component, memberVariableName)
           << '\n';
 
-        const String indent (String::repeatedString (" ", memberVariableName.length() + 13));
+        const String indent (CharacterFunctions::repeat (" ", memberVariableName.length() + 13));
 
         s << memberVariableName << "->setImages (false, true, "
           << CodeHelpers::boolLiteral (doesImageKeepProportions (ib)) << ",\n"

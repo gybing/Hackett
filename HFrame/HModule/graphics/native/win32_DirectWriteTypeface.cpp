@@ -146,7 +146,7 @@ public:
 
         BOOL fontFound = false;
         uint32 fontIndex = 0;
-        auto hr = fontCollection->FindFamilyName (font.getTypefaceName().toWideCharPointer(), &fontIndex, &fontFound);
+        auto hr = fontCollection->FindFamilyName (font.getTypefaceName().c_str(), &fontIndex, &fontFound);
 
         if (! fontFound)
             fontIndex = 0;

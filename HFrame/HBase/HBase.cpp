@@ -223,21 +223,3 @@
 #if HUNIT_TESTS
 #include "containers/HashMap_test.cpp"
 #endif
-
-//==============================================================================
-
-/*
-    As the very long class names here try to explain, the purpose of this code is to cause
-    a linker error if not all of your compile units are consistent in the options that they
-    enable before including H headers. The reason this is important is that if you have
-    two cpp files, and one includes the H headers with debug enabled, and the other doesn't,
-    then each will be generating code with different memory layouts for the classes, and
-    you'll get subtle and hard-to-track-down memory corruption bugs!
-*/
-#if HDEBUG
- this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_debug_mode
-    ::this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_debug_mode() noexcept {}
-#else
- this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_release_mode
-    ::this_will_fail_to_link_if_some_of_your_compile_units_are_built_in_release_mode() noexcept {}
-#endif

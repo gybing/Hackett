@@ -366,7 +366,7 @@ private:
             {
                 Range<int> selection = optimiseSelection ({ start.getPosition(), end.getPosition() });
 
-                String text = getTextInRange (selection).toLowerCase();
+                String text = getTextInRange (selection).std::tolower();
 
                 if (isIntegerLiteral (text) || isFloatLiteral (text))
                     overlay.reset (new LiteralHighlightOverlay (*this, selection, mightBeColourValue (text)));

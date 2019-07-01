@@ -941,10 +941,10 @@ public:
 
         @see toString
     */
-    static Rectangle fromString (StringRef stringVersion)
+    static Rectangle fromString (const String& stringVersion)
     {
         StringArray toks;
-        toks.addTokens (stringVersion.text.findEndOfWhitespace(), ",; \t\r\n", "");
+        toks.addTokens (stringVersion.text.find_last_of(' '), ",; \t\r\n", "");
 
         return { parseIntAfterSpace (toks[0]),
                  parseIntAfterSpace (toks[1]),
@@ -963,8 +963,8 @@ private:
     Point<ValueType> pos;
     ValueType w{}, h{};
 
-    static ValueType parseIntAfterSpace (StringRef s) noexcept
-        { return static_cast<ValueType> (s.text.findEndOfWhitespace().getIntValue32()); }
+    static ValueType parseIntAfterSpace (const String& s) noexcept
+        { return static_cast<ValueType> (s.text.find_last_of(' ').getIntValue32()); }
 
     void copyWithRounding (Rectangle<int>& result) const noexcept    { result = getSmallestIntegerContainer(); }
     void copyWithRounding (Rectangle<float>& result) const noexcept  { result = toFloat(); }

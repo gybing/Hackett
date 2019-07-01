@@ -131,12 +131,12 @@ void* attachComponentToWindowRefVST (Component* comp, void* parentWindowOrView, 
             HIRect r = { {0, 0}, { (float) comp->getWidth(), (float) comp->getHeight()} };
             HIViewSetFrame (dummyView, &r);
             HIViewAddSubview (parentView, dummyView);
-            comp->getProperties().set ("dummyViewRef", String::toHexString ((pointer_sized_int) (void*) dummyView));
+            comp->getProperties().set ("dummyViewRef", CharacterFunctions::hexToString ((pointer_sized_int) (void*) dummyView));
 
             EventHandlerRef ref;
             const EventTypeSpec kControlBoundsChangedEvent = { kEventClassControl, kEventControlBoundsChanged };
             InstallEventHandler (GetControlEventTarget (dummyView), NewEventHandlerUPP (viewBoundsChangedEvent), 1, &kControlBoundsChangedEvent, (void*) comp, &ref);
-            comp->getProperties().set ("boundsEventRef", String::toHexString ((pointer_sized_int) (void*) ref));
+            comp->getProperties().set ("boundsEventRef", CharacterFunctions::hexToString ((pointer_sized_int) (void*) ref));
 
             updateEditorCompBoundsVST (comp);
 

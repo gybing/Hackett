@@ -357,7 +357,7 @@ struct InAppPurchases::Pimpl    : private AsyncUpdater,
 
                 for (auto i = 0; i < productIdentifiers.size(); ++i)
                 {
-                    identifiersToUse.add (productIdentifiers[i].toLowerCase());
+                    identifiersToUse.add (productIdentifiers[i].std::tolower());
                     ++pi;
 
                     if (pi == maxQuerySize || i == productIdentifiers.size() - 1)

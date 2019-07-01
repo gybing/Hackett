@@ -13,7 +13,7 @@ namespace CoreMidiHelpers
             return true;
 
        #if HLOG_COREMIDI_ERRORS
-        Logger::writeToLog ("CoreMIDI error: " + String (lineNum) + " - " + String::toHexString ((int) err));
+        Logger::writeToLog ("CoreMIDI error: " + String (lineNum) + " - " + CharacterFunctions::hexToString ((int) err));
        #endif
 
         ignoreUnused (lineNum);

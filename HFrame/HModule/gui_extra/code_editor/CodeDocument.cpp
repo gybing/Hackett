@@ -39,7 +39,7 @@ public:
     {
     }
 
-    static void createLines (Array<CodeDocumentLine*>& newLines, StringRef text)
+    static void createLines (Array<CodeDocumentLine*>& newLines, const String& text)
     {
         auto t = text.text;
         int charNumInFile = 0;
@@ -170,7 +170,7 @@ bool CodeDocument::Iterator::reinitialiseCharPtr() const
     return true;
 }
 
-wchar CodeDocument::Iterator::nextChar() noexcept
+char CodeDocument::Iterator::nextChar() noexcept
 {
     for (;;)
     {
@@ -222,7 +222,7 @@ void CodeDocument::Iterator::skipToStartOfLine() noexcept
     }
 }
 
-wchar CodeDocument::Iterator::peekNextChar() const noexcept
+char CodeDocument::Iterator::peekNextChar() const noexcept
 {
     if (! reinitialiseCharPtr())
         return 0;
@@ -236,7 +236,7 @@ wchar CodeDocument::Iterator::peekNextChar() const noexcept
     return 0;
 }
 
-wchar CodeDocument::Iterator::previousChar() noexcept
+char CodeDocument::Iterator::previousChar() noexcept
 {
     if (! reinitialiseCharPtr())
         return 0;
@@ -265,7 +265,7 @@ wchar CodeDocument::Iterator::previousChar() noexcept
     return *charPointer;
 }
 
-wchar CodeDocument::Iterator::peekPreviousChar() const noexcept
+char CodeDocument::Iterator::peekPreviousChar() const noexcept
 {
     if (! reinitialiseCharPtr())
         return 0;
@@ -511,7 +511,7 @@ CodeDocument::Position CodeDocument::Position::movedByLines (const int deltaLine
     return p;
 }
 
-wchar CodeDocument::Position::getCharacter() const
+char CodeDocument::Position::getCharacter() const
 {
     if (auto* l = owner->lines [line])
         return l->line [getIndexInLine()];
@@ -748,7 +748,7 @@ bool CodeDocument::hasChangedSinceSavePoint() const noexcept
 }
 
 //==============================================================================
-static inline int getCharacterType (wchar character) noexcept
+static inline int getCharacterType (char character) noexcept
 {
     return (CharacterFunctions::isLetterOrDigit (character) || character == '_')
                 ? 2 : (CharacterFunctions::isWhitespace (character) ? 0 : 1);
@@ -834,7 +834,7 @@ CodeDocument::Position CodeDocument::findWordBreakBefore (const Position& positi
 
 void CodeDocument::findTokenContaining (const Position& pos, Position& start, Position& end) const noexcept
 {
-    auto isTokenCharacter = [] (wchar c)  { return CharacterFunctions::isLetterOrDigit (c) || c == '.' || c == '_'; };
+    auto isTokenCharacter = [] (char c)  { return CharacterFunctions::isLetterOrDigit (c) || c == '.' || c == '_'; };
 
     end = pos;
     while (isTokenCharacter (end.getCharacter()))
@@ -867,7 +867,7 @@ void CodeDocument::checkLastLineStatus()
     if (lastLine != nullptr && lastLine->endsWithLineBreak())
     {
         // check that there's an empty line at the end if the preceding one ends in a newline..
-        lines.add (new CodeDocumentLine (StringRef(), StringRef(), 0, 0,
+        lines.add (new CodeDocumentLine (const String&(), const String&(), 0, 0,
                                          lastLine->lineStartInFile + lastLine->lineLength));
     }
 }
@@ -1182,10 +1182,10 @@ struct CodeDocumentTest  : public UnitTest
                 CodeDocument::Position p2 (d, -8);
                 expectEquals (p1.getLineNumber(), 0, comment);
                 expectEquals (p1.getIndexInLine(), 0, comment);
-                expectEquals (p1.getCharacter(), wchar ('\''), comment);
+                expectEquals (p1.getCharacter(), char ('\''), comment);
                 expectEquals (p2.getLineNumber(), 0, comment);
                 expectEquals (p2.getIndexInLine(), 0, comment);
-                expectEquals (p2.getCharacter(), wchar ('\''), comment);
+                expectEquals (p2.getCharacter(), char ('\''), comment);
             }
 
             {
@@ -1204,12 +1204,12 @@ struct CodeDocumentTest  : public UnitTest
 
                 CodeDocument::Position p1 (d, 3, 0);
                 p1.setPositionMaintained (true);
-                expectEquals (p1.getCharacter(), wchar ('A'), comment1);
+                expectEquals (p1.getCharacter(), char ('A'), comment1);
 
                 d.newTransaction();
                 d.insertText (p1, "INSERT1");
 
-                expectEquals (p1.getCharacter(), wchar ('A'), comment1);
+                expectEquals (p1.getCharacter(), char ('A'), comment1);
                 expectEquals (p1.getLineNumber(), 3, comment1);
                 expectEquals (p1.getIndexInLine(), 7, comment1);
                 d.undo();
@@ -1237,25 +1237,25 @@ struct CodeDocumentTest  : public UnitTest
                 const String comment4 ("Check iteration across line boundaries.");
 
                 CodeDocument::Iterator it (d);
-                expectEquals (it.peekNextChar(), wchar ('\''), comment1);
-                expectEquals (it.nextChar(), wchar ('\''), comment1);
-                expectEquals (it.nextChar(), wchar ('T'), comment1);
-                expectEquals (it.nextChar(), wchar ('w'), comment1);
-                expectEquals (it.peekNextChar(), wchar ('a'), comment2);
-                expectEquals (it.previousChar(), wchar ('w'), comment2);
-                expectEquals (it.previousChar(), wchar ('T'), comment2);
-                expectEquals (it.previousChar(), wchar ('\''), comment2);
-                expectEquals (it.previousChar(), wchar (0), comment3);
+                expectEquals (it.peekNextChar(), char ('\''), comment1);
+                expectEquals (it.nextChar(), char ('\''), comment1);
+                expectEquals (it.nextChar(), char ('T'), comment1);
+                expectEquals (it.nextChar(), char ('w'), comment1);
+                expectEquals (it.peekNextChar(), char ('a'), comment2);
+                expectEquals (it.previousChar(), char ('w'), comment2);
+                expectEquals (it.previousChar(), char ('T'), comment2);
+                expectEquals (it.previousChar(), char ('\''), comment2);
+                expectEquals (it.previousChar(), char (0), comment3);
                 expect (it.isSOF(), comment3);
 
-                while (it.peekNextChar() != wchar ('D')) // "Did gyre..."
+                while (it.peekNextChar() != char ('D')) // "Did gyre..."
                     it.nextChar();
 
-                expectEquals (it.nextChar(), wchar ('D'), comment3);
-                expectEquals (it.peekNextChar(), wchar ('i'), comment3);
-                expectEquals (it.previousChar(), wchar ('D'), comment3);
-                expectEquals (it.previousChar(), wchar ('\n'), comment3);
-                expectEquals (it.previousChar(), wchar ('s'), comment3);
+                expectEquals (it.nextChar(), char ('D'), comment3);
+                expectEquals (it.peekNextChar(), char ('i'), comment3);
+                expectEquals (it.previousChar(), char ('D'), comment3);
+                expectEquals (it.previousChar(), char ('\n'), comment3);
+                expectEquals (it.previousChar(), char ('s'), comment3);
             }
 
             {
@@ -1266,12 +1266,12 @@ struct CodeDocumentTest  : public UnitTest
                 CodeDocument::Position p (d, 6, 0); // "The jaws..."
                 CodeDocument::Iterator it (p);
 
-                expectEquals (it.nextChar(), wchar ('T'), comment1);
-                expectEquals (it.nextChar(), wchar ('h'), comment1);
-                expectEquals (it.previousChar(), wchar ('h'), comment1);
-                expectEquals (it.previousChar(), wchar ('T'), comment1);
-                expectEquals (it.previousChar(), wchar ('\n'), comment1);
-                expectEquals (it.previousChar(), wchar ('!'), comment1);
+                expectEquals (it.nextChar(), char ('T'), comment1);
+                expectEquals (it.nextChar(), char ('h'), comment1);
+                expectEquals (it.previousChar(), char ('h'), comment1);
+                expectEquals (it.previousChar(), char ('T'), comment1);
+                expectEquals (it.previousChar(), char ('\n'), comment1);
+                expectEquals (it.previousChar(), char ('!'), comment1);
 
                 const auto p2 = it.toPosition();
                 expectEquals (p2.getLineNumber(), 5, comment2);

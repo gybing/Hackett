@@ -909,7 +909,7 @@ private:
         if (errorCode == noErr)
             return true;
 
-        const String errorMessage ("CoreAudio error: " + String::toHexString ((int) errorCode));
+        const String errorMessage ("CoreAudio error: " + CharacterFunctions::hexToString ((int) errorCode));
         HCOREAUDIOLOG (errorMessage);
 
         if (callback != nullptr)

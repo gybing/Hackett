@@ -744,7 +744,7 @@ private:
     //==============================================================================
     static String convertASIOString (char* text, int length)
     {
-        if (CharPointer_UTF8::isValidString (text, length))
+        if (char*::isValidString (text, length))
             return String::fromUTF8 (text, length);
 
         WCHAR wideVersion[512] = {};
@@ -1550,7 +1550,7 @@ private:
     {
         HKEY subKey;
 
-        if (RegOpenKeyEx (hk, keyName.toWideCharPointer(), 0, KEY_READ, &subKey) == ERROR_SUCCESS)
+        if (RegOpenKeyEx (hk, keyName.c_str(), 0, KEY_READ, &subKey) == ERROR_SUCCESS)
         {
             TCHAR buf[256] = {};
             DWORD dtype = REG_SZ;

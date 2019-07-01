@@ -168,14 +168,14 @@ String IPAddress::toString() const
     temp.split[0] = address[0];
     temp.split[1] = address[1];
 
-    auto addressString = String::toHexString (temp.combined);
+    auto addressString = CharacterFunctions::hexToString (temp.combined);
 
     for (int i = 1; i < 8; ++i)
     {
         temp.split[0] = address[i * 2];
         temp.split[1] = address[i * 2 + 1];
 
-        addressString << ':' << String::toHexString (temp.combined);
+        addressString << ':' << CharacterFunctions::hexToString (temp.combined);
     }
 
     return getFormattedAddress (addressString);
@@ -248,14 +248,14 @@ String IPAddress::getFormattedAddress (const String& unformattedAddress)
                 isLast = true;
 
             if (t.length() > 1)
-                addressString = addressString.replace (String::repeatedString ("0", t.length()), "0");
+                addressString = addressString.replace (CharacterFunctions::repeat ("0", t.length()), "0");
 
             if (isFirst && numZerosTemp != 0 && numZeros > numZerosTemp)
                 isFirst = false;
         }
         else
         {
-            addressString = addressString.replace (t, t.trimCharactersAtStart ("0").toLowerCase());
+            addressString = addressString.replace (t, t.trimCharactersAtStart ("0").std::tolower());
 
             if (numZeros > 0)
             {
@@ -278,8 +278,8 @@ String IPAddress::getFormattedAddress (const String& unformattedAddress)
         }
         else
         {
-            auto zeroString = isFirst ? "0" + String::repeatedString (":0", numZeros - 1)
-                                      : String::repeatedString (":0", numZeros);
+            auto zeroString = isFirst ? "0" + CharacterFunctions::repeat (":0", numZeros - 1)
+                                      : CharacterFunctions::repeat (":0", numZeros);
 
             addressString = addressString.replaceFirstOccurrenceOf (zeroString, ":");
 

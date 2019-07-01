@@ -467,7 +467,7 @@ private:
 
         for (auto& m : modules)
             out << "#define HMODULE_AVAILABLE_" << m->getID()
-                << String::repeatedString (" ", longestName + 5 - m->getID().length()) << " 1" << newLine;
+                << CharacterFunctions::repeat (" ", longestName + 5 - m->getID().length()) << " 1" << newLine;
 
         out << newLine << "#define HGLOBAL_MODULE_SETTINGS_INCLUDED 1" << newLine;
 

@@ -207,7 +207,7 @@ API String translate (const char* stringLiteral);
 /** Uses the LocalisedStrings class to translate the given string literal.
     @see LocalisedStrings
 */
-API String translate (CharPointer_UTF8 stringLiteral);
+API String translate (char* stringLiteral);
 
 /** Uses the LocalisedStrings class to translate the given string literal.
     @see LocalisedStrings

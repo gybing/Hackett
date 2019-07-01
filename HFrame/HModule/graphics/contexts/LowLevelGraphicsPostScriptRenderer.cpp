@@ -453,7 +453,7 @@ void LowLevelGraphicsPostScriptRenderer::writeImage (const Image& im,
 
             const uint8 pixelValues[3] = { pixel.getRed(), pixel.getGreen(), pixel.getBlue() };
 
-            out << String::toHexString (pixelValues, 3, 0);
+            out << CharacterFunctions::hexToString (pixelValues, 3, 0);
             charsOnLine += 3;
 
             if (charsOnLine > 100)

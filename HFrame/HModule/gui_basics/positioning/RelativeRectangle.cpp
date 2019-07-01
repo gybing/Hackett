@@ -28,7 +28,7 @@ namespace RelativeRectangleHelpers
 {
     inline void skipComma (char*& s)
     {
-        s = s.findEndOfWhitespace();
+        s = s.find_last_of(' ');
 
         if (*s == ',')
             ++s;

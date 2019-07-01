@@ -11,11 +11,10 @@ FileLogger::FileLogger (const File& file,
     if (! file.exists())
         file.create();  // (to create the parent directories)
 
-    String welcome;
-    welcome << newLine
-            << "**********************************************************" << newLine
-            << welcomeMessage << newLine
-            << "Log started: " << Time::getCurrentTime().toString (true, true) << newLine;
+    String welcome = newLine
+        + "**********************************************************" + newLine
+		+ welcomeMessage + newLine
+		+ "Log started: " + Time::getCurrentTime().toString (true, true) + newLine;
 
     FileLogger::logMessage (welcome);
 }

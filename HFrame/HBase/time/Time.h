@@ -224,7 +224,7 @@ public:
     String toISO8601 (bool includeDividerCharacters) const;
 
     /** Parses an ISO-8601 string and returns it as a Time. */
-    static Time fromISO8601 (StringRef iso8601);
+    static Time fromISO8601 (const String& iso8601);
 
     //==============================================================================
     /** Adds a RelativeTime to this time. */

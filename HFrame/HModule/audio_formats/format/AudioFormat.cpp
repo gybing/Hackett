@@ -29,7 +29,7 @@ AudioFormat::AudioFormat (String name, StringArray extensions)
 {
 }
 
-AudioFormat::AudioFormat (StringRef name, StringRef extensions)
+AudioFormat::AudioFormat (const String& name, const String& extensions)
    : formatName (name.text), fileExtensions (StringArray::fromTokens (extensions, false))
 {
 }

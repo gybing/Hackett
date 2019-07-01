@@ -24,7 +24,7 @@
   ==============================================================================
 */
 
-SidePanel::SidePanel (StringRef title, int width, bool positionOnLeft,
+SidePanel::SidePanel (const String& title, int width, bool positionOnLeft,
                       Component* contentToDisplay, bool deleteComponentWhenNoLongerNeeded)
     : titleLabel ("titleLabel", title),
       isOnLeft (positionOnLeft),

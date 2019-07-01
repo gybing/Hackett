@@ -502,7 +502,7 @@ private:
             LocalRef<jbyteArray> result((jbyteArray) env->CallObjectMethod(digest.get(), JavaMessageDigest.digest));
 
             auto* md5Bytes = env->GetByteArrayElements(result.get(), &ignore);
-            key = String::toHexString(md5Bytes, env->GetArrayLength(result.get()), 0);
+            key = CharacterFunctions::hexToString(md5Bytes, env->GetArrayLength(result.get()), 0);
             env->ReleaseByteArrayElements(result.get(), md5Bytes, 0);
         }
 

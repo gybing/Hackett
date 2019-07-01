@@ -320,12 +320,12 @@ protected:
 
         String getProductFlavourNameIdentifier() const
         {
-            return getName().toLowerCase().replaceCharacter (L' ', L'_') + String ("_");
+            return getName().std::tolower().replaceCharacter (L' ', L'_') + String ("_");
         }
 
         String getProductFlavourCMakeIdentifier() const
         {
-            return getName().toUpperCase().replaceCharacter (L' ', L'_');
+            return getName().std::toupper().replaceCharacter (L' ', L'_');
         }
 
         String getModuleLibraryArchName() const override
@@ -448,7 +448,7 @@ private:
                     for (auto& lib : userLibraries)
                     {
                         String findLibraryCmd;
-                        findLibraryCmd << "find_library(" << lib.toLowerCase().replaceCharacter (L' ', L'_')
+                        findLibraryCmd << "find_library(" << lib.std::tolower().replaceCharacter (L' ', L'_')
                             << " \"" << lib << "\" PATHS";
 
                         writeCmakePathLines (mo, "    ", findLibraryCmd, cfgLibraryPaths, "    NO_CMAKE_FIND_ROOT_PATH)");
@@ -522,7 +522,7 @@ private:
         if (libraries.size() > 0)
         {
             for (auto& lib : libraries)
-                mo << "find_library(" << lib.toLowerCase().replaceCharacter (L' ', L'_') << " \"" << lib << "\")" << newLine;
+                mo << "find_library(" << lib.std::tolower().replaceCharacter (L' ', L'_') << " \"" << lib << "\")" << newLine;
 
             mo << newLine;
         }
@@ -534,7 +534,7 @@ private:
             mo << newLine << newLine;
 
             for (auto& lib : libraries)
-                mo << "    ${" << lib.toLowerCase().replaceCharacter (L' ', L'_') << "}" << newLine;
+                mo << "    ${" << lib.std::tolower().replaceCharacter (L' ', L'_') << "}" << newLine;
 
             mo << "    \"cpufeatures\"" << newLine;
         }
@@ -674,7 +674,7 @@ private:
 
     String getAndroidDefaultConfig() const
     {
-        auto bundleIdentifier  = project.getBundleIdentifierString().toLowerCase();
+        auto bundleIdentifier  = project.getBundleIdentifierString().std::tolower();
         auto cmakeDefs         = getCmakeDefinitions();
         auto cFlags            = getProjectCompilerFlags();
         auto cxxFlags          = getProjectCxxCompilerFlags();
@@ -1736,7 +1736,7 @@ private:
             auto* provider = application.createNewChildElement ("provider");
 
             provider->setAttribute ("android:name", "com.roli.H.JuceSharingContentProvider");
-            provider->setAttribute ("android:authorities", project.getBundleIdentifierString().toLowerCase() + ".sharingcontentprovider");
+            provider->setAttribute ("android:authorities", project.getBundleIdentifierString().std::tolower() + ".sharingcontentprovider");
             provider->setAttribute ("android:grantUriPermissions", "true");
             provider->setAttribute ("android:exported", "false");
         }

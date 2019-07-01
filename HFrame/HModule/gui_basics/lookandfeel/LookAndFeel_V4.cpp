@@ -456,7 +456,7 @@ void LookAndFeel_V4::drawAlertBox (Graphics& g, AlertWindow& alert,
 
         GlyphArrangement ga;
         ga.addFittedText ({ iconRect.getHeight() * 0.9f, Font::bold },
-                          String::charToString ((wchar) (uint8) character),
+                          String::charToString ((char) (uint8) character),
                           static_cast<float> (iconRect.getX()), static_cast<float> (iconRect.getY()),
                           static_cast<float> (iconRect.getWidth()), static_cast<float> (iconRect.getHeight()),
                           Justification::centred, false);

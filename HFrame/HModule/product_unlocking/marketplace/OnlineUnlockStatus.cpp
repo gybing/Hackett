@@ -43,7 +43,7 @@ struct KeyFileUtils
         xml.setAttribute ("email", userEmail);
         xml.setAttribute (machineNumbersAttributeName, machineNumbers);
         xml.setAttribute ("app", appName);
-        xml.setAttribute ("date", String::toHexString (Time::getCurrentTime().toMilliseconds()));
+        xml.setAttribute ("date", CharacterFunctions::hexToString (Time::getCurrentTime().toMilliseconds()));
 
         return xml;
     }
@@ -119,7 +119,7 @@ struct KeyFileUtils
 
             auto mb = val.toMemoryBlock();
 
-            if (CharPointer_UTF8::isValidString (static_cast<const char*> (mb.getData()), (int) mb.getSize()))
+            if (char*::isValidString (static_cast<const char*> (mb.getData()), (int) mb.getSize()))
                 xml = parseXML (mb.toString());
         }
 
@@ -131,10 +131,10 @@ struct KeyFileUtils
         return decryptXML (keyFileText.fromLastOccurrenceOf ("#", false, false).trim(), rsaPublicKey);
     }
 
-    static StringArray getMachineNumbers (XmlElement xml, StringRef attributeName)
+    static StringArray getMachineNumbers (XmlElement xml, const String& attributeName)
     {
         StringArray numbers;
-        numbers.addTokens (xml.getStringAttribute (attributeName), ",; ", StringRef());
+        numbers.addTokens (xml.getStringAttribute (attributeName), ",; ", const String&());
         numbers.trim();
         numbers.removeEmptyStrings();
         return numbers;
@@ -286,17 +286,17 @@ char OnlineUnlockStatus::MachineIDUtilities::getPlatformPrefix()
 
 String OnlineUnlockStatus::MachineIDUtilities::getEncodedIDString (const String& input)
 {
-    auto platform = String::charToString (static_cast<wchar> (getPlatformPrefix()));
+    auto platform = String::charToString (static_cast<char> (getPlatformPrefix()));
 
     return platform + MD5 ((input + "salt_1" + platform).toUTF8())
-                        .toHexString().substr (0, 9).toUpperCase();
+                        .toHexString().substr (0, 9).std::toupper();
 }
 
 bool OnlineUnlockStatus::MachineIDUtilities::addFileIDToList (StringArray& ids, const File& f)
 {
     if (auto num = f.getFileIdentifier())
     {
-        ids.add (getEncodedIDString (String::toHexString ((int64) num)));
+        ids.add (getEncodedIDString (CharacterFunctions::hexToString ((int64) num)));
         return true;
     }
 
@@ -488,7 +488,7 @@ String KeyGeneration::generateExpiringKeyFile (const String& appName,
                                                const RSAKey& privateKey)
 {
     auto xml = KeyFileUtils::createKeyFileContent (appName, userEmail, userName, machineNumbers, "expiring_mach");
-    xml.setAttribute ("expiryTime", String::toHexString (expiryTime.toMilliseconds()));
+    xml.setAttribute ("expiryTime", CharacterFunctions::hexToString (expiryTime.toMilliseconds()));
 
     auto comment = KeyFileUtils::createKeyFileComment (appName, userEmail, userName, machineNumbers);
     comment << newLine << "Expires: " << expiryTime.toString (true, true);

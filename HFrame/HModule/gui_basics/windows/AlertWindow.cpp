@@ -24,7 +24,7 @@
   ==============================================================================
 */
 
-static wchar getDefaultPasswordChar() noexcept
+static char getDefaultPasswordChar() noexcept
 {
    #if HLINUX
     return 0x2022;

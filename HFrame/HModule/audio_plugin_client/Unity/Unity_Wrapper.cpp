@@ -217,7 +217,7 @@ private:
     KeyPress getKeyPress (int keyCode, String name)
     {
         if (keyCode >= 32 && keyCode <= 64)
-            return { keyCode, ModifierKeys::currentModifiers, wchar (keyCode) };
+            return { keyCode, ModifierKeys::currentModifiers, char (keyCode) };
 
         if (keyCode >= 91 && keyCode <= 122)
             return { keyCode, ModifierKeys::currentModifiers, name[0] };

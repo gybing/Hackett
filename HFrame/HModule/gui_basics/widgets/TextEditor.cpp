@@ -36,16 +36,16 @@ struct TextAtom
     bool isWhitespace() const noexcept       { return CharacterFunctions::isWhitespace (atomText[0]); }
     bool isNewLine() const noexcept          { return atomText[0] == '\r' || atomText[0] == '\n'; }
 
-    String getText (wchar passwordCharacter) const
+    String getText (char passwordCharacter) const
     {
         if (passwordCharacter == 0)
             return atomText;
 
-        return String::repeatedString (String::charToString (passwordCharacter),
+        return CharacterFunctions::repeat (String::charToString (passwordCharacter),
                                        atomText.length());
     }
 
-    String getTrimmedText (const wchar passwordCharacter) const
+    String getTrimmedText (const char passwordCharacter) const
     {
         if (passwordCharacter == 0)
             return atomText.substr (0, numChars);
@@ -53,7 +53,7 @@ struct TextAtom
         if (isNewLine())
             return {};
 
-        return String::repeatedString (String::charToString (passwordCharacter), numChars);
+        return CharacterFunctions::repeat (String::charToString (passwordCharacter), numChars);
     }
 
     HLEAK_DETECTOR (TextAtom)
@@ -64,7 +64,7 @@ struct TextAtom
 class TextEditor::UniformTextSection
 {
 public:
-    UniformTextSection (const String& text, const Font& f, Colour col, wchar passwordChar)
+    UniformTextSection (const String& text, const Font& f, Colour col, char passwordChar)
         : font (f), colour (col)
     {
         initialiseAtoms (text, passwordChar);
@@ -82,7 +82,7 @@ public:
 
     UniformTextSection& operator= (const UniformTextSection&) = delete;
 
-    void append (UniformTextSection& other, const wchar passwordChar)
+    void append (UniformTextSection& other, const char passwordChar)
     {
         if (! other.atoms.empty())
         {
@@ -116,7 +116,7 @@ public:
         }
     }
 
-    UniformTextSection* split (int indexToBreakAt, wchar passwordChar)
+    UniformTextSection* split (int indexToBreakAt, char passwordChar)
     {
         auto* section2 = new UniformTextSection (String(), font, colour, passwordChar);
         int index = 0;
@@ -200,7 +200,7 @@ public:
         return total;
     }
 
-    void setFont (const Font& newFont, const wchar passwordChar)
+    void setFont (const Font& newFont, const char passwordChar)
     {
         if (font != newFont)
         {
@@ -217,7 +217,7 @@ public:
     Array<TextAtom> atoms;
 
 private:
-    void initialiseAtoms (const String& textToParse, const wchar passwordChar)
+    void initialiseAtoms (const String& textToParse, const char passwordChar)
     {
         auto text = textToParse.c_str();
 
@@ -664,7 +664,7 @@ private:
     int sectionIndex = 0, atomIndex = 0;
     Justification justification;
     const float justificationWidth, wordWrapWidth;
-    const wchar passwordCharacter;
+    const char passwordCharacter;
     const float lineSpacing;
     TextAtom tempAtom;
 
@@ -863,7 +863,7 @@ namespace TextEditorDefs
 
     const int maxActionsPerTransaction = 100;
 
-    static int getCharacterCategory (wchar character) noexcept
+    static int getCharacterCategory (char character) noexcept
     {
         return CharacterFunctions::isLetterOrDigit (character)
                     ? 2 : (CharacterFunctions::isWhitespace (character) ? 0 : 1);
@@ -871,7 +871,7 @@ namespace TextEditorDefs
 }
 
 //==============================================================================
-TextEditor::TextEditor (const String& name, wchar passwordChar)
+TextEditor::TextEditor (const String& name, char passwordChar)
     : Component (name),
       passwordCharacter (passwordChar)
 {
@@ -1131,7 +1131,7 @@ void TextEditor::setTextToShowWhenEmpty (const String& text, Colour colourToUse)
     colourForTextWhenEmpty = colourToUse;
 }
 
-void TextEditor::setPasswordCharacter (wchar newPasswordCharacter)
+void TextEditor::setPasswordCharacter (char newPasswordCharacter)
 {
     if (passwordCharacter != newPasswordCharacter)
     {

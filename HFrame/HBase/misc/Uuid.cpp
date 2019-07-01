@@ -58,7 +58,7 @@ bool Uuid::isNull() const noexcept
 
 String Uuid::getHexRegion (int start, int length) const
 {
-    return String::toHexString (uuid + start, length, 0);
+    return CharacterFunctions::hexToString (uuid + start, length, 0);
 }
 
 String Uuid::toString() const

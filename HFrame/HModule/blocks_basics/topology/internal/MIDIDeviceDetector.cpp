@@ -66,7 +66,7 @@ struct MIDIDeviceDetector  : public PhysicalTopologySource::DeviceDetector
         if (name.endsWith (" OUT)"))
             return name.dropLastCharacters (5);
 
-        const int openBracketPosition = name.lastIndexOfChar ('[');
+        const int openBracketPosition = name.find_last_of ('[');
         if (openBracketPosition != -1 && name.endsWith ("]"))
             return name.dropLastCharacters (name.length() - openBracketPosition);
 

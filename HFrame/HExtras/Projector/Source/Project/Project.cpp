@@ -36,8 +36,8 @@ namespace
     {
         auto s = CodeHelpers::makeValidIdentifier (seed, false, true, false) + "xxxx";
 
-        return s.substr (0, 1).toUpperCase()
-             + s.substr (1, 4).toLowerCase();
+        return s.substr (0, 1).std::toupper()
+             + s.substr (1, 4).std::tolower();
     }
 }
 
@@ -500,7 +500,7 @@ void Project::writeLegacyPluginCharacteristicsSettings()
 }
 
 //==============================================================================
-static int getVersionElement (StringRef v, int index)
+static int getVersionElement (const String& v, int index)
 {
     StringArray parts = StringArray::fromTokens (v, "., ", {});
 
@@ -709,7 +709,7 @@ bool Project::saveProjectRootToFile()
 }
 
 //==============================================================================
-static void sendProjectSettingAnalyticsEvent (StringRef label)
+static void sendProjectSettingAnalyticsEvent (const String& label)
 {
     StringPairArray data;
     data.set ("label", label);
@@ -809,8 +809,8 @@ String Project::getRelativePathForFile (const File& file) const
     while (p2.startsWithChar (File::getSeparatorChar()))
         p2 = p2.substr (1);
 
-    if (p1.upToFirstOccurrenceOf (File::getSeparatorString(), true, false)
-          .equalsIgnoreCase (p2.upToFirstOccurrenceOf (File::getSeparatorString(), true, false)))
+    if (p1.upToFirstOccurrenceOf (File::getSeparatorChars(), true, false)
+          .equalsIgnoreCase (p2.upToFirstOccurrenceOf (File::getSeparatorChars(), true, false)))
     {
         filename = FileHelpers::getRelativePathFrom (file, relativePathBase);
     }
@@ -1173,7 +1173,7 @@ int Project::getVersionAsHexInteger() const
 
 String Project::getVersionAsHex() const
 {
-    return "0x" + String::toHexString (getVersionAsHexInteger());
+    return "0x" + CharacterFunctions::hexToString (getVersionAsHexInteger());
 }
 
 File Project::getBinaryDataCppFile (int index) const
@@ -1741,7 +1741,7 @@ void Project::removeCompilerFlagScheme (const String& schemeToRemove)
 }
 
 //==============================================================================
-static String getCompanyNameOrDefault (StringRef str)
+static String getCompanyNameOrDefault (const String& str)
 {
     if (str.empty())
         return "yourcompany";

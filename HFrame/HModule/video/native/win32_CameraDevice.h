@@ -370,7 +370,7 @@ struct CameraDevice::Pimpl  : public ChangeBroadcaster
 
             if (SUCCEEDED (hr))
             {
-                hr = fileSink->SetFileName (file.getFullPathName().toWideCharPointer(), 0);
+                hr = fileSink->SetFileName (file.getFullPathName().c_str(), 0);
 
                 if (SUCCEEDED (hr))
                 {
@@ -414,7 +414,7 @@ struct CameraDevice::Pimpl  : public ChangeBroadcaster
                                    .replace ("$AVGTIMEPERFRAME", String (10000000 / maxFramesPerSecond));
 
                         ComSmartPtr<IWMProfile> currentProfile;
-                        hr = profileManager->LoadProfileByData (prof.toWideCharPointer(), currentProfile.resetAndGetPointerAddress());
+                        hr = profileManager->LoadProfileByData (prof.c_str(), currentProfile.resetAndGetPointerAddress());
                         hr = asfConfig->ConfigureFilterUsingProfile (currentProfile);
 
                         if (SUCCEEDED (hr))

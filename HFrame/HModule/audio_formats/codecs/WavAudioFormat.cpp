@@ -660,7 +660,7 @@ namespace WavFileHelpers
         static bool isMatchingTypeIgnoringCase (const int value, const char* const name) noexcept
         {
             for (int i = 0; i < 4; ++i)
-                if ((wchar) name[i] != CharacterFunctions::toUpperCase ((wchar) ((value >> (i * 8)) & 0xff)))
+                if ((char) name[i] != CharacterFunctions::std::toupper ((char) ((value >> (i * 8)) & 0xff)))
                     return false;
 
             return true;

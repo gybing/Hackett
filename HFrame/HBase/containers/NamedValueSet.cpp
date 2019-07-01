@@ -99,7 +99,7 @@ bool NamedValueSet::operator== (const NamedValueSet& other) const noexcept
 
 bool NamedValueSet::operator!= (const NamedValueSet& other) const noexcept   { return ! operator== (other); }
 
-int NamedValueSet::size() const noexcept        { return values.size(); }
+size_t NamedValueSet::size() const noexcept        { return values.size(); }
 bool NamedValueSet::empty() const noexcept    { return values.empty(); }
 
 static const var& getNullVarRef() noexcept

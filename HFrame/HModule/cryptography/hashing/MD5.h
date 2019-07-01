@@ -72,7 +72,7 @@ public:
         @code MD5 checksum (myString.toUTF8());
         @endcode
     */
-    explicit MD5 (CharPointer_UTF8 utf8Text) noexcept;
+    explicit MD5 (char* utf8Text) noexcept;
 
     /** Destructor. */
     ~MD5() noexcept;
@@ -92,9 +92,9 @@ public:
         Note that this method is provided for backwards-compatibility with the old
         version of this class, which had a constructor that took a string and performed
         this operation on it. In new code, you shouldn't use this, and are recommended to
-        use the constructor that takes a CharPointer_UTF8 instead.
+        use the constructor that takes a char* instead.
     */
-    static MD5 fromUTF32 (StringRef);
+    static MD5 fromUTF32 (const String&);
 
     //==============================================================================
     bool operator== (const MD5&) const noexcept;

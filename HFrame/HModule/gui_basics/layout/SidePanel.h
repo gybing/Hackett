@@ -54,7 +54,7 @@ public:
                                    the SidePanel is deleted or when a different component is added. If false,
                                    the caller must manage the lifetime of the component
     */
-    SidePanel (StringRef title, int width, bool positionOnLeft,
+    SidePanel (const String& title, int width, bool positionOnLeft,
                Component* contentComponent = nullptr,
                bool deleteComponentWhenNoLongerNeeded = true);
 

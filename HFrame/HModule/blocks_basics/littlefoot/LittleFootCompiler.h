@@ -182,8 +182,8 @@ private:
         char* p;
 
     private:
-        static bool isIdentifierStart (wchar c) noexcept   { return CharacterFunctions::isLetter (c)        || c == '_'; }
-        static bool isIdentifierBody  (wchar c) noexcept   { return CharacterFunctions::isLetterOrDigit (c) || c == '_'; }
+        static bool isIdentifierStart (char c) noexcept   { return CharacterFunctions::isLetter (c)        || c == '_'; }
+        static bool isIdentifierBody  (char c) noexcept   { return CharacterFunctions::isLetterOrDigit (c) || c == '_'; }
 
         TokenType matchNextToken()
         {
@@ -230,13 +230,13 @@ private:
         {
             for (;;)
             {
-                p = p.findEndOfWhitespace();
+                p = p.find_last_of(' ');
 
                 if (*p == '/')
                 {
                     auto c2 = p[1];
 
-                    if (c2 == '/')  { p = CharacterFunctions::find (p, (wchar) '\n'); continue; }
+                    if (c2 == '/')  { p = CharacterFunctions::find (p, (char) '\n'); continue; }
 
                     if (c2 == '*')
                     {
@@ -251,7 +251,7 @@ private:
             }
         }
 
-        bool parseStringLiteral (wchar quoteType)
+        bool parseStringLiteral (char quoteType)
         {
             if (quoteType != '"' && quoteType != '\'')
                 return false;

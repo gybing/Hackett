@@ -199,9 +199,9 @@ namespace AiffFileHelpers
     {
         static bool isValidTag (const char* d) noexcept
         {
-            return CharacterFunctions::isLetterOrDigit (d[0]) && CharacterFunctions::isUpperCase (static_cast<wchar> (d[0]))
-                && CharacterFunctions::isLetterOrDigit (d[1]) && CharacterFunctions::isLowerCase (static_cast<wchar> (d[1]))
-                && CharacterFunctions::isLetterOrDigit (d[2]) && CharacterFunctions::isLowerCase (static_cast<wchar> (d[2]));
+            return CharacterFunctions::isLetterOrDigit (d[0]) && CharacterFunctions::isUpperCase (static_cast<char> (d[0]))
+                && CharacterFunctions::isLetterOrDigit (d[1]) && CharacterFunctions::isLowerCase (static_cast<char> (d[1]))
+                && CharacterFunctions::isLetterOrDigit (d[2]) && CharacterFunctions::isLowerCase (static_cast<char> (d[2]));
         }
 
         static bool isAppleGenre (const String& tag) noexcept
@@ -244,7 +244,7 @@ namespace AiffFileHelpers
 
                 if (isValidTag (data))
                 {
-                    auto tag = String (CharPointer_UTF8 (data), CharPointer_UTF8 (dataEnd));
+                    auto tag = String (char* (data), char* (dataEnd));
                     isGenre = isAppleGenre (tag);
                     tagsArray.add (tag);
                 }

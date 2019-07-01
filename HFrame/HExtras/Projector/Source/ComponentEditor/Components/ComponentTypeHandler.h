@@ -53,7 +53,7 @@ public:
     static ComponentTypeHandler* getHandlerFor (Component& component);
 
     //==============================================================================
-    virtual String getXmlTagName() const noexcept             { return className.toUpperCase(); }
+    virtual String getXmlTagName() const noexcept             { return className.std::toupper(); }
 
     static ComponentTypeHandler* getHandlerForXmlTag (const String& tagName);
 

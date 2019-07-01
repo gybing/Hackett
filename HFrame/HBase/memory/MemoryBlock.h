@@ -201,9 +201,9 @@ public:
         The block will be resized to the number of valid bytes read from the string.
         Non-hex characters in the string will be ignored.
 
-        @see String::toHexString()
+        @see CharacterFunctions::hexToString()
     */
-    void loadFromHexString (StringRef sourceHexString);
+    void loadFromHexString (const String& sourceHexString);
 
     //==============================================================================
     /** Sets a number of bits in the memory block, treating it as a long binary sequence. */
@@ -240,7 +240,7 @@ public:
 
         @see toBase64Encoding, Base64::convertFromBase64
     */
-    bool fromBase64Encoding  (StringRef encodedString);
+    bool fromBase64Encoding  (const String& encodedString);
 
 
 private:

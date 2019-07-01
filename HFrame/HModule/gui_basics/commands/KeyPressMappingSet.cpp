@@ -277,7 +277,7 @@ std::unique_ptr<XmlElement> KeyPressMappingSet::createXml (const bool saveDiffer
             {
                 auto map = doc->createNewChildElement ("MAPPING");
 
-                map->setAttribute ("commandId", String::toHexString ((int) cm.commandID));
+                map->setAttribute ("commandId", CharacterFunctions::hexToString ((int) cm.commandID));
                 map->setAttribute ("description", commandManager.getDescriptionOfCommand (cm.commandID));
                 map->setAttribute ("key", cm.keypresses.getReference (j).getTextDescription());
             }
@@ -296,7 +296,7 @@ std::unique_ptr<XmlElement> KeyPressMappingSet::createXml (const bool saveDiffer
                 {
                     auto map = doc->createNewChildElement ("UNMAPPING");
 
-                    map->setAttribute ("commandId", String::toHexString ((int) cm.commandID));
+                    map->setAttribute ("commandId", CharacterFunctions::hexToString ((int) cm.commandID));
                     map->setAttribute ("description", commandManager.getDescriptionOfCommand (cm.commandID));
                     map->setAttribute ("key", cm.keypresses.getReference (j).getTextDescription());
                 }

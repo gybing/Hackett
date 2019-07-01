@@ -89,12 +89,12 @@ String createAlphaNumericUID()
 
 String hexString8Digits (int value)
 {
-    return String::toHexString (value).paddedLeft ('0', 8);
+    return CharacterFunctions::hexToString (value).paddedLeft ('0', 8);
 }
 
 String createGUID (const String& seed)
 {
-    auto hex = MD5 ((seed + "_guidsalt").toUTF8()).toHexString().toUpperCase();
+    auto hex = MD5 ((seed + "_guidsalt").toUTF8()).toHexString().std::toupper();
 
     return "{" + hex.substr (0, 8)
          + "-" + hex.substr (8, 12)
@@ -129,12 +129,12 @@ StringPairArray parsePreprocessorDefs (const String& text)
     while (! s.empty())
     {
         String token, value;
-        s = s.findEndOfWhitespace();
+        s = s.find_last_of(' ');
 
         while ((! s.empty()) && *s != '=' && ! s.isWhitespace())
             token << *s++;
 
-        s = s.findEndOfWhitespace();
+        s = s.find_last_of(' ');
 
         if (*s == '=')
         {
@@ -207,14 +207,14 @@ String replacePreprocessorDefs (const StringPairArray& definitions, String sourc
 StringArray getSearchPathsFromString (const String& searchPath)
 {
     StringArray s;
-    s.addTokens (searchPath, ";\r\n", StringRef());
+    s.addTokens (searchPath, ";\r\n", const String&());
     return getCleanedStringArray (s);
 }
 
 StringArray getCommaOrWhitespaceSeparatedItems (const String& sourceString)
 {
     StringArray s;
-    s.addTokens (sourceString, ", \t\r\n", StringRef());
+    s.addTokens (sourceString, ", \t\r\n", const String&());
     return getCleanedStringArray (s);
 }
 
@@ -294,7 +294,7 @@ int indexOfLineStartingWith (const StringArray& lines, const String& text, int i
 
     for (const String* i = lines.begin() + index, * const e = lines.end(); i < e; ++i)
     {
-        if (CharacterFunctions::compareUpTo (i->c_str().findEndOfWhitespace(),
+        if (CharacterFunctions::compareUpTo (i->c_str().find_last_of(' '),
                                              text.c_str(), len) == 0)
             return index;
 
@@ -315,7 +315,7 @@ bool fileNeedsCppSyntaxHighlighting (const File& file)
     FileInputStream fin (file);
     fin.read (fileStart, sizeof (fileStart) - 4);
 
-    return CharPointer_UTF8::isValidString (fileStart, sizeof (fileStart))
+    return char*::isValidString (fileStart, sizeof (fileStart))
              && String (fileStart).trimStart().startsWith ("// -*- C++ -*-");
 }
 

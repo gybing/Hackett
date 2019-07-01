@@ -186,7 +186,7 @@ public:
     String getExporterIdentifierMacro() const
     {
         return "HR_" + settings.getType().toString() + "_"
-                + String::toHexString (getTargetLocationString().hashCode()).toUpperCase();
+                + CharacterFunctions::hexToString (getTargetLocationString().hashCode()).std::toupper();
     }
 
     // An exception that can be thrown by the create() method.

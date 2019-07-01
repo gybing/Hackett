@@ -46,7 +46,7 @@ public:
 
             if (clientName.empty())
             {
-                clientName = "CLIENT_" + String (Random().nextInt (10000)).toUpperCase();
+                clientName = "CLIENT_" + String (Random().nextInt (10000)).std::toupper();
                 properties.setValue (uuidPropName, clientName);
             }
         }

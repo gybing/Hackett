@@ -652,7 +652,7 @@ public:
 
     void handleKeyDownCallback (int k, int kc)
     {
-        handleKeyPress (k, static_cast<wchar> (kc));
+        handleKeyPress (k, static_cast<char> (kc));
     }
 
     void handleKeyUpCallback (int /*k*/, int /*kc*/)

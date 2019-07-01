@@ -32,8 +32,8 @@ bool PluginDescription::isDuplicateOf (const PluginDescription& other) const noe
 
 static String getPluginDescSuffix (const PluginDescription& d)
 {
-    return "-" + String::toHexString (d.fileOrIdentifier.hashCode())
-         + "-" + String::toHexString (d.uid);
+    return "-" + CharacterFunctions::hexToString (d.fileOrIdentifier.hashCode())
+         + "-" + CharacterFunctions::hexToString (d.uid);
 }
 
 bool PluginDescription::matchesIdentifierString (const String& identifierString) const
@@ -60,10 +60,10 @@ std::unique_ptr<XmlElement> PluginDescription::createXml() const
     e->setAttribute ("manufacturer", manufacturerName);
     e->setAttribute ("version", version);
     e->setAttribute ("file", fileOrIdentifier);
-    e->setAttribute ("uid", String::toHexString (uid));
+    e->setAttribute ("uid", CharacterFunctions::hexToString (uid));
     e->setAttribute ("isInstrument", isInstrument);
-    e->setAttribute ("fileTime", String::toHexString (lastFileModTime.toMilliseconds()));
-    e->setAttribute ("infoUpdateTime", String::toHexString (lastInfoUpdateTime.toMilliseconds()));
+    e->setAttribute ("fileTime", CharacterFunctions::hexToString (lastFileModTime.toMilliseconds()));
+    e->setAttribute ("infoUpdateTime", CharacterFunctions::hexToString (lastInfoUpdateTime.toMilliseconds()));
     e->setAttribute ("numInputs", numInputChannels);
     e->setAttribute ("numOutputs", numOutputChannels);
     e->setAttribute ("isShell", hasSharedContainer);

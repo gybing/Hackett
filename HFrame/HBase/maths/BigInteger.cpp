@@ -1077,7 +1077,7 @@ String BigInteger::toString (const int base, const int minimumNumCharacters) con
             if (remainder == 0 && v.isZero())
                 break;
 
-            s = String::charToString ((wchar) (uint8) hexDigits [remainder]) + s;
+            s = (char) (uint8) hexDigits [remainder] + s;
         }
     }
     else if (base == 10)
@@ -1092,7 +1092,7 @@ String BigInteger::toString (const int base, const int minimumNumCharacters) con
             if (remainder.isZero() && v.isZero())
                 break;
 
-            s = String (remainder.getBitRangeAsInt (0, 8)) + s;
+            s = std::to_string(remainder.getBitRangeAsInt(0, 8)) + s;
         }
     }
     else
@@ -1101,17 +1101,17 @@ String BigInteger::toString (const int base, const int minimumNumCharacters) con
         return {};
     }
 
-    s = s.paddedLeft ('0', minimumNumCharacters);
+    s += CharacterFunctions::repeat ("0", minimumNumCharacters - s.length());
 
     return isNegative() ? "-" + s : s;
 }
 
-void BigInteger::parseString (StringRef text, const int base)
+void BigInteger::parseString (const String& text, const int base)
 {
     clear();
-    auto t = text.text.findEndOfWhitespace();
+    auto t = text.find_last_of(' ');
 
-    setNegative (*t == (wchar) '-');
+    setNegative (text.at(t) == (char) '-');
 
     if (base == 2 || base == 8 || base == 16)
     {
@@ -1119,7 +1119,7 @@ void BigInteger::parseString (StringRef text, const int base)
 
         for (;;)
         {
-            auto c = *t++;
+			auto c = text.at(t); t++;
             auto digit = CharacterFunctions::getHexDigitValue (c);
 
             if (((uint32) digit) < (uint32) base)
@@ -1139,7 +1139,7 @@ void BigInteger::parseString (StringRef text, const int base)
 
         for (;;)
         {
-            auto c = *t++;
+            auto c = text.at(t); t++;
 
             if (c >= '0' && c <= '9')
             {

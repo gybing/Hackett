@@ -57,7 +57,7 @@ void logFailure (HRESULT hr)
         }
 
         Logger::writeToLog ("WASAPI error: " + (m != nullptr ? String (m)
-                                                             : String::toHexString ((int) hr)));
+                                                             : CharacterFunctions::hexToString ((int) hr)));
     }
    #endif
 }

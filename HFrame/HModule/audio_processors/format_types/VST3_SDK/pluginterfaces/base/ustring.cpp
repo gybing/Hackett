@@ -31,7 +31,7 @@
 #include <locale>
 
 #include <wctype.h>
-#include <wchar.h>
+#include <char.h>
 
 #endif
 

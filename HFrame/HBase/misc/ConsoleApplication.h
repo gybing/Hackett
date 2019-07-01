@@ -77,12 +77,12 @@ struct ArgumentList
         /** Compares this argument against a string.
             The string may be a pipe-separated list of options, e.g. "--help|-h"
         */
-        bool operator== (StringRef stringToCompare) const;
+        bool operator== (const String& stringToCompare) const;
 
         /** Compares this argument against a string.
             The string may be a pipe-separated list of options, e.g. "--help|-h"
         */
-        bool operator!= (StringRef stringToCompare) const;
+        bool operator!= (const String& stringToCompare) const;
     };
 
     //==============================================================================
@@ -99,22 +99,22 @@ struct ArgumentList
         The option can also be a list of different versions separated by pipes, e.g. "--help|-h"
         @see removeOptionIfFound
     */
-    bool containsOption (StringRef option) const;
+    bool containsOption (const String& option) const;
 
     /** Returns true if the given string matches one of the arguments, and also removes the
         argument from the list if found.
         The option can also be a list of different versions separated by pipes, e.g. "--help|-h"
         @see containsOption
     */
-    bool removeOptionIfFound (StringRef option);
+    bool removeOptionIfFound (const String& option);
 
     /** Returns the index of the given string if it matches one of the arguments, or -1 if it doesn't.
         The option can also be a list of different versions separated by pipes, e.g. "--help|-h"
     */
-    int indexOfOption (StringRef option) const;
+    int indexOfOption (const String& option) const;
 
     /** Throws an error unless the given option is found in the argument list. */
-    void failIfOptionIsMissing (StringRef option) const;
+    void failIfOptionIsMissing (const String& option) const;
 
     /** Looks for a given argument and returns either its assigned value (for long options) or the
         string that follows it (for short options).
@@ -125,49 +125,49 @@ struct ArgumentList
         it's another option.
         If the argument isn't found, this returns an empty string.
     */
-    String getValueForOption (StringRef option) const;
+    String getValueForOption (const String& option) const;
 
     /** Looks for a given argument and returns either its assigned value (for long options) or the
         string that follows it (for short options).
         This works like getValueForOption() but also removes the option argument (and any value arguments)
         from the list if they are found.
     */
-    String removeValueForOption (StringRef option);
+    String removeValueForOption (const String& option);
 
     /** Looks for the value of argument using getValueForOption() and tries to parse that value as a file.
         If the option isn't found, or if the value can't be parsed as a filename, it will throw an error.
     */
-    File getFileForOption (StringRef option) const;
+    File getFileForOption (const String& option) const;
 
     /** Looks for the value of argument using getValueForOption() and tries to parse that value as a file.
         This works like getFileForOption() but also removes the option argument (and any value arguments)
         from the list if they are found.
     */
-    File getFileForOptionAndRemove (StringRef option);
+    File getFileForOptionAndRemove (const String& option);
 
     /** Looks for a file argument using getFileForOption() and fails with a suitable error if
         the file doesn't exist.
     */
-    File getExistingFileForOption (StringRef option) const;
+    File getExistingFileForOption (const String& option) const;
 
     /** Looks for a file argument using getFileForOption() and fails with a suitable error if
         the file doesn't exist.
         This works like getExistingFileForOption() but also removes the option argument (and any
         value arguments) from the list if they are found.
     */
-    File getExistingFileForOptionAndRemove (StringRef option);
+    File getExistingFileForOptionAndRemove (const String& option);
 
     /** Looks for a filename argument using getFileForOption() and fails with a suitable error if
         the file isn't a folder that exists.
     */
-    File getExistingFolderForOption (StringRef option) const;
+    File getExistingFolderForOption (const String& option) const;
 
     /** Looks for a filename argument using getFileForOption() and fails with a suitable error if
         the file isn't a folder that exists.
         This works like getExistingFolderForOption() but also removes the option argument (and any
         value arguments) from the list if they are found.
     */
-    File getExistingFolderForOptionAndRemove (StringRef option);
+    File getExistingFolderForOptionAndRemove (const String& option);
 
     /** The name or path of the executable that was invoked, as it was specified on the command-line. */
     String executableName;

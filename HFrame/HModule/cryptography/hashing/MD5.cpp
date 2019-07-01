@@ -217,13 +217,13 @@ MD5::MD5 (const void* data, const size_t numBytes) noexcept
     processData (data, numBytes);
 }
 
-MD5::MD5 (CharPointer_UTF8 utf8) noexcept
+MD5::MD5 (char* utf8) noexcept
 {
     HAssert (utf8.getAddress() != nullptr);
     processData (utf8.getAddress(), utf8.sizeInBytes() - 1);
 }
 
-MD5 MD5::fromUTF32 (StringRef text)
+MD5 MD5::fromUTF32 (const String& text)
 {
     MD5Generator generator;
     auto t = text.text;
@@ -293,7 +293,7 @@ MemoryBlock MD5::getRawChecksumData() const
 
 String MD5::toHexString() const
 {
-    return String::toHexString (result, sizeof (result), 0);
+    return CharacterFunctions::hexToString (result, sizeof (result), 0);
 }
 
 //==============================================================================

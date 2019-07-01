@@ -41,7 +41,7 @@ public:
         @param keyName              the name of the property to retrieve
         @param defaultReturnValue   a value to return if the named property doesn't actually exist
     */
-    String getValue (StringRef keyName, const String& defaultReturnValue = String()) const noexcept;
+    String getValue (const String& keyName, const String& defaultReturnValue = String()) const noexcept;
 
     /** Returns one of the properties as an integer.
 
@@ -52,7 +52,7 @@ public:
         @param keyName              the name of the property to retrieve
         @param defaultReturnValue   a value to return if the named property doesn't actually exist
     */
-    int getIntValue (StringRef keyName, int defaultReturnValue = 0) const noexcept;
+    int getIntValue (const String& keyName, int defaultReturnValue = 0) const noexcept;
 
     /** Returns one of the properties as an double.
 
@@ -63,7 +63,7 @@ public:
         @param keyName              the name of the property to retrieve
         @param defaultReturnValue   a value to return if the named property doesn't actually exist
     */
-    double getDoubleValue (StringRef keyName, double defaultReturnValue = 0.0) const noexcept;
+    double getDoubleValue (const String& keyName, double defaultReturnValue = 0.0) const noexcept;
 
     /** Returns one of the properties as an boolean.
 
@@ -77,7 +77,7 @@ public:
         @param keyName              the name of the property to retrieve
         @param defaultReturnValue   a value to return if the named property doesn't actually exist
     */
-    bool getBoolValue (StringRef keyName, bool defaultReturnValue = false) const noexcept;
+    bool getBoolValue (const String& keyName, bool defaultReturnValue = false) const noexcept;
 
     /** Returns one of the properties as an XML element.
 
@@ -90,7 +90,7 @@ public:
 
         @param keyName              the name of the property to retrieve
     */
-    std::unique_ptr<XmlElement> getXmlValue (StringRef keyName) const;
+    std::unique_ptr<XmlElement> getXmlValue (const String& keyName) const;
 
     //==============================================================================
     /** Sets a named property.
@@ -118,10 +118,10 @@ public:
     /** Deletes a property.
         @param keyName      the name of the property to delete. (This mustn't be an empty string)
     */
-    void removeValue (StringRef keyName);
+    void removeValue (const String& keyName);
 
     /** Returns true if the properies include the given key. */
-    bool containsKey (StringRef keyName) const noexcept;
+    bool containsKey (const String& keyName) const noexcept;
 
     /** Removes all values. */
     void clear();

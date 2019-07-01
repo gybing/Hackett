@@ -39,7 +39,7 @@ void PropertySet::clear()
     }
 }
 
-String PropertySet::getValue (StringRef keyName, const String& defaultValue) const noexcept
+String PropertySet::getValue (const String& keyName, const String& defaultValue) const noexcept
 {
     const ScopedLock sl (lock);
     auto index = properties.getAllKeys().indexOf (keyName, ignoreCaseOfKeys);
@@ -51,7 +51,7 @@ String PropertySet::getValue (StringRef keyName, const String& defaultValue) con
                                          : defaultValue;
 }
 
-int PropertySet::getIntValue (StringRef keyName, int defaultValue) const noexcept
+int PropertySet::getIntValue (const String& keyName, int defaultValue) const noexcept
 {
     const ScopedLock sl (lock);
     auto index = properties.getAllKeys().indexOf (keyName, ignoreCaseOfKeys);
@@ -63,7 +63,7 @@ int PropertySet::getIntValue (StringRef keyName, int defaultValue) const noexcep
                                          : defaultValue;
 }
 
-double PropertySet::getDoubleValue (StringRef keyName, double defaultValue) const noexcept
+double PropertySet::getDoubleValue (const String& keyName, double defaultValue) const noexcept
 {
     const ScopedLock sl (lock);
     auto index = properties.getAllKeys().indexOf (keyName, ignoreCaseOfKeys);
@@ -75,7 +75,7 @@ double PropertySet::getDoubleValue (StringRef keyName, double defaultValue) cons
                                          : defaultValue;
 }
 
-bool PropertySet::getBoolValue (StringRef keyName, bool defaultValue) const noexcept
+bool PropertySet::getBoolValue (const String& keyName, bool defaultValue) const noexcept
 {
     const ScopedLock sl (lock);
     auto index = properties.getAllKeys().indexOf (keyName, ignoreCaseOfKeys);
@@ -87,7 +87,7 @@ bool PropertySet::getBoolValue (StringRef keyName, bool defaultValue) const noex
                                          : defaultValue;
 }
 
-std::unique_ptr<XmlElement> PropertySet::getXmlValue (StringRef keyName) const
+std::unique_ptr<XmlElement> PropertySet::getXmlValue (const String& keyName) const
 {
     return parseXML (getValue (keyName));
 }
@@ -110,7 +110,7 @@ void PropertySet::setValue (const String& keyName, const var& v)
     }
 }
 
-void PropertySet::removeValue (StringRef keyName)
+void PropertySet::removeValue (const String& keyName)
 {
     if (!keyName.empty())
     {
@@ -131,7 +131,7 @@ void PropertySet::setValue (const String& keyName, const XmlElement* xml)
                                       : var (xml->toString (XmlElement::TextFormat().singleLine().withoutHeader())));
 }
 
-bool PropertySet::containsKey (StringRef keyName) const noexcept
+bool PropertySet::containsKey (const String& keyName) const noexcept
 {
     const ScopedLock sl (lock);
     return properties.getAllKeys().contains (keyName, ignoreCaseOfKeys);

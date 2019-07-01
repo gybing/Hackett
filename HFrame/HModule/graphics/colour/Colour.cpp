@@ -426,19 +426,19 @@ Colour Colour::contrasting (Colour colour1,
 //==============================================================================
 String Colour::toString() const
 {
-    return String::toHexString ((int) argb.getInARGBMaskOrder());
+    return CharacterFunctions::hexToString ((int) argb.getInARGBMaskOrder());
 }
 
-Colour Colour::fromString (StringRef encodedColourString)
+Colour Colour::fromString (const String& encodedColourString)
 {
     return Colour ((uint32) CharacterFunctions::HexParser<int>::parse (encodedColourString.text));
 }
 
 String Colour::toDisplayString (const bool includeAlphaValue) const
 {
-    return String::toHexString ((int) (argb.getInARGBMaskOrder() & (includeAlphaValue ? 0xffffffff : 0xffffff)))
+    return CharacterFunctions::hexToString ((int) (argb.getInARGBMaskOrder() & (includeAlphaValue ? 0xffffffff : 0xffffff)))
                   .paddedLeft ('0', includeAlphaValue ? 8 : 6)
-                  .toUpperCase();
+                  .std::toupper();
 }
 
 

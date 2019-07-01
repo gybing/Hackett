@@ -455,7 +455,7 @@ namespace TextLayoutHelpers
             glyphLine.runs.add (glyphRun);
         }
 
-        static int getCharacterType (wchar c) noexcept
+        static int getCharacterType (char c) noexcept
         {
             if (c == '\r' || c == '\n')
                 return 0;

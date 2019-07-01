@@ -223,7 +223,7 @@ String createCommandLineForLaunchingServer (const String& pipeName, const String
     info.add (cacheLocation.getFullPathName());
 
    #if HWINDOWS
-    info.add (String::toHexString (getCurrentProcessID()));
+    info.add (CharacterFunctions::hexToString (getCurrentProcessID()));
    #endif
 
     const File exe (File::getSpecialLocation (File::currentExecutableFile).getFullPathName());

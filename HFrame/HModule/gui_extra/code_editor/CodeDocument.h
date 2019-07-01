@@ -170,7 +170,7 @@ public:
         /** Returns the character in the document at this position.
             @see getLineText
         */
-        wchar getCharacter() const;
+        char getCharacter() const;
 
         /** Returns the line from the document that this position is within.
             @see getCharacter, getLineNumber
@@ -374,19 +374,19 @@ public:
             read past the document's end.
             @see peekNextChar, previousChar
         */
-        wchar nextChar() noexcept;
+        char nextChar() noexcept;
 
         /** Reads the next character without moving the current position. */
-        wchar peekNextChar() const noexcept;
+        char peekNextChar() const noexcept;
 
         /** Reads the previous character and returns it. Returns 0 if you try to
             read past the document's start.
             @see isSOF, peekPreviousChar, nextChar
          */
-        wchar previousChar() noexcept;
+        char previousChar() noexcept;
 
         /** Reads the next character without moving the current position. */
-        wchar peekPreviousChar() const noexcept;
+        char peekPreviousChar() const noexcept;
 
         /** Advances the position by one character. */
         void skip() noexcept;

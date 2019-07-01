@@ -151,7 +151,7 @@ private:
         Icon getIcon() const override            { return Icon (getIcons().bug, getContentColour (true)); }
         bool canBeSelected() const override      { return true; }
         bool mightContainSubItems() override     { return true; }
-        String getUniqueName() const override    { return String::toHexString (compileUnit.hashCode64()); }
+        String getUniqueName() const override    { return CharacterFunctions::hexToString (compileUnit.hashCode64()); }
 
         String getRenamingName() const override  { return getDisplayName(); }
         String getDisplayName() const override

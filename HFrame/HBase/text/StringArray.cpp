@@ -162,12 +162,12 @@ void StringArray::set (int index, String newString)
     strings.set (index, std::move (newString));
 }
 
-bool StringArray::contains (StringRef stringToLookFor, bool ignoreCase) const
+bool StringArray::contains (const String& stringToLookFor, bool ignoreCase) const
 {
     return indexOf (stringToLookFor, ignoreCase) >= 0;
 }
 
-int StringArray::indexOf (StringRef stringToLookFor, bool ignoreCase, int i) const
+int StringArray::indexOf (const String& stringToLookFor, bool ignoreCase, int i) const
 {
     if (i < 0)
         i = 0;
@@ -201,7 +201,7 @@ void StringArray::remove (int index)
     strings.remove (index);
 }
 
-void StringArray::removeString (StringRef stringToRemove, bool ignoreCase)
+void StringArray::removeString (const String& stringToRemove, bool ignoreCase)
 {
     if (ignoreCase)
     {
@@ -262,7 +262,7 @@ void StringArray::sortNatural()
 }
 
 //==============================================================================
-String StringArray::joinIntoString (StringRef separator, int start, int numberToJoin) const
+String StringArray::joinIntoString (const String& separator, int start, int numberToJoin) const
 {
     auto last = (numberToJoin < 0) ? size()
                                    : jmin (size(), start + numberToJoin);
@@ -302,12 +302,12 @@ String StringArray::joinIntoString (StringRef separator, int start, int numberTo
     return result;
 }
 
-int StringArray::addTokens (StringRef text, const bool preserveQuotedStrings)
+int StringArray::addTokens (const String& text, const bool preserveQuotedStrings)
 {
     return addTokens (text, " \n\r\t", preserveQuotedStrings ? "\"" : "");
 }
 
-int StringArray::addTokens (StringRef text, StringRef breakCharacters, StringRef quoteCharacters)
+int StringArray::addTokens (const String& text, const String& breakCharacters, const String& quoteCharacters)
 {
     int num = 0;
 
@@ -331,7 +331,7 @@ int StringArray::addTokens (StringRef text, StringRef breakCharacters, StringRef
     return num;
 }
 
-int StringArray::addLines (StringRef sourceText)
+int StringArray::addLines (const String& sourceText)
 {
     int numLines = 0;
     auto text = sourceText.text;
@@ -360,23 +360,23 @@ int StringArray::addLines (StringRef sourceText)
     return numLines;
 }
 
-StringArray StringArray::fromTokens (StringRef stringToTokenise, bool preserveQuotedStrings)
+StringArray StringArray::fromTokens (const String& stringToTokenise, bool preserveQuotedStrings)
 {
     StringArray s;
     s.addTokens (stringToTokenise, preserveQuotedStrings);
     return s;
 }
 
-StringArray StringArray::fromTokens (StringRef stringToTokenise,
-                                     StringRef breakCharacters,
-                                     StringRef quoteCharacters)
+StringArray StringArray::fromTokens (const String& stringToTokenise,
+                                     const String& breakCharacters,
+                                     const String& quoteCharacters)
 {
     StringArray s;
     s.addTokens (stringToTokenise, breakCharacters, quoteCharacters);
     return s;
 }
 
-StringArray StringArray::fromLines (StringRef stringToBreakUp)
+StringArray StringArray::fromLines (const String& stringToBreakUp)
 {
     StringArray s;
     s.addLines (stringToBreakUp);
@@ -404,14 +404,14 @@ void StringArray::removeDuplicates (bool ignoreCase)
 
 void StringArray::appendNumbersToDuplicates (bool ignoreCase,
                                              bool appendNumberToFirstInstance,
-                                             CharPointer_UTF8 preNumberString,
-                                             CharPointer_UTF8 postNumberString)
+                                             char* preNumberString,
+                                             char* postNumberString)
 {
     if (preNumberString.getAddress() == nullptr)
-        preNumberString = CharPointer_UTF8 (" (");
+        preNumberString = char* (" (");
 
     if (postNumberString.getAddress() == nullptr)
-        postNumberString = CharPointer_UTF8 (")");
+        postNumberString = char* (")");
 
     for (int i = 0; i < size() - 1; ++i)
     {

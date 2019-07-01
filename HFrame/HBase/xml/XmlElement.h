@@ -207,18 +207,18 @@ public:
         @param possibleTagName  the tag name you're comparing it with
         @see getTagName
     */
-    bool hasTagName (StringRef possibleTagName) const noexcept;
+    bool hasTagName (const String& possibleTagName) const noexcept;
 
     /** Tests whether this element has a particular tag name, ignoring any XML namespace prefix.
         So a test for e.g. "xyz" will return true for "xyz" and also "foo:xyz", "bar::xyz", etc.
         @see getTagName
     */
-    bool hasTagNameIgnoringNamespace (StringRef possibleTagName) const;
+    bool hasTagNameIgnoringNamespace (const String& possibleTagName) const;
 
     /** Changes this elements tag name.
         @see getTagName
      */
-    void setTagName (StringRef newTagName);
+    void setTagName (const String& newTagName);
 
     //==============================================================================
     /** Returns the number of XML attributes this element contains.
@@ -250,19 +250,19 @@ public:
     // Attribute-handling methods..
 
     /** Checks whether the element contains an attribute with a certain name. */
-    bool hasAttribute (StringRef attributeName) const noexcept;
+    bool hasAttribute (const String& attributeName) const noexcept;
 
     /** Returns the value of a named attribute.
         @param attributeName        the name of the attribute to look up
     */
-    const String& getStringAttribute (StringRef attributeName) const noexcept;
+    const String& getStringAttribute (const String& attributeName) const noexcept;
 
     /** Returns the value of a named attribute.
         @param attributeName        the name of the attribute to look up
         @param defaultReturnValue   a value to return if the element doesn't have an attribute
                                     with this name
     */
-    String getStringAttribute (StringRef attributeName, const String& defaultReturnValue) const;
+    String getStringAttribute (const String& attributeName, const String& defaultReturnValue) const;
 
     /** Compares the value of a named attribute with a value passed-in.
 
@@ -272,8 +272,8 @@ public:
         @returns    true if the value of the attribute is the same as the string passed-in;
                     false if it's different (or if no such attribute exists)
     */
-    bool compareAttribute (StringRef attributeName,
-                           StringRef stringToCompareAgainst,
+    bool compareAttribute (const String& attributeName,
+                           const String& stringToCompareAgainst,
                            bool ignoreCase = false) const noexcept;
 
     /** Returns the value of a named attribute as an integer.
@@ -286,7 +286,7 @@ public:
                                     with this name
         @see setAttribute
     */
-    int getIntAttribute (StringRef attributeName, int defaultReturnValue = 0) const;
+    int getIntAttribute (const String& attributeName, int defaultReturnValue = 0) const;
 
     /** Returns the value of a named attribute as floating-point.
 
@@ -298,7 +298,7 @@ public:
                                     with this name
         @see setAttribute
     */
-    double getDoubleAttribute (StringRef attributeName, double defaultReturnValue = 0.0) const;
+    double getDoubleAttribute (const String& attributeName, double defaultReturnValue = 0.0) const;
 
     /** Returns the value of a named attribute as a boolean.
 
@@ -310,7 +310,7 @@ public:
         @param defaultReturnValue   a value to return if the element doesn't have an attribute
                                     with this name
     */
-    bool getBoolAttribute (StringRef attributeName, bool defaultReturnValue = false) const;
+    bool getBoolAttribute (const String& attributeName, bool defaultReturnValue = false) const;
 
     /** Adds a named attribute to the element.
 
@@ -410,7 +410,7 @@ public:
 
         @see getNextElement, forEachXmlChildElementWithTagName
     */
-    XmlElement* getNextElementWithTagName (StringRef requiredTagName) const;
+    XmlElement* getNextElementWithTagName (const String& requiredTagName) const;
 
     /** Returns the number of sub-elements in this element.
         @see getChildElement
@@ -433,7 +433,7 @@ public:
         @returns the first element with this tag name, or nullptr if none is found
         @see getNextElement, isTextElement, getChildElement, getChildByAttribute
     */
-    XmlElement* getChildByName (StringRef tagNameToLookFor) const noexcept;
+    XmlElement* getChildByName (const String& tagNameToLookFor) const noexcept;
 
     /** Returns the first sub-element which has an attribute that matches the given value.
 
@@ -442,8 +442,8 @@ public:
         @returns the first element with this attribute value, or nullptr if none is found
         @see getChildByName
     */
-    XmlElement* getChildByAttribute (StringRef attributeName,
-                                     StringRef attributeValue) const noexcept;
+    XmlElement* getChildByAttribute (const String& attributeName,
+                                     const String& attributeValue) const noexcept;
 
     //==============================================================================
     /** Appends an element to this element's list of children.
@@ -503,7 +503,7 @@ public:
         XmlElement* newElement = myParentElement->createNewChildElement ("foobar");
         @endcode
     */
-    XmlElement* createNewChildElement (StringRef tagName);
+    XmlElement* createNewChildElement (const String& tagName);
 
     /** Replaces one of this element's children with another node.
 
@@ -532,7 +532,7 @@ public:
     /** Deletes all the child elements with a given tag name.
         @see removeChildElement
     */
-    void deleteAllChildElementsWithTagName (StringRef tagName) noexcept;
+    void deleteAllChildElementsWithTagName (const String& tagName) noexcept;
 
     /** Returns true if the given element is a child of this one. */
     bool containsChildElement (const XmlElement* possibleChild) const noexcept;
@@ -646,7 +646,7 @@ public:
 
         @see getAllSubText
     */
-    String getChildElementAllSubText (StringRef childTagName,
+    String getChildElementAllSubText (const String& childTagName,
                                       const String& defaultReturnValue) const;
 
     /** Appends a section of text to this element.
@@ -663,28 +663,28 @@ public:
     static XmlElement* createTextElement (const String& text);
 
     /** Checks if a given string is a valid XML name */
-    static bool isValidXmlName (StringRef possibleName) noexcept;
+    static bool isValidXmlName (const String& possibleName) noexcept;
 
     //==============================================================================
     /** This has been deprecated in favour of the toString() method. */
-    HDEPRECATED (String createDocument (StringRef dtdToUse,
+    HDEPRECATED (String createDocument (const String& dtdToUse,
                                             bool allOnOneLine = false,
                                             bool includeXmlHeader = true,
-                                            StringRef encodingType = "UTF-8",
+                                            const String& encodingType = "UTF-8",
                                             int lineWrapLength = 60) const);
 
     /** This has been deprecated in favour of the writeTo() method. */
     HDEPRECATED (void writeToStream (OutputStream& output,
-                                         StringRef dtdToUse,
+                                         const String& dtdToUse,
                                          bool allOnOneLine = false,
                                          bool includeXmlHeader = true,
-                                         StringRef encodingType = "UTF-8",
+                                         const String& encodingType = "UTF-8",
                                          int lineWrapLength = 60) const);
 
     /** This has been deprecated in favour of the writeTo() method. */
     HDEPRECATED (bool writeToFile (const File& destinationFile,
-                                       StringRef dtdToUse,
-                                       StringRef encodingType = "UTF-8",
+                                       const String& dtdToUse,
+                                       const String& encodingType = "UTF-8",
                                        int lineWrapLength = 60) const);
 
     //==============================================================================
@@ -718,7 +718,7 @@ private:
     void writeElementAsText (OutputStream&, int, int, const char*) const;
     void getChildElementsAsArray (XmlElement**) const noexcept;
     void reorderChildElements (XmlElement**, int) noexcept;
-    XmlAttributeNode* getAttribute (StringRef) const noexcept;
+    XmlAttributeNode* getAttribute (const String&) const noexcept;
 
     // Sigh.. L"" or _T("") string literals are problematic in general, and really inappropriate
     // for XML tags. Use a UTF-8 encoded literal instead, or if you're really determined to use

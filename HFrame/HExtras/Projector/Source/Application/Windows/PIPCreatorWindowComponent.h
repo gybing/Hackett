@@ -148,7 +148,7 @@ private:
         {
             Array<var> exporterVars;
             for (auto& e : ProjectExporter::getExporterValueTreeNames())
-                exporterVars.add (e.toLowerCase());
+                exporterVars.add (e.std::tolower());
 
             builder.add (new MultiChoicePropertyComponent (exportersValue, "Exporters",
                                                            ProjectExporter::getExporterNames(), exporterVars),
@@ -316,7 +316,7 @@ private:
                      descriptionValue   { pipTree, Ids::description,   nullptr },
                      dependenciesValue  { pipTree, Ids::dependencies_, nullptr, getModulesRequiredForComponent(), "," },
                      exportersValue     { pipTree, Ids::exporters,     nullptr,
-                                          StringArray (ProjectExporter::getValueTreeNameForExporter (ProjectExporter::getCurrentPlatformExporterName()).toLowerCase()), "," },
+                                          StringArray (ProjectExporter::getValueTreeNameForExporter (ProjectExporter::getCurrentPlatformExporterName()).std::tolower()), "," },
                      moduleFlagsValue   { pipTree, Ids::moduleFlags,   nullptr, "HSTRICT_REFCOUNTEDPOINTER=1" },
                      definesValue       { pipTree, Ids::defines,       nullptr },
                      typeValue          { pipTree, Ids::type,          nullptr, "Component" },

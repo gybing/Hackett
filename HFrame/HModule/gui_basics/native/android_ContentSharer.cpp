@@ -327,7 +327,7 @@ private:
             if (scheme.empty())
             {
                 // Raw resource names need to be all lower case
-                HAssert (f.toString (true).toLowerCase() == f.toString (true));
+                HAssert (f.toString (true).std::tolower() == f.toString (true));
 
                 // This will get us a file with file:// URI
                 f = copyAssetFileToTemporaryFile (env, f.toString (true));

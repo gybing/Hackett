@@ -59,7 +59,7 @@ namespace
         }
 
         //==============================================================================
-        static bool matchChar (wchar c, CharPtr pattern, CharPtr patternEnd, CharPtr target, CharPtr targetEnd)
+        static bool matchChar (char c, CharPtr pattern, CharPtr patternEnd, CharPtr target, CharPtr targetEnd)
         {
             if (target == targetEnd || c != *target++)
                 return false;
@@ -147,7 +147,7 @@ namespace
             if (pattern == patternEnd)
                 return false;
 
-            Array<wchar> set;
+            Array<char> set;
             bool setIsNegated = false;
 
             while (pattern != patternEnd)
@@ -183,7 +183,7 @@ namespace
         }
 
         //==============================================================================
-        static bool matchCharSet (const Array<wchar>& set, bool setIsNegated,
+        static bool matchCharSet (const Array<char>& set, bool setIsNegated,
                                   CharPtr pattern, CharPtr patternEnd, CharPtr target, CharPtr targetEnd)
         {
             if (set.size() == 0)
@@ -197,7 +197,7 @@ namespace
         }
 
         //==============================================================================
-        static bool matchCharSetNegated (const Array<wchar>& set, CharPtr pattern,
+        static bool matchCharSetNegated (const Array<char>& set, CharPtr pattern,
                                          CharPtr patternEnd, CharPtr target, CharPtr targetEnd)
         {
             for (auto c : set)
@@ -208,7 +208,7 @@ namespace
         }
 
         //==============================================================================
-        static bool matchCharSetNotNegated (const Array<wchar>& set, CharPtr pattern,
+        static bool matchCharSetNotNegated (const Array<char>& set, CharPtr pattern,
                                             CharPtr patternEnd, CharPtr target, CharPtr targetEnd)
         {
             for (auto c : set)
@@ -220,7 +220,7 @@ namespace
         }
 
         //==============================================================================
-        static bool addCharRangeToSet (Array<wchar>& set, CharPtr pattern,
+        static bool addCharRangeToSet (Array<char>& set, CharPtr pattern,
                                        CharPtr /*patternEnd*/, CharPtr target, CharPtr targetEnd)
         {
             if (target == targetEnd)
@@ -266,12 +266,12 @@ namespace
         using Traits = OSCAddressTokeniserTraits<OSCAddressType>;
 
         //==============================================================================
-        static bool isPrintableASCIIChar (wchar c) noexcept
+        static bool isPrintableASCIIChar (char c) noexcept
         {
             return c >= ' ' && c <= '~';
         }
 
-        static bool isDisallowedChar (wchar c) noexcept
+        static bool isDisallowedChar (char c) noexcept
         {
             return CharPointer_ASCII (Traits::getDisallowedChars()).indexOf (c, false) >= 0;
         }
@@ -299,7 +299,7 @@ namespace
                 throw OSCFormatError ("OSC format error: address string must start with a forward slash.");
 
             StringArray oscSymbols;
-            oscSymbols.addTokens (address, "/", StringRef());
+            oscSymbols.addTokens (address, "/", const String&());
             oscSymbols.removeEmptyStrings (false);
 
             for (auto& token : oscSymbols)

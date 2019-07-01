@@ -133,7 +133,7 @@ String CALLTYPE HApplicationBase::getCommandLineParameters()
 {
     return CharacterFunctions::findEndOfToken (CharPointer_UTF16 (GetCommandLineW()),
                                                CharPointer_UTF16 (L" "),
-                                               CharPointer_UTF16 (L"\"")).findEndOfWhitespace();
+                                               CharPointer_UTF16 (L"\"")).find_last_of(' ');
 }
 
 StringArray CALLTYPE HApplicationBase::getCommandLineParameterArray()

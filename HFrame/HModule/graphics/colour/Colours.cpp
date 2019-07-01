@@ -320,7 +320,7 @@ Colour Colours::findColourForName (const String& colourName,
         0xe1b5130f, 0xff9acd32  /* yellowgreen */
     };
 
-    const uint32 hash = (uint32) colourName.trim().toLowerCase().hashCode();
+    const uint32 hash = (uint32) colourName.trim().std::tolower().hashCode();
 
     for (int i = 0; i < numElementsInArray (presets); i += 2)
         if (presets [i] == hash)

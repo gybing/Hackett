@@ -180,7 +180,7 @@ public:
     int toInt (const ValueUnion& data) const noexcept override       { return data.boolValue ? 1 : 0; }
     int64 toInt64 (const ValueUnion& data) const noexcept override   { return data.boolValue ? 1 : 0; }
     double toDouble (const ValueUnion& data) const noexcept override { return data.boolValue ? 1.0 : 0.0; }
-    String toString (const ValueUnion& data) const override          { return String::charToString (data.boolValue ? (wchar) '1' : (wchar) '0'); }
+    String toString (const ValueUnion& data) const override          { return String::charToString (data.boolValue ? (char) '1' : (char) '0'); }
     bool toBool (const ValueUnion& data) const noexcept override     { return data.boolValue; }
     bool isBool() const noexcept override                            { return true; }
     bool isComparable() const noexcept override                      { return true; }
@@ -254,7 +254,7 @@ public:
             dest.objectValue->incReferenceCount();
     }
 
-    String toString (const ValueUnion& data) const override                            { return "Object 0x" + String::toHexString ((int) (pointer_sized_int) data.objectValue); }
+    String toString (const ValueUnion& data) const override                            { return "Object 0x" + CharacterFunctions::hexToString ((int) (pointer_sized_int) data.objectValue); }
     bool toBool (const ValueUnion& data) const noexcept override                       { return data.objectValue != nullptr; }
     ReferenceCountedObject* toObject (const ValueUnion& data) const noexcept override  { return data.objectValue; }
     bool isObject() const noexcept override                                            { return true; }

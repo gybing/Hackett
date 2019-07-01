@@ -233,7 +233,7 @@ void FileBrowserComponent::setRoot (const File& newRootDirectory)
         String path (newRootDirectory.getFullPathName());
 
         if (path.empty())
-            path = File::getSeparatorString();
+            path = File::getSeparatorChars();
 
         StringArray rootNames, rootPaths;
         getRoots (rootNames, rootPaths);
@@ -265,7 +265,7 @@ void FileBrowserComponent::setRoot (const File& newRootDirectory)
     auto currentRootName = currentRoot.getFullPathName();
 
     if (currentRootName.empty())
-        currentRootName = File::getSeparatorString();
+        currentRootName = File::getSeparatorChars();
 
     currentPathBox.setText (currentRootName, dontSendNotification);
 

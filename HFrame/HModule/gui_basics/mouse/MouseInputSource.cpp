@@ -111,7 +111,7 @@ public:
    #if HDUMP_MOUSE_EVENTS
     #define HMOUSE_EVENT_DBG(desc)   DBG ("Mouse " << desc << " #" << index \
                                                 << ": " << screenPosToLocalPos (comp, screenPos).toString() \
-                                                << " - Comp: " << String::toHexString ((pointer_sized_int) &comp));
+                                                << " - Comp: " << CharacterFunctions::hexToString ((pointer_sized_int) &comp));
    #else
     #define HMOUSE_EVENT_DBG(desc)
    #endif

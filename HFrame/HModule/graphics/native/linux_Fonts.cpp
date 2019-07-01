@@ -40,7 +40,7 @@ StringArray FTTypefaceList::getDefaultFontDirectories()
 {
     StringArray fontDirs;
 
-    fontDirs.addTokens (String (CharPointer_UTF8 (getenv ("HFONT_PATH"))), ";,", "");
+    fontDirs.addTokens (String (char* (getenv ("HFONT_PATH"))), ";,", "");
     fontDirs.removeEmptyStrings (true);
 
     if (fontDirs.empty())

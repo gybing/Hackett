@@ -64,7 +64,7 @@ static void ensureSingleNewLineAfterIncludes (StringArray& lines)
     }
 }
 
-static String ensureCorrectWhitespace (StringRef input)
+static String ensureCorrectWhitespace (const String& input)
 {
     auto lines = StringArray::fromLines (input);
     ensureSingleNewLineAfterIncludes (lines);
@@ -87,7 +87,7 @@ static bool isHExample (const File& pipFile)
     return false;
 }
 
-static bool isValidExporterName (StringRef exporterName)
+static bool isValidExporterName (const String& exporterName)
 {
     return ProjectExporter::getExporterValueTreeNames().contains (exporterName, true);
 }
@@ -313,7 +313,7 @@ void PIPGenerator::addExporters (ValueTree& HrTree)
 
     for (auto& e : exporters)
     {
-        e = e.trim().toUpperCase();
+        e = e.trim().std::toupper();
 
         if (isValidExporterName (e))
             exportersTree.addChild (createExporterChild (e), -1, nullptr);

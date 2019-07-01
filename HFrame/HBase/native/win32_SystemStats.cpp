@@ -7,7 +7,7 @@
 
 void Logger::outputDebugString (const String& text)
 {
-    OutputDebugString ((text + "\n").toWideCharPointer());
+    OutputDebugString ((text + "\n").c_str());
 }
 
 //==============================================================================
@@ -275,13 +275,13 @@ int SystemStats::getMemorySizeInMegabytes()
 //==============================================================================
 String SystemStats::getEnvironmentVariable (const String& name, const String& defaultValue)
 {
-    auto len = GetEnvironmentVariableW (name.toWideCharPointer(), nullptr, 0);
+    auto len = GetEnvironmentVariableW (name.c_str(), nullptr, 0);
 
     if (len == 0)
         return String (defaultValue);
 
     HeapBlock<WCHAR> buffer (len);
-    len = GetEnvironmentVariableW (name.toWideCharPointer(), buffer, len);
+    len = GetEnvironmentVariableW (name.c_str(), buffer, len);
 
     return String (CharPointer_wchar_t (buffer),
                    CharPointer_wchar_t (buffer + len));

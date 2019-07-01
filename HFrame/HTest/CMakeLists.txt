@@ -5,7 +5,6 @@ include_directories(../HBase)
 # HFrameTest
 add_executable("HFrameTest" "HBaseTest.cpp")
 set_property(TARGET HFrameTest PROPERTY FOLDER HTest)
-target_link_libraries("HFrameTest" HBase)
 FUNC_OUTPUT("HFrameTest" ${PATH_BIN})
 
 # HFrameUnitTest

@@ -482,7 +482,7 @@ struct MiscPage   : public Component
     }
 
     TextEditor textEditor1,
-               textEditor2  { "Password", (wchar) 0x2022 };
+               textEditor2  { "Password", (char) 0x2022 };
 
     ComboBox comboBox  { "Combo" };
 };

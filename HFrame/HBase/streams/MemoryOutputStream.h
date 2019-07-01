@@ -65,7 +65,7 @@ public:
     void preallocate (size_t bytesToPreallocate);
 
     /** Appends the utf-8 bytes for a unicode character */
-    bool appendUTF8Char (wchar character);
+    bool appendUTF8Char (char character);
 
     /** Returns a String created from the (UTF8) data that has been written to the stream. */
     String toUTF8() const;

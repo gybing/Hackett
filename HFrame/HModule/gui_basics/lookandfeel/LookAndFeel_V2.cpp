@@ -418,8 +418,8 @@ AlertWindow* LookAndFeel_V2::createAlertWindow (const String& title, const Strin
     }
     else
     {
-        const KeyPress button1ShortCut ((int) CharacterFunctions::toLowerCase (button1[0]), 0, 0);
-        KeyPress button2ShortCut ((int) CharacterFunctions::toLowerCase (button2[0]), 0, 0);
+        const KeyPress button1ShortCut ((int) CharacterFunctions::std::tolower (button1[0]), 0, 0);
+        KeyPress button2ShortCut ((int) CharacterFunctions::std::tolower (button2[0]), 0, 0);
         if (button1ShortCut == button2ShortCut)
             button2ShortCut = KeyPress();
 
@@ -482,7 +482,7 @@ void LookAndFeel_V2::drawAlertBox (Graphics& g, AlertWindow& alert,
 
         GlyphArrangement ga;
         ga.addFittedText (Font (iconRect.getHeight() * 0.9f, Font::bold),
-                          String::charToString ((wchar) (uint8) character),
+                          String::charToString ((char) (uint8) character),
                           (float) iconRect.getX(), (float) iconRect.getY(),
                           (float) iconRect.getWidth(), (float) iconRect.getHeight(),
                           Justification::centred, false);

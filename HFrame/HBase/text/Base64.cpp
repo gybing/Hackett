@@ -47,7 +47,7 @@ bool Base64::convertToBase64 (OutputStream& base64Result, const void* sourceData
     return true;
 }
 
-bool Base64::convertFromBase64 (OutputStream& binaryOutput, StringRef base64TextInput)
+bool Base64::convertFromBase64 (OutputStream& binaryOutput, const String& base64TextInput)
 {
     for (auto s = base64TextInput.text; ! s.empty();)
     {

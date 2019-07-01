@@ -81,10 +81,10 @@ int SystemStats::getPageSize()
 String SystemStats::getLogonName()
 {
     if (const char* user = getenv ("USER"))
-        return CharPointer_UTF8 (user);
+        return char* (user);
 
     if (struct passwd* const pw = getpwuid (getuid()))
-        return CharPointer_UTF8 (pw->pw_name);
+        return char* (pw->pw_name);
 
     return {};
 }

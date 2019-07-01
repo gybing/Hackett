@@ -68,7 +68,7 @@ public:
     */
     KeyPress (int keyCode,
               ModifierKeys modifiers,
-              wchar textCharacter) noexcept;
+              char textCharacter) noexcept;
 
     /** Creates a keypress with a keyCode but no modifiers or text character. */
     explicit KeyPress (int keyCode) noexcept;
@@ -117,7 +117,7 @@ public:
         This is the character that you'd expect to see printed if you press this
         keypress in a text editor or similar component.
     */
-    wchar getTextCharacter() const noexcept                { return textCharacter; }
+    char getTextCharacter() const noexcept                { return textCharacter; }
 
     /** Checks whether the KeyPress's key is the same as the one provided, without checking
         the modifiers.
@@ -267,7 +267,7 @@ private:
     //==============================================================================
     int keyCode = 0;
     ModifierKeys mods;
-    wchar textCharacter = 0;
+    char textCharacter = 0;
 
     HLEAK_DETECTOR (KeyPress)
 };

@@ -869,8 +869,8 @@ struct JavascriptEngine::RootObject   : public DynamicObject
     private:
         char* p;
 
-        static bool isIdentifierStart (wchar c) noexcept   { return CharacterFunctions::isLetter (c)        || c == '_'; }
-        static bool isIdentifierBody  (wchar c) noexcept   { return CharacterFunctions::isLetterOrDigit (c) || c == '_'; }
+        static bool isIdentifierStart (char c) noexcept   { return CharacterFunctions::isLetter (c)        || c == '_'; }
+        static bool isIdentifierBody  (char c) noexcept   { return CharacterFunctions::isLetterOrDigit (c) || c == '_'; }
 
         TokenType matchNextToken()
         {
@@ -917,13 +917,13 @@ struct JavascriptEngine::RootObject   : public DynamicObject
         {
             for (;;)
             {
-                p = p.findEndOfWhitespace();
+                p = p.find_last_of(' ');
 
                 if (*p == '/')
                 {
                     auto c2 = p[1];
 
-                    if (c2 == '/')  { p = CharacterFunctions::find (p, (wchar) '\n'); continue; }
+                    if (c2 == '/')  { p = CharacterFunctions::find (p, (char) '\n'); continue; }
 
                     if (c2 == '*')
                     {
@@ -938,7 +938,7 @@ struct JavascriptEngine::RootObject   : public DynamicObject
             }
         }
 
-        bool parseStringLiteral (wchar quoteType)
+        bool parseStringLiteral (char quoteType)
         {
             if (quoteType != '"' && quoteType != '\'')
                 return false;
@@ -1638,7 +1638,7 @@ struct JavascriptEngine::RootObject   : public DynamicObject
 
         static Identifier getClassName()  { static const Identifier i ("String"); return i; }
 
-        static var fromCharCode (Args a)  { return String::charToString (static_cast<wchar> (getInt (a, 0))); }
+        static var fromCharCode (Args a)  { return String::charToString (static_cast<char> (getInt (a, 0))); }
         static var substr (Args a)     { return a.thisObject.toString().substr (getInt (a, 0), getInt (a, 1)); }
         static var indexOf (Args a)       { return a.thisObject.toString().indexOf (getString (a, 0)); }
         static var charCodeAt (Args a)    { return (int) a.thisObject.toString() [getInt (a, 0)]; }

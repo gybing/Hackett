@@ -18,7 +18,7 @@ struct API Base64
         This will write the decoded binary data to the given stream.
         If the string is not valid base-64, the method will terminate and return false.
     */
-    static bool convertFromBase64 (OutputStream& binaryOutput, StringRef base64TextInput);
+    static bool convertFromBase64 (OutputStream& binaryOutput, const String& base64TextInput);
 
     /** Converts a block of binary data to a base-64 string. */
     static String toBase64 (const void* sourceData, size_t sourceDataSize);

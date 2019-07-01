@@ -268,7 +268,7 @@ private:
             if (isPost)
                 WebInputStream::createHeadersAndPostData (url, headers, postData);
 
-            if (InternetCrackUrl (address.toWideCharPointer(), 0, 0, &uc))
+            if (InternetCrackUrl (address.c_str(), 0, 0, &uc))
                 openConnection (uc, sessionHandle, address, listener);
         }
     }
@@ -364,7 +364,7 @@ private:
             const ScopedLock lock (createConnectionLock);
 
             request = hasBeenCancelled ? 0
-                                       : HttpOpenRequest (connection, httpRequestCmd.toWideCharPointer(),
+                                       : HttpOpenRequest (connection, httpRequestCmd.c_str(),
                                                           uc.lpszUrlPath, 0, 0, mimeTypes, flags, 0);
         }
 
@@ -372,7 +372,7 @@ private:
         {
             INTERNET_BUFFERS buffers = { 0 };
             buffers.dwStructSize    = sizeof (INTERNET_BUFFERS);
-            buffers.lpcszHeader     = headers.toWideCharPointer();
+            buffers.lpcszHeader     = headers.c_str();
             buffers.dwHeadersLength = (DWORD) headers.length();
             buffers.dwBufferTotal   = (DWORD) postData.getSize();
 

@@ -1128,7 +1128,7 @@ public:
 
     static String createRandomWideCharString (Random& r)
     {
-        wchar buffer[50] = { 0 };
+        char buffer[50] = { 0 };
 
         for (int i = r.nextInt (numElementsInArray (buffer) - 1); --i >= 0;)
         {
@@ -1136,12 +1136,12 @@ public:
             {
                 do
                 {
-                    buffer[i] = (wchar) (1 + r.nextInt (0x10ffff - 1));
+                    buffer[i] = (char) (1 + r.nextInt (0x10ffff - 1));
                 }
                 while (! CharPointer_UTF16::canRepresent (buffer[i]));
             }
             else
-                buffer[i] = (wchar) (1 + r.nextInt (0x7e));
+                buffer[i] = (char) (1 + r.nextInt (0x7e));
         }
 
         return CharPointer_UTF32 (buffer);

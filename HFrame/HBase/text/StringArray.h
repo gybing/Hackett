@@ -26,7 +26,7 @@ public:
 
     /** Creates an array containing a list of strings. */
     template <typename... OtherElements>
-    StringArray (StringRef firstValue, OtherElements... otherValues) : strings (firstValue, otherValues...) {}
+    StringArray (const String& firstValue, OtherElements... otherValues) : strings (firstValue, otherValues...) {}
 
     /** Creates an array containing a list of strings. */
     StringArray (const std::initializer_list<const char*>& strings);
@@ -156,7 +156,7 @@ public:
 
         @returns    true if the string is found inside the array
     */
-    bool contains (StringRef stringToLookFor,
+    bool contains (const String& stringToLookFor,
                    bool ignoreCase = false) const;
 
     /** Searches for a string in the array.
@@ -169,7 +169,7 @@ public:
         @returns                the index of the first occurrence of the string in this array,
                                 or -1 if it isn't found.
     */
-    int indexOf (StringRef stringToLookFor,
+    int indexOf (const String& stringToLookFor,
                  bool ignoreCase = false,
                  int startIndex = 0) const;
 
@@ -239,7 +239,7 @@ public:
         @returns    the number of tokens added
         @see fromTokens
     */
-    int addTokens (StringRef stringToTokenise, bool preserveQuotedStrings);
+    int addTokens (const String& stringToTokenise, bool preserveQuotedStrings);
 
     /** Breaks up a string into tokens and adds them to this array.
 
@@ -255,9 +255,9 @@ public:
         @returns    the number of tokens added
         @see fromTokens
     */
-    int addTokens (StringRef stringToTokenise,
-                   StringRef breakCharacters,
-                   StringRef quoteCharacters);
+    int addTokens (const String& stringToTokenise,
+                   const String& breakCharacters,
+                   const String& quoteCharacters);
 
     /** Breaks up a string into lines and adds them to this array.
 
@@ -265,7 +265,7 @@ public:
         to the array. Line-break characters are omitted from the strings that are added to
         the array.
     */
-    int addLines (StringRef stringToBreakUp);
+    int addLines (const String& stringToBreakUp);
 
     /** Returns an array containing the tokens in a given string.
 
@@ -273,7 +273,7 @@ public:
         token delimiters, and return the parsed tokens as an array.
         @see addTokens
     */
-    static StringArray fromTokens (StringRef stringToTokenise,
+    static StringArray fromTokens (const String& stringToTokenise,
                                    bool preserveQuotedStrings);
 
     /** Returns an array containing the tokens in a given string.
@@ -289,9 +289,9 @@ public:
                                     between quotes is not broken up into tokens.
         @see addTokens
     */
-    static StringArray fromTokens (StringRef stringToTokenise,
-                                   StringRef breakCharacters,
-                                   StringRef quoteCharacters);
+    static StringArray fromTokens (const String& stringToTokenise,
+                                   const String& breakCharacters,
+                                   const String& quoteCharacters);
 
     /** Returns an array containing the lines in a given string.
 
@@ -299,7 +299,7 @@ public:
         array containing these lines. Line-break characters are omitted from the strings that
         are added to the array.
     */
-    static StringArray fromLines (StringRef stringToBreakUp);
+    static StringArray fromLines (const String& stringToBreakUp);
 
     //==============================================================================
     /** Removes all elements from the array. */
@@ -319,7 +319,7 @@ public:
         This will remove all occurrences of the given string from the array.
         The comparison may be case-insensitive depending on the ignoreCase parameter.
     */
-    void removeString (StringRef stringToRemove,
+    void removeString (const String& stringToRemove,
                        bool ignoreCase = false);
 
     /** Removes a range of elements from the array.
@@ -386,8 +386,8 @@ public:
     */
     void appendNumbersToDuplicates (bool ignoreCaseWhenComparing,
                                     bool appendNumberToFirstInstance,
-                                    CharPointer_UTF8 preNumberString = nullptr,
-                                    CharPointer_UTF8 postNumberString = nullptr);
+                                    char* preNumberString = nullptr,
+                                    char* postNumberString = nullptr);
 
     //==============================================================================
     /** Joins the strings in the array together into one string.
@@ -402,7 +402,7 @@ public:
         @param numberOfElements     how many elements to join together. If this is less
                                     than zero, all available elements will be used.
     */
-    String joinIntoString (StringRef separatorString,
+    String joinIntoString (const String& separatorString,
                            int startIndex = 0,
                            int numberOfElements = -1) const;
 

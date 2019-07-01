@@ -662,7 +662,7 @@ public:
     /** Looks for a child component with the specified ID.
         @see setComponentID, getComponentID
     */
-    Component* findChildWithID (StringRef componentID) const noexcept;
+    Component* findChildWithID (const String& componentID) const noexcept;
 
     /** Adds a child component to this one.
 

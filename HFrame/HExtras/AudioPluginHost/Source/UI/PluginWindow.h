@@ -66,7 +66,7 @@ public:
     }
 
 private:
-    void appendToLog (StringRef action, AudioProcessorParameter& param, StringRef value)
+    void appendToLog (const String& action, AudioProcessorParameter& param, const String& value)
     {
         String entry (action + " " + param.getName (30).quoted() + " [" + String (param.getParameterIndex()) + "]: " + value);
 

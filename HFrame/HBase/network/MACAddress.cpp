@@ -21,7 +21,7 @@ MACAddress::MACAddress (const uint8 bytes[6]) noexcept
     memcpy (address, bytes, sizeof (address));
 }
 
-MACAddress::MACAddress (StringRef addressString)
+MACAddress::MACAddress (const String& addressString)
 {
     MemoryBlock hex;
     hex.loadFromHexString (addressString);
@@ -37,13 +37,13 @@ String MACAddress::toString() const
     return toString ("-");
 }
 
-String MACAddress::toString (StringRef separator) const
+String MACAddress::toString (const String& separator) const
 {
     String s;
 
     for (size_t i = 0; i < sizeof (address); ++i)
     {
-        s << String::toHexString ((int) address[i]).paddedLeft ('0', 2);
+        s << CharacterFunctions::hexToString ((int) address[i]).paddedLeft ('0', 2);
 
         if (i < sizeof (address) - 1)
             s << separator;

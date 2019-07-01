@@ -54,7 +54,7 @@ static String removeEllipsis (const String& path)
    #endif
     {
         StringArray toks;
-        toks.addTokens (path, File::getSeparatorString(), {});
+        toks.addTokens (path, File::getSeparatorChars(), {});
         bool anythingChanged = false;
 
         for (int i = 1; i < toks.size(); ++i)
@@ -75,7 +75,7 @@ static String removeEllipsis (const String& path)
         }
 
         if (anythingChanged)
-            return toks.joinIntoString (File::getSeparatorString());
+            return toks.joinIntoString (File::getSeparatorChars());
     }
 
     return path;
@@ -183,7 +183,7 @@ String File::parseAbsolutePath (const String& p)
     }
 #endif
 
-    while (path.back() == getSeparatorChar() && path != getSeparatorString()) // careful not to turn a single "/" into an empty string.
+    while (path.back() == getSeparatorChar() && path != getSeparatorChars()) // careful not to turn a single "/" into an empty string.
         path = path.substr (0, path.length() - 1);
 
     return path;
@@ -214,7 +214,7 @@ static int compareFilenames (const String& name1, const String& name2) noexcept
    #if NAMES_ARE_CASE_SENSITIVE
     return name1.compare (name2);
    #else
-    return CharacterFunctions::compareIgnoreCase(name1, name2);
+    return CharacterFunctions::compare(name1.c_str(), name2.c_str(), true);
    #endif
 }
 
@@ -317,7 +317,7 @@ String File::getPathUpToLastSlash() const
         return fullPath.substr (0, lastSlash);
 
     if (lastSlash == std::string::npos)
-        return getSeparatorString();
+        return getSeparatorChars();
 
     return fullPath;
 }
@@ -360,11 +360,11 @@ bool File::isAChildOf (const File& potentialParent) const
     return getParentDirectory().isAChildOf (potentialParent);
 }
 
-int   File::hashCode() const { return std::hash<std::string>{}(fullPath); }
+size_t   File::hashCode() const { return std::hash<std::string>{}(fullPath); }
 int64 File::hashCode64() const  { return std::hash<std::string>{}(fullPath); }
 
 //==============================================================================
-bool File::isAbsolutePath (StringRef path)
+bool File::isAbsolutePath (const String& path)
 {
     auto firstChar = *(path.c_str());
 
@@ -376,16 +376,17 @@ bool File::isAbsolutePath (StringRef path)
            #endif
 }
 
-File File::getChildFile (StringRef relativePath) const
+File File::getChildFile (const String& relativePath) const
 {
-    auto r = relativePath.c_str();
+    if (isAbsolutePath (relativePath))
+        return File (relativePath);
 
-    if (isAbsolutePath (r))
-        return File (String (r));
+	auto r = relativePath.c_str();
 
    #if HWINDOWS
-    if (r.indexOf ((wchar) '/') >= 0)
-        return getChildFile (String (r).replaceCharacter ('/', '\\'));
+	auto index = relativePath.find('/');
+	if (index != String::npos)
+		return getChildFile(String(relativePath).replace(index, 1, "\\"));
    #endif
 
     auto path = fullPath;
@@ -402,7 +403,7 @@ File File::getChildFile (StringRef relativePath) const
 
             if (thirdChar == separatorChar || thirdChar == 0)
             {
-                auto lastSlash = path.lastIndexOfChar (separatorChar);
+                auto lastSlash = path.find_last_of (separatorChar);
 
                 if (lastSlash >= 0)
                     path = path.substr (0, lastSlash);
@@ -429,11 +430,11 @@ File File::getChildFile (StringRef relativePath) const
     }
 
     path = addTrailingSeparator (path);
-    path.appendCharPointer (r);
+    path.append (r);
     return File (path);
 }
 
-File File::getSiblingFile (StringRef fileName) const
+File File::getSiblingFile (const String& fileName) const
 {
     return getParentDirectory().getChildFile (fileName);
 }
@@ -450,7 +451,7 @@ String File::descriptionOfSizeInBytes (const int64 bytes)
     else if (bytes < 1024 * 1024 * 1024)  { suffix = " MB"; divisor = 1024.0 * 1024.0; }
     else                                  { suffix = " GB"; divisor = 1024.0 * 1024.0 * 1024.0; }
 
-    return (divisor > 0 ? String (bytes / divisor, 1) : String (bytes)) + suffix;
+    return (divisor > 0 ? std::to_string((int64)(bytes * 0.1 / divisor)) : std::to_string(bytes)) + suffix;
 }
 
 //==============================================================================
@@ -488,7 +489,7 @@ Result File::createDirectory() const
     auto r = parentDir.createDirectory();
 
     if (r.wasOk())
-        r = createDirectoryInternal (fullPath.trimCharactersAtEnd (getSeparatorString()));
+        r = createDirectoryInternal (CharacterFunctions::trim (fullPath, getSeparatorChar(), false));
 
     return r;
 }
@@ -580,18 +581,20 @@ File File::getNonexistentChildFile (const String& suggestedPrefix,
         auto prefix = suggestedPrefix;
 
         // remove any bracketed numbers that may already be on the end..
-        if (prefix.trim().endsWithChar (')'))
+        if (CharacterFunctions::endsWith (CharacterFunctions::trim(prefix), ")"))
         {
             putNumbersInBrackets = true;
 
-            auto openBracks  = prefix.lastIndexOfChar ('(');
-            auto closeBracks = prefix.lastIndexOfChar (')');
+            auto openBracks  = prefix.find_last_of ('(');
+            auto closeBracks = prefix.find_last_of (')');
+
+			auto text = prefix.substr(openBracks + 1, closeBracks);
 
             if (openBracks > 0
                  && closeBracks > openBracks
-                 && prefix.substr (openBracks + 1, closeBracks).containsOnly ("0123456789"))
+                 && !std::any_of(text.begin(), text.end(), [](const char& c) { return std::isdigit(c); }))
             {
-                number = prefix.substr (openBracks + 1, closeBracks).getIntValue();
+				number = std::atoi(text.c_str());
                 prefix = prefix.substr (0, openBracks);
             }
         }
@@ -602,14 +605,14 @@ File File::getNonexistentChildFile (const String& suggestedPrefix,
 
             if (putNumbersInBrackets)
             {
-                newName << '(' << ++number << ')';
+                newName += '(' + ++number + ')';
             }
             else
             {
-                if (CharacterFunctions::isDigit (prefix.getLastCharacter()))
-                    newName << '_'; // pad with an underscore if the name already ends in a digit
+                if (std::isdigit (prefix.back()))
+                    newName += '_'; // pad with an underscore if the name already ends in a digit
 
-                newName << ++number;
+                newName += ++number;
             }
 
             f = getChildFile (newName + suffix);
@@ -633,28 +636,28 @@ File File::getNonexistentSibling (const bool putNumbersInBrackets) const
 //==============================================================================
 String File::getFileExtension() const
 {
-    auto indexOfDot = fullPath.lastIndexOfChar ('.');
+    auto indexOfDot = fullPath.find_last_of ('.');
 
-    if (indexOfDot > fullPath.lastIndexOfChar (getSeparatorChar()))
+    if (indexOfDot > fullPath.find_last_of (getSeparatorChar()))
         return fullPath.substr (indexOfDot);
 
     return {};
 }
 
-bool File::hasFileExtension (StringRef possibleSuffix) const
+bool File::hasFileExtension (const String& possibleSuffix) const
 {
     if (possibleSuffix.empty())
-        return fullPath.lastIndexOfChar ('.') <= fullPath.lastIndexOfChar (getSeparatorChar());
+        return fullPath.find_last_of ('.') <= fullPath.find_last_of (getSeparatorChar());
 
-    auto semicolon = possibleSuffix.text.indexOf ((wchar) ';');
+    auto semicolon = possibleSuffix.find (';');
 
     if (semicolon >= 0)
-        return hasFileExtension (String (possibleSuffix.text).substr (0, semicolon).trimEnd())
-                || hasFileExtension ((possibleSuffix.text + (semicolon + 1)).findEndOfWhitespace());
+        return hasFileExtension (CharacterFunctions::trim(String(possibleSuffix).substr(0, semicolon), false))
+                || hasFileExtension (possibleSuffix.substr(semicolon + 1, possibleSuffix.find_last_of(' ') - semicolon - 1));
 
-    if (fullPath.endsWithIgnoreCase (possibleSuffix))
+    if (CharacterFunctions::endsWith (fullPath, possibleSuffix.c_str(), true))
     {
-        if (possibleSuffix.text[0] == '.')
+        if (possibleSuffix[0] == '.')
             return true;
 
         auto dotPos = fullPath.length() - possibleSuffix.length() - 1;
@@ -666,20 +669,20 @@ bool File::hasFileExtension (StringRef possibleSuffix) const
     return false;
 }
 
-File File::withFileExtension (StringRef newExtension) const
+File File::withFileExtension (const String& newExtension) const
 {
     if (fullPath.empty())
         return {};
 
     auto filePart = getFileName();
 
-    auto lastDot = filePart.lastIndexOfChar ('.');
+    auto lastDot = filePart.find_last_of ('.');
 
     if (lastDot >= 0)
         filePart = filePart.substr (0, lastDot);
 
-    if (!newExtension.empty() && newExtension.text[0] != '.')
-        filePart << '.';
+    if (!newExtension.empty() && newExtension[0] != '.')
+        filePart += '.';
 
     return getSiblingFile (filePart + newExtension);
 }
@@ -796,22 +799,21 @@ String File::createLegalPathName (const String& original)
         s = s.substr (2);
     }
 
-    return start + s.removeCharacters ("\"#@,;:<>*^|?")
-                    .substr (0, 1024);
+    return start + CharacterFunctions::remove(s, "\"#@,;:<>*^|?").substr (0, 1024);
 }
 
 String File::createLegalFileName (const String& original)
 {
-    auto s = original.removeCharacters ("\"#@,;:<>*^|?\\/");
+    auto s = CharacterFunctions::remove (original, "\"#@,;:<>*^|?\\/");
 
     const int maxLength = 128; // only the length of the filename, not the whole path
     auto len = s.length();
 
     if (len > maxLength)
     {
-        auto lastDot = s.lastIndexOfChar ('.');
+        auto lastDot = s.find_last_of ('.');
 
-        if (lastDot > jmax (0, len - 12))
+        if (lastDot > std::max ((size_t)0, len - 12))
         {
             s = s.substr (0, maxLength - (len - lastDot))
                  + s.substr (lastDot);
@@ -826,7 +828,7 @@ String File::createLegalFileName (const String& original)
 }
 
 //==============================================================================
-static int countNumberOfSeparators (char* s)
+static int countNumberOfSeparators (const char* s)
 {
     int num = 0;
 
@@ -851,8 +853,8 @@ String File::getRelativePathFrom (const File& dir) const
 
     auto thisPath = fullPath;
 
-    while (thisPath.endsWithChar (getSeparatorChar()))
-        thisPath = thisPath.dropLastCharacters (1);
+    while (CharacterFunctions::endsWith (thisPath, getSeparatorChars()))
+        thisPath = thisPath.substr (0, thisPath.length() - 1);
 
     auto dirPath = addTrailingSeparator (dir.existsAsFile() ? dir.getParentDirectory().getFullPathName()
                                                             : dir.fullPath);
@@ -873,7 +875,7 @@ String File::getRelativePathFrom (const File& dir) const
            #if NAMES_ARE_CASE_SENSITIVE
             if (c1 != c2
            #else
-            if ((c1 != c2 && CharacterFunctions::toLowerCase (c1) != CharacterFunctions::toLowerCase (c2))
+            if ((c1 != c2 && std::tolower (c1) != std::tolower (c2))
            #endif
                  || c1 == 0)
                 break;
@@ -899,19 +901,19 @@ String File::getRelativePathFrom (const File& dir) const
         return thisPathAfterCommon;
 
    #if HWINDOWS
-    auto s = String::repeatedString ("..\\", numUpDirectoriesNeeded);
+    auto s = CharacterFunctions::repeat ("..\\", numUpDirectoriesNeeded);
    #else
-    auto s = String::repeatedString ("../",  numUpDirectoriesNeeded);
+    auto s = CharacterFunctions::repeat ("../",  numUpDirectoriesNeeded);
    #endif
-    s.appendCharPointer (thisPathAfterCommon);
+    s += thisPathAfterCommon;
     return s;
 }
 
 //==============================================================================
-File File::createTempFile (StringRef fileNameEnding)
+File File::createTempFile (const String& fileNameEnding)
 {
     auto tempFile = getSpecialLocation (tempDirectory)
-                      .getChildFile ("temp_" + String::toHexString (Random::getSystemRandom().nextInt()))
+                      .getChildFile ("temp_" + CharacterFunctions::hexToString (Random::getSystemRandom().nextInt()))
                       .withFileExtension (fileNameEnding);
 
     if (tempFile.exists())
@@ -950,8 +952,8 @@ bool File::createSymbolicLink (const File& linkFileToCreate,
    #elif HMSVC
     File targetFile (linkFileToCreate.getSiblingFile (nativePathOfTarget));
 
-    return CreateSymbolicLink (linkFileToCreate.getFullPathName().toWideCharPointer(),
-                               nativePathOfTarget.toWideCharPointer(),
+    return CreateSymbolicLinkA (linkFileToCreate.getFullPathName().c_str(),
+                               nativePathOfTarget.c_str(),
                                targetFile.isDirectory() ? SYMBOLIC_LINK_FLAG_DIRECTORY : 0) != FALSE;
    #else
     ignoreUnused (nativePathOfTarget);
@@ -1091,8 +1093,8 @@ public:
         expectEquals (tempFile.loadFileAsString(), String ("0123456789"));
         expect (! demoFolder.containsSubDirectories());
 
-        expectEquals (tempFile.getRelativePathFrom (demoFolder.getParentDirectory()), demoFolder.getFileName() + File::getSeparatorString() + tempFile.getFileName());
-        expectEquals (demoFolder.getParentDirectory().getRelativePathFrom (tempFile), ".." + File::getSeparatorString() + ".." + File::getSeparatorString() + demoFolder.getParentDirectory().getFileName());
+        expectEquals (tempFile.getRelativePathFrom (demoFolder.getParentDirectory()), demoFolder.getFileName() + File::getSeparatorChars() + tempFile.getFileName());
+        expectEquals (demoFolder.getParentDirectory().getRelativePathFrom (tempFile), String("..") + File::getSeparatorChars() + ".." + File::getSeparatorChars() + demoFolder.getParentDirectory().getFileName());
 
         expect (demoFolder.getNumberOfChildFiles (File::findFiles) == 1);
         expect (demoFolder.getNumberOfChildFiles (File::findFilesAndDirectories) == 1);

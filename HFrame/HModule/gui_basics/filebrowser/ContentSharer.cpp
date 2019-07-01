@@ -36,7 +36,7 @@ public:
           images (imagesToUse),
           imageFileFormat (imageFileFormatToUse == nullptr ? new PNGImageFormat()
                                                            : imageFileFormatToUse),
-          extension (imageFileFormat->getFormatName().toLowerCase())
+          extension (imageFileFormat->getFormatName().std::tolower())
     {
         startThread();
     }

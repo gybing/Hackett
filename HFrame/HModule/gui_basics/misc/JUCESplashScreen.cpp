@@ -158,7 +158,7 @@ HSplashScreen::HSplashScreen (Component& parent)
         {
             const auto deviceDescription = SystemStats::getDeviceDescription();
             const auto deviceString = SystemStats::getDeviceIdentifiers().joinIntoString (":");
-            const auto deviceIdentifier = String::toHexString (deviceString.hashCode64());
+            const auto deviceIdentifier = CharacterFunctions::hexToString (deviceString.hashCode64());
             const auto osName = SystemStats::getOperatingSystemName();
 
             StringPairArray data;

@@ -81,7 +81,7 @@ public:
         @code SHA256 checksum (myString.toUTF8());
         @endcode
     */
-    explicit SHA256 (CharPointer_UTF8 utf8Text) noexcept;
+    explicit SHA256 (char* utf8Text) noexcept;
 
     //==============================================================================
     /** Returns the hash as a 32-byte block of data. */

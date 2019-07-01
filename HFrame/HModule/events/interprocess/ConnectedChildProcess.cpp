@@ -120,7 +120,7 @@ bool ChildProcessMaster::launchSlaveProcess (const File& executable, const Strin
 {
     killSlaveProcess();
 
-    auto pipeName = "p" + String::toHexString (Random().nextInt64());
+    auto pipeName = "p" + CharacterFunctions::hexToString (Random().nextInt64());
 
     StringArray args;
     args.add (executable.getFullPathName());

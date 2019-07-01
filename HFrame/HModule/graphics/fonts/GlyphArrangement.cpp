@@ -29,7 +29,7 @@ PositionedGlyph::PositionedGlyph() noexcept
 {
 }
 
-PositionedGlyph::PositionedGlyph (const Font& font_, wchar character_, int glyphNumber,
+PositionedGlyph::PositionedGlyph (const Font& font_, char character_, int glyphNumber,
                                   float anchorX, float baselineY, float width, bool whitespace_)
     : font (font_), character (character_), glyph (glyphNumber),
       x (anchorX), y (baselineY), w (width), whitespace (whitespace_)

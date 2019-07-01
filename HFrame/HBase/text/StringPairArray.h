@@ -49,16 +49,16 @@ public:
 
         @see getValue
     */
-    const String& operator[] (StringRef key) const;
+    const String& operator[] (const String& key) const;
 
     /** Finds the value corresponding to a key string.
         If no such key is found, this will just return the value provided as a default.
         @see operator[]
     */
-    String getValue (StringRef, const String& defaultReturnValue) const;
+    String getValue (const String&, const String& defaultReturnValue) const;
 
     /** Returns true if the given key exists. */
-    bool containsKey (StringRef key) const noexcept;
+    bool containsKey (const String& key) const noexcept;
 
     /** Returns a list of all keys in the array. */
     const StringArray& getAllKeys() const noexcept          { return keys; }
@@ -89,7 +89,7 @@ public:
     /** Removes a string from the array based on its key.
         If the key isn't found, nothing will happen.
     */
-    void remove (StringRef key);
+    void remove (const String& key);
 
     /** Removes a string from the array based on its index.
         If the index is out-of-range, no action will be taken.

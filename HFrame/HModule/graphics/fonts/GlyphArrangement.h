@@ -42,7 +42,7 @@ public:
     //==============================================================================
     PositionedGlyph() noexcept;
 
-    PositionedGlyph (const Font& font, wchar character, int glyphNumber,
+    PositionedGlyph (const Font& font, char character, int glyphNumber,
                      float anchorX, float baselineY, float width, bool isWhitespace);
 
     PositionedGlyph (const PositionedGlyph&) = default;
@@ -55,7 +55,7 @@ public:
     ~PositionedGlyph();
 
     /** Returns the character the glyph represents. */
-    wchar getCharacter() const noexcept    { return character; }
+    char getCharacter() const noexcept    { return character; }
     /** Checks whether the glyph is actually empty. */
     bool isWhitespace() const noexcept          { return whitespace; }
 
@@ -99,7 +99,7 @@ private:
     //==============================================================================
     friend class GlyphArrangement;
     Font font;
-    wchar character;
+    char character;
     int glyph;
     float x, y, w;
     bool whitespace;

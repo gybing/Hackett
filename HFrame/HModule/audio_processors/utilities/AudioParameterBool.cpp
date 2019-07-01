@@ -51,7 +51,7 @@ AudioParameterBool::AudioParameterBool (const String& idToUse, const String& nam
 
         boolFromStringFunction = [onStrings, offStrings] (const String& text)
         {
-            String lowercaseText (text.toLowerCase());
+            String lowercaseText (text.std::tolower());
 
             for (auto& testText : onStrings)
                 if (lowercaseText == testText)

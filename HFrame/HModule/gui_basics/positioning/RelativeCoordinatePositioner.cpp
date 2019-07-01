@@ -64,7 +64,7 @@ struct MarkerListScope  : public Expression::Scope
 
     String getScopeUID() const override
     {
-        return String::toHexString ((pointer_sized_int) (void*) &component) + "m";
+        return CharacterFunctions::hexToString ((pointer_sized_int) (void*) &component) + "m";
     }
 
     static const MarkerList::Marker* findMarker (Component& component, const String& name, MarkerList*& list)
@@ -145,7 +145,7 @@ void RelativeCoordinatePositionerBase::ComponentScope::visitRelativeScope (const
 
 String RelativeCoordinatePositionerBase::ComponentScope::getScopeUID() const
 {
-    return String::toHexString ((pointer_sized_int) (void*) &component);
+    return CharacterFunctions::hexToString ((pointer_sized_int) (void*) &component);
 }
 
 Component* RelativeCoordinatePositionerBase::ComponentScope::findSiblingComponent (const String& componentID) const

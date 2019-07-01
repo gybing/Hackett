@@ -693,10 +693,10 @@ void ComponentLayout::setComponentBoundsAndProperties (Component* componentToPos
                    componentToPosition->getBounds());
 
     props.set ("pos",         rect.toString());
-    props.set ("relativeToX", String::toHexString (referenceComponentPosition.relativeToX));
-    props.set ("relativeToY", String::toHexString (referenceComponentPosition.relativeToY));
-    props.set ("relativeToW", String::toHexString (referenceComponentPosition.relativeToW));
-    props.set ("relativeToH", String::toHexString (referenceComponentPosition.relativeToH));
+    props.set ("relativeToX", CharacterFunctions::hexToString (referenceComponentPosition.relativeToX));
+    props.set ("relativeToY", CharacterFunctions::hexToString (referenceComponentPosition.relativeToY));
+    props.set ("relativeToW", CharacterFunctions::hexToString (referenceComponentPosition.relativeToW));
+    props.set ("relativeToH", CharacterFunctions::hexToString (referenceComponentPosition.relativeToH));
 
     if (componentToPosition->getBounds() != newBounds || componentToPosition->getProperties() != props)
     {

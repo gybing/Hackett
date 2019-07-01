@@ -1321,7 +1321,7 @@ public:
         // Unfortunately some ancient bits of win32 mean you can only perform this operation from the message thread.
         HASSERT_MESSAGE_THREAD
 
-        SetWindowText (hwnd, title.toWideCharPointer());
+        SetWindowText (hwnd, title.c_str());
     }
 
     void repaintNowIfTransparent()
@@ -1945,7 +1945,7 @@ private:
             // this name has to be different for each app/dll instance because otherwise poor old Windows can
             // get a bit confused (even despite it not being a process-global window class).
             String windowClassName ("H");
-            windowClassName << String::toHexString (Time::currentTimeMillis());
+            windowClassName << CharacterFunctions::hexToString (Time::currentTimeMillis());
 
             auto moduleHandle = (HINSTANCE) Process::getCurrentModuleInstanceHandle();
 
@@ -1957,7 +1957,7 @@ private:
             wcex.cbSize         = sizeof (wcex);
             wcex.style          = CS_OWNDC;
             wcex.lpfnWndProc    = (WNDPROC) windowProc;
-            wcex.lpszClassName  = windowClassName.toWideCharPointer();
+            wcex.lpszClassName  = windowClassName.c_str();
             wcex.cbWndExtra     = 32;
             wcex.hInstance      = moduleHandle;
             wcex.hIcon          = ExtractAssociatedIcon (moduleHandle, moduleFile, &iconNum);
@@ -3065,7 +3065,7 @@ private:
                         if (ToUnicode ((UINT) key, scanCode, keyState, text, 8, 0) != 1)
                             text[0] = 0;
 
-                        used = handleKeyPress ((int) LOWORD (keyChar), (wchar) text[0]) || used;
+                        used = handleKeyPress ((int) LOWORD (keyChar), (char) text[0]) || used;
                     }
                 }
 
@@ -3079,7 +3079,7 @@ private:
     {
         updateKeyModifiers();
 
-        auto textChar = (wchar) key;
+        auto textChar = (char) key;
         const int virtualScanCode = (flags >> 16) & 0xff;
 
         if (key >= '0' && key <= '9')
@@ -4192,7 +4192,7 @@ public:
 
     int getResult() const
     {
-        const int r = MessageBox (owner, message.toWideCharPointer(), title.toWideCharPointer(), flags);
+        const int r = MessageBox (owner, message.c_str(), title.c_str(), flags);
         return (r == IDYES || r == IDOK) ? 1 : (r == IDNO && (flags & 1) != 0 ? 2 : 0);
     }
 

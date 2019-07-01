@@ -290,7 +290,7 @@ struct Program
     void dumpFunctionDisassembly (OutputStream& out, uint32 functionIndex) const
     {
         out << newLine << "Function #" << (int) functionIndex
-            << "  (" << String::toHexString (getFunctionID (functionIndex)) << ")" << newLine;
+            << "  (" << CharacterFunctions::hexToString (getFunctionID (functionIndex)) << ")" << newLine;
 
         if (auto codeStart = getFunctionStartAddress (functionIndex))
             if (auto codeEnd = getFunctionEndAddress (functionIndex))
@@ -301,15 +301,15 @@ struct Program
     String getOpDisassembly (const uint8*& prog) const
     {
         String s;
-        s << String::toHexString ((int) (prog - programStart)).paddedLeft ('0', 4) << ":  ";
+        s << CharacterFunctions::hexToString ((int) (prog - programStart)).paddedLeft ('0', 4) << ":  ";
         auto op = (OpCode) *prog++;
 
         switch (op)
         {
            #define LITTLEFOOT_OP(name)         case OpCode::name:  s << #name; break;
-           #define LITTLEFOOT_OP_INT8(name)    case OpCode::name:  s << #name << " " << String::toHexString ((int) *prog++).paddedLeft ('0', 2); break;
-           #define LITTLEFOOT_OP_INT16(name)   case OpCode::name:  s << #name << " " << String::toHexString ((int) readInt16 (prog)).paddedLeft ('0', 4); prog += 2; break;
-           #define LITTLEFOOT_OP_INT32(name)   case OpCode::name:  s << #name << " " << String::toHexString ((int) readInt32 (prog)).paddedLeft ('0', 8); prog += 4; break;
+           #define LITTLEFOOT_OP_INT8(name)    case OpCode::name:  s << #name << " " << CharacterFunctions::hexToString ((int) *prog++).paddedLeft ('0', 2); break;
+           #define LITTLEFOOT_OP_INT16(name)   case OpCode::name:  s << #name << " " << CharacterFunctions::hexToString ((int) readInt16 (prog)).paddedLeft ('0', 4); prog += 2; break;
+           #define LITTLEFOOT_OP_INT32(name)   case OpCode::name:  s << #name << " " << CharacterFunctions::hexToString ((int) readInt32 (prog)).paddedLeft ('0', 8); prog += 4; break;
             LITTLEFOOT_OPCODES (LITTLEFOOT_OP, LITTLEFOOT_OP_INT8, LITTLEFOOT_OP_INT16, LITTLEFOOT_OP_INT32)
            #undef LITTLEFOOT_OP
            #undef LITTLEFOOT_OP_INT8
@@ -796,10 +796,10 @@ struct Runner
             MemoryOutputStream dump;
             auto progCopy = programCounter;
             dump << String (runner->program.getOpDisassembly (progCopy)).paddedRight (' ', 26)
-                 << String::toHexString (tos) << ' ';
+                 << CharacterFunctions::hexToString (tos) << ' ';
 
             for (auto s = stack; s < stackEnd; ++s)
-                dump << String::toHexString (*s) << ' ';
+                dump << CharacterFunctions::hexToString (*s) << ' ';
 
             DBG (dump.toString());
            #endif

@@ -75,7 +75,7 @@ static void skipToEndOfXmlDTD (Iterator& source) noexcept
 template <typename Iterator>
 static void skipToEndOfXmlComment (Iterator& source) noexcept
 {
-    wchar last[2] = {};
+    char last[2] = {};
 
     for (;;)
     {

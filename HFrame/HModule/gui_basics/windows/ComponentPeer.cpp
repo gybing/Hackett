@@ -170,7 +170,7 @@ Component* ComponentPeer::getTargetForKeyPress()
     return c;
 }
 
-bool ComponentPeer::handleKeyPress (const int keyCode, const wchar textCharacter)
+bool ComponentPeer::handleKeyPress (const int keyCode, const char textCharacter)
 {
     return handleKeyPress (KeyPress (keyCode,
                                      ModifierKeys::currentModifiers.withoutMouseButtons(),

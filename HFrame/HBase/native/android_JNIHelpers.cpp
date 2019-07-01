@@ -201,7 +201,7 @@ void JNIClassBase::initialise (JNIEnv* env)
                         auto codeCacheDir = getCodeCacheDirectory();
 
                         // The dex file has an embedded 20-byte long SHA-1 signature at offset 12
-                        auto fileName = String::toHexString ((char*)uncompressedByteCode.getData() + 12, 20, 0) + ".dex";
+                        auto fileName = CharacterFunctions::hexToString ((char*)uncompressedByteCode.getData() + 12, 20, 0) + ".dex";
                         auto dexFile = codeCacheDir.getChildFile (fileName);
                         auto optimizedDirectory = codeCacheDir.getChildFile ("optimized_cache");
                         optimizedDirectory.createDirectory();

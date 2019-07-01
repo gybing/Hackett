@@ -95,7 +95,7 @@
       that have important side-effects!
       @see Logger::outputDebugString
   */
-  #define DBG(textToWrite)          HBLOCK_WITH_FORCED_SEMICOLON (String tempDbgBuf; tempDbgBuf << textToWrite; Logger::outputDebugString (tempDbgBuf);)
+  #define DBG(textToWrite)          HBLOCK_WITH_FORCED_SEMICOLON (Logger::outputDebugString (textToWrite);)
 
   //==============================================================================
   /** This will always cause an assertion failure.

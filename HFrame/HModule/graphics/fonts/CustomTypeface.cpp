@@ -27,23 +27,23 @@
 class CustomTypeface::GlyphInfo
 {
 public:
-    GlyphInfo (wchar c, const Path& p, float w) noexcept
+    GlyphInfo (char c, const Path& p, float w) noexcept
         : character (c), path (p), width (w)
     {
     }
 
     struct KerningPair
     {
-        wchar character2;
+        char character2;
         float kerningAmount;
     };
 
-    void addKerningPair (wchar subsequentCharacter, float extraKerningAmount) noexcept
+    void addKerningPair (char subsequentCharacter, float extraKerningAmount) noexcept
     {
         kerningPairs.add ({ subsequentCharacter, extraKerningAmount });
     }
 
-    float getHorizontalSpacing (wchar subsequentCharacter) const noexcept
+    float getHorizontalSpacing (char subsequentCharacter) const noexcept
     {
         if (subsequentCharacter != 0)
             for (auto& kp : kerningPairs)
@@ -53,7 +53,7 @@ public:
         return width;
     }
 
-    const wchar character;
+    const char character;
     const Path path;
     float width;
     Array<KerningPair> kerningPairs;
@@ -65,7 +65,7 @@ private:
 //==============================================================================
 namespace CustomTypefaceHelpers
 {
-    static wchar readChar (InputStream& in)
+    static char readChar (InputStream& in)
     {
         auto n = (uint32) (uint16) in.readShort();
 
@@ -77,10 +77,10 @@ namespace CustomTypefaceHelpers
             n = 0x10000 + (((n - 0xd800) << 10) | (nextWord - 0xdc00));
         }
 
-        return (wchar) n;
+        return (char) n;
     }
 
-    static void writeChar (OutputStream& out, wchar charToWrite)
+    static void writeChar (OutputStream& out, char charToWrite)
     {
         if (charToWrite >= 0x10000)
         {
@@ -157,7 +157,7 @@ void CustomTypeface::clear()
 }
 
 void CustomTypeface::setCharacteristics (const String& newName, float newAscent, bool isBold,
-                                         bool isItalic, wchar newDefaultCharacter) noexcept
+                                         bool isItalic, char newDefaultCharacter) noexcept
 {
     name = newName;
     defaultCharacter = newDefaultCharacter;
@@ -166,7 +166,7 @@ void CustomTypeface::setCharacteristics (const String& newName, float newAscent,
 }
 
 void CustomTypeface::setCharacteristics (const String& newName, const String& newStyle,
-                                         float newAscent, wchar newDefaultCharacter) noexcept
+                                         float newAscent, char newDefaultCharacter) noexcept
 {
     name = newName;
     style = newStyle;
@@ -174,7 +174,7 @@ void CustomTypeface::setCharacteristics (const String& newName, const String& ne
     ascent = newAscent;
 }
 
-void CustomTypeface::addGlyph (wchar character, const Path& path, float width) noexcept
+void CustomTypeface::addGlyph (char character, const Path& path, float width) noexcept
 {
     // Check that you're not trying to add the same character twice..
     HAssert (findGlyph (character, false) == nullptr);
@@ -185,7 +185,7 @@ void CustomTypeface::addGlyph (wchar character, const Path& path, float width) n
     glyphs.add (new GlyphInfo (character, path, width));
 }
 
-void CustomTypeface::addKerningPair (wchar char1, wchar char2, float extraAmount) noexcept
+void CustomTypeface::addKerningPair (char char1, char char2, float extraAmount) noexcept
 {
     if (extraAmount != 0.0f)
     {
@@ -196,7 +196,7 @@ void CustomTypeface::addKerningPair (wchar char1, wchar char2, float extraAmount
     }
 }
 
-CustomTypeface::GlyphInfo* CustomTypeface::findGlyph (wchar character, bool loadIfNeeded) noexcept
+CustomTypeface::GlyphInfo* CustomTypeface::findGlyph (char character, bool loadIfNeeded) noexcept
 {
     if (isPositiveAndBelow ((int) character, numElementsInArray (lookupTable)) && lookupTable [character] > 0)
         return glyphs [(int) lookupTable [(int) character]];
@@ -211,18 +211,18 @@ CustomTypeface::GlyphInfo* CustomTypeface::findGlyph (wchar character, bool load
     return nullptr;
 }
 
-bool CustomTypeface::loadGlyphIfPossible (wchar)
+bool CustomTypeface::loadGlyphIfPossible (char)
 {
     return false;
 }
 
-void CustomTypeface::addGlyphsFromOtherTypeface (Typeface& typefaceToCopy, wchar characterStartIndex, int numCharacters) noexcept
+void CustomTypeface::addGlyphsFromOtherTypeface (Typeface& typefaceToCopy, char characterStartIndex, int numCharacters) noexcept
 {
     setCharacteristics (name, style, typefaceToCopy.getAscent(), defaultCharacter);
 
     for (int i = 0; i < numCharacters; ++i)
     {
-        auto c = (wchar) (characterStartIndex + static_cast<wchar> (i));
+        auto c = (char) (characterStartIndex + static_cast<char> (i));
 
         Array<int> glyphIndexes;
         Array<float> offsets;
@@ -361,7 +361,7 @@ void CustomTypeface::getGlyphPositions (const String& text, Array<int>& resultGl
 
 bool CustomTypeface::getOutlineForGlyph (int glyphNumber, Path& path)
 {
-    if (auto* glyph = findGlyph ((wchar) glyphNumber, true))
+    if (auto* glyph = findGlyph ((char) glyphNumber, true))
     {
         path = glyph->path;
         return true;
@@ -376,7 +376,7 @@ bool CustomTypeface::getOutlineForGlyph (int glyphNumber, Path& path)
 
 EdgeTable* CustomTypeface::getEdgeTableForGlyph (int glyphNumber, const AffineTransform& transform, float fontHeight)
 {
-    if (auto* glyph = findGlyph ((wchar) glyphNumber, true))
+    if (auto* glyph = findGlyph ((char) glyphNumber, true))
     {
         if (! glyph->path.empty())
             return new EdgeTable (glyph->path.getBoundsTransformed (transform)

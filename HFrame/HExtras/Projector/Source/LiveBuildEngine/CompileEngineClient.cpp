@@ -95,7 +95,7 @@ public:
     {
         DBG ("Client: Launching Server...");
 
-        auto pipeName = "ipc_" + String::toHexString (Random().nextInt64());
+        auto pipeName = "ipc_" + CharacterFunctions::hexToString (Random().nextInt64());
         auto command = createCommandLineForLaunchingServer (pipeName, owner.project.getProjectUIDString(),
                                                             getCacheLocationForProject (owner.project));
 

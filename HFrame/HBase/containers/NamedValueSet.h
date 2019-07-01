@@ -59,7 +59,7 @@ public:
 
     //==============================================================================
     /** Returns the total number of values that the set contains. */
-    int size() const noexcept;
+	size_t size() const noexcept;
 
     /** Returns true if the set is empty. */
     bool empty() const noexcept;

@@ -202,10 +202,10 @@ public:
     //==============================================================================
     void parsePathString (Path& path, const String& pathString) const
     {
-        auto d = pathString.c_str().findEndOfWhitespace();
+        auto d = pathString.c_str().find_last_of(' ');
 
         Point<float> subpathStart, last, last2, p1, p2, p3;
-        wchar currentCommand = 0, previousCommand = 0;
+        char currentCommand = 0, previousCommand = 0;
         bool isRelative = true;
         bool carryOn = true;
 
@@ -405,7 +405,7 @@ public:
             case 'z':
                 path.closeSubPath();
                 last = last2 = subpathStart;
-                d = d.findEndOfWhitespace();
+                d = d.find_last_of(' ');
                 currentCommand = 'M';
                 break;
 
@@ -745,7 +745,7 @@ private:
 
             dashLengths.add (value);
 
-            t = t.findEndOfWhitespace();
+            t = t.find_last_of(' ');
 
             if (*t == ',')
                 ++t;
@@ -965,7 +965,7 @@ private:
 
     FillType getPathFillType (const Path& path,
                               const XmlPath& xml,
-                              StringRef fillAttribute,
+                              const String& fillAttribute,
                               const String& fillOpacity,
                               const String& overallOpacity,
                               const Colour defaultColour) const
@@ -1312,20 +1312,20 @@ private:
             if (*source++ == '.'
                  && CharacterFunctions::compareIgnoreCaseUpTo (source, name, nameLength) == 0)
             {
-                auto endOfName = (source + nameLength).findEndOfWhitespace();
+                auto endOfName = (source + nameLength).find_last_of(' ');
 
                 if (*endOfName == '{')
                     return endOfName;
 
                 if (*endOfName == ',')
-                    return CharacterFunctions::find (endOfName, (wchar) '{');
+                    return CharacterFunctions::find (endOfName, (char) '{');
             }
         }
 
         return source;
     }
 
-    String getStyleAttribute (const XmlPath& xml, StringRef attributeName, const String& defaultValue = String()) const
+    String getStyleAttribute (const XmlPath& xml, const String& attributeName, const String& defaultValue = String()) const
     {
         if (xml->hasAttribute (attributeName))
             return xml->getStringAttribute (attributeName, defaultValue);
@@ -1348,7 +1348,7 @@ private:
                 if (openBrace.empty())
                     break;
 
-                auto closeBrace = CharacterFunctions::find (openBrace, (wchar) '}');
+                auto closeBrace = CharacterFunctions::find (openBrace, (char) '}');
 
                 if (closeBrace.empty())
                     break;
@@ -1368,7 +1368,7 @@ private:
         return defaultValue;
     }
 
-    String getInheritedAttribute (const XmlPath& xml, StringRef attributeName) const
+    String getInheritedAttribute (const XmlPath& xml, const String& attributeName) const
     {
         if (xml->hasAttribute (attributeName))
             return xml->getStringAttribute (attributeName);
@@ -1397,12 +1397,12 @@ private:
     }
 
     //==============================================================================
-    static bool isIdentifierChar (wchar c)
+    static bool isIdentifierChar (char c)
     {
         return CharacterFunctions::isLetter (c) || c == '-';
     }
 
-    static String getAttributeFromStyleList (const String& list, StringRef attributeName, const String& defaultValue)
+    static String getAttributeFromStyleList (const String& list, const String& attributeName, const String& defaultValue)
     {
         int i = 0;
 
@@ -1436,7 +1436,7 @@ private:
     }
 
     //==============================================================================
-    static bool isStartOfNumber (wchar c) noexcept
+    static bool isStartOfNumber (char c) noexcept
     {
         return CharacterFunctions::isDigit (c) || c == '-' || c == '+';
     }
@@ -1492,7 +1492,7 @@ private:
     }
 
     //==============================================================================
-    Colour parseColour (const XmlPath& xml, StringRef attributeName, const Colour defaultColour) const
+    Colour parseColour (const XmlPath& xml, const String& attributeName, const Colour defaultColour) const
     {
         auto text = getStyleAttribute (xml, attributeName);
 

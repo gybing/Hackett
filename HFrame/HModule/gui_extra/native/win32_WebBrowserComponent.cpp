@@ -95,7 +95,7 @@ public:
             if (headers != nullptr)
             {
                 V_VT (&headersVar) = VT_BSTR;
-                V_BSTR (&headersVar) = SysAllocString ((const OLECHAR*) headers->joinIntoString ("\r\n").toWideCharPointer());
+                V_BSTR (&headersVar) = SysAllocString ((const OLECHAR*) headers->joinIntoString ("\r\n").c_str());
             }
 
             if (postData != nullptr && postData->getSize() > 0)
@@ -123,7 +123,7 @@ public:
                 }
             }
 
-            auto urlBSTR = SysAllocString ((const OLECHAR*) url.toWideCharPointer());
+            auto urlBSTR = SysAllocString ((const OLECHAR*) url.c_str());
             browser->Navigate (urlBSTR, &headerFlags, &frame, &postDataVar, &headersVar);
             SysFreeString (urlBSTR);
 

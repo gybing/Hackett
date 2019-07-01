@@ -178,17 +178,17 @@ public:
         updateHashes();
     }
 
-    void updateMD5Result (CharPointer_UTF8 text)
+    void updateMD5Result (char* text)
     {
         md5Result.setText (MD5 (text).toHexString(), dontSendNotification);
     }
 
-    void updateSHA256Result (CharPointer_UTF8 text)
+    void updateSHA256Result (char* text)
     {
         shaResult.setText (SHA256 (text).toHexString(), dontSendNotification);
     }
 
-    void updateWhirlpoolResult (CharPointer_UTF8 text)
+    void updateWhirlpoolResult (char* text)
     {
         whirlpoolResult.setText (Whirlpool (text).toHexString(), dontSendNotification);
     }

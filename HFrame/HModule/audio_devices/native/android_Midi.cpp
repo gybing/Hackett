@@ -474,7 +474,7 @@ public:
             LocalRef<jobjectArray> localDeviceNameAndIDs (jDeviceNameAndIDs);
 
             auto deviceNameAndIDs = javaStringArrayToJuce (localDeviceNameAndIDs);
-            deviceNameAndIDs.appendNumbersToDuplicates (false, false, CharPointer_UTF8 ("-"), CharPointer_UTF8 (""));
+            deviceNameAndIDs.appendNumbersToDuplicates (false, false, char* ("-"), char* (""));
 
             Array<MidiDeviceInfo> devices;
 

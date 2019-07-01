@@ -87,7 +87,7 @@ struct DemoFlexPanel   : public Component
         addLabel ("align-self", alignSelfCombo);
     }
 
-    void setupTextEditor (TextEditor& te, Rectangle<int> b, StringRef initialText, std::function<void()> updateFn)
+    void setupTextEditor (TextEditor& te, Rectangle<int> b, const String& initialText, std::function<void()> updateFn)
     {
         te.setBounds (b);
         te.setText (initialText);
@@ -283,7 +283,7 @@ struct FlexBoxDemo   : public Component
         addAndMakeVisible (panel);
     }
 
-    ToggleButton& createToggleButton (StringRef text, int groupID, int x, int y, bool toggleOn, std::function<void()> fn)
+    ToggleButton& createToggleButton (const String& text, int groupID, int x, int y, bool toggleOn, std::function<void()> fn)
     {
         auto* tb = buttons.add (new ToggleButton());
         tb->setButtonText (text);

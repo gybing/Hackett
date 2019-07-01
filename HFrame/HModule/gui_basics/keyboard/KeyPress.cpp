@@ -24,7 +24,7 @@
   ==============================================================================
 */
 
-KeyPress::KeyPress (int code, ModifierKeys m, wchar textChar) noexcept
+KeyPress::KeyPress (int code, ModifierKeys m, char textChar) noexcept
     : keyCode (code), mods (m), textCharacter (textChar)
 {
 }
@@ -47,8 +47,8 @@ bool KeyPress::operator== (const KeyPress& other) const noexcept
             && (keyCode == other.keyCode
                  || (keyCode < 256
                       && other.keyCode < 256
-                      && CharacterFunctions::toLowerCase ((wchar) keyCode)
-                           == CharacterFunctions::toLowerCase ((wchar) other.keyCode)));
+                      && CharacterFunctions::std::tolower ((char) keyCode)
+                           == CharacterFunctions::std::tolower ((char) other.keyCode)));
 }
 
 bool KeyPress::operator!= (const KeyPress& other) const noexcept    { return ! operator== (other); }
@@ -147,7 +147,7 @@ namespace KeyPressHelpers
     struct OSXSymbolReplacement
     {
         const char* text;
-        wchar symbol;
+        char symbol;
     };
 
     const OSXSymbolReplacement osxSymbols[] =
@@ -217,7 +217,7 @@ KeyPress KeyPress::createFromDescription (const String& desc)
             if (hexCode > 0)
                 key = hexCode;
             else
-                key = (int) CharacterFunctions::toUpperCase (desc.getLastCharacter());
+                key = (int) CharacterFunctions::std::toupper (desc.getLastCharacter());
         }
     }
 
@@ -254,7 +254,7 @@ String KeyPress::getTextDescription() const
         else if (keyCode >= F17Key && keyCode <= F24Key)                  desc << 'F' << (17 + keyCode - F17Key);
         else if (keyCode >= F25Key && keyCode <= F35Key)                  desc << 'F' << (25 + keyCode - F25Key);
         else if (keyCode >= numberPad0 && keyCode <= numberPad9)    desc << KeyPressHelpers::numberPadPrefix() << (keyCode - numberPad0);
-        else if (keyCode >= 33 && keyCode < 176)        desc += CharacterFunctions::toUpperCase ((wchar) keyCode);
+        else if (keyCode >= 33 && keyCode < 176)        desc += CharacterFunctions::std::toupper ((char) keyCode);
         else if (keyCode == numberPadAdd)               desc << KeyPressHelpers::numberPadPrefix() << '+';
         else if (keyCode == numberPadSubtract)          desc << KeyPressHelpers::numberPadPrefix() << '-';
         else if (keyCode == numberPadMultiply)          desc << KeyPressHelpers::numberPadPrefix() << '*';
@@ -263,7 +263,7 @@ String KeyPress::getTextDescription() const
         else if (keyCode == numberPadDecimalPoint)      desc << KeyPressHelpers::numberPadPrefix() << '.';
         else if (keyCode == numberPadEquals)            desc << KeyPressHelpers::numberPadPrefix() << '=';
         else if (keyCode == numberPadDelete)            desc << KeyPressHelpers::numberPadPrefix() << "delete";
-        else                                            desc << '#' << String::toHexString (keyCode);
+        else                                            desc << '#' << CharacterFunctions::hexToString (keyCode);
     }
 
     return desc;

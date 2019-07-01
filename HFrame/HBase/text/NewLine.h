@@ -29,7 +29,7 @@ public:
     /** Returns the default new-line sequence that the library uses.
         @see OutputStream::setNewLineString()
     */
-    operator StringRef() const noexcept             { return getDefault(); }
+    operator const String&() const noexcept             { return getDefault(); }
 };
 
 //==============================================================================

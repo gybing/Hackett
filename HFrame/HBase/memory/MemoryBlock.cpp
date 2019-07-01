@@ -238,7 +238,7 @@ void MemoryBlock::copyTo (void* const dst, int offset, size_t num) const noexcep
 
 String MemoryBlock::toString() const
 {
-    return String::fromUTF8 (data, (int) size);
+    return String (data, (int) size);
 }
 
 //==============================================================================
@@ -290,11 +290,11 @@ void MemoryBlock::setBitRange (const size_t bitRangeStart, size_t numBits, int b
 }
 
 //==============================================================================
-void MemoryBlock::loadFromHexString (StringRef hex)
+void MemoryBlock::loadFromHexString (const String& hex)
 {
     ensureSize ((size_t) hex.length() >> 1);
     char* dest = data;
-    auto t = hex.text;
+    auto t = hex.c_str();
 
     for (;;)
     {
@@ -331,18 +331,14 @@ String MemoryBlock::toBase64Encoding() const
 {
     auto numChars = ((size << 3) + 5) / 6;
 
-    String destString ((unsigned int) size); // store the length, followed by a '.', and then the data.
+    String destString (std::to_string(size)); // store the length, followed by a '.', and then the data.
     auto initialLen = destString.length();
-    destString.preallocateBytes (sizeof (char*::CharType) * (size_t) initialLen + 2 + numChars);
 
-    auto d = destString.c_str();
-    d += initialLen;
-    d.write ('.');
+	destString += '.';
 
     for (size_t i = 0; i < numChars; ++i)
-        d.write ((wchar) (uint8) base64EncodingTable[getBitRange (i * 6, 6)]);
+		destString += ((char) (uint8) base64EncodingTable[getBitRange (i * 6, 6)]);
 
-    d.writeNull();
     return destString;
 }
 
@@ -353,14 +349,14 @@ static const char base64DecodingTable[] =
     0, 0, 0, 0, 0, 0, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52
 };
 
-bool MemoryBlock::fromBase64Encoding (StringRef s)
+bool MemoryBlock::fromBase64Encoding (const String& s)
 {
-    auto dot = CharacterFunctions::find (s.text, (wchar) '.');
+    auto dot = s.find ('.');
 
-    if (dot.empty())
+    if (dot == String::npos)
         return false;
 
-    auto numBytesNeeded = String (s.text, dot).getIntValue();
+    auto numBytesNeeded = std::atoi(s.substr(0, dot).c_str());
 
     setSize ((size_t) numBytesNeeded, true);
 
@@ -369,7 +365,7 @@ bool MemoryBlock::fromBase64Encoding (StringRef s)
 
     for (;;)
     {
-        auto c = (int) *srcChars++;
+		auto c = (int)s.at(srcChars); srcChars++;
 
         if (c == 0)
             return true;

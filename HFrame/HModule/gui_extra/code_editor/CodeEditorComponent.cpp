@@ -180,7 +180,7 @@ private:
                     break;
 
                 const int spacesNeeded = spacesPerTab - ((tabPos + x) % spacesPerTab);
-                t.text = t.text.replaceSection (tabPos, 1, String::repeatedString (" ", spacesNeeded));
+                t.text = t.text.replaceSection (tabPos, 1, CharacterFunctions::repeat (" ", spacesNeeded));
                 t.length = t.text.length();
             }
 
@@ -223,7 +223,7 @@ private:
 
 namespace CodeEditorHelpers
 {
-    static int findFirstNonWhitespaceChar (StringRef line) noexcept
+    static int findFirstNonWhitespaceChar (const String& line) noexcept
     {
         auto t = line.text;
         int i = 0;
@@ -781,7 +781,7 @@ void CodeEditorComponent::insertTabAtCaret()
         {
             auto caretCol = indexToColumn (caretPos.getLineNumber(), caretPos.getIndexInLine());
             auto spacesNeeded = spacesPerTab - (caretCol % spacesPerTab);
-            insertTextAtCaret (String::repeatedString (" ", spacesNeeded));
+            insertTextAtCaret (CharacterFunctions::repeat (" ", spacesNeeded));
         }
         else
         {
@@ -1454,7 +1454,7 @@ void CodeEditorComponent::setTabSize (const int numSpaces, const bool insertSpac
 
 String CodeEditorComponent::getTabString (const int numSpaces) const
 {
-    return String::repeatedString (useSpacesForTabs ? " " : "\t",
+    return CharacterFunctions::repeat (useSpacesForTabs ? " " : "\t",
                                    useSpacesForTabs ? numSpaces
                                                     : (numSpaces / spacesPerTab));
 }

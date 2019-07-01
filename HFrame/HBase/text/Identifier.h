@@ -58,22 +58,22 @@ public:
     inline bool operator!= (const Identifier& other) const noexcept     { return name.c_str() != other.name.c_str(); }
 
     /** Compares the identifier with a string. */
-    inline bool operator== (StringRef other) const noexcept             { return name == other; }
+    inline bool operator== (const String& other) const noexcept             { return name == other; }
 
     /** Compares the identifier with a string. */
-    inline bool operator!= (StringRef other) const noexcept             { return name != other; }
+    inline bool operator!= (const String& other) const noexcept             { return name != other; }
 
     /** Compares the identifier with a string. */
-    inline bool operator<  (StringRef other) const noexcept             { return name <  other; }
+    inline bool operator<  (const String& other) const noexcept             { return name <  other; }
 
     /** Compares the identifier with a string. */
-    inline bool operator<= (StringRef other) const noexcept             { return name <= other; }
+    inline bool operator<= (const String& other) const noexcept             { return name <= other; }
 
     /** Compares the identifier with a string. */
-    inline bool operator>  (StringRef other) const noexcept             { return name >  other; }
+    inline bool operator>  (const String& other) const noexcept             { return name >  other; }
 
     /** Compares the identifier with a string. */
-    inline bool operator>= (StringRef other) const noexcept             { return name >= other; }
+    inline bool operator>= (const String& other) const noexcept             { return name >= other; }
 
     /** Returns this identifier as a string. */
     const String& toString() const noexcept                             { return name; }
@@ -84,8 +84,8 @@ public:
     /** Returns this identifier's raw string pointer. */
     char* c_str() const noexcept             { return (char*)name.c_str(); }
 
-    /** Returns this identifier as a StringRef. */
-    operator StringRef() const noexcept                                 { return name; }
+    /** Returns this identifier as a const String&. */
+    operator const String&() const noexcept                                 { return name; }
 
     /** Returns true if this Identifier is not null */
     bool isValid() const noexcept                                       { return !name.empty(); }

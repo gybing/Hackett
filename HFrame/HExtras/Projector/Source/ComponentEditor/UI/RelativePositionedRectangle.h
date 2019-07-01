@@ -712,19 +712,19 @@ struct RelativePositionedRectangle
     {
         e.setAttribute ("pos", rect.toString());
 
-        if (relativeToX != 0)   e.setAttribute ("posRelativeX", String::toHexString (relativeToX));
-        if (relativeToY != 0)   e.setAttribute ("posRelativeY", String::toHexString (relativeToY));
-        if (relativeToW != 0)   e.setAttribute ("posRelativeW", String::toHexString (relativeToW));
-        if (relativeToH != 0)   e.setAttribute ("posRelativeH", String::toHexString (relativeToH));
+        if (relativeToX != 0)   e.setAttribute ("posRelativeX", CharacterFunctions::hexToString (relativeToX));
+        if (relativeToY != 0)   e.setAttribute ("posRelativeY", CharacterFunctions::hexToString (relativeToY));
+        if (relativeToW != 0)   e.setAttribute ("posRelativeW", CharacterFunctions::hexToString (relativeToW));
+        if (relativeToH != 0)   e.setAttribute ("posRelativeH", CharacterFunctions::hexToString (relativeToH));
     }
 
     void restoreFromXml (const XmlElement& e, const RelativePositionedRectangle& defaultPos)
     {
         rect = PositionedRectangle (e.getStringAttribute ("pos", defaultPos.rect.toString()));
-        relativeToX = e.getStringAttribute ("posRelativeX", String::toHexString (defaultPos.relativeToX)).getHexValue64();
-        relativeToY = e.getStringAttribute ("posRelativeY", String::toHexString (defaultPos.relativeToY)).getHexValue64();
-        relativeToW = e.getStringAttribute ("posRelativeW", String::toHexString (defaultPos.relativeToW)).getHexValue64();
-        relativeToH = e.getStringAttribute ("posRelativeH", String::toHexString (defaultPos.relativeToH)).getHexValue64();
+        relativeToX = e.getStringAttribute ("posRelativeX", CharacterFunctions::hexToString (defaultPos.relativeToX)).getHexValue64();
+        relativeToY = e.getStringAttribute ("posRelativeY", CharacterFunctions::hexToString (defaultPos.relativeToY)).getHexValue64();
+        relativeToW = e.getStringAttribute ("posRelativeW", CharacterFunctions::hexToString (defaultPos.relativeToW)).getHexValue64();
+        relativeToH = e.getStringAttribute ("posRelativeH", CharacterFunctions::hexToString (defaultPos.relativeToH)).getHexValue64();
     }
 
     String toString() const

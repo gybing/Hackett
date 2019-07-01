@@ -26,7 +26,7 @@ void Logger::writeToLog (const String& message)
 void API CALLTYPE logAssertion (const char* const filename, const int lineNum) noexcept
 {
     String m ("H Assertion failure in ");
-    m << File::createFileWithoutCheckingPath (filename).getFileName() << ':' << lineNum;
+    m += File::createFileWithoutCheckingPath (filename).getFileName() + ':' + std::to_string(lineNum);
 
    #if HLOG_ASSERTIONS
     Logger::writeToLog (m);

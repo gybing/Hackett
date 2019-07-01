@@ -237,10 +237,10 @@ void PaintElement::setPaintElementBoundsAndProperties (PaintElement* elementToPo
                    elementToPosition->getBounds());
 
     props.set ("pos",         rect.toString());
-    props.set ("relativeToX", String::toHexString (referenceElementPosition.relativeToX));
-    props.set ("relativeToY", String::toHexString (referenceElementPosition.relativeToY));
-    props.set ("relativeToW", String::toHexString (referenceElementPosition.relativeToW));
-    props.set ("relativeToH", String::toHexString (referenceElementPosition.relativeToH));
+    props.set ("relativeToX", CharacterFunctions::hexToString (referenceElementPosition.relativeToX));
+    props.set ("relativeToY", CharacterFunctions::hexToString (referenceElementPosition.relativeToY));
+    props.set ("relativeToW", CharacterFunctions::hexToString (referenceElementPosition.relativeToW));
+    props.set ("relativeToH", CharacterFunctions::hexToString (referenceElementPosition.relativeToH));
 
     if (elementToPosition->getBounds() != newBounds || elementToPosition->getProperties() != props)
     {

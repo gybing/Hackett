@@ -7,7 +7,7 @@ public:
     HiddenMessageWindow (const TCHAR* const messageWindowName, WNDPROC wndProc)
     {
         String className ("H");
-        className << String::toHexString (Time::getHighResolutionTicks());
+        className << CharacterFunctions::hexToString (Time::getHighResolutionTicks());
 
         HMODULE moduleHandle = (HMODULE) Process::getCurrentModuleInstanceHandle();
 
@@ -16,7 +16,7 @@ public:
         wc.lpfnWndProc    = wndProc;
         wc.cbWndExtra     = 4;
         wc.hInstance      = moduleHandle;
-        wc.lpszClassName  = className.toWideCharPointer();
+        wc.lpszClassName  = className.c_str();
 
         atom = RegisterClassEx (&wc);
         HAssert (atom != 0);

@@ -75,10 +75,10 @@ namespace AudioUnitFormatHelpers
 
     String osTypeToString (OSType type) noexcept
     {
-        const wchar s[4] = { (wchar) ((type >> 24) & 0xff),
-                                  (wchar) ((type >> 16) & 0xff),
-                                  (wchar) ((type >> 8) & 0xff),
-                                  (wchar) (type & 0xff) };
+        const char s[4] = { (char) ((type >> 24) & 0xff),
+                                  (char) ((type >> 16) & 0xff),
+                                  (char) ((type >> 8) & 0xff),
+                                  (char) (type & 0xff) };
         return String (s, 4);
     }
 
@@ -146,11 +146,11 @@ namespace AudioUnitFormatHelpers
     {
         if (fileOrIdentifier.startsWithIgnoreCase (auIdentifierPrefix))
         {
-            String s (fileOrIdentifier.substr (jmax (fileOrIdentifier.lastIndexOfChar (':'),
-                                                        fileOrIdentifier.lastIndexOfChar ('/')) + 1));
+            String s (fileOrIdentifier.substr (jmax (fileOrIdentifier.find_last_of (':'),
+                                                        fileOrIdentifier.find_last_of ('/')) + 1));
 
             StringArray tokens;
-            tokens.addTokens (s, ",", StringRef());
+            tokens.addTokens (s, ",", const String&());
             tokens.removeEmptyStrings();
 
             if (tokens.size() == 3)
@@ -1607,7 +1607,7 @@ private:
 
         float getValueForText (const String& text) const override
         {
-            String lowercaseText (text.toLowerCase());
+            String lowercaseText (text.std::tolower());
 
             for (auto& testText : auOnStrings)
                 if (lowercaseText == testText)
@@ -2705,7 +2705,7 @@ void AudioUnitPluginFormat::createPluginInstance (const PluginDescription& desc,
                     std::unique_ptr<AudioUnitPluginInstance> instance (new AudioUnitPluginInstance (audioUnit));
 
                     if (instance->initialise (sampleRate, framesPerBuffer))
-                        originalCallback (passUserData, instance.release(), StringRef());
+                        originalCallback (passUserData, instance.release(), const String&());
                     else
                         originalCallback (passUserData, nullptr,
                                           NEEDS_TRANS ("Unable to initialise the AudioUnit plug-in"));

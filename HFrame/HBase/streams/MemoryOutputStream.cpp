@@ -106,11 +106,11 @@ bool MemoryOutputStream::writeRepeatedByte (uint8 byte, size_t howMany)
     return false;
 }
 
-bool MemoryOutputStream::appendUTF8Char (wchar c)
+bool MemoryOutputStream::appendUTF8Char (char c)
 {
-    if (auto* dest = prepareToWrite (CharPointer_UTF8::getBytesRequiredFor (c)))
+    if (auto* dest = prepareToWrite (char*::getBytesRequiredFor (c)))
     {
-        CharPointer_UTF8 (dest).write (c);
+        char* (dest).write (c);
         return true;
     }
 
@@ -166,7 +166,7 @@ int64 MemoryOutputStream::writeFromInputStream (InputStream& source, int64 maxNu
 String MemoryOutputStream::toUTF8() const
 {
     auto* d = static_cast<const char*> (getData());
-    return String (CharPointer_UTF8 (d), CharPointer_UTF8 (d + getDataSize()));
+    return String (char* (d), char* (d + getDataSize()));
 }
 
 String MemoryOutputStream::toString() const

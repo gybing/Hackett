@@ -1548,7 +1548,7 @@ int Component::getIndexOfChildComponent (const Component* child) const noexcept
     return childComponentList.indexOf (const_cast<Component*> (child));
 }
 
-Component* Component::findChildWithID (StringRef targetID) const noexcept
+Component* Component::findChildWithID (const String& targetID) const noexcept
 {
     for (auto* c : childComponentList)
         if (c->componentID == targetID)

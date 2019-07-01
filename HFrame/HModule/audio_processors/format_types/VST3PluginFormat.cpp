@@ -2491,7 +2491,7 @@ private:
         }
     }
 
-    static ComSmartPtr<Steinberg::MemoryStream> createMemoryStreamForState (XmlElement& head, StringRef identifier)
+    static ComSmartPtr<Steinberg::MemoryStream> createMemoryStreamForState (XmlElement& head, const String& identifier)
     {
         if (auto* state = head.getChildByName (identifier))
         {

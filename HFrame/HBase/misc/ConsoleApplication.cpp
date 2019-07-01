@@ -2,7 +2,7 @@
 
 static inline File resolveFilename (const String& name)
 {
-    return File::getCurrentWorkingDirectory().getChildFile (name.unquoted());
+    return File::getCurrentWorkingDirectory().getChildFile (CharacterFunctions::trim(name, '\"'));
 }
 
 static inline File checkFileExists (const File& f)
@@ -21,7 +21,7 @@ static inline File checkFolderExists (const File& f)
     return f;
 }
 
-static inline File resolveFilenameForOption (const ArgumentList& args, StringRef option, const String& filename)
+static inline File resolveFilenameForOption (const ArgumentList& args, const String& option, const String& filename)
 {
     if (filename.empty())
     {
@@ -52,9 +52,9 @@ File ArgumentList::Argument::resolveAsExistingFolder() const
     return f;
 }
 
-static inline bool isShortOptionFormat (StringRef s)  { return s[0] == '-' && s[1] != '-'; }
-static inline bool isLongOptionFormat  (StringRef s)  { return s[0] == '-' && s[1] == '-' && s[2] != '-'; }
-static inline bool isOptionFormat      (StringRef s)  { return s[0] == '-'; }
+static inline bool isShortOptionFormat (const String& s)  { return s[0] == '-' && s[1] != '-'; }
+static inline bool isLongOptionFormat  (const String& s)  { return s[0] == '-' && s[1] == '-' && s[2] != '-'; }
+static inline bool isOptionFormat      (const String& s)  { return s[0] == '-'; }
 
 bool ArgumentList::Argument::isLongOption() const     { return isLongOptionFormat (text); }
 bool ArgumentList::Argument::isShortOption() const    { return isShortOptionFormat (text); }
@@ -91,7 +91,7 @@ bool ArgumentList::Argument::isShortOption (char option) const
     return isShortOption() && text.containsChar (option);
 }
 
-bool ArgumentList::Argument::operator== (StringRef wildcard) const
+bool ArgumentList::Argument::operator== (const String& wildcard) const
 {
     for (auto& o : StringArray::fromTokens (wildcard, "|", {}))
     {
@@ -108,7 +108,7 @@ bool ArgumentList::Argument::operator== (StringRef wildcard) const
     return false;
 }
 
-bool ArgumentList::Argument::operator!= (StringRef s) const   { return ! operator== (s); }
+bool ArgumentList::Argument::operator!= (const String& s) const   { return ! operator== (s); }
 
 //==============================================================================
 ArgumentList::ArgumentList (String exeName, StringArray args)
@@ -140,7 +140,7 @@ void ArgumentList::checkMinNumArguments (int expectedMinNumberOfArgs) const
         ConsoleApplication::fail ("Not enough arguments!");
 }
 
-int ArgumentList::indexOfOption (StringRef option) const
+int ArgumentList::indexOfOption (const String& option) const
 {
     HAssert (option == String (option).trim()); // passing non-trimmed strings will always fail to find a match!
 
@@ -151,12 +151,12 @@ int ArgumentList::indexOfOption (StringRef option) const
     return -1;
 }
 
-bool ArgumentList::containsOption (StringRef option) const
+bool ArgumentList::containsOption (const String& option) const
 {
     return indexOfOption (option) >= 0;
 }
 
-bool ArgumentList::removeOptionIfFound (StringRef option)
+bool ArgumentList::removeOptionIfFound (const String& option)
 {
     auto i = indexOfOption (option);
 
@@ -166,13 +166,13 @@ bool ArgumentList::removeOptionIfFound (StringRef option)
     return i >= 0;
 }
 
-void ArgumentList::failIfOptionIsMissing (StringRef option) const
+void ArgumentList::failIfOptionIsMissing (const String& option) const
 {
     if (indexOfOption (option) < 0)
         ConsoleApplication::fail ("Expected the option " + option);
 }
 
-String ArgumentList::getValueForOption (StringRef option) const
+String ArgumentList::getValueForOption (const String& option) const
 {
     HAssert (isOptionFormat (option)); // the thing you're searching for must be an option
 
@@ -198,7 +198,7 @@ String ArgumentList::getValueForOption (StringRef option) const
     return {};
 }
 
-String ArgumentList::removeValueForOption (StringRef option)
+String ArgumentList::removeValueForOption (const String& option)
 {
     HAssert (isOptionFormat (option)); // the thing you're searching for must be an option
 
@@ -233,32 +233,32 @@ String ArgumentList::removeValueForOption (StringRef option)
     return {};
 }
 
-File ArgumentList::getFileForOption (StringRef option) const
+File ArgumentList::getFileForOption (const String& option) const
 {
     return resolveFilenameForOption (*this, option, getValueForOption (option));
 }
 
-File ArgumentList::getFileForOptionAndRemove (StringRef option)
+File ArgumentList::getFileForOptionAndRemove (const String& option)
 {
     return resolveFilenameForOption (*this, option, removeValueForOption (option));
 }
 
-File ArgumentList::getExistingFileForOption (StringRef option) const
+File ArgumentList::getExistingFileForOption (const String& option) const
 {
     return checkFileExists (getFileForOption (option));
 }
 
-File ArgumentList::getExistingFileForOptionAndRemove (StringRef option)
+File ArgumentList::getExistingFileForOptionAndRemove (const String& option)
 {
     return checkFileExists (getFileForOptionAndRemove (option));
 }
 
-File ArgumentList::getExistingFolderForOption (StringRef option) const
+File ArgumentList::getExistingFolderForOption (const String& option) const
 {
     return checkFolderExists (getFileForOption (option));
 }
 
-File ArgumentList::getExistingFolderForOptionAndRemove (StringRef option)
+File ArgumentList::getExistingFolderForOptionAndRemove (const String& option)
 {
     return checkFolderExists (getFileForOptionAndRemove (option));
 }

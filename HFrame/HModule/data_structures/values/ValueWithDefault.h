@@ -66,7 +66,7 @@ public:
         XML format.
     */
     ValueWithDefault (ValueTree& tree, const Identifier& propertyID, UndoManager* um,
-                      const var& defaultToUse, StringRef arrayDelimiter)
+                      const var& defaultToUse, const String& arrayDelimiter)
         : targetTree (tree),
           targetProperty (propertyID),
           undoManager (um),
@@ -166,7 +166,7 @@ public:
     }
 
     void referTo (ValueTree& tree, const Identifier& property, UndoManager* um,
-                  const var& defaultVal, StringRef arrayDelimiter)
+                  const var& defaultVal, const String& arrayDelimiter)
     {
         referToWithDefault (tree, property, um, defaultVal, arrayDelimiter);
     }
@@ -201,7 +201,7 @@ private:
 
     //==============================================================================
     void referToWithDefault (const ValueTree& v, const Identifier& i, UndoManager* um,
-                             const var& defaultVal, StringRef del)
+                             const var& defaultVal, const String& del)
     {
         targetTree = v;
         targetProperty = i;
@@ -225,7 +225,7 @@ private:
         return elements.joinIntoString (delimiter);
     }
 
-    Array<var> delimitedStringToVarArray (StringRef input) const noexcept
+    Array<var> delimitedStringToVarArray (const String& input) const noexcept
     {
         Array<var> arr;
 

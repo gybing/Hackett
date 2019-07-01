@@ -75,7 +75,7 @@ public:
 
         g.setColour (Colours::black);
         g.setFont (10.0f);
-        g.drawText (String::toHexString ((int64) threadId), getLocalBounds(), Justification::centred, false);
+        g.drawText (CharacterFunctions::hexToString ((int64) threadId), getLocalBounds(), Justification::centred, false);
     }
 
     void parentSizeChanged() override

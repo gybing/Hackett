@@ -60,7 +60,7 @@ inline void attachWindowHidingHooks (Component* comp, void* hostWindowRef, NSWin
                                GetEventTypeCount (eventsToCatch), eventsToCatch,
                                (void*) nsWindow, &ref);
 
-    comp->getProperties().set ("carbonEventRef", String::toHexString ((pointer_sized_int) (void*) ref));
+    comp->getProperties().set ("carbonEventRef", CharacterFunctions::hexToString ((pointer_sized_int) (void*) ref));
 }
 
 inline void removeWindowHidingHooks (Component* comp)

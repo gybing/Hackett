@@ -973,7 +973,7 @@ StringArray AudioCDReader::getAvailableCDNames()
     {
         String s;
         if (list[i].scsiDriveLetter > 0)
-            s << String::charToString (list[i].scsiDriveLetter).toUpperCase() << ": ";
+            s << String::charToString (list[i].scsiDriveLetter).std::toupper() << ": ";
 
         s << list[i].description;
         results.add (s);

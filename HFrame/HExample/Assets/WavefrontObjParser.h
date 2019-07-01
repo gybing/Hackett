@@ -143,7 +143,7 @@ private:
 
     static float parseFloat (char*& t)
     {
-        t = t.findEndOfWhitespace();
+        t = t.find_last_of(' ');
         return (float) CharacterFunctions::readDoubleValue (t);
     }
 
@@ -174,7 +174,7 @@ private:
 
             if (end.empty() || end.isWhitespace())
             {
-                t = end.findEndOfWhitespace();
+                t = end.find_last_of(' ');
                 return true;
             }
         }
@@ -211,7 +211,7 @@ private:
         {
             TripleIndex i;
 
-            t = t.findEndOfWhitespace();
+            t = t.find_last_of(' ');
             i.vertexIndex = t.getIntValue32() - 1;
             t = findEndOfFaceToken (t);
 
@@ -273,7 +273,7 @@ private:
 
         for (auto lineNum = 0; lineNum < lines.size(); ++lineNum)
         {
-            auto l = lines[lineNum].c_str().findEndOfWhitespace();
+            auto l = lines[lineNum].c_str().find_last_of(' ');
 
             if (matchToken (l, "v"))    { mesh.vertices     .add (parseVertex (l));       continue; }
             if (matchToken (l, "vn"))   { mesh.normals      .add (parseVertex (l));       continue; }
@@ -334,7 +334,7 @@ private:
 
         for (auto line : lines)
         {
-            auto l = line.c_str().findEndOfWhitespace();
+            auto l = line.c_str().find_last_of(' ');
 
             if (matchToken (l, "newmtl"))   { materials.add (material); material.name = String (l).trim(); continue; }
 

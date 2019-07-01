@@ -370,7 +370,7 @@ namespace
 
                     const int spacesPerTab = 4;
                     const int spacesNeeded = spacesPerTab - (tabPos % spacesPerTab);
-                    line = line.replaceSection (tabPos, 1, String::repeatedString (" ", spacesNeeded));
+                    line = line.replaceSection (tabPos, 1, CharacterFunctions::repeat (" ", spacesNeeded));
                 }
             }
 
@@ -387,7 +387,7 @@ namespace
                           || afterIndent.containsOnly ("-"))
                     {
                         line = line.substr (0, line.indexOfChar ('/'))
-                                  + "//" + String::repeatedString ("=", 78);
+                                  + "//" + CharacterFunctions::repeat ("=", 78);
                     }
                 }
             }
@@ -881,7 +881,7 @@ int performCommandLine (const ArgumentList& args)
 
         auto command = args[0];
 
-        auto matchCommand = [&] (StringRef name) -> bool
+        auto matchCommand = [&] (const String& name) -> bool
         {
             return command == name || command.isLongOption (name);
         };

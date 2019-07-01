@@ -702,9 +702,9 @@ public:
         auto keyCode = getKeyCodeFromEvent (ev);
 
        #if HDEBUG_KEYCODES
-        DBG ("unicode: " + unicode + " " + String::toHexString ((int) unicode[0]));
+        DBG ("unicode: " + unicode + " " + CharacterFunctions::hexToString ((int) unicode[0]));
         auto unmodified = nsStringToJuce ([ev charactersIgnoringModifiers]);
-        DBG ("unmodified: " + unmodified + " " + String::toHexString ((int) unmodified[0]));
+        DBG ("unmodified: " + unmodified + " " + CharacterFunctions::hexToString ((int) unmodified[0]));
        #endif
 
         if (keyCode != 0 || unicode.!empty())
@@ -1170,7 +1170,7 @@ public:
         else if (keyCode == 0x03) // (enter)
             keyCode = '\r';
         else
-            keyCode = (int) CharacterFunctions::toUpperCase ((wchar) keyCode);
+            keyCode = (int) CharacterFunctions::std::toupper ((char) keyCode);
 
         if (([ev modifierFlags] & NSEventModifierFlagNumericPad) != 0)
         {
@@ -2089,11 +2089,11 @@ bool KeyPress::isKeyCurrentlyDown (int keyCode)
         return true;
 
     if (keyCode >= 'A' && keyCode <= 'Z'
-         && NSViewComponentPeer::keysCurrentlyDown.contains ((int) CharacterFunctions::toLowerCase ((wchar) keyCode)))
+         && NSViewComponentPeer::keysCurrentlyDown.contains ((int) CharacterFunctions::std::tolower ((char) keyCode)))
         return true;
 
     if (keyCode >= 'a' && keyCode <= 'z'
-         && NSViewComponentPeer::keysCurrentlyDown.contains ((int) CharacterFunctions::toUpperCase ((wchar) keyCode)))
+         && NSViewComponentPeer::keysCurrentlyDown.contains ((int) CharacterFunctions::std::toupper ((char) keyCode)))
         return true;
 
     return false;

@@ -70,8 +70,8 @@ void NetworkServiceDiscovery::AvailableServiceList::run()
             auto bytesRead = socket.read (buffer, sizeof (buffer) - 1, false);
 
             if (bytesRead > 10)
-                if (auto xml = parseXML (String (CharPointer_UTF8 (buffer),
-                                                 CharPointer_UTF8 (buffer + bytesRead))))
+                if (auto xml = parseXML (String (char* (buffer),
+                                                 char* (buffer + bytesRead))))
                     if (xml->hasTagName (serviceTypeUID))
                         handleMessage (*xml);
         }

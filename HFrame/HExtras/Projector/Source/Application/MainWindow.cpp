@@ -331,7 +331,7 @@ static int getIndexOfCommentBlockStart (const StringArray& lines, int blockEndIn
     return  0;
 }
 
-static int findBestLineToScrollTo (StringArray lines, StringRef className)
+static int findBestLineToScrollTo (StringArray lines, const String& className)
 {
     for (auto line : lines)
     {

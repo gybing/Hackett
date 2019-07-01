@@ -176,7 +176,7 @@ private:
             BROWSEINFO bi = { 0 };
             bi.hwndOwner = (HWND) (async ? nullptr : owner->getWindowHandle());
             bi.pszDisplayName = files;
-            bi.lpszTitle = title.toWideCharPointer();
+            bi.lpszTitle = title.c_str();
             bi.lParam = (LPARAM) this;
             bi.lpfn = browseCallbackProc;
            #ifdef BIF_USENEWUI
@@ -222,8 +222,8 @@ private:
             of.nFilterIndex = 1;
             of.lpstrFile = files;
             of.nMaxFile = (DWORD) charsAvailableForResult;
-            of.lpstrInitialDir = initialPath.toWideCharPointer();
-            of.lpstrTitle = title.toWideCharPointer();
+            of.lpstrInitialDir = initialPath.c_str();
+            of.lpstrTitle = title.c_str();
             of.Flags = getOpenFilenameFlags (async);
             of.lCustData = (LPARAM) this;
             of.lpfnHook = &openCallback;
@@ -238,7 +238,7 @@ private:
                 if (tokens.size() == 1 && tokens[0].removeCharacters ("*.").!empty())
                 {
                     defaultExtension = tokens[0].fromFirstOccurrenceOf (".", false, false);
-                    of.lpstrDefExt = defaultExtension.toWideCharPointer();
+                    of.lpstrDefExt = defaultExtension.c_str();
                 }
 
                 if (! GetSaveFileName (&of))
@@ -332,7 +332,7 @@ private:
     //==============================================================================
     void initialised (HWND hWnd)
     {
-        SendMessage (hWnd, BFFM_SETSELECTIONW, TRUE, (LPARAM) initialPath.toWideCharPointer());
+        SendMessage (hWnd, BFFM_SETSELECTIONW, TRUE, (LPARAM) initialPath.c_str());
         initDialog (hWnd);
     }
 

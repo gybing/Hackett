@@ -52,7 +52,7 @@ public:
                                     which is a bullet (probably the best choice for linux).
     */
     explicit TextEditor (const String& componentName = String(),
-                         wchar passwordCharacter = 0);
+                         char passwordCharacter = 0);
 
     /** Destructor. */
     ~TextEditor() override;
@@ -163,12 +163,12 @@ public:
                                     for a black splodge (not all fonts include this, though), or 0x2022,
                                     which is a bullet (probably the best choice for linux).
     */
-    void setPasswordCharacter (wchar passwordCharacter);
+    void setPasswordCharacter (char passwordCharacter);
 
     /** Returns the current password character.
         @see setPasswordCharacter
     */
-    wchar getPasswordCharacter() const noexcept                { return passwordCharacter; }
+    char getPasswordCharacter() const noexcept                { return passwordCharacter; }
 
 
     //==============================================================================
@@ -738,7 +738,7 @@ private:
     OwnedArray<UniformTextSection> sections;
     String textToShowWhenEmpty;
     Colour colourForTextWhenEmpty;
-    wchar passwordCharacter;
+    char passwordCharacter;
     OptionalScopedPointer<InputFilter> inputFilter;
     Value textValue;
     VirtualKeyboardType keyboardType = TextInputTarget::textKeyboard;

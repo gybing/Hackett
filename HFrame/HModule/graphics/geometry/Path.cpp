@@ -35,7 +35,7 @@ namespace PathHelpers
 
     static String nextToken (char*& t)
     {
-        t = t.findEndOfWhitespace();
+        t = t.find_last_of(' ');
 
         auto start = t;
         size_t numChars = 0;
@@ -1410,13 +1410,13 @@ String Path::toString() const
     return s.toUTF8();
 }
 
-void Path::restoreFromString (StringRef stringVersion)
+void Path::restoreFromString (const String& stringVersion)
 {
     clear();
     setUsingNonZeroWinding (true);
 
     auto t = stringVersion.text;
-    wchar marker = 'm';
+    char marker = 'm';
     int numValues = 2;
     float values[6];
 

@@ -142,10 +142,10 @@ struct CppParserHelpers
 
             if (CppTokeniserFunctions::parseHexLiteral (i))
             {
-                String s ("0x" + String::toHexString (newValue) + getIntegerSuffix (old));
+                String s ("0x" + CharacterFunctions::hexToString (newValue) + getIntegerSuffix (old));
 
-                if (old.toUpperCase() == old)
-                    s = s.toUpperCase();
+                if (old.std::toupper() == old)
+                    s = s.std::toupper();
 
                 return s;
             }
@@ -280,5 +280,5 @@ static inline String concatenateListOfStrings (const StringArray& s)
 
 static inline StringArray separateJoinedStrings (const String& s)
 {
-    return StringArray::fromTokens (s, "\x01", StringRef());
+    return StringArray::fromTokens (s, "\x01", const String&());
 }

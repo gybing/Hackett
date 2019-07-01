@@ -329,8 +329,8 @@ private:
                     deviceIDs.add (deviceNames[i]);
             }
 
-            deviceNames.appendNumbersToDuplicates (false, false, CharPointer_UTF8 ("-"), CharPointer_UTF8 (""));
-            deviceIDs  .appendNumbersToDuplicates (false, false, CharPointer_UTF8 ("-"), CharPointer_UTF8 (""));
+            deviceNames.appendNumbersToDuplicates (false, false, char* ("-"), char* (""));
+            deviceIDs  .appendNumbersToDuplicates (false, false, char* ("-"), char* (""));
 
             Array<MidiDeviceInfo> devices;
 
@@ -1299,8 +1299,8 @@ private:
                 deviceIDs  .add (info.containerID);
             }
 
-            deviceNames.appendNumbersToDuplicates (false, false, CharPointer_UTF8 ("-"), CharPointer_UTF8 (""));
-            deviceIDs  .appendNumbersToDuplicates (false, false, CharPointer_UTF8 ("-"), CharPointer_UTF8 (""));
+            deviceNames.appendNumbersToDuplicates (false, false, char* ("-"), char* (""));
+            deviceIDs  .appendNumbersToDuplicates (false, false, char* ("-"), char* (""));
 
             Array<MidiDeviceInfo> devices;
 

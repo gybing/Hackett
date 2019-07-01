@@ -274,7 +274,7 @@ public:
 
     //==============================================================================
     /** Returns a parameter by its ID string. */
-    RangedAudioParameter* getParameter (StringRef parameterID) const noexcept;
+    RangedAudioParameter* getParameter (const String& parameterID) const noexcept;
 
     /** Returns a pointer to a floating point representation of a particular parameter which a realtime
         process can read to find out its current value.
@@ -282,7 +282,7 @@ public:
         Note that calling this method from within AudioProcessorValueTreeState::Listener::parameterChanged()
         is not guaranteed to return an up-to-date value for the parameter.
     */
-    float* getRawParameterValue (StringRef parameterID) const noexcept;
+    float* getRawParameterValue (const String& parameterID) const noexcept;
 
     //==============================================================================
     /** A listener class that can be attached to an AudioProcessorValueTreeState.
@@ -302,17 +302,17 @@ public:
     };
 
     /** Attaches a callback to one of the parameters, which will be called when the parameter changes. */
-    void addParameterListener (StringRef parameterID, Listener* listener);
+    void addParameterListener (const String& parameterID, Listener* listener);
 
     /** Removes a callback that was previously added with addParameterCallback(). */
-    void removeParameterListener (StringRef parameterID, Listener* listener);
+    void removeParameterListener (const String& parameterID, Listener* listener);
 
     //==============================================================================
     /** Returns a Value object that can be used to control a particular parameter. */
-    Value getParameterAsValue (StringRef parameterID) const;
+    Value getParameterAsValue (const String& parameterID) const;
 
     /** Returns the range that was set when the given parameter was created. */
-    NormalisableRange<float> getParameterRange (StringRef parameterID) const noexcept;
+    NormalisableRange<float> getParameterRange (const String& parameterID) const noexcept;
 
     //==============================================================================
     /** Returns a copy of the state value tree.
@@ -524,7 +524,7 @@ private:
    #endif
 
     void addParameterAdapter (RangedAudioParameter&);
-    ParameterAdapter* getParameterAdapter (StringRef) const;
+    ParameterAdapter* getParameterAdapter (const String&) const;
 
     bool flushParameterValuesToValueTree();
     void setNewState (ValueTree);
@@ -539,10 +539,10 @@ private:
 
     struct StringRefLessThan final
     {
-        bool operator() (StringRef a, StringRef b) const noexcept { return a.text.compare (b.text) < 0; }
+        bool operator() (const String& a, const String& b) const noexcept { return a.text.compare (b.text) < 0; }
     };
 
-    std::map<StringRef, std::unique_ptr<ParameterAdapter>, StringRefLessThan> adapterTable;
+    std::map<const String&, std::unique_ptr<ParameterAdapter>, StringRefLessThan> adapterTable;
 
     CriticalSection valueTreeChanging;
 

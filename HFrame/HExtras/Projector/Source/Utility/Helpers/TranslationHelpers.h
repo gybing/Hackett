@@ -49,7 +49,7 @@ struct TranslationHelpers
                 break;
 
             p += 5;
-            p = p.findEndOfWhitespace();
+            p = p.find_last_of(' ');
 
             if (*p == '(')
             {
@@ -64,7 +64,7 @@ struct TranslationHelpers
 
     static void parseStringLiteral (char*& p, MemoryOutputStream& out) noexcept
     {
-        p = p.findEndOfWhitespace();
+        p = p.find_last_of(' ');
 
         if (*p++ == '"')
         {
@@ -98,7 +98,7 @@ struct TranslationHelpers
         }
     }
 
-    static wchar readEscapedChar (char*& p)
+    static char readEscapedChar (char*& p)
     {
         auto c = *p;
 
@@ -125,7 +125,7 @@ struct TranslationHelpers
                         break;
 
                     ++p;
-                    c = (wchar) ((c << 4) + digitValue);
+                    c = (char) ((c << 4) + digitValue);
                 }
 
                 break;
@@ -141,7 +141,7 @@ struct TranslationHelpers
                         break;
 
                     ++p;
-                    c = (wchar) ((c << 3) + digitValue);
+                    c = (char) ((c << 3) + digitValue);
                 }
 
                 break;

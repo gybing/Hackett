@@ -205,7 +205,7 @@ protected:
         @param fileExtensions   a whitespace-separated list of file extensions - these will
                                 be returned by getFileExtensions()
     */
-    AudioFormat (StringRef formatName, StringRef fileExtensions);
+    AudioFormat (const String& formatName, const String& fileExtensions);
 
 private:
     //==============================================================================

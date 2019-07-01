@@ -33,7 +33,7 @@ public:
         If the string isn't a 6-byte hex value, this will just default-initialise
         the object.
     */
-    explicit MACAddress (StringRef address);
+    explicit MACAddress (const String& address);
 
     /** Returns a pointer to the 6 bytes that make up this address. */
     const uint8* getBytes() const noexcept        { return address; }
@@ -42,7 +42,7 @@ public:
     String toString() const;
 
     /** Returns a hex string of this address, using a custom separator between each byte. */
-    String toString (StringRef separator) const;
+    String toString (const String& separator) const;
 
     /** Returns the address in the lower 6 bytes of an int64.
 

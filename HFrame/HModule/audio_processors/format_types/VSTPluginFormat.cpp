@@ -407,7 +407,7 @@ private:
         param->numberOfStates = item.getIntAttribute ("numberOfStates");
         param->defaultValue   = (float) item.getDoubleAttribute ("defaultValue");
 
-        param->shortNames.addTokens (item.getStringAttribute ("shortName"), ",", StringRef());
+        param->shortNames.addTokens (item.getStringAttribute ("shortName"), ",", const String&());
         param->shortNames.trim();
         param->shortNames.removeEmptyStrings();
 
@@ -489,7 +489,7 @@ private:
         if (item.hasAttribute ("template"))
         {
             StringArray variables;
-            variables.addTokens (item.getStringAttribute ("values"), ";", StringRef());
+            variables.addTokens (item.getStringAttribute ("values"), ";", const String&());
             variables.trim();
 
             for (auto temp : templates)
@@ -554,7 +554,7 @@ private:
                    .replace ("-", " - ");
 
         StringArray tokens;
-        tokens.addTokens (expr, " ", StringRef());
+        tokens.addTokens (expr, " ", const String&());
 
         bool add = true;
         int val = 0;
@@ -700,7 +700,7 @@ struct ModuleHandle    : public ReferenceCountedObject
 
         if (dllModule != INVALID_HANDLE_VALUE)
         {
-            if (auto res = FindResource (dllModule, MAKEINTRESOURCE (resID), type.toWideCharPointer()))
+            if (auto res = FindResource (dllModule, MAKEINTRESOURCE (resID), type.c_str()))
             {
                 if (auto hGlob = LoadResource (dllModule, res))
                 {
@@ -1999,7 +1999,7 @@ private:
 
         float getValueForText (const String& text) const override
         {
-            String lowercaseText (text.toLowerCase());
+            String lowercaseText (text.std::tolower());
 
             for (auto& testText : vstOnStrings)
                 if (lowercaseText == testText)

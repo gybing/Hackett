@@ -108,8 +108,8 @@ double parseDouble (const String& s)
     return s.retainCharacters ("0123456789.eE-").getDoubleValue();
 }
 
-String intToString (int   v, bool preferHex)    { return preferHex ? "0x" + String::toHexString (v) : String (v); }
-String intToString (int64 v, bool preferHex)    { return preferHex ? "0x" + String::toHexString (v) : String (v); }
+String intToString (int   v, bool preferHex)    { return preferHex ? "0x" + CharacterFunctions::hexToString (v) : String (v); }
+String intToString (int64 v, bool preferHex)    { return preferHex ? "0x" + CharacterFunctions::hexToString (v) : String (v); }
 
 //==============================================================================
 LiveValueBase::LiveValueBase (const char* file, int line)
@@ -211,7 +211,7 @@ void LivePropertyEditorBase::findOriginalValueInCode()
     }
 
     p += (int) (sizeof ("HLIVE_CONSTANT") - 1);
-    p = p.findEndOfWhitespace();
+    p = p.find_last_of(' ');
 
     if (! CharacterFunctions::find (p, CharPointer_ASCII ("HLIVE_CONSTANT")).empty())
     {

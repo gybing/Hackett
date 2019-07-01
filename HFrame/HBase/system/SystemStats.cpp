@@ -46,7 +46,7 @@ StringArray SystemStats::getDeviceIdentifiers()
    #endif
     if (auto num = f.getFileIdentifier())
     {
-        ids.add (String::toHexString ((int64) num));
+        ids.add (CharacterFunctions::hexToString ((int64) num));
     }
     else
     {
@@ -143,7 +143,7 @@ String SystemStats::getStackBacktrace()
             if (::SymGetModuleInfo64 (process, symbol->ModBase, &moduleInfo))
                 result << moduleInfo.ModuleName << ": ";
 
-            result << symbol->Name << " + 0x" << String::toHexString ((int64) displacement) << newLine;
+            result << symbol->Name << " + 0x" << CharacterFunctions::hexToString ((int64) displacement) << newLine;
         }
     }
 

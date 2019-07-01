@@ -260,7 +260,7 @@ namespace DirectWriteTypeLayout
 
             BOOL fontFound = false;
             uint32 fontIndex;
-            fontCollection.FindFamilyName (familyName.toWideCharPointer(), &fontIndex, &fontFound);
+            fontCollection.FindFamilyName (familyName.c_str(), &fontIndex, &fontFound);
 
             if (! fontFound)
                 fontIndex = 0;
@@ -280,7 +280,7 @@ namespace DirectWriteTypeLayout
                     break;
             }
 
-            textLayout.SetFontFamilyName (familyName.toWideCharPointer(), range);
+            textLayout.SetFontFamilyName (familyName.c_str(), range);
             textLayout.SetFontWeight (dwFont->GetWeight(), range);
             textLayout.SetFontStretch (dwFont->GetStretch(), range);
             textLayout.SetFontStyle (dwFont->GetStyle(), range);
@@ -313,7 +313,7 @@ namespace DirectWriteTypeLayout
         Font defaultFont;
         BOOL fontFound = false;
         uint32 fontIndex;
-        fontCollection.FindFamilyName (defaultFont.getTypeface()->getName().toWideCharPointer(), &fontIndex, &fontFound);
+        fontCollection.FindFamilyName (defaultFont.getTypeface()->getName().c_str(), &fontIndex, &fontFound);
 
         if (! fontFound)
             fontIndex = 0;
@@ -329,7 +329,7 @@ namespace DirectWriteTypeLayout
         auto defaultFontHeightToEmSizeFactor = getFontHeightToEmSizeFactor (*dwFont);
 
         ComSmartPtr<IDWriteTextFormat> dwTextFormat;
-        hr = directWriteFactory.CreateTextFormat (defaultFont.getTypefaceName().toWideCharPointer(), &fontCollection,
+        hr = directWriteFactory.CreateTextFormat (defaultFont.getTypefaceName().c_str(), &fontCollection,
                                                   DWRITE_FONT_WEIGHT_REGULAR, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL,
                                                   defaultFont.getHeight() * defaultFontHeightToEmSizeFactor,
                                                   L"en-us", dwTextFormat.resetAndGetPointerAddress());
@@ -345,7 +345,7 @@ namespace DirectWriteTypeLayout
 
         auto textLen = text.getText().length();
 
-        hr = directWriteFactory.CreateTextLayout (text.getText().toWideCharPointer(), textLen, dwTextFormat,
+        hr = directWriteFactory.CreateTextLayout (text.getText().c_str(), textLen, dwTextFormat,
                                                   maxWidth, maxHeight, textLayout.resetAndGetPointerAddress());
 
         if (FAILED (hr) || textLayout == nullptr)

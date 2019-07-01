@@ -163,7 +163,7 @@ String GeneratedCode::getCallbackDefinitions() const
 String GeneratedCode::getClassDeclaration() const
 {
     StringArray parentClassLines;
-    parentClassLines.addTokens (parentClasses, ",", StringRef());
+    parentClassLines.addTokens (parentClasses, ",", const String&());
     parentClassLines.addArray (getExtraParentClasses());
 
     parentClassLines = getCleanedStringArray (parentClassLines);
@@ -174,7 +174,7 @@ String GeneratedCode::getClassDeclaration() const
     String r ("class ");
     r << className << "  : ";
 
-    r += parentClassLines.joinIntoString (",\n" + String::repeatedString (" ", r.length()));
+    r += parentClassLines.joinIntoString (",\n" + CharacterFunctions::repeat (" ", r.length()));
 
     return r;
 }

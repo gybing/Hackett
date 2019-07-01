@@ -148,7 +148,7 @@ void PaintElementImage::fillInGeneratedCode (GeneratedCode& code, String& paintM
                 r << "    HAssert (" << imageVariable << " != 0);\n"
                   << "    if (" << imageVariable << " != 0)\n"
                   << "        " << imageVariable  << "->drawWithin (g, Rectangle<float> (x, y, width, height),\n"
-                  << "    " << String::repeatedString (" ", imageVariable.length() + 18)
+                  << "    " << CharacterFunctions::repeat (" ", imageVariable.length() + 18)
                   << (mode == stretched ? "RectanglePlacement::stretchToFit"
                                         : (mode == proportionalReducingOnly ? "RectanglePlacement::centred | RectanglePlacement::onlyReduceInSize"
                                                                             : "RectanglePlacement::centred"))

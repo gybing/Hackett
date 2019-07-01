@@ -265,7 +265,7 @@ bool isRunningInWine()
 bool DynamicLibrary::open (const String& name)
 {
     close();
-    handle = LoadLibrary (name.toWideCharPointer());
+    handle = LoadLibrary (name.c_str());
     return handle != nullptr;
 }
 
@@ -293,13 +293,13 @@ public:
         : handle (0), refCount (1)
     {
         name = name.replaceCharacter ('\\', '/');
-        handle = CreateMutexW (0, TRUE, ("Global\\" + name).toWideCharPointer());
+        handle = CreateMutexW (0, TRUE, ("Global\\" + name).c_str());
 
         // Not 100% sure why a global mutex sometimes can't be allocated, but if it fails, fall back to
         // a local one. (A local one also sometimes fails on other machines so neither type appears to be
         // universally reliable)
         if (handle == 0)
-            handle = CreateMutexW (0, TRUE, ("Local\\" + name).toWideCharPointer());
+            handle = CreateMutexW (0, TRUE, ("Local\\" + name).c_str());
 
         if (handle != 0 && GetLastError() == ERROR_ALREADY_EXISTS)
         {
@@ -402,7 +402,7 @@ public:
             startupInfo.hStdError  = (streamFlags & wantStdErr) != 0 ? writePipe : 0;
             startupInfo.dwFlags = STARTF_USESTDHANDLES;
 
-            ok = CreateProcess (nullptr, const_cast<LPWSTR> (command.toWideCharPointer()),
+            ok = CreateProcess (nullptr, const_cast<LPWSTR> (command.c_str()),
                                 nullptr, nullptr, TRUE, CREATE_NO_WINDOW | CREATE_UNICODE_ENVIRONMENT,
                                 nullptr, nullptr, &startupInfo, &processInfo) != FALSE;
         }

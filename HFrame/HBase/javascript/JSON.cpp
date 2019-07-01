@@ -4,7 +4,7 @@ struct JSONParser
 {
     static Result parseObjectOrArray (char* t, var& result)
     {
-        t = t.findEndOfWhitespace();
+        t = t.find_last_of(' ');
 
         switch (*t++)
         {
@@ -16,7 +16,7 @@ struct JSONParser
         return createFail ("Expected '{' or '['", &t);
     }
 
-    static Result parseString (const wchar quoteChar, char*& t, var& result)
+    static Result parseString (const char quoteChar, char*& t, var& result)
     {
         MemoryOutputStream buffer (256);
 
@@ -56,7 +56,7 @@ struct JSONParser
                             if (digitValue < 0)
                                 return createFail ("Syntax error in unicode escape sequence");
 
-                            c = (wchar) ((c << 4) + static_cast<wchar> (digitValue));
+                            c = (char) ((c << 4) + static_cast<char> (digitValue));
                         }
 
                         break;
@@ -76,7 +76,7 @@ struct JSONParser
 
     static Result parseAny (char*& t, var& result)
     {
-        t = t.findEndOfWhitespace();
+        t = t.find_last_of(' ');
         auto t2 = t;
 
         switch (*t2++)
@@ -87,7 +87,7 @@ struct JSONParser
             case '\'':   t = t2; return parseString ('\'', t, result);
 
             case '-':
-                t2 = t2.findEndOfWhitespace();
+                t2 = t2.find_last_of(' ');
                 if (! CharacterFunctions::isDigit (*t2))
                     break;
 
@@ -198,7 +198,7 @@ private:
 
         for (;;)
         {
-            t = t.findEndOfWhitespace();
+            t = t.find_last_of(' ');
 
             auto oldT = t;
             auto c = *t++;
@@ -221,7 +221,7 @@ private:
 
                 if (propertyName.isValid())
                 {
-                    t = t.findEndOfWhitespace();
+                    t = t.find_last_of(' ');
                     oldT = t;
 
                     auto c2 = *t++;
@@ -237,7 +237,7 @@ private:
                     if (r2.failed())
                         return r2;
 
-                    t = t.findEndOfWhitespace();
+                    t = t.find_last_of(' ');
                     oldT = t;
 
                     auto nextChar = *t++;
@@ -263,7 +263,7 @@ private:
 
         for (;;)
         {
-            t = t.findEndOfWhitespace();
+            t = t.find_last_of(' ');
 
             auto oldT = t;
             auto c = *t++;
@@ -281,7 +281,7 @@ private:
             if (r.failed())
                 return r;
 
-            t = t.findEndOfWhitespace();
+            t = t.find_last_of(' ');
             oldT = t;
 
             auto nextChar = *t++;
@@ -358,7 +358,7 @@ struct JSONFormatter
 
     static void writeEscapedChar (OutputStream& out, const unsigned short value)
     {
-        out << "\\u" << String::toHexString ((int) value).paddedLeft ('0', 4);
+        out << "\\u" << CharacterFunctions::hexToString ((int) value).paddedLeft ('0', 4);
     }
 
     static void writeString (OutputStream& out, char* t)
@@ -461,7 +461,7 @@ var JSON::parse (const String& text)
     return result;
 }
 
-var JSON::fromString (StringRef text)
+var JSON::fromString (const String& text)
 {
     var result;
 
@@ -498,7 +498,7 @@ void JSON::writeToStream (OutputStream& output, const var& data, const bool allO
     JSONFormatter::write (output, data, 0, allOnOneLine, maximumDecimalPlaces);
 }
 
-String JSON::escapeString (StringRef s)
+String JSON::escapeString (const String& s)
 {
     MemoryOutputStream mo;
     JSONFormatter::writeString (mo, s.text);
@@ -529,7 +529,7 @@ public:
 
     static String createRandomWideCharString (Random& r)
     {
-        wchar buffer[40] = { 0 };
+        char buffer[40] = { 0 };
 
         for (int i = 0; i < numElementsInArray (buffer) - 1; ++i)
         {
@@ -537,12 +537,12 @@ public:
             {
                 do
                 {
-                    buffer[i] = (wchar) (1 + r.nextInt (0x10ffff - 1));
+                    buffer[i] = (char) (1 + r.nextInt (0x10ffff - 1));
                 }
                 while (! CharPointer_UTF16::canRepresent (buffer[i]));
             }
             else
-                buffer[i] = (wchar) (1 + r.nextInt (0xff));
+                buffer[i] = (char) (1 + r.nextInt (0xff));
         }
 
         return CharPointer_UTF32 (buffer);

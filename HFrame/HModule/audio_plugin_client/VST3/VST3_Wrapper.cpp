@@ -1785,8 +1785,8 @@ public:
         {
             auto buffer = static_cast<const char*> (data);
 
-            String magic (CharPointer_UTF8 (buffer + size - HPrivDataIdentifierSize),
-                          CharPointer_UTF8 (buffer + size));
+            String magic (char* (buffer + size - HPrivDataIdentifierSize),
+                          char* (buffer + size));
 
             if (magic == kJucePrivateDataIdentifier)
             {

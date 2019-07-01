@@ -736,7 +736,7 @@ namespace
             return {};
 
         const char* const utf8 = env->GetStringUTFChars (s, nullptr);
-        CharPointer_UTF8 utf8CP (utf8);
+        char* utf8CP (utf8);
         const String result (utf8CP);
         env->ReleaseStringUTFChars (s, utf8);
         return result;
@@ -752,10 +752,10 @@ namespace
         return LocalRef<jstring> (getEnv()->NewStringUTF (s.toUTF8()));
     }
 
-    inline LocalRef<jstring> javaStringFromChar (const wchar c)
+    inline LocalRef<jstring> javaStringFromChar (const char c)
     {
         char utf8[8] = { 0 };
-        CharPointer_UTF8 (utf8).write (c);
+        char* (utf8).write (c);
         return LocalRef<jstring> (getEnv()->NewStringUTF (utf8));
     }
 

@@ -299,12 +299,12 @@ public:
                     if (kp != KeyPress::backspaceKey   // (adding these is annoying because it flashes the menu bar
                          && kp != KeyPress::deleteKey) // every time you press the key while editing text)
                     {
-                        wchar key = kp.getTextCharacter();
+                        char key = kp.getTextCharacter();
 
                         if (key == 0)
-                            key = (wchar) kp.getKeyCode();
+                            key = (char) kp.getKeyCode();
 
-                        [item setKeyEquivalent: HStringToNS (String::charToString (key).toLowerCase())];
+                        [item setKeyEquivalent: HStringToNS (String::charToString (key).std::tolower())];
                         [item setKeyEquivalentModifierMask: HModsToNSMods (kp.getModifiers())];
                     }
 

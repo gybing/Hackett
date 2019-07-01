@@ -37,7 +37,7 @@ static NSMutableArray* createAllowedTypesArray (const StringArray& filters)
         // From OS X 10.6 you can only specify allowed extensions, so any filters containing wildcards
         // must be of the form "*.extension"
         HAssert (filters[i] == "*"
-                 || (filters[i].startsWith ("*.") && filters[i].lastIndexOfChar ('*') == 0));
+                 || (filters[i].startsWith ("*.") && filters[i].find_last_of ('*') == 0));
         const String f (filters[i].replace ("*.", ""));
 
         if (f == "*")

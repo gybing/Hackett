@@ -83,7 +83,7 @@ namespace TTFNameExtractor
             HeapBlock<char> buffer;
             buffer.calloc (stringLength + 1);
             input.read (buffer, stringLength);
-            result = CharPointer_UTF8 (buffer.getData());
+            result = char* (buffer.getData());
         }
 
         input.setPosition (oldPos);
@@ -232,7 +232,7 @@ StringArray Font::findAllTypefaceStyles (const String& family)
     {
         BOOL fontFound = false;
         uint32 fontIndex = 0;
-        auto hr = factories->systemFonts->FindFamilyName (family.toWideCharPointer(), &fontIndex, &fontFound);
+        auto hr = factories->systemFonts->FindFamilyName (family.c_str(), &fontIndex, &fontFound);
 
         if (! fontFound)
             fontIndex = 0;
@@ -541,7 +541,7 @@ private:
         }
     }
 
-    static int getGlyphForChar (HDC dc, std::unordered_map<int, int>& cache, wchar character)
+    static int getGlyphForChar (HDC dc, std::unordered_map<int, int>& cache, char character)
     {
         auto existing = cache.find ((int) character);
 

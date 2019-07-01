@@ -33,7 +33,7 @@ void FileSearchPath::init (const String& path)
     directories.removeEmptyStrings();
 
     for (auto& d : directories)
-        d = d.unquoted();
+        d = CharacterFunctions::trim(d, '\"');
 }
 
 int FileSearchPath::getNumPaths() const
@@ -51,8 +51,8 @@ String FileSearchPath::toString() const
     auto dirs = directories;
 
     for (auto& d : dirs)
-        if (d.containsChar (';'))
-            d = d.quoted();
+        if (d.find (';') > 0)
+            d = "\"" + d + "\"";
 
     return dirs.joinIntoString (";");
 }

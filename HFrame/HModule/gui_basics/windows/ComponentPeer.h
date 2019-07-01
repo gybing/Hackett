@@ -267,7 +267,7 @@ public:
         For keycode info, see the KeyPress class.
         Returns true if the keystroke was used.
     */
-    bool handleKeyPress (int keyCode, wchar textCharacter);
+    bool handleKeyPress (int keyCode, char textCharacter);
 
     /** Called when a key is pressed.
         Returns true if the keystroke was used.

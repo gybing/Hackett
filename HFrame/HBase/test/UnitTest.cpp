@@ -125,7 +125,7 @@ void UnitTestRunner::runTests (const Array<UnitTest*>& tests, int64 randomSeed)
         randomSeed = Random().nextInt (0x7ffffff);
 
     randomForTest = Random (randomSeed);
-    logMessage ("Random seed: 0x" + String::toHexString (randomSeed));
+    logMessage ("Random seed: 0x" + CharacterFunctions::hexToString (randomSeed));
 
     for (auto* t : tests)
     {

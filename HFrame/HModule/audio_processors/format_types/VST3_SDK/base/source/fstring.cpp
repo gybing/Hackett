@@ -71,7 +71,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFStringEncodingExt.h>
-#include <wchar.h>
+#include <char.h>
 
 #if defined (__GNUC__) && (__GNUC__ >= 4) && !__LP64__
 // on 32 bit Mac OS X we can safely ignore the format warnings as sizeof(int) == sizeof(long)
@@ -237,7 +237,7 @@ static bool fromCFStringRef (Steinberg::char8* dest, Steinberg::int32 destSize, 
 #include <string>
 #include <limits>
 #include <cassert>
-#include <wchar.h>
+#include <char.h>
 
 using ConverterFacet = std::codecvt_utf8_utf16<char16_t>;
 using Converter = std::wstring_convert<ConverterFacet, char16_t>;

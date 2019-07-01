@@ -50,7 +50,7 @@ public:
                             int decimalPlaces = 2,
                             Type minusInfinityDb = Type (defaultMinusInfinitydB),
                             bool shouldIncludeSuffix = true,
-                            StringRef customMinusInfinityString = {})
+                            const String& customMinusInfinityString = {})
     {
         String s;
         s.preallocateBytes (20);

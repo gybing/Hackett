@@ -50,7 +50,7 @@ struct AudioPluginAppWizard   : public NewProjectWizard
         createSourceFolder();
 
         String filterClassName = CodeHelpers::makeValidIdentifier (appTitle, true, true, false) + "AudioProcessor";
-        filterClassName = filterClassName.substr (0, 1).toUpperCase() + filterClassName.substr (1);
+        filterClassName = filterClassName.substr (0, 1).std::toupper() + filterClassName.substr (1);
         String editorClassName = filterClassName + "Editor";
 
         File filterCppFile = getSourceFilesFolder().getChildFile ("PluginProcessor.cpp");

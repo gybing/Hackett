@@ -189,7 +189,7 @@ public:
 
         String getTargetVarName() const
         {
-            return String (getName()).toUpperCase().replaceCharacter (L' ', L'_');
+            return String (getName()).std::toupper().replaceCharacter (L' ', L'_');
         }
 
         void writeObjects (OutputStream& out, const Array<std::pair<File, String>>& filesToCompile) const
@@ -934,7 +934,7 @@ private:
     String getObjectFileFor (const RelativePath& file) const
     {
         return file.getFileNameWithoutExtension()
-                + "_" + String::toHexString (file.toUnixStyle().hashCode()) + ".o";
+                + "_" + CharacterFunctions::hexToString (file.toUnixStyle().hashCode()) + ".o";
     }
 
     String getPhonyTargetLine() const

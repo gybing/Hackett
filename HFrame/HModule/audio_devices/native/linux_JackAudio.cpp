@@ -106,7 +106,7 @@ struct JackPortIterator
         if (ports == nullptr || ports [index + 1] == nullptr)
             return false;
 
-        name = CharPointer_UTF8 (ports[++index]);
+        name = char* (ports[++index]);
         clientName = name.upToFirstOccurrenceOf (":", false, false);
         return true;
     }

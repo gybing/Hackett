@@ -325,7 +325,7 @@ String MidiMessage::getDescription() const
         return "Controller " + name + ": " + String (getControllerValue()) + " Channel " + String (getChannel());
     }
 
-    return String::toHexString (getRawData(), getRawDataSize());
+    return CharacterFunctions::hexToString (getRawData(), getRawDataSize());
 }
 
 MidiMessage MidiMessage::withTimeStamp (double newTimestamp) const
@@ -698,11 +698,11 @@ String MidiMessage::getTextFromTextMetaEvent() const
 {
     auto textData = reinterpret_cast<const char*> (getMetaEventData());
 
-    return String (CharPointer_UTF8 (textData),
-                   CharPointer_UTF8 (textData + getMetaEventLength()));
+    return String (char* (textData),
+                   char* (textData + getMetaEventLength()));
 }
 
-MidiMessage MidiMessage::textMetaEvent (int type, StringRef text)
+MidiMessage MidiMessage::textMetaEvent (int type, const String& text)
 {
     HAssert (type > 0 && type < 16);
 

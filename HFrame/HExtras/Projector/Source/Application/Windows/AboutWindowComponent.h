@@ -125,7 +125,7 @@ public:
 private:
     Label titleLabel { "title", "PROHR" },
           versionLabel { "version" },
-          copyrightLabel { "copyright", String (CharPointer_UTF8 ("\xc2\xa9")) + String (" 2017 ROLI Ltd.") };
+          copyrightLabel { "copyright", String (char* ("\xc2\xa9")) + String (" 2017 ROLI Ltd.") };
 
     HyperlinkButton aboutButton { "About Us", URL ("https://H.com") };
     TextButton licenseButton { "Purchase License" };

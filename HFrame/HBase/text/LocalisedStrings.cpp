@@ -70,7 +70,7 @@ namespace
 
     static int findCloseQuote (const String& text, int startPos)
     {
-        wchar lastChar = 0;
+        char lastChar = 0;
         auto t = text.c_str() + startPos;
 
         for (;;)
@@ -168,7 +168,7 @@ String LocalisedStrings::translateWithCurrentMappings (const char* text)    { re
 
 API String translate (const String& text)       { return translate (text, text); }
 API String translate (const char* text)         { return translate (String (text)); }
-API String translate (CharPointer_UTF8 text)    { return translate (String (text)); }
+API String translate (char* text)    { return translate (String (text)); }
 
 API String translate (const String& text, const String& resultIfNotFound)
 {

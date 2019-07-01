@@ -231,7 +231,7 @@ private:
     //==============================================================================
     int findVoiceIndexFromIdentifier (String identifier) const
     {
-        identifier = identifier.toLowerCase();
+        identifier = identifier.std::tolower();
 
         for (auto i = 0; i < voiceProducts.size(); ++i)
             if (String (voiceProducts.getReference (i).identifier) == identifier)

@@ -1879,7 +1879,7 @@ OpenGLGraphicsContextCustomShader::OpenGLGraphicsContextCustomShader (const Stri
     : code (String (HDECLARE_VARYING_COLOUR
                     HDECLARE_VARYING_PIXELPOS
                     "\n#define pixelAlpha frontColour.a\n") + fragmentShaderCode),
-      hashName (String::toHexString (fragmentShaderCode.hashCode64()) + "_shader")
+      hashName (CharacterFunctions::hexToString (fragmentShaderCode.hashCode64()) + "_shader")
 {
 }
 

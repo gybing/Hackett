@@ -165,11 +165,11 @@ static MaxNumFileHandlesInitialiser maxNumFileHandlesInitialiser;
 #endif
 
 //==============================================================================
-HDECLARE_DEPRECATED_STATIC (const wchar File::separator = '/';)
-HDECLARE_DEPRECATED_STATIC (const StringRef File::separatorString ("/");)
+HDECLARE_DEPRECATED_STATIC (const char File::separator = '/';)
+HDECLARE_DEPRECATED_STATIC (const const String& File::separatorString ("/");)
 
 char File::getSeparatorChar()    { return '/'; }
-StringRef File::getSeparatorString()   { return "/"; }
+const char* File::getSeparatorChars()   { return "/"; }
 
 
 //==============================================================================
@@ -188,7 +188,7 @@ File File::getCurrentWorkingDirectory()
         bufferSize += 1024;
     }
 
-    return File (CharPointer_UTF8 (cwd));
+    return File (char* (cwd));
 }
 
 bool File::setAsCurrentWorkingDirectory() const
@@ -625,7 +625,7 @@ File getExecutableFile()
 
             auto localSymbol = (void*) getExecutableFile;
             dladdr (localSymbol, &exeInfo);
-            return CharPointer_UTF8 (exeInfo.dli_fname);
+            return char* (exeInfo.dli_fname);
         }
     };
 
@@ -708,7 +708,7 @@ String getOutputFromCommand (const String& command)
 {
     // slight bodge here, as we just pipe the output into a temp file and read it...
     auto tempFile = File::getSpecialLocation (File::tempDirectory)
-                      .getNonexistentChildFile (String::toHexString (Random::getSystemRandom().nextInt()), ".tmp", false);
+                      .getNonexistentChildFile (CharacterFunctions::hexToString (Random::getSystemRandom().nextInt()), ".tmp", false);
 
     runSystemCommand (command + " > " + tempFile.getFullPathName());
 

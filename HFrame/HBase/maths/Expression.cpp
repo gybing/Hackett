@@ -95,7 +95,7 @@ struct Expression::Helpers
 
         String toString() const
         {
-            String s (value);
+            String s (std::to_string(value));
             if (isResolutionTarget)
                 s = "@" + s;
 
@@ -139,16 +139,16 @@ struct Expression::Helpers
             auto ourPrecendence = getOperatorPrecedence();
 
             if (left->getOperatorPrecedence() > ourPrecendence)
-                s << '(' << left->toString() << ')';
+                s += '(' + left->toString() + ')';
             else
-                s = left->toString();
+                s += left->toString();
 
             writeOperator (s);
 
             if (right->getOperatorPrecedence() >= ourPrecendence)
-                s << '(' << right->toString() << ')';
+                s += '(' + right->toString() + ')';
             else
-                s << right->toString();
+                s += right->toString();
 
             return s;
         }
@@ -259,13 +259,13 @@ struct Expression::Helpers
 
             for (int i = 0; i < parameters.size(); ++i)
             {
-                s << parameters.getReference(i).term->toString();
+                s += parameters.getReference(i).term->toString();
 
                 if (i < parameters.size() - 1)
-                    s << ", ";
+                    s += ", ";
             }
 
-            s << ')';
+            s += ')';
             return s;
         }
 
@@ -291,7 +291,7 @@ struct Expression::Helpers
         Term* clone() const                             { return new DotOperator (getSymbol(), *right); }
         String getName() const                          { return "."; }
         int getOperatorPrecedence() const               { return 1; }
-        void writeOperator (String& dest) const         { dest << '.'; }
+        void writeOperator (String& dest) const         { dest += '.'; }
         double performFunction (double, double) const   { return 0.0; }
 
         void visitAllSymbols (SymbolVisitor& visitor, const Scope& scope, int recursionDepth)
@@ -434,7 +434,7 @@ struct Expression::Helpers
         double performFunction (double lhs, double rhs) const    { return lhs + rhs; }
         int getOperatorPrecedence() const       { return 3; }
         String getName() const                  { return "+"; }
-        void writeOperator (String& dest) const { dest << " + "; }
+        void writeOperator (String& dest) const { dest += " + "; }
 
         TermPtr createTermToEvaluateInput (const Scope& scope, const Term* input, double overallTarget, Term* topLevelTerm) const
         {
@@ -458,7 +458,7 @@ struct Expression::Helpers
         double performFunction (double lhs, double rhs) const    { return lhs - rhs; }
         int getOperatorPrecedence() const       { return 3; }
         String getName() const                  { return "-"; }
-        void writeOperator (String& dest) const { dest << " - "; }
+        void writeOperator (String& dest) const { dest += " - "; }
 
         TermPtr createTermToEvaluateInput (const Scope& scope, const Term* input, double overallTarget, Term* topLevelTerm) const
         {
@@ -486,7 +486,7 @@ struct Expression::Helpers
         Term* clone() const                     { return new Multiply (*left->clone(), *right->clone()); }
         double performFunction (double lhs, double rhs) const    { return lhs * rhs; }
         String getName() const                  { return "*"; }
-        void writeOperator (String& dest) const { dest << " * "; }
+        void writeOperator (String& dest) const { dest += " * "; }
         int getOperatorPrecedence() const       { return 2; }
 
         TermPtr createTermToEvaluateInput (const Scope& scope, const Term* input, double overallTarget, Term* topLevelTerm) const
@@ -509,7 +509,7 @@ struct Expression::Helpers
         Term* clone() const                     { return new Divide (*left->clone(), *right->clone()); }
         double performFunction (double lhs, double rhs) const    { return lhs / rhs; }
         String getName() const                  { return "/"; }
-        void writeOperator (String& dest) const { dest << " / "; }
+        void writeOperator (String& dest) const { dest += " / "; }
         int getOperatorPrecedence() const       { return 2; }
 
         TermPtr createTermToEvaluateInput (const Scope& scope, const Term* input, double overallTarget, Term* topLevelTerm) const
@@ -647,7 +647,7 @@ struct Expression::Helpers
         String error;
 
     private:
-        char*& text;
+        String text;
 
         TermPtr parseError (const String& message)
         {
@@ -658,16 +658,16 @@ struct Expression::Helpers
         }
 
         //==============================================================================
-        static inline bool isDecimalDigit (const wchar c) noexcept
+        static inline bool isDecimalDigit (const char c) noexcept
         {
             return c >= '0' && c <= '9';
         }
 
-        bool readChar (const wchar required) noexcept
+        bool readChar (const char required) noexcept
         {
-            if (*text == required)
+            if (text.front() == required)
             {
-                ++text;
+				text.erase(text.begin() + 1);
                 return true;
             }
 
@@ -676,11 +676,11 @@ struct Expression::Helpers
 
         bool readOperator (const char* ops, char* const opType = nullptr) noexcept
         {
-            text = text.findEndOfWhitespace();
+            text = text.substr(text.find_last_of(' '));
 
             while (*ops != 0)
             {
-                if (readChar ((wchar) (uint8) *ops))
+                if (readChar ((char) (uint8) *ops))
                 {
                     if (opType != nullptr)
                         *opType = *ops;
@@ -696,18 +696,18 @@ struct Expression::Helpers
 
         bool readIdentifier (String& identifier) noexcept
         {
-            text = text.findEndOfWhitespace();
+            text = text.substr(text.find_last_of(' '));
             auto t = text;
             int numChars = 0;
 
-            if (t.isLetter() || *t == '_')
+            if (std::isalpha(t.front()) || t.front() == '_')
             {
-                ++t;
+				t.erase(t.begin() + 1);
                 ++numChars;
 
-                while (t.isLetterOrDigit() || *t == '_')
+                while (std::isalpha(t.front()) || std::isdigit(t.front()) || t.front() == '_')
                 {
-                    ++t;
+					t.erase(t.begin() + 1);
                     ++numChars;
                 }
             }
@@ -724,25 +724,25 @@ struct Expression::Helpers
 
         Term* readNumber() noexcept
         {
-            text = text.findEndOfWhitespace();
+            text = text.substr(text.find_last_of(' '));
             auto t = text;
-            bool isResolutionTarget = (*t == '@');
+            bool isResolutionTarget = (t.front() == '@');
 
             if (isResolutionTarget)
             {
-                ++t;
-                t = t.findEndOfWhitespace();
+				t.erase(t.begin() + 1);
+                t = t.substr(t.find_last_of(' '));
                 text = t;
             }
 
-            if (*t == '-')
+            if (t.front() == '-')
             {
-                ++t;
-                t = t.findEndOfWhitespace();
+				t.erase(t.begin() + 1);
+                t = t.substr(t.find_last_of(' '));
             }
 
-            if (isDecimalDigit (*t) || (*t == '.' && isDecimalDigit (t[1])))
-                return new Constant (CharacterFunctions::readDoubleValue (text), isResolutionTarget);
+            if (isDecimalDigit (t.front()) || (t.front() == '.' && isDecimalDigit (t[1])))
+                return new Constant (std::atof(text.c_str()), isResolutionTarget);
 
             return nullptr;
         }
@@ -757,7 +757,7 @@ struct Expression::Helpers
                 auto rhs = readMultiplyOrDivideExpression();
 
                 if (rhs == nullptr)
-                    return parseError ("Expected expression after \"" + String::charToString ((wchar) (uint8) opType) + "\"");
+                    return parseError (String("Expected expression after \"") + ((char) (uint8) opType) + "\"");
 
                 if (opType == '+')
                     lhs = *new Add (lhs, rhs);
@@ -778,7 +778,7 @@ struct Expression::Helpers
                 TermPtr rhs (readUnaryExpression());
 
                 if (rhs == nullptr)
-                    return parseError ("Expected expression after \"" + String::charToString ((wchar) (uint8) opType) + "\"");
+                    return parseError (String("Expected expression after \"") +  ((char) (uint8) opType) + "\"");
 
                 if (opType == '*')
                     lhs = *new Multiply (lhs, rhs);
@@ -797,7 +797,7 @@ struct Expression::Helpers
                 TermPtr e (readUnaryExpression());
 
                 if (e == nullptr)
-                    return parseError ("Expected expression after \"" + String::charToString ((wchar) (uint8) opType) + "\"");
+                    return parseError (String("Expected expression after \"") + ((char) (uint8) opType) + "\"");
 
                 if (opType == '-')
                     e = e->negated();
@@ -872,7 +872,7 @@ struct Expression::Helpers
                 }
 
                 // just a symbol..
-                HAssert (identifier.trim() == identifier);
+                HAssert (CharacterFunctions::trim(identifier) == identifier);
                 return *new SymbolTerm (identifier);
             }
 
@@ -940,7 +940,7 @@ Expression& Expression::operator= (Expression&& other) noexcept
 
 Expression::Expression (const String& stringToParse, String& parseError)
 {
-    auto text = stringToParse.c_str();
+    auto text = (char *)stringToParse.c_str();
     Helpers::Parser parser (text);
     term = parser.readUpToComma();
     parseError = parser.error;
@@ -1025,8 +1025,6 @@ Expression Expression::adjustedToGiveNewResult (const double targetValue, const 
 
 Expression Expression::withRenamedSymbol (const Expression::Symbol& oldSymbol, const String& newName, const Scope& scope) const
 {
-    HAssert (newName.toLowerCase().containsOnly ("abcdefghijklmnopqrstuvwxyz0123456789_"));
-
     if (oldSymbol.symbolName == newName)
         return *this;
 

@@ -158,6 +158,8 @@ class XmlElement;
 extern API bool CALLTYPE isRunningUnderDebugger() noexcept;
 extern API void CALLTYPE logAssertion(const char *file, int line) noexcept;
 
+using String = std::string;
+
 #include "memory/Memory.h"
 #include "maths/MathsFunctions.h"
 #include "memory/ByteOrder.h"
@@ -173,10 +175,6 @@ extern API void CALLTYPE logAssertion(const char *file, int line) noexcept;
 #if HMSVC
 #pragma warning(pop)
 #endif
-
-using String = std::string;
-using StringRef = const std::string &;
-using CharPointer_UTF8 = char*;
 
 #include "logging/Logger.h"
 #include "memory/LeakedObjectDetector.h"

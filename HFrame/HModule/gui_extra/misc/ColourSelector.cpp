@@ -33,7 +33,7 @@ struct ColourComponentSlider  : public Slider
 
     String getTextFromValue (double value) override
     {
-        return String::toHexString ((int) value).toUpperCase().paddedLeft ('0', 2);
+        return CharacterFunctions::hexToString ((int) value).std::toupper().paddedLeft ('0', 2);
     }
 
     double getValueFromText (const String& text) override
