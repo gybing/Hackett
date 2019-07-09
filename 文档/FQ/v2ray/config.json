@@ -1,0 +1,115 @@
+{
+    "log": {
+        "error": "error.log",
+        "loglevel": "error"
+    },
+    "inbound": {
+        "port": 1080,
+        "listen": "127.0.0.1",
+        "tag": "socks-inbound",
+        "protocol": "socks",
+        "settings": {
+            "auth": "noauth",
+            "udp": true,
+            "ip": "127.0.0.1"
+        },
+        "sniffing": {
+            "enabled": true,
+            "destOverride": ["http", "tls"]
+        }
+    },
+    "outbound": {
+        "protocol": "vmess",
+        "settings": {
+            "vnext": [{
+                "address": "m.hackett.club",
+                "port": 443,
+                "users": [{
+                    "id": "25eb8ae2-af93-4b5f-ad1c-e9add3ead9c1",
+                    "alterId": 32,
+                    "security": "auto"
+                }]
+            }, {
+                "address": "v.hackett.club",
+                "port": 443,
+                "users": [{
+                    "id": "17df1dac-007d-434a-8817-1a0e8e6a5885",
+                    "alterId": 64,
+                    "security": "auto"
+                }]
+            }]
+        },
+        "streamSettings": {
+            "network": "ws",
+            "security": "tls",
+            "wsSettings": {
+                "path": "/9da88da4/"
+            }
+        },
+        "mux": {
+            "enabled": true
+        }
+    },
+    "inboundDetour": [{
+        "port": 8023,
+        "listen": "172.16.0.4",
+        "protocol": "http",
+        "settings": {
+            "auth": "noauth",
+            "udp": true,
+            "ip": "172.16.0.4"
+        }
+    }],
+    "outboundDetour": [{
+        "protocol": "freedom",
+        "settings": {},
+        "tag": "direct"
+    }],
+    "dns": {
+        "servers": [
+            "8.8.8.8",
+            "8.8.4.4",
+            "localhost"
+        ]
+    },
+    "routing": {
+        "strategy": "rules",
+        "settings": {
+            "domainStrategy": "IPIfNonMatch",
+            "rules": [{
+                    "type": "field",
+                    "ip": [
+                        "0.0.0.0/8",
+                        "10.0.0.0/8",
+                        "100.64.0.0/10",
+                        "127.0.0.0/8",
+                        "169.254.0.0/16",
+                        "172.16.0.0/12",
+                        "192.0.0.0/24",
+                        "192.0.2.0/24",
+                        "192.168.0.0/16",
+                        "198.18.0.0/15",
+                        "198.51.100.0/24",
+                        "203.0.113.0/24",
+                        "::1/128",
+                        "fc00::/7",
+                        "fe80::/10",
+                        "geoip:cn"
+                    ],
+                    "domain": [
+                        "geosite:cn"
+                    ],
+                    "outboundTag": "direct"
+                },
+                {
+                    "type": "chinasites",
+                    "outboundTag": "direct"
+                },
+                {
+                    "type": "chinaip",
+                    "outboundTag": "direct"
+                }
+            ]
+        }
+    }
+}
